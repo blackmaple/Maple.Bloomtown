@@ -190,7 +190,7 @@ namespace Maple.Bloomtown
             var pListAccessories = pGameSettings.Accessories;
             if (pListAccessories.Valid())
             {
-                foreach (var accessory in pListAccessories.AsEnumerable())
+                foreach (var accessory in pListAccessories)
                 {
                     var uid = accessory.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -237,7 +237,7 @@ namespace Maple.Bloomtown
             var pListArmor = pGameSettings.Armors;
             if (pListArmor.Valid())
             {
-                foreach (var armor in pListArmor.AsEnumerable())
+                foreach (var armor in pListArmor)
                 {
                     var uid = armor.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -285,7 +285,7 @@ namespace Maple.Bloomtown
             var pListBaits = pGameSettings.Baits;
             if (pListBaits.Valid())
             {
-                foreach (var bait in pListBaits.AsEnumerable())
+                foreach (var bait in pListBaits)
                 {
                     var uid = bait.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -310,7 +310,7 @@ namespace Maple.Bloomtown
             var pListBooks = pGameSettings.Books;
             if (pListBooks.Valid())
             {
-                foreach (var book in pListBooks.AsEnumerable())
+                foreach (var book in pListBooks)
                 {
                     var uid = book.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -333,7 +333,7 @@ namespace Maple.Bloomtown
             var pListConfidantGifts = pGameSettings.ConfidantGifts;
             if (pListConfidantGifts.Valid())
             {
-                foreach (var confidantGift in pListConfidantGifts.AsEnumerable())
+                foreach (var confidantGift in pListConfidantGifts)
                 {
                     var uid = confidantGift.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -356,7 +356,7 @@ namespace Maple.Bloomtown
             var pListConsumables = pGameSettings.Consumables;
             if (pListConsumables.Valid())
             {
-                foreach (var consumable in pListConsumables.AsEnumerable())
+                foreach (var consumable in pListConsumables)
                 {
                     var uid = consumable.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -379,7 +379,7 @@ namespace Maple.Bloomtown
             var pListCraftMaterials = pGameSettings.CraftMaterials;
             if (pListCraftMaterials.Valid())
             {
-                foreach (var craftMaterial in pListCraftMaterials.AsEnumerable())
+                foreach (var craftMaterial in pListCraftMaterials)
                 {
                     var uid = craftMaterial.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -402,7 +402,7 @@ namespace Maple.Bloomtown
             var pListFertilizers = pGameSettings.Fertilizers;
             if (pListFertilizers.Valid())
             {
-                foreach (var fertilizer in pListFertilizers.AsEnumerable())
+                foreach (var fertilizer in pListFertilizers)
                 {
                     var uid = fertilizer.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -461,7 +461,7 @@ namespace Maple.Bloomtown
             var pListMeleeWeapons = pGameSettings.MeleeWeapons;
             if (pListMeleeWeapons.Valid())
             {
-                foreach (var meleeWeapon in pListMeleeWeapons.AsEnumerable())
+                foreach (var meleeWeapon in pListMeleeWeapons)
                 {
                     var uid = meleeWeapon.UID.ToString()!;
 
@@ -512,7 +512,7 @@ namespace Maple.Bloomtown
             var pListQuestItems = pGameSettings.QuestItems;
             if (pListQuestItems.Valid())
             {
-                foreach (var questItem in pListQuestItems.AsEnumerable())
+                foreach (var questItem in pListQuestItems)
                 {
                     var uid = questItem.UID.ToString()!;
 
@@ -538,7 +538,7 @@ namespace Maple.Bloomtown
             var pListRangedWeapons = pGameSettings.RangedWeapons;
             if (pListRangedWeapons.Valid())
             {
-                foreach (var rangedWeapon in pListRangedWeapons.AsEnumerable())
+                foreach (var rangedWeapon in pListRangedWeapons)
                 {
                     var uid = rangedWeapon.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -588,7 +588,7 @@ namespace Maple.Bloomtown
             var pListRecipes = pGameSettings.Recipes;
             if (pListRecipes.Valid())
             {
-                foreach (var recipe in pListRecipes.AsEnumerable())
+                foreach (var recipe in pListRecipes)
                 {
                     var uid = recipe.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -613,7 +613,7 @@ namespace Maple.Bloomtown
             var pListRods = pGameSettings.Rods;
             if (pListRods.Valid())
             {
-                foreach (var rod in pListRods.AsEnumerable())
+                foreach (var rod in pListRods)
                 {
                     var uid = rod.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -636,7 +636,7 @@ namespace Maple.Bloomtown
             var pListSeeds = pGameSettings.Seeds;
             if (pListSeeds.Valid())
             {
-                foreach (var seed in pListSeeds.AsEnumerable())
+                foreach (var seed in pListSeeds)
                 {
                     var uid = seed.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -659,7 +659,7 @@ namespace Maple.Bloomtown
             var pListTreasures = pGameSettings.Treasures;
             if (pListTreasures.Valid())
             {
-                foreach (var treasure in pListTreasures.AsEnumerable())
+                foreach (var treasure in pListTreasures)
                 {
                     var uid = treasure.UID.ToString()!;
                     yield return new GameInventoryDisplayDTO()
@@ -699,7 +699,7 @@ namespace Maple.Bloomtown
                 var pListAccessories = pGameSettings.Accessories;
                 if (pListAccessories.Valid())
                 {
-                    foreach (var accessory in pListAccessories.AsEnumerable())
+                    foreach (var accessory in pListAccessories)
                     {
                         var uid = accessory.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -723,7 +723,7 @@ namespace Maple.Bloomtown
                 var pListArmor = pGameSettings.Armors;
                 if (pListArmor.Valid())
                 {
-                    foreach (var armor in pListArmor.AsEnumerable())
+                    foreach (var armor in pListArmor)
                     {
                         var uid = armor.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -745,7 +745,7 @@ namespace Maple.Bloomtown
                 var pListBaits = pGameSettings.Baits;
                 if (pListBaits.Valid())
                 {
-                    foreach (var bait in pListBaits.AsEnumerable())
+                    foreach (var bait in pListBaits)
                     {
                         var uid = bait.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -769,7 +769,7 @@ namespace Maple.Bloomtown
                 var pListBooks = pGameSettings.Books;
                 if (pListBooks.Valid())
                 {
-                    foreach (var book in pListBooks.AsEnumerable())
+                    foreach (var book in pListBooks)
                     {
                         var uid = book.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -791,7 +791,7 @@ namespace Maple.Bloomtown
                 var pListConfidantGifts = pGameSettings.ConfidantGifts;
                 if (pListConfidantGifts.Valid())
                 {
-                    foreach (var confidantGift in pListConfidantGifts.AsEnumerable())
+                    foreach (var confidantGift in pListConfidantGifts)
                     {
                         var uid = confidantGift.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -814,7 +814,7 @@ namespace Maple.Bloomtown
                 var pListConsumables = pGameSettings.Consumables;
                 if (pListConsumables.Valid())
                 {
-                    foreach (var consumable in pListConsumables.AsEnumerable())
+                    foreach (var consumable in pListConsumables)
                     {
                         var uid = consumable.UID.ToString()!;
 
@@ -837,7 +837,7 @@ namespace Maple.Bloomtown
                 var pListCraftMaterials = pGameSettings.CraftMaterials;
                 if (pListCraftMaterials.Valid())
                 {
-                    foreach (var craftMaterial in pListCraftMaterials.AsEnumerable())
+                    foreach (var craftMaterial in pListCraftMaterials)
                     {
                         var uid = craftMaterial.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -859,7 +859,7 @@ namespace Maple.Bloomtown
                 var pListFertilizers = pGameSettings.Fertilizers;
                 if (pListFertilizers.Valid())
                 {
-                    foreach (var fertilizer in pListFertilizers.AsEnumerable())
+                    foreach (var fertilizer in pListFertilizers)
                     {
                         var uid = fertilizer.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -918,7 +918,7 @@ namespace Maple.Bloomtown
                 var pListMeleeWeapons = pGameSettings.MeleeWeapons;
                 if (pListMeleeWeapons.Valid())
                 {
-                    foreach (var meleeWeapon in pListMeleeWeapons.AsEnumerable())
+                    foreach (var meleeWeapon in pListMeleeWeapons)
                     {
                         var uid = meleeWeapon.UID.ToString()!;
 
@@ -942,7 +942,7 @@ namespace Maple.Bloomtown
                 var pListQuestItems = pGameSettings.QuestItems;
                 if (pListQuestItems.Valid())
                 {
-                    foreach (var questItem in pListQuestItems.AsEnumerable())
+                    foreach (var questItem in pListQuestItems)
                     {
                         var uid = questItem.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -967,7 +967,7 @@ namespace Maple.Bloomtown
                 var pListRangedWeapons = pGameSettings.RangedWeapons;
                 if (pListRangedWeapons.Valid())
                 {
-                    foreach (var rangedWeapon in pListRangedWeapons.AsEnumerable())
+                    foreach (var rangedWeapon in pListRangedWeapons)
                     {
                         var uid = rangedWeapon.UID.ToString()!;
 
@@ -993,7 +993,7 @@ namespace Maple.Bloomtown
                 var pListRecipes = pGameSettings.Recipes;
                 if (pListRecipes.Valid())
                 {
-                    foreach (var recipe in pListRecipes.AsEnumerable())
+                    foreach (var recipe in pListRecipes)
                     {
                         var uid = recipe.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1016,7 +1016,7 @@ namespace Maple.Bloomtown
                 var pListRods = pGameSettings.Rods;
                 if (pListRods.Valid())
                 {
-                    foreach (var rod in pListRods.AsEnumerable())
+                    foreach (var rod in pListRods)
                     {
                         var uid = rod.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1040,7 +1040,7 @@ namespace Maple.Bloomtown
                 var pListSeeds = pGameSettings.Seeds;
                 if (pListSeeds.Valid())
                 {
-                    foreach (var seed in pListSeeds.AsEnumerable())
+                    foreach (var seed in pListSeeds)
                     {
                         var uid = seed.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1062,7 +1062,7 @@ namespace Maple.Bloomtown
                 var pListTreasures = pGameSettings.Treasures;
                 if (pListTreasures.Valid())
                 {
-                    foreach (var treasure in pListTreasures.AsEnumerable())
+                    foreach (var treasure in pListTreasures)
                     {
                         var uid = treasure.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1101,7 +1101,7 @@ namespace Maple.Bloomtown
                 var pListAccessories = pGameSettings.Accessories;
                 if (pListAccessories.Valid())
                 {
-                    foreach (var accessory in pListAccessories.AsEnumerable())
+                    foreach (var accessory in pListAccessories)
                     {
                         var uid = accessory.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1128,7 +1128,7 @@ namespace Maple.Bloomtown
                 var pListArmor = pGameSettings.Armors;
                 if (pListArmor.Valid())
                 {
-                    foreach (var armor in pListArmor.AsEnumerable())
+                    foreach (var armor in pListArmor)
                     {
                         var uid = armor.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1154,7 +1154,7 @@ namespace Maple.Bloomtown
                 var pListBaits = pGameSettings.Baits;
                 if (pListBaits.Valid())
                 {
-                    foreach (var bait in pListBaits.AsEnumerable())
+                    foreach (var bait in pListBaits)
                     {
                         var uid = bait.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1179,7 +1179,7 @@ namespace Maple.Bloomtown
                 var pListBooks = pGameSettings.Books;
                 if (pListBooks.Valid())
                 {
-                    foreach (var book in pListBooks.AsEnumerable())
+                    foreach (var book in pListBooks)
                     {
                         var uid = book.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1207,7 +1207,7 @@ namespace Maple.Bloomtown
                 var pListConfidantGifts = pGameSettings.ConfidantGifts;
                 if (pListConfidantGifts.Valid())
                 {
-                    foreach (var confidantGift in pListConfidantGifts.AsEnumerable())
+                    foreach (var confidantGift in pListConfidantGifts)
                     {
                         var uid = confidantGift.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1232,7 +1232,7 @@ namespace Maple.Bloomtown
                 var pListConsumables = pGameSettings.Consumables;
                 if (pListConsumables.Valid())
                 {
-                    foreach (var consumable in pListConsumables.AsEnumerable())
+                    foreach (var consumable in pListConsumables)
                     {
                         var uid = consumable.UID.ToString()!;
 
@@ -1256,7 +1256,7 @@ namespace Maple.Bloomtown
                 var pListCraftMaterials = pGameSettings.CraftMaterials;
                 if (pListCraftMaterials.Valid())
                 {
-                    foreach (var craftMaterial in pListCraftMaterials.AsEnumerable())
+                    foreach (var craftMaterial in pListCraftMaterials)
                     {
                         var uid = craftMaterial.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1279,7 +1279,7 @@ namespace Maple.Bloomtown
                 var pListFertilizers = pGameSettings.Fertilizers;
                 if (pListFertilizers.Valid())
                 {
-                    foreach (var fertilizer in pListFertilizers.AsEnumerable())
+                    foreach (var fertilizer in pListFertilizers)
                     {
                         var uid = fertilizer.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1339,7 +1339,7 @@ namespace Maple.Bloomtown
                 var pListMeleeWeapons = pGameSettings.MeleeWeapons;
                 if (pListMeleeWeapons.Valid())
                 {
-                    foreach (var meleeWeapon in pListMeleeWeapons.AsEnumerable())
+                    foreach (var meleeWeapon in pListMeleeWeapons)
                     {
                         var uid = meleeWeapon.UID.ToString()!;
 
@@ -1365,7 +1365,7 @@ namespace Maple.Bloomtown
                 var pListQuestItems = pGameSettings.QuestItems;
                 if (pListQuestItems.Valid())
                 {
-                    foreach (var questItem in pListQuestItems.AsEnumerable())
+                    foreach (var questItem in pListQuestItems)
                     {
                         var uid = questItem.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1391,7 +1391,7 @@ namespace Maple.Bloomtown
                 var pListRangedWeapons = pGameSettings.RangedWeapons;
                 if (pListRangedWeapons.Valid())
                 {
-                    foreach (var rangedWeapon in pListRangedWeapons.AsEnumerable())
+                    foreach (var rangedWeapon in pListRangedWeapons)
                     {
                         var uid = rangedWeapon.UID.ToString()!;
 
@@ -1419,7 +1419,7 @@ namespace Maple.Bloomtown
                 var pListRecipes = pGameSettings.Recipes;
                 if (pListRecipes.Valid())
                 {
-                    foreach (var recipe in pListRecipes.AsEnumerable())
+                    foreach (var recipe in pListRecipes)
                     {
                         var uid = recipe.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1453,7 +1453,7 @@ namespace Maple.Bloomtown
                 var pListRods = pGameSettings.Rods;
                 if (pListRods.Valid())
                 {
-                    foreach (var rod in pListRods.AsEnumerable())
+                    foreach (var rod in pListRods)
                     {
                         var uid = rod.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1478,7 +1478,7 @@ namespace Maple.Bloomtown
                 var pListSeeds = pGameSettings.Seeds;
                 if (pListSeeds.Valid())
                 {
-                    foreach (var seed in pListSeeds.AsEnumerable())
+                    foreach (var seed in pListSeeds)
                     {
                         var uid = seed.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1501,7 +1501,7 @@ namespace Maple.Bloomtown
                 var pListTreasures = pGameSettings.Treasures;
                 if (pListTreasures.Valid())
                 {
-                    foreach (var treasure in pListTreasures.AsEnumerable())
+                    foreach (var treasure in pListTreasures)
                     {
                         var uid = treasure.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
@@ -1529,7 +1529,7 @@ namespace Maple.Bloomtown
             if (pListAccessories.Valid())
             {
                 //null
-                foreach (var accessory in pListAccessories.AsEnumerable())
+                foreach (var accessory in pListAccessories)
                 {
                     var pIcon = accessory.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1548,7 +1548,7 @@ namespace Maple.Bloomtown
             if (pListArmor.Valid())
             {
                 //getIcon
-                foreach (var armor in pListArmor.AsEnumerable())
+                foreach (var armor in pListArmor)
                 {
                     var pIcon = armor.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1567,7 +1567,7 @@ namespace Maple.Bloomtown
             if (pListBaits.Valid())
             {
                 //Icon
-                foreach (var bait in pListBaits.AsEnumerable())
+                foreach (var bait in pListBaits)
                 {
                     var pIcon = bait.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1587,7 +1587,7 @@ namespace Maple.Bloomtown
             if (pListBooks.Valid())
             {
                 //bookIcon
-                foreach (var book in pListBooks.AsEnumerable())
+                foreach (var book in pListBooks)
                 {
                     var pIcon = book.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1607,7 +1607,7 @@ namespace Maple.Bloomtown
             if (pListConfidantGifts.Valid())
             {
                 //giftIcon
-                foreach (var confidantGift in pListConfidantGifts.AsEnumerable())
+                foreach (var confidantGift in pListConfidantGifts)
                 {
                     var pIcon = pGameSettings.GiftIcon;
                     if (pIcon.Valid())
@@ -1626,7 +1626,7 @@ namespace Maple.Bloomtown
             if (pListConsumables.Valid())
             {
                 //GetIcon
-                foreach (var consumable in pListConsumables.AsEnumerable())
+                foreach (var consumable in pListConsumables)
                 {
                     var pIcon = consumable.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1645,7 +1645,7 @@ namespace Maple.Bloomtown
             if (pListCraftMaterials.Valid())
             {
                 //GetIcon()
-                foreach (var craftMaterial in pListCraftMaterials.AsEnumerable())
+                foreach (var craftMaterial in pListCraftMaterials)
                 {
                     var pIcon = craftMaterial.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1664,7 +1664,7 @@ namespace Maple.Bloomtown
             if (pListFertilizers.Valid())
             {
                 //GetIcon()
-                foreach (var fertilizer in pListFertilizers.AsEnumerable())
+                foreach (var fertilizer in pListFertilizers)
                 {
                     var pIcon = fertilizer.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1714,7 +1714,7 @@ namespace Maple.Bloomtown
             if (pListMeleeWeapons.Valid())
             {
                 //GetIcon()
-                foreach (var meleeWeapon in pListMeleeWeapons.AsEnumerable())
+                foreach (var meleeWeapon in pListMeleeWeapons)
                 {
 
                     var pIcon = meleeWeapon.GET_ICON_00();
@@ -1735,7 +1735,7 @@ namespace Maple.Bloomtown
             if (pListQuestItems.Valid())
             {
                 //GetIcon()
-                foreach (var questItem in pListQuestItems.AsEnumerable())
+                foreach (var questItem in pListQuestItems)
                 {
                     var pIcon = questItem.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1755,7 +1755,7 @@ namespace Maple.Bloomtown
             if (pListRangedWeapons.Valid())
             {
                 //GetIcon()
-                foreach (var rangedWeapon in pListRangedWeapons.AsEnumerable())
+                foreach (var rangedWeapon in pListRangedWeapons)
                 {
                     var pIcon = rangedWeapon.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1775,7 +1775,7 @@ namespace Maple.Bloomtown
             if (pListRecipes.Valid())
             {
                 //GetIcon()
-                foreach (var recipe in pListRecipes.AsEnumerable())
+                foreach (var recipe in pListRecipes)
                 {
                     var pIcon = recipe.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1795,7 +1795,7 @@ namespace Maple.Bloomtown
             if (pListRods.Valid())
             {
                 //GetIcon
-                foreach (var rod in pListRods.AsEnumerable())
+                foreach (var rod in pListRods)
                 {
                     var pIcon = rod.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1814,7 +1814,7 @@ namespace Maple.Bloomtown
             var pListSeeds = pGameSettings.Seeds;
             if (pListSeeds.Valid())
             {
-                foreach (var seed in pListSeeds.AsEnumerable())
+                foreach (var seed in pListSeeds)
                 {
                     var pIcon = seed.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1833,7 +1833,7 @@ namespace Maple.Bloomtown
             if (pListTreasures.Valid())
             {
                 //null
-                foreach (var treasure in pListTreasures.AsEnumerable())
+                foreach (var treasure in pListTreasures)
                 {
                     var pIcon = treasure.GET_ICON_00();
                     if (pIcon.Valid())
@@ -1853,7 +1853,7 @@ namespace Maple.Bloomtown
             var pListPlayerModels = pGameSettings.PlayerModels;
             if (pListPlayerModels.Valid())
             {
-                foreach (var playerModel in pListPlayerModels.AsEnumerable())
+                foreach (var playerModel in pListPlayerModels)
                 {
                     var uid = playerModel.UID.ToString()!;
 
@@ -2066,7 +2066,7 @@ namespace Maple.Bloomtown
             };
             static IEnumerable<GameValueInfoDTO> GetSkillInfos(Character.Ptr_Character pCharacter)
             {
-                foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS().AsEnumerable())
+                foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
                 {
                     var monsterModel = pPersonas.MonsterModel;
                     if (monsterModel.Valid())
@@ -2074,7 +2074,7 @@ namespace Maple.Bloomtown
                         var pSkills = monsterModel.Skills;
                         if (pSkills.Valid())
                         {
-                            foreach (var skill in pSkills.AsEnumerable())
+                            foreach (var skill in pSkills)
                             {
                                 var pSkillInfo = skill.SkillInfo;
                                 if (pSkillInfo.Valid())
@@ -2102,7 +2102,7 @@ namespace Maple.Bloomtown
             {
                 yield break;
             }
-            foreach (var player in pPlayerGroup.AsEnumerable())
+            foreach (var player in pPlayerGroup)
             {
                 var pAvatar = player.AvatarMini;
                 //  player.GET_AVATAR(Emotion.Normal);
@@ -2123,7 +2123,7 @@ namespace Maple.Bloomtown
             var pListMonsterModels = pGameSettings.MonsterModels;
             if (pListMonsterModels.Valid())
             {
-                foreach (var monsterModel in pListMonsterModels.AsEnumerable())
+                foreach (var monsterModel in pListMonsterModels)
                 {
                     var uid = monsterModel.UID.ToString()!;
                     var tameStat = monsterModel.TameStat.ToString();
@@ -2166,7 +2166,7 @@ namespace Maple.Bloomtown
             var pListPersonaModels = pGameSettings.PersonaModels;
             if (pListPersonaModels.Valid())
             {
-                foreach (var monsterModel in pListPersonaModels.AsEnumerable())
+                foreach (var monsterModel in pListPersonaModels)
                 {
                     var uid = monsterModel.UID.ToString()!;
                     var tameStat = monsterModel.TameStat.ToString();
@@ -2212,7 +2212,7 @@ namespace Maple.Bloomtown
             {
                 if (pListSkills.Valid())
                 {
-                    foreach (var skill in pListSkills.AsEnumerable())
+                    foreach (var skill in pListSkills)
                     {
                         var pSkillInfo = skill.SkillInfo;
                         if (pSkillInfo.Valid())
@@ -2238,7 +2238,7 @@ namespace Maple.Bloomtown
             var pListMonsterModels = pGameSettings.MonsterModels;
             if (pListMonsterModels.Valid())
             {
-                foreach (var monsterModel in pListMonsterModels.AsEnumerable())
+                foreach (var monsterModel in pListMonsterModels)
                 {
                     if (TryGetUnitySpriteImageData(nameof(BattleMonsterModel), monsterModel, unityEngine, out var imageData))
                     {
@@ -2250,7 +2250,7 @@ namespace Maple.Bloomtown
             var pListPersonaModels = pGameSettings.PersonaModels;
             if (pListPersonaModels.Valid())
             {
-                foreach (var monsterModel in pListPersonaModels.AsEnumerable())
+                foreach (var monsterModel in pListPersonaModels)
                 {
                     if (TryGetUnitySpriteImageData(nameof(PersonaProgress), monsterModel, unityEngine, out var imageData))
                     {
@@ -2301,12 +2301,12 @@ namespace Maple.Bloomtown
 
                 if (pListMonsterModels.Valid())
                 {
-                    foreach (var monsterModel in pListMonsterModels.AsEnumerable())
+                    foreach (var monsterModel in pListMonsterModels)
                     {
                         var pListSkills = monsterModel.Skills;
                         if (pListSkills.Valid())
                         {
-                            foreach (var skill in pListSkills.AsEnumerable())
+                            foreach (var skill in pListSkills)
                             {
                                 if (skill.Valid())
                                 {
@@ -2346,7 +2346,7 @@ namespace Maple.Bloomtown
             var pListMonsterModels = pGameSettings.MonsterModels;
             if (pListMonsterModels.Valid())
             {
-                foreach (var monsterModel in pListMonsterModels.AsEnumerable())
+                foreach (var monsterModel in pListMonsterModels)
                 {
                     foreach (var image in GetUnitySpriteImageData(monsterModel.Skills, unityEngine, nameof(BattleMonsterModel)))
                     {
@@ -2358,7 +2358,7 @@ namespace Maple.Bloomtown
             var pListPersonaModels = pGameSettings.PersonaModels;
             if (pListPersonaModels.Valid())
             {
-                foreach (var monsterModel in pListPersonaModels.AsEnumerable())
+                foreach (var monsterModel in pListPersonaModels)
                 {
                     foreach (var image in GetUnitySpriteImageData(monsterModel.Skills, unityEngine, nameof(PersonaProgress)))
                     {
@@ -2372,7 +2372,7 @@ namespace Maple.Bloomtown
 
                 if (pListSkills.Valid())
                 {
-                    foreach (var skill in pListSkills.AsEnumerable())
+                    foreach (var skill in pListSkills)
                     {
                         var pSkillInfo = skill.SkillInfo;
                         if (pSkillInfo.Valid())
@@ -2416,7 +2416,7 @@ namespace Maple.Bloomtown
             var first_val = ref_first;
             try
             {
-                foreach (var personaModel in pListPersonaModels.AsEnumerable())
+                foreach (var personaModel in pListPersonaModels)
                 {
                     ref_first = personaModel;
                     pPlayerData.DEBUG_ADD_PERSONA();

@@ -13,8 +13,8 @@ namespace Maple.Bloomtown.GameModel.Demo
     /// [System.Object]
     /// 
     /// </summary>
-    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x020003EBU)]
-    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [76, 111, 99, 97, 108, 105, 122, 97, 116, 105, 111, 110, 77, 97, 110, 97, 103, 101, 114, 43, 76, 111, 99, 97, 108, 105, 122, 101, 100, 70, 105, 101, 108, 100])]
+    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x020003EBU)]
+    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [76, 111, 99, 97, 108, 105, 122, 101, 100, 70, 105, 101, 108, 100])]
     public partial class LocalizedField
     {
         //public const string Const_ImageName = "Assembly-CSharp";

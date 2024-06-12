@@ -21,6 +21,9 @@ namespace Maple.Bloomtown
     {
 
         #region LoadService
+
+        protected sealed override bool EnableService => false;
+
         protected sealed override BloomtownGameContext LoadGameContext()
             => BloomtownGameContext.LoadBloomtownGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.Ver_Common, this.Logger);
         protected sealed override UnityEngineContext LoadUnityEngineContext()
