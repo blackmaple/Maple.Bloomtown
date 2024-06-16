@@ -26,13 +26,13 @@ typeof(MonoCollectorClassInfo)
 
     //player
     [MonoCollectorType(typeof(BattlePlayerModel))]
-    [MonoCollectorType(typeof(BattlePlayerView))]
+    //[MonoCollectorType(typeof(BattlePlayerView))]
     [MonoCollectorType(typeof(PlayerCharacter))]
     [MonoCollectorType(typeof(Character))]
 
     //Monster
     [MonoCollectorType(typeof(BattleMonsterModel))]
-    [MonoCollectorType(typeof(BattleMonsterView))]
+    //[MonoCollectorType(typeof(BattleMonsterView))]
     [MonoCollectorType(typeof(PersonaProgress))]
 
     //skill
@@ -46,7 +46,7 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(Stackable))]
     [MonoCollectorType(typeof(Accessory))]
     [MonoCollectorType(typeof(Armor))]
-    [MonoCollectorType(typeof(Bait))]
+   // [MonoCollectorType(typeof(Bait))]
     [MonoCollectorType(typeof(Book))]
     [MonoCollectorType(typeof(ConfidantGift))]
     [MonoCollectorType(typeof(Consumable))]
@@ -61,7 +61,7 @@ typeof(MonoCollectorClassInfo)
 
     [MonoCollectorType(typeof(Recipe))]
 
-    [MonoCollectorType(typeof(Rod))]
+ //   [MonoCollectorType(typeof(Rod))]
     [MonoCollectorType(typeof(Seed))]
     [MonoCollectorType(typeof(Treasure))]
     [MonoCollectorType(typeof(SocialStat))]

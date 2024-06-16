@@ -282,29 +282,29 @@ namespace Maple.Bloomtown
             }
 
             //鱼饵
-            var pListBaits = pGameSettings.Baits;
-            if (pListBaits.Valid())
-            {
-                foreach (var bait in pListBaits)
-                {
-                    var uid = bait.UID.ToString()!;
-                    yield return new GameInventoryDisplayDTO()
-                    {
-                        ObjectId = uid,
-                        DisplayName = bait.ItemName.GET_VALUE().ToString(),
-                        DisplayDesc = bait.Description.GET_VALUE().ToString(),
-                        DisplayCategory = nameof(Bait),
-                        ItemAttributes = GetItemAttributes(uid, bait).ToArray()
+            //var pListBaits = pGameSettings.Baits;
+            //if (pListBaits.Valid())
+            //{
+            //    foreach (var bait in pListBaits)
+            //    {
+            //        var uid = bait.UID.ToString()!;
+            //        yield return new GameInventoryDisplayDTO()
+            //        {
+            //            ObjectId = uid,
+            //            DisplayName = bait.ItemName.GET_VALUE().ToString(),
+            //            DisplayDesc = bait.Description.GET_VALUE().ToString(),
+            //            DisplayCategory = nameof(Bait),
+            //            ItemAttributes = GetItemAttributes(uid, bait).ToArray()
 
-                    };
+            //        };
 
-                }
-                static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Bait.Ptr_Bait item)
-                {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.Price), DisplayValue = item.Price.ToString("F2"), CanPreview = true };
-                }
+            //    }
+            //    static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Bait.Ptr_Bait item)
+            //    {
+            //        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.Price), DisplayValue = item.Price.ToString("F2"), CanPreview = true };
+            //    }
 
-            }
+            //}
 
             //书籍
             var pListBooks = pGameSettings.Books;
@@ -444,18 +444,18 @@ namespace Maple.Bloomtown
             }
 
             //捕鱼
-            var pFishHaul = pGameSettings.FishHaul;
-            if (pFishHaul.Valid())
-            {
-                //yield return ;
-            }
+            //var pFishHaul = pGameSettings.FishHaul;
+            //if (pFishHaul.Valid())
+            //{
+            //    //yield return ;
+            //}
 
-            //捕垃圾
-            var pGarbageHaul = pGameSettings.GarbageHaul;
-            if (pGarbageHaul.Valid())
-            {
-                //yield return ;
-            }
+            ////捕垃圾
+            //var pGarbageHaul = pGameSettings.GarbageHaul;
+            //if (pGarbageHaul.Valid())
+            //{
+            //    //yield return ;
+            //}
 
             //近战武器
             var pListMeleeWeapons = pGameSettings.MeleeWeapons;

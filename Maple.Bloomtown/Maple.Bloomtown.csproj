@@ -29,6 +29,12 @@
 		<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.AspNetCore.Http.Generated</InterceptorsPreviewNamespaces>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Compile Remove="GameModel\Demo\**" />
+	  <EmbeddedResource Remove="GameModel\Demo\**" />
+	  <None Remove="GameModel\Demo\**" />
+	</ItemGroup>
+
 
 
 
@@ -53,6 +59,9 @@
 		<AdditionalFiles Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllExportTmp\WinHttp.Api" Link="GameDllExport\WinHttp.Api" />
 		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllHijackData\Maple.MonoGameAssistant.DllHijackData.csproj" />
 		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllHijackGenerator\Maple.MonoGameAssistant.DllHijackGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="GameModel\DemoV2\" />
 	</ItemGroup>
 
  
