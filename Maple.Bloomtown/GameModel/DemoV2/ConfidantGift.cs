@@ -18,6 +18,42 @@ namespace Maple.Bloomtown.GameModel.Demo
     /// </summary>
     //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x02000452U)]
     [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [67, 111, 110, 102, 105, 100, 97, 110, 116, 71, 105, 102, 116])]
+                
+    //  class static System.String PathToResources
+    //  [MonoCollectorSearchFieldAttribute(typeof(nint),"PathToResources", "PATH_TO_RESOURCES"), true]
+            
+    //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
+    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
+                
+    // struct 0x10 System.IntPtr m_CachedPtr
+    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+            
+    // class 0x18 System.String uid
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"uid", "UID")]
+            
+    // class 0x20 LocalizationManager.LocalizedField itemName
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"itemName", "ITEM_NAME")]
+            
+    // class 0x28 LocalizationManager.LocalizedField description
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
+            
+    // class 0x30 System.String nameUid
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
+            
+    // class 0x38 System.String descriptionUid
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+            
+    // class 0x40 UnityEngine.Sprite smallIcon
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
+            
+    // struct 0x48 System.Single price
+    [MonoCollectorSearchFieldAttribute(typeof(System.Single),"price", "PRICE")]
+            
+    // class 0x50 ConfidantInfo confidant
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"confidant", "CONFIDANT")]
+            
+    // class 0x58 System.String reaction_uid
+    [MonoCollectorSearchFieldAttribute(typeof(nint),"reaction_uid", "REACTION_UID")]
     public partial class ConfidantGift
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -33,174 +69,20 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
 
-        
-        public readonly unsafe partial struct Const_ConfidantGift
-        {
-
+                    
+        /// <summary>
+        /// class System.String objectIsNullMessage "The Object you want to instantiate is null."
+        /// </summary>
+        /// public const nint OBJECT_IS_NULL_MESSAGE=>"The Object you want to instantiate is null.";
             
-                        
-            /// <summary>
-            /// class System.String objectIsNullMessage "The Object you want to instantiate is null."
-            /// </summary>
-            /// public nint OBJECT_IS_NULL_MESSAGE=>"The Object you want to instantiate is null.";
-
-                        
-            /// <summary>
-            /// class System.String cloneDestroyedMessage "Instantiate failed because the clone was destroyed during creati"
-            /// </summary>
-            /// public nint CLONE_DESTROYED_MESSAGE=>"Instantiate failed because the clone was destroyed during creati";
-
-        }
+        /// <summary>
+        /// class System.String cloneDestroyedMessage "Instantiate failed because the clone was destroyed during creati"
+        /// </summary>
+        /// public const nint CLONE_DESTROYED_MESSAGE=>"Instantiate failed because the clone was destroyed during creati";
             
         
-        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
-        public readonly unsafe partial struct Static_ConfidantGift
-        {
-
-            
-                        
-            /// const string Name_Field_PathToResources = "PathToResources";
-            /// <summary>
-            /// class 0x0 System.String PathToResources
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x0)]
-            public readonly nint PathToResources;
-
-                        
-            /// const string Name_Field_OffsetOfInstanceIDInCPlusPlusObject = "OffsetOfInstanceIDInCPlusPlusObject";
-            /// <summary>
-            /// struct 0x0 System.Int32 OffsetOfInstanceIDInCPlusPlusObject
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x0)]
-            public readonly System.Int32 OffsetOfInstanceIDInCPlusPlusObject;
-
-        }
 
         
-        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Explicit)]
-        public readonly unsafe partial struct Ref_ConfidantGift
-        {
-
-            
-            /// <summary>
-            /// REF_MONO_OBJECT._vtable
-            /// </summary>
-            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0)]
-            public readonly nint _vtable;
-
-            /// <summary>
-            /// REF_MONO_OBJECT._synchronisation
-            /// </summary>
-            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
-            [System.Runtime.InteropServices.FieldOffsetAttribute(8)]
-            public readonly nint _synchronisation;
-            
-            
-                        
-            /// const string Name_Field_m_CachedPtr = "m_CachedPtr";
-            /// <summary>
-            /// struct 0x10 System.IntPtr m_CachedPtr
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x10)]
-            public readonly System.IntPtr m_CachedPtr;
-
-                        
-            /// const string Name_Field_uid = "uid";
-            /// <summary>
-            /// class 0x18 System.String uid
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x18)]
-            public readonly nint uid;
-
-                        
-            /// const string Name_Field_itemName = "itemName";
-            /// <summary>
-            /// class 0x20 LocalizationManager.LocalizedField itemName
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x20)]
-            public readonly nint itemName;
-
-                        
-            /// const string Name_Field_description = "description";
-            /// <summary>
-            /// class 0x28 LocalizationManager.LocalizedField description
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x28)]
-            public readonly nint description;
-
-                        
-            /// const string Name_Field_nameUid = "nameUid";
-            /// <summary>
-            /// class 0x30 System.String nameUid
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x30)]
-            public readonly nint nameUid;
-
-                        
-            /// const string Name_Field_descriptionUid = "descriptionUid";
-            /// <summary>
-            /// class 0x38 System.String descriptionUid
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x38)]
-            public readonly nint descriptionUid;
-
-                        
-            /// const string Name_Field_smallIcon = "smallIcon";
-            /// <summary>
-            /// class 0x40 UnityEngine.Sprite smallIcon
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x40)]
-            public readonly nint smallIcon;
-
-                        
-            /// const string Name_Field_price = "price";
-            /// <summary>
-            /// struct 0x48 System.Single price
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x48)]
-            public readonly System.Single price;
-
-                        
-            /// const string Name_Field_confidant = "confidant";
-            /// <summary>
-            /// class 0x50 ConfidantInfo confidant
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x50)]
-            public readonly nint confidant;
-
-                        
-            /// const string Name_Field_reaction_uid = "reaction_uid";
-            /// <summary>
-            /// class 0x58 System.String reaction_uid
-            /// </summary>
-            [System.Runtime.InteropServices.FieldOffsetAttribute(0x58)]
-            public readonly nint reaction_uid;
-
-        }
-        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-        public readonly unsafe partial struct Ptr_ConfidantGift(nint ptr)
-        {
-
-            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
-            readonly nint _ptr = ptr;
-            public static implicit operator Ptr_ConfidantGift(nint ptr) => new(ptr);
-            public static implicit operator nint(Ptr_ConfidantGift obj) => obj._ptr;
-            
-            public override string ToString()
-            {
-                return _ptr.ToString("X8");
-            }
-
-            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            public bool Valid() => _ptr != nint.Zero;
-            
-            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            public ref Ref_ConfidantGift AsRef()
-            {
-                return ref System.Runtime.CompilerServices.Unsafe.AsRef<Ref_ConfidantGift>(_ptr.ToPointer());
-            }
-        }
 
     }
 
@@ -212,952 +94,952 @@ namespace Maple.Bloomtown.GameModel.Demo
 
             
             
-            /// const string Name_Func_ADD = "Add";
             /// <summary>
             ///   System.Void Add(System.Int32 amount)
             /// </summary>
             /// <param name="amount">struct System.Int32</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void ADD (System.Int32 amount);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Add")]
+            ///  extern void ADD (System.Int32 amount);
 
             
-            /// const string Name_Func_CAN_TAKE = "CanTake";
             /// <summary>
             ///   System.Boolean CanTake(System.Int32 amount)
             /// </summary>
             /// <param name="amount">struct System.Int32</param>
             /// <returns>struct System.Boolean</returns>
-            /// public  extern System.Boolean CAN_TAKE (System.Int32 amount);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CanTake")]
+            ///  extern System.Boolean CAN_TAKE (System.Int32 amount);
 
             
-            /// const string Name_Func_CHECK_NULL_ARGUMENT = "CheckNullArgument";
             /// <summary>
-            /// static  System.Void CheckNullArgument(System.Object arg,System.String message)
+            /// static  System.Void CheckNullArgument(System.Object arg, System.String message)
             /// </summary>
             /// <param name="arg">class System.Object</param>
             /// <param name="message">class System.String</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void CHECK_NULL_ARGUMENT (nint arg,nint message);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CheckNullArgument")]
+            /// static extern void CHECK_NULL_ARGUMENT (nint arg, nint message);
 
             
-            /// const string Name_Func_CLAMP_PRICE = "ClampPrice";
             /// <summary>
             ///   System.Single ClampPrice(System.Single priceVal)
             /// </summary>
             /// <param name="priceVal">struct System.Single</param>
             /// <returns>struct System.Single</returns>
-            /// public  extern System.Single CLAMP_PRICE (System.Single priceVal);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ClampPrice")]
+            ///  extern System.Single CLAMP_PRICE (System.Single priceVal);
 
             
-            /// const string Name_Func_COMPARE_BASE_OBJECTS = "CompareBaseObjects";
             /// <summary>
-            /// static  System.Boolean CompareBaseObjects(UnityEngine.Object lhs,UnityEngine.Object rhs)
+            /// static  System.Boolean CompareBaseObjects(UnityEngine.Object lhs, UnityEngine.Object rhs)
             /// </summary>
             /// <param name="lhs">class UnityEngine.Object</param>
             /// <param name="rhs">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean COMPARE_BASE_OBJECTS (nint lhs,nint rhs);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CompareBaseObjects")]
+            /// static extern System.Boolean COMPARE_BASE_OBJECTS (nint lhs, nint rhs);
 
             
-            /// const string Name_Func_CREATE_SCRIPTABLE_OBJECT = "CreateScriptableObject";
             /// <summary>
             /// static  System.Void CreateScriptableObject(UnityEngine.ScriptableObject self)
             /// </summary>
             /// <param name="self">class UnityEngine.ScriptableObject</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void CREATE_SCRIPTABLE_OBJECT (nint self);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateScriptableObject")]
+            /// static extern void CREATE_SCRIPTABLE_OBJECT (nint self);
 
             
-            /// const string Name_Func_CREATE_SCRIPTABLE_OBJECT_INSTANCE_FROM_TYPE = "CreateScriptableObjectInstanceFromType";
             /// <summary>
-            /// static  UnityEngine.ScriptableObject CreateScriptableObjectInstanceFromType(System.Type type,System.Boolean applyDefaultsAndReset)
+            /// static  UnityEngine.ScriptableObject CreateScriptableObjectInstanceFromType(System.Type type, System.Boolean applyDefaultsAndReset)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="applyDefaultsAndReset">struct System.Boolean</param>
             /// <returns>class UnityEngine.ScriptableObject</returns>
-            /// public static extern nint CREATE_SCRIPTABLE_OBJECT_INSTANCE_FROM_TYPE (nint type,System.Boolean applyDefaultsAndReset);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateScriptableObjectInstanceFromType")]
+            /// static extern nint CREATE_SCRIPTABLE_OBJECT_INSTANCE_FROM_TYPE (nint type, System.Boolean applyDefaultsAndReset);
 
             
-            /// const string Name_Func_CURRENT_THREAD_IS_MAIN_THREAD = "CurrentThreadIsMainThread";
             /// <summary>
             /// static  System.Boolean CurrentThreadIsMainThread()
             /// </summary>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean CURRENT_THREAD_IS_MAIN_THREAD ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CurrentThreadIsMainThread")]
+            /// static extern System.Boolean CURRENT_THREAD_IS_MAIN_THREAD ();
 
             
-            /// const string Name_Func_DESERIALIZE = "Deserialize";
             /// <summary>
             ///   System.Void Deserialize(System.String data)
             /// </summary>
             /// <param name="data">class System.String</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void DESERIALIZE (nint data);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Deserialize")]
+            ///  extern void DESERIALIZE (nint data);
 
             
-            /// const string Name_Func_DOES_OBJECT_WITH_INSTANCE_ID_EXIST = "DoesObjectWithInstanceIDExist";
             /// <summary>
             /// static  System.Boolean DoesObjectWithInstanceIDExist(System.Int32 instanceID)
             /// </summary>
             /// <param name="instanceID">struct System.Int32</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean DOES_OBJECT_WITH_INSTANCE_ID_EXIST (System.Int32 instanceID);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DoesObjectWithInstanceIDExist")]
+            /// static extern System.Boolean DOES_OBJECT_WITH_INSTANCE_ID_EXIST (System.Int32 instanceID);
 
             
-            /// const string Name_Func_DONT_DESTROY_ON_LOAD = "DontDestroyOnLoad";
             /// <summary>
             /// static  System.Void DontDestroyOnLoad(UnityEngine.Object target)
             /// </summary>
             /// <param name="target">class UnityEngine.Object</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DONT_DESTROY_ON_LOAD (nint target);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DontDestroyOnLoad")]
+            /// static extern void DONT_DESTROY_ON_LOAD (nint target);
 
             
-            /// const string Name_Func_ENSURE_RUNNING_ON_MAIN_THREAD = "EnsureRunningOnMainThread";
             /// <summary>
             ///   System.Void EnsureRunningOnMainThread()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void ENSURE_RUNNING_ON_MAIN_THREAD ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("EnsureRunningOnMainThread")]
+            ///  extern void ENSURE_RUNNING_ON_MAIN_THREAD ();
 
             
-            /// const string Name_Func_EQUALS = "Equals";
             /// <summary>
             ///   System.Boolean Equals(System.Object other)
             /// </summary>
             /// <param name="other">class System.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public  extern System.Boolean EQUALS (nint other);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equals")]
+            ///  extern System.Boolean EQUALS (nint other);
 
             
-            /// const string Name_Func_FIND_OBJECT_FROM_INSTANCE_ID = "FindObjectFromInstanceID";
             /// <summary>
             /// static  UnityEngine.Object FindObjectFromInstanceID(System.Int32 instanceID)
             /// </summary>
             /// <param name="instanceID">struct System.Int32</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_OBJECT_FROM_INSTANCE_ID (System.Int32 instanceID);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectFromInstanceID")]
+            /// static extern nint FIND_OBJECT_FROM_INSTANCE_ID (System.Int32 instanceID);
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE_ALL = "FindObjectsOfTypeAll";
             /// <summary>
             /// static  UnityEngine.Object[] FindObjectsOfTypeAll(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_ALL (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfTypeAll")]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_ALL (nint type);
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE_INCLUDING_ASSETS = "FindObjectsOfTypeIncludingAssets";
             /// <summary>
             /// static  UnityEngine.Object[] FindObjectsOfTypeIncludingAssets(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_INCLUDING_ASSETS (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfTypeIncludingAssets")]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_INCLUDING_ASSETS (nint type);
 
             
-            /// const string Name_Func_FIND_SCENE_OBJECTS_OF_TYPE = "FindSceneObjectsOfType";
             /// <summary>
             /// static  UnityEngine.Object[] FindSceneObjectsOfType(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_SCENE_OBJECTS_OF_TYPE (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindSceneObjectsOfType")]
+            /// static extern nint FIND_SCENE_OBJECTS_OF_TYPE (nint type);
 
             
-            /// const string Name_Func_FORCE_LOAD_FROM_INSTANCE_ID = "ForceLoadFromInstanceID";
             /// <summary>
             /// static  UnityEngine.Object ForceLoadFromInstanceID(System.Int32 instanceID)
             /// </summary>
             /// <param name="instanceID">struct System.Int32</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FORCE_LOAD_FROM_INSTANCE_ID (System.Int32 instanceID);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ForceLoadFromInstanceID")]
+            /// static extern nint FORCE_LOAD_FROM_INSTANCE_ID (System.Int32 instanceID);
 
             
-            /// const string Name_Func_GET_COUNT = "get_count";
             /// <summary>
             ///   System.Int32 get_count()
             /// </summary>
             /// <returns>struct System.Int32</returns>
-            /// public  extern System.Int32 GET_COUNT ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_count")]
+            ///  extern System.Int32 GET_COUNT ();
 
             
-            /// const string Name_Func_GET_GET_UID = "get_getUID";
             /// <summary>
             ///   System.String get_getUID()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint GET_GET_UID ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getUID")]
+            ///  extern nint GET_GET_UID ();
 
             
-            /// const string Name_Func_GET_HIDE_FLAGS = "get_hideFlags";
             /// <summary>
             ///   UnityEngine.HideFlags get_hideFlags()
             /// </summary>
             /// <returns>enum UnityEngine.HideFlags</returns>
-            /// public  extern UnityEngine.HideFlags GET_HIDE_FLAGS ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_hideFlags")]
+            ///  extern UnityEngine.HideFlags GET_HIDE_FLAGS ();
 
             
-            /// const string Name_Func_GET_NAME = "get_name";
             /// <summary>
             ///   System.String get_name()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint GET_NAME ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_name")]
+            ///  extern nint GET_NAME ();
 
             
-            /// const string Name_Func_GET_BUY_PRICE = "GetBuyPrice";
             /// <summary>
             ///   System.Single GetBuyPrice()
             /// </summary>
             /// <returns>struct System.Single</returns>
-            /// public  extern System.Single GET_BUY_PRICE ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetBuyPrice")]
+            ///  extern System.Single GET_BUY_PRICE ();
 
             
-            /// const string Name_Func_GET_CACHED_PTR = "GetCachedPtr";
             /// <summary>
             ///   System.IntPtr GetCachedPtr()
             /// </summary>
             /// <returns>struct System.IntPtr</returns>
-            /// public  extern System.IntPtr GET_CACHED_PTR ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCachedPtr")]
+            ///  extern System.IntPtr GET_CACHED_PTR ();
 
             
-            /// const string Name_Func_GET_COUNT_IN_INVENTORY = "GetCountInInventory";
             /// <summary>
             ///   System.Int32 GetCountInInventory()
             /// </summary>
             /// <returns>struct System.Int32</returns>
-            /// public  extern System.Int32 GET_COUNT_IN_INVENTORY ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCountInInventory")]
+            ///  extern System.Int32 GET_COUNT_IN_INVENTORY ();
 
             
-            /// const string Name_Func_GET_DESCRIPTION = "GetDescription";
             /// <summary>
             ///   System.String GetDescription()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint GET_DESCRIPTION ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescription")]
+            ///  extern nint GET_DESCRIPTION ();
 
             
-            /// const string Name_Func_GET_DESCRIPTION_FIELD = "GetDescriptionField";
             /// <summary>
             ///   LocalizationManager.LocalizedField GetDescriptionField()
             /// </summary>
             /// <returns>class LocalizationManager.LocalizedField</returns>
-            /// public  extern nint GET_DESCRIPTION_FIELD ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescriptionField")]
+            ///  extern nint GET_DESCRIPTION_FIELD ();
 
             
-            /// const string Name_Func_GET_HASH_CODE = "GetHashCode";
             /// <summary>
             ///   System.Int32 GetHashCode()
             /// </summary>
             /// <returns>struct System.Int32</returns>
-            /// public  extern System.Int32 GET_HASH_CODE ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetHashCode")]
+            ///  extern System.Int32 GET_HASH_CODE ();
 
             
-            /// const string Name_Func_GET_INSTANCE_ID = "GetInstanceID";
             /// <summary>
             ///   System.Int32 GetInstanceID()
             /// </summary>
             /// <returns>struct System.Int32</returns>
-            /// public  extern System.Int32 GET_INSTANCE_ID ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetInstanceID")]
+            ///  extern System.Int32 GET_INSTANCE_ID ();
 
             
-            /// const string Name_Func_GET_NAME_FIELD = "GetNameField";
             /// <summary>
             ///   LocalizationManager.LocalizedField GetNameField()
             /// </summary>
             /// <returns>class LocalizationManager.LocalizedField</returns>
-            /// public  extern nint GET_NAME_FIELD ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetNameField")]
+            ///  extern nint GET_NAME_FIELD ();
 
             
-            /// const string Name_Func_GET_OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT = "GetOffsetOfInstanceIDInCPlusPlusObject";
             /// <summary>
             /// static  System.Int32 GetOffsetOfInstanceIDInCPlusPlusObject()
             /// </summary>
             /// <returns>struct System.Int32</returns>
-            /// public static extern System.Int32 GET_OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetOffsetOfInstanceIDInCPlusPlusObject")]
+            /// static extern System.Int32 GET_OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT ();
 
             
-            /// const string Name_Func_INTERNAL_CLONE_SINGLE = "Internal_CloneSingle";
             /// <summary>
             /// static  UnityEngine.Object Internal_CloneSingle(UnityEngine.Object data)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_CLONE_SINGLE (nint data);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_CloneSingle")]
+            /// static extern nint INTERNAL_CLONE_SINGLE (nint data);
 
             
-            /// const string Name_Func_INTERNAL_CLONE_SINGLE_WITH_PARENT = "Internal_CloneSingleWithParent";
             /// <summary>
-            /// static  UnityEngine.Object Internal_CloneSingleWithParent(UnityEngine.Object data,UnityEngine.Transform parent,System.Boolean worldPositionStays)
+            /// static  UnityEngine.Object Internal_CloneSingleWithParent(UnityEngine.Object data, UnityEngine.Transform parent, System.Boolean worldPositionStays)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <param name="worldPositionStays">struct System.Boolean</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_CLONE_SINGLE_WITH_PARENT (nint data,nint parent,System.Boolean worldPositionStays);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_CloneSingleWithParent")]
+            /// static extern nint INTERNAL_CLONE_SINGLE_WITH_PARENT (nint data, nint parent, System.Boolean worldPositionStays);
 
             
-            /// const string Name_Func_INTERNAL_INSTANTIATE_SINGLE = "Internal_InstantiateSingle";
             /// <summary>
-            /// static  UnityEngine.Object Internal_InstantiateSingle(UnityEngine.Object data,UnityEngine.Vector3 pos,UnityEngine.Quaternion rot)
+            /// static  UnityEngine.Object Internal_InstantiateSingle(UnityEngine.Object data, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <param name="pos">struct UnityEngine.Vector3</param>
             /// <param name="rot">struct UnityEngine.Quaternion</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_INSTANTIATE_SINGLE (nint data,UnityEngine.Vector3 pos,UnityEngine.Quaternion rot);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateSingle")]
+            /// static extern nint INTERNAL_INSTANTIATE_SINGLE (nint data, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot);
 
             
-            /// const string Name_Func_INTERNAL_INSTANTIATE_SINGLE_INJECTED = "Internal_InstantiateSingle_Injected";
             /// <summary>
-            /// static  UnityEngine.Object Internal_InstantiateSingle_Injected(UnityEngine.Object data,UnityEngine.Vector3& pos,UnityEngine.Quaternion& rot)
+            /// static  UnityEngine.Object Internal_InstantiateSingle_Injected(UnityEngine.Object data, UnityEngine.Vector3& pos, UnityEngine.Quaternion& rot)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <param name="pos">struct UnityEngine.Vector3&</param>
             /// <param name="rot">struct UnityEngine.Quaternion&</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_INSTANTIATE_SINGLE_INJECTED (nint data,UnityEngine.Vector3& pos,UnityEngine.Quaternion& rot);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateSingle_Injected")]
+            /// static extern nint INTERNAL_INSTANTIATE_SINGLE_INJECTED (nint data, UnityEngine.Vector3& pos, UnityEngine.Quaternion& rot);
 
             
-            /// const string Name_Func_INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT = "Internal_InstantiateSingleWithParent";
             /// <summary>
-            /// static  UnityEngine.Object Internal_InstantiateSingleWithParent(UnityEngine.Object data,UnityEngine.Transform parent,UnityEngine.Vector3 pos,UnityEngine.Quaternion rot)
+            /// static  UnityEngine.Object Internal_InstantiateSingleWithParent(UnityEngine.Object data, UnityEngine.Transform parent, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <param name="pos">struct UnityEngine.Vector3</param>
             /// <param name="rot">struct UnityEngine.Quaternion</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT (nint data,nint parent,UnityEngine.Vector3 pos,UnityEngine.Quaternion rot);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateSingleWithParent")]
+            /// static extern nint INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT (nint data, nint parent, UnityEngine.Vector3 pos, UnityEngine.Quaternion rot);
 
             
-            /// const string Name_Func_INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT_INJECTED = "Internal_InstantiateSingleWithParent_Injected";
             /// <summary>
-            /// static  UnityEngine.Object Internal_InstantiateSingleWithParent_Injected(UnityEngine.Object data,UnityEngine.Transform parent,UnityEngine.Vector3& pos,UnityEngine.Quaternion& rot)
+            /// static  UnityEngine.Object Internal_InstantiateSingleWithParent_Injected(UnityEngine.Object data, UnityEngine.Transform parent, UnityEngine.Vector3& pos, UnityEngine.Quaternion& rot)
             /// </summary>
             /// <param name="data">class UnityEngine.Object</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <param name="pos">struct UnityEngine.Vector3&</param>
             /// <param name="rot">struct UnityEngine.Quaternion&</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT_INJECTED (nint data,nint parent,UnityEngine.Vector3& pos,UnityEngine.Quaternion& rot);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateSingleWithParent_Injected")]
+            /// static extern nint INTERNAL_INSTANTIATE_SINGLE_WITH_PARENT_INJECTED (nint data, nint parent, UnityEngine.Vector3& pos, UnityEngine.Quaternion& rot);
 
             
-            /// const string Name_Func_IS_NATIVE_OBJECT_ALIVE = "IsNativeObjectAlive";
             /// <summary>
             /// static  System.Boolean IsNativeObjectAlive(UnityEngine.Object o)
             /// </summary>
             /// <param name="o">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean IS_NATIVE_OBJECT_ALIVE (nint o);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsNativeObjectAlive")]
+            /// static extern System.Boolean IS_NATIVE_OBJECT_ALIVE (nint o);
 
             
-            /// const string Name_Func_IS_PERSISTENT = "IsPersistent";
             /// <summary>
             /// static  System.Boolean IsPersistent(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean IS_PERSISTENT (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsPersistent")]
+            /// static extern System.Boolean IS_PERSISTENT (nint obj);
 
             
-            /// const string Name_Func_MARK_DIRTY = "MarkDirty";
             /// <summary>
             ///   System.Void MarkDirty()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void MARK_DIRTY ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("MarkDirty")]
+            ///  extern void MARK_DIRTY ();
 
             
-            /// const string Name_Func_OP_EQUALITY = "op_Equality";
             /// <summary>
-            /// static  System.Boolean op_Equality(UnityEngine.Object x,UnityEngine.Object y)
+            /// static  System.Boolean op_Equality(UnityEngine.Object x, UnityEngine.Object y)
             /// </summary>
             /// <param name="x">class UnityEngine.Object</param>
             /// <param name="y">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean OP_EQUALITY (nint x,nint y);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("op_Equality")]
+            /// static extern System.Boolean OP_EQUALITY (nint x, nint y);
 
             
-            /// const string Name_Func_OP_IMPLICIT = "op_Implicit";
             /// <summary>
             /// static  System.Boolean op_Implicit(UnityEngine.Object exists)
             /// </summary>
             /// <param name="exists">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean OP_IMPLICIT (nint exists);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("op_Implicit")]
+            /// static extern System.Boolean OP_IMPLICIT (nint exists);
 
             
-            /// const string Name_Func_OP_INEQUALITY = "op_Inequality";
             /// <summary>
-            /// static  System.Boolean op_Inequality(UnityEngine.Object x,UnityEngine.Object y)
+            /// static  System.Boolean op_Inequality(UnityEngine.Object x, UnityEngine.Object y)
             /// </summary>
             /// <param name="x">class UnityEngine.Object</param>
             /// <param name="y">class UnityEngine.Object</param>
             /// <returns>struct System.Boolean</returns>
-            /// public static extern System.Boolean OP_INEQUALITY (nint x,nint y);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("op_Inequality")]
+            /// static extern System.Boolean OP_INEQUALITY (nint x, nint y);
 
             
-            /// const string Name_Func_PARSE = "Parse";
             /// <summary>
             ///   System.Void Parse(System.Collections.Generic.Dictionary<System.String,System.Object> row)
             /// </summary>
             /// <param name="row">class System.Collections.Generic.Dictionary<System.String,System.Object></param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void PARSE (nint row);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Parse")]
+            ///  extern void PARSE (nint row);
 
             
-            /// const string Name_Func_PARSE_TABLE = "ParseTable";
             /// <summary>
             /// static  System.Void ParseTable(System.Collections.Generic.List<System.Collections.Generic.Dictionary<System.String,System.Object>> table)
             /// </summary>
             /// <param name="table">class System.Collections.Generic.List<System.Collections.Generic.Dictionary<System.String,System.Object>></param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void PARSE_TABLE (nint table);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ParseTable")]
+            /// static extern void PARSE_TABLE (nint table);
 
             
-            /// const string Name_Func_SERIALIZE = "Serialize";
             /// <summary>
             ///   System.String Serialize()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint SERIALIZE ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Serialize")]
+            ///  extern nint SERIALIZE ();
 
             
-            /// const string Name_Func_SET_COUNT = "set_count";
             /// <summary>
             ///   System.Void set_count(System.Int32 value)
             /// </summary>
             /// <param name="value">struct System.Int32</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void SET_COUNT (System.Int32 value);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_count")]
+            ///  extern void SET_COUNT (System.Int32 value);
 
             
-            /// const string Name_Func_SET_HIDE_FLAGS = "set_hideFlags";
             /// <summary>
             ///   System.Void set_hideFlags(UnityEngine.HideFlags value)
             /// </summary>
             /// <param name="value">enum UnityEngine.HideFlags</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void SET_HIDE_FLAGS (UnityEngine.HideFlags value);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_hideFlags")]
+            ///  extern void SET_HIDE_FLAGS (UnityEngine.HideFlags value);
 
             
-            /// const string Name_Func_SET_NAME = "set_name";
             /// <summary>
             ///   System.Void set_name(System.String value)
             /// </summary>
             /// <param name="value">class System.String</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void SET_NAME (nint value);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_name")]
+            ///  extern void SET_NAME (nint value);
 
             
-            /// const string Name_Func_SET_COUNT = "SetCount";
             /// <summary>
             ///   System.Void SetCount(System.Int32 amount)
             /// </summary>
             /// <param name="amount">struct System.Int32</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void SET_COUNT (System.Int32 amount);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetCount")]
+            ///  extern void SET_COUNT (System.Int32 amount);
 
             
-            /// const string Name_Func_SET_NAME = "SetName";
             /// <summary>
-            /// static  System.Void SetName(UnityEngine.Object obj,System.String name)
+            /// static  System.Void SetName(UnityEngine.Object obj, System.String name)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <param name="name">class System.String</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void SET_NAME (nint obj,nint name);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetName")]
+            /// static extern void SET_NAME (nint obj, nint name);
 
             
-            /// const string Name_Func_SHOULD_BE_HIGHLIGHTED = "ShouldBeHighlighted";
             /// <summary>
             ///   System.Boolean ShouldBeHighlighted()
             /// </summary>
             /// <returns>struct System.Boolean</returns>
-            /// public  extern System.Boolean SHOULD_BE_HIGHLIGHTED ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShouldBeHighlighted")]
+            ///  extern System.Boolean SHOULD_BE_HIGHLIGHTED ();
 
             
-            /// const string Name_Func_TAKE = "Take";
             /// <summary>
             ///   System.Void Take(System.Int32 amount)
             /// </summary>
             /// <param name="amount">struct System.Int32</param>
             /// <returns>struct System.Void</returns>
-            /// public  extern void TAKE (System.Int32 amount);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Take")]
+            ///  extern void TAKE (System.Int32 amount);
             
             
             
-            /// const string Name_Func_.CCTOR = ".cctor";
             /// <summary>
             /// static  System.Void .cctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public static extern void .CCTOR_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".cctor", Search = typeof(Search_ConfidantGift))]
+            /// static extern void .CCTOR_00 ();
 
             
-            /// const string Name_Func_.CCTOR = ".cctor";
             /// <summary>
             /// static  System.Void .cctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public static extern void .CCTOR_01 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".cctor", Search = typeof(Search_ConfidantGift))]
+            /// static extern void .CCTOR_01 ();
 
             
-            /// const string Name_Func_.CTOR = ".ctor";
             /// <summary>
             ///   System.Void .ctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void .CTOR_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ConfidantGift))]
+            ///  extern void .CTOR_00 ();
 
             
-            /// const string Name_Func_.CTOR = ".ctor";
             /// <summary>
             ///   System.Void .ctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void .CTOR_01 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ConfidantGift))]
+            ///  extern void .CTOR_01 ();
 
             
-            /// const string Name_Func_.CTOR = ".ctor";
             /// <summary>
             ///   System.Void .ctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void .CTOR_02 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ConfidantGift))]
+            ///  extern void .CTOR_02 ();
 
             
-            /// const string Name_Func_.CTOR = ".ctor";
             /// <summary>
             ///   System.Void .ctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void .CTOR_03 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ConfidantGift))]
+            ///  extern void .CTOR_03 ();
 
             
-            /// const string Name_Func_.CTOR = ".ctor";
             /// <summary>
             ///   System.Void .ctor()
             /// </summary>
             /// <returns>struct System.Void</returns>
-            /// public  extern void .CTOR_04 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_ConfidantGift))]
+            ///  extern void .CTOR_04 ();
 
             
-            /// const string Name_Func_CREATE_INSTANCE = "CreateInstance";
             /// <summary>
             /// static  UnityEngine.ScriptableObject CreateInstance(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.ScriptableObject</returns>
-            /// public static extern nint CREATE_INSTANCE_00 (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint CREATE_INSTANCE_00 (nint type);
 
             
-            /// const string Name_Func_CREATE_INSTANCE = "CreateInstance";
             /// <summary>
             /// static  T CreateInstance()
             /// </summary>
             /// <returns>class T</returns>
-            /// public static extern nint CREATE_INSTANCE_01 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CreateInstance", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint CREATE_INSTANCE_01 ();
 
             
-            /// const string Name_Func_DESTROY = "Destroy";
             /// <summary>
-            /// static  System.Void Destroy(UnityEngine.Object obj,System.Single t)
+            /// static  System.Void Destroy(UnityEngine.Object obj, System.Single t)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <param name="t">struct System.Single</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_00 (nint obj,System.Single t);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_00 (nint obj, System.Single t);
 
             
-            /// const string Name_Func_DESTROY = "Destroy";
             /// <summary>
             /// static  System.Void Destroy(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_01 (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_01 (nint obj);
 
             
-            /// const string Name_Func_DESTROY_IMMEDIATE = "DestroyImmediate";
             /// <summary>
-            /// static  System.Void DestroyImmediate(UnityEngine.Object obj,System.Boolean allowDestroyingAssets)
+            /// static  System.Void DestroyImmediate(UnityEngine.Object obj, System.Boolean allowDestroyingAssets)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <param name="allowDestroyingAssets">struct System.Boolean</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_IMMEDIATE_00 (nint obj,System.Boolean allowDestroyingAssets);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_IMMEDIATE_00 (nint obj, System.Boolean allowDestroyingAssets);
 
             
-            /// const string Name_Func_DESTROY_IMMEDIATE = "DestroyImmediate";
             /// <summary>
             /// static  System.Void DestroyImmediate(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_IMMEDIATE_01 (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_IMMEDIATE_01 (nint obj);
 
             
-            /// const string Name_Func_DESTROY_OBJECT = "DestroyObject";
             /// <summary>
-            /// static  System.Void DestroyObject(UnityEngine.Object obj,System.Single t)
+            /// static  System.Void DestroyObject(UnityEngine.Object obj, System.Single t)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <param name="t">struct System.Single</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_OBJECT_00 (nint obj,System.Single t);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_OBJECT_00 (nint obj, System.Single t);
 
             
-            /// const string Name_Func_DESTROY_OBJECT = "DestroyObject";
             /// <summary>
             /// static  System.Void DestroyObject(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>struct System.Void</returns>
-            /// public static extern void DESTROY_OBJECT_01 (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_ConfidantGift))]
+            /// static extern void DESTROY_OBJECT_01 (nint obj);
 
             
-            /// const string Name_Func_FIND_ANY_OBJECT_BY_TYPE = "FindAnyObjectByType";
             /// <summary>
             /// static  T FindAnyObjectByType()
             /// </summary>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_ANY_OBJECT_BY_TYPE_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_ANY_OBJECT_BY_TYPE_00 ();
 
             
-            /// const string Name_Func_FIND_ANY_OBJECT_BY_TYPE = "FindAnyObjectByType";
             /// <summary>
             /// static  T FindAnyObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
             /// </summary>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_ANY_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_ANY_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
             
-            /// const string Name_Func_FIND_ANY_OBJECT_BY_TYPE = "FindAnyObjectByType";
             /// <summary>
             /// static  UnityEngine.Object FindAnyObjectByType(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_ANY_OBJECT_BY_TYPE_02 (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_ANY_OBJECT_BY_TYPE_02 (nint type);
 
             
-            /// const string Name_Func_FIND_ANY_OBJECT_BY_TYPE = "FindAnyObjectByType";
             /// <summary>
-            /// static  UnityEngine.Object FindAnyObjectByType(System.Type type,UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// static  UnityEngine.Object FindAnyObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_ANY_OBJECT_BY_TYPE_03 (nint type,UnityEngine.FindObjectsInactive findObjectsInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_ANY_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
             
-            /// const string Name_Func_FIND_FIRST_OBJECT_BY_TYPE = "FindFirstObjectByType";
             /// <summary>
             /// static  T FindFirstObjectByType()
             /// </summary>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_FIRST_OBJECT_BY_TYPE_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_00 ();
 
             
-            /// const string Name_Func_FIND_FIRST_OBJECT_BY_TYPE = "FindFirstObjectByType";
             /// <summary>
             /// static  T FindFirstObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
             /// </summary>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_FIRST_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
             
-            /// const string Name_Func_FIND_FIRST_OBJECT_BY_TYPE = "FindFirstObjectByType";
             /// <summary>
             /// static  UnityEngine.Object FindFirstObjectByType(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_FIRST_OBJECT_BY_TYPE_02 (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_02 (nint type);
 
             
-            /// const string Name_Func_FIND_FIRST_OBJECT_BY_TYPE = "FindFirstObjectByType";
             /// <summary>
-            /// static  UnityEngine.Object FindFirstObjectByType(System.Type type,UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// static  UnityEngine.Object FindFirstObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_FIRST_OBJECT_BY_TYPE_03 (nint type,UnityEngine.FindObjectsInactive findObjectsInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
             
-            /// const string Name_Func_FIND_OBJECT_OF_TYPE = "FindObjectOfType";
             /// <summary>
             /// static  T FindObjectOfType()
             /// </summary>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_OBJECT_OF_TYPE_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECT_OF_TYPE_00 ();
 
             
-            /// const string Name_Func_FIND_OBJECT_OF_TYPE = "FindObjectOfType";
             /// <summary>
             /// static  T FindObjectOfType(System.Boolean includeInactive)
             /// </summary>
             /// <param name="includeInactive">struct System.Boolean</param>
             /// <returns>class T</returns>
-            /// public static extern nint FIND_OBJECT_OF_TYPE_01 (System.Boolean includeInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECT_OF_TYPE_01 (System.Boolean includeInactive);
 
             
-            /// const string Name_Func_FIND_OBJECT_OF_TYPE = "FindObjectOfType";
             /// <summary>
             /// static  UnityEngine.Object FindObjectOfType(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_OBJECT_OF_TYPE_02 (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECT_OF_TYPE_02 (nint type);
 
             
-            /// const string Name_Func_FIND_OBJECT_OF_TYPE = "FindObjectOfType";
             /// <summary>
-            /// static  UnityEngine.Object FindObjectOfType(System.Type type,System.Boolean includeInactive)
+            /// static  UnityEngine.Object FindObjectOfType(System.Type type, System.Boolean includeInactive)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="includeInactive">struct System.Boolean</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint FIND_OBJECT_OF_TYPE_03 (nint type,System.Boolean includeInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECT_OF_TYPE_03 (nint type, System.Boolean includeInactive);
 
             
-            /// const string Name_Func_FIND_OBJECTS_BY_TYPE = "FindObjectsByType";
             /// <summary>
-            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type,UnityEngine.FindObjectsSortMode sortMode)
+            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsSortMode sortMode)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_BY_TYPE_00 (nint type,UnityEngine.FindObjectsSortMode sortMode);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_BY_TYPE_00 (nint type, UnityEngine.FindObjectsSortMode sortMode);
 
             
-            /// const string Name_Func_FIND_OBJECTS_BY_TYPE = "FindObjectsByType";
             /// <summary>
-            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type,UnityEngine.FindObjectsInactive findObjectsInactive,UnityEngine.FindObjectsSortMode sortMode)
+            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_BY_TYPE_01 (nint type,UnityEngine.FindObjectsInactive findObjectsInactive,UnityEngine.FindObjectsSortMode sortMode);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_BY_TYPE_01 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
             
-            /// const string Name_Func_FIND_OBJECTS_BY_TYPE = "FindObjectsByType";
             /// <summary>
             /// static  T[] FindObjectsByType(UnityEngine.FindObjectsSortMode sortMode)
             /// </summary>
             /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
             /// <returns>class T[]</returns>
-            /// public static extern nint FIND_OBJECTS_BY_TYPE_02 (UnityEngine.FindObjectsSortMode sortMode);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_BY_TYPE_02 (UnityEngine.FindObjectsSortMode sortMode);
 
             
-            /// const string Name_Func_FIND_OBJECTS_BY_TYPE = "FindObjectsByType";
             /// <summary>
-            /// static  T[] FindObjectsByType(UnityEngine.FindObjectsInactive findObjectsInactive,UnityEngine.FindObjectsSortMode sortMode)
+            /// static  T[] FindObjectsByType(UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
             /// </summary>
             /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
             /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
             /// <returns>class T[]</returns>
-            /// public static extern nint FIND_OBJECTS_BY_TYPE_03 (UnityEngine.FindObjectsInactive findObjectsInactive,UnityEngine.FindObjectsSortMode sortMode);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_BY_TYPE_03 (UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE = "FindObjectsOfType";
             /// <summary>
             /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_00 (nint type);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_00 (nint type);
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE = "FindObjectsOfType";
             /// <summary>
-            /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type,System.Boolean includeInactive)
+            /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type, System.Boolean includeInactive)
             /// </summary>
             /// <param name="type">abstract class System.Type</param>
             /// <param name="includeInactive">struct System.Boolean</param>
             /// <returns>class UnityEngine.Object[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_01 (nint type,System.Boolean includeInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_01 (nint type, System.Boolean includeInactive);
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE = "FindObjectsOfType";
             /// <summary>
             /// static  T[] FindObjectsOfType()
             /// </summary>
             /// <returns>class T[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_02 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_02 ();
 
             
-            /// const string Name_Func_FIND_OBJECTS_OF_TYPE = "FindObjectsOfType";
             /// <summary>
             /// static  T[] FindObjectsOfType(System.Boolean includeInactive)
             /// </summary>
             /// <param name="includeInactive">struct System.Boolean</param>
             /// <returns>class T[]</returns>
-            /// public static extern nint FIND_OBJECTS_OF_TYPE_03 (System.Boolean includeInactive);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint FIND_OBJECTS_OF_TYPE_03 (System.Boolean includeInactive);
 
             
-            /// const string Name_Func_GET_ICON = "GetIcon";
             /// <summary>
             ///   UnityEngine.Sprite GetIcon()
             /// </summary>
             /// <returns>class UnityEngine.Sprite</returns>
-            /// public  extern nint GET_ICON_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetIcon", Search = typeof(Search_ConfidantGift))]
+            ///  extern nint GET_ICON_00 ();
 
             
-            /// const string Name_Func_GET_ICON = "GetIcon";
             /// <summary>
             ///  abstract UnityEngine.Sprite GetIcon()
             /// </summary>
             /// <returns>class UnityEngine.Sprite</returns>
-            /// public  extern nint GET_ICON_01 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetIcon", Search = typeof(Search_ConfidantGift))]
+            ///  extern nint GET_ICON_01 ();
 
             
-            /// const string Name_Func_GET_NAME = "GetName";
             /// <summary>
             ///   System.String GetName()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint GET_NAME_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetName", Search = typeof(Search_ConfidantGift))]
+            ///  extern nint GET_NAME_00 ();
 
             
-            /// const string Name_Func_GET_NAME = "GetName";
             /// <summary>
             /// static  System.String GetName(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>class System.String</returns>
-            /// public static extern nint GET_NAME_01 (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetName", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint GET_NAME_01 (nint obj);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation)
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
             /// </summary>
             /// <param name="original">class UnityEngine.Object</param>
             /// <param name="position">struct UnityEngine.Vector3</param>
             /// <param name="rotation">struct UnityEngine.Quaternion</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INSTANTIATE_00 (nint original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_00 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation,UnityEngine.Transform parent)
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
             /// </summary>
             /// <param name="original">class UnityEngine.Object</param>
             /// <param name="position">struct UnityEngine.Vector3</param>
             /// <param name="rotation">struct UnityEngine.Quaternion</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INSTANTIATE_01 (nint original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation,nint parent);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_01 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
             /// static  UnityEngine.Object Instantiate(UnityEngine.Object original)
             /// </summary>
             /// <param name="original">class UnityEngine.Object</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INSTANTIATE_02 (nint original);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_02 (nint original);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original,UnityEngine.Transform parent)
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
             /// </summary>
             /// <param name="original">class UnityEngine.Object</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INSTANTIATE_03 (nint original,nint parent);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_03 (nint original, nint parent);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original,UnityEngine.Transform parent,System.Boolean instantiateInWorldSpace)
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace)
             /// </summary>
             /// <param name="original">class UnityEngine.Object</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <param name="instantiateInWorldSpace">struct System.Boolean</param>
             /// <returns>class UnityEngine.Object</returns>
-            /// public static extern nint INSTANTIATE_04 (nint original,nint parent,System.Boolean instantiateInWorldSpace);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_04 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
             /// static  T Instantiate(T original)
             /// </summary>
             /// <param name="original">class T</param>
             /// <returns>class T</returns>
-            /// public static extern nint INSTANTIATE_05 (nint original);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_05 (nint original);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  T Instantiate(T original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation)
+            /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
             /// </summary>
             /// <param name="original">class T</param>
             /// <param name="position">struct UnityEngine.Vector3</param>
             /// <param name="rotation">struct UnityEngine.Quaternion</param>
             /// <returns>class T</returns>
-            /// public static extern nint INSTANTIATE_06 (nint original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_06 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  T Instantiate(T original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation,UnityEngine.Transform parent)
+            /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
             /// </summary>
             /// <param name="original">class T</param>
             /// <param name="position">struct UnityEngine.Vector3</param>
             /// <param name="rotation">struct UnityEngine.Quaternion</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <returns>class T</returns>
-            /// public static extern nint INSTANTIATE_07 (nint original,UnityEngine.Vector3 position,UnityEngine.Quaternion rotation,nint parent);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  T Instantiate(T original,UnityEngine.Transform parent)
+            /// static  T Instantiate(T original, UnityEngine.Transform parent)
             /// </summary>
             /// <param name="original">class T</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <returns>class T</returns>
-            /// public static extern nint INSTANTIATE_08 (nint original,nint parent);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_08 (nint original, nint parent);
 
             
-            /// const string Name_Func_INSTANTIATE = "Instantiate";
             /// <summary>
-            /// static  T Instantiate(T original,UnityEngine.Transform parent,System.Boolean worldPositionStays)
+            /// static  T Instantiate(T original, UnityEngine.Transform parent, System.Boolean worldPositionStays)
             /// </summary>
             /// <param name="original">class T</param>
             /// <param name="parent">class UnityEngine.Transform</param>
             /// <param name="worldPositionStays">struct System.Boolean</param>
             /// <returns>class T</returns>
-            /// public static extern nint INSTANTIATE_09 (nint original,nint parent,System.Boolean worldPositionStays);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint INSTANTIATE_09 (nint original, nint parent, System.Boolean worldPositionStays);
 
             
-            /// const string Name_Func_TO_STRING = "ToString";
             /// <summary>
             ///   System.String ToString()
             /// </summary>
             /// <returns>class System.String</returns>
-            /// public  extern nint TO_STRING_00 ();
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_ConfidantGift))]
+            ///  extern nint TO_STRING_00 ();
 
             
-            /// const string Name_Func_TO_STRING = "ToString";
             /// <summary>
             /// static  System.String ToString(UnityEngine.Object obj)
             /// </summary>
             /// <param name="obj">class UnityEngine.Object</param>
             /// <returns>class System.String</returns>
-            /// public static extern nint TO_STRING_01 (nint obj);
+            /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_ConfidantGift))]
+            /// static extern nint TO_STRING_01 (nint obj);
 
             
             /// public static partial class Search_ConfidantGift
