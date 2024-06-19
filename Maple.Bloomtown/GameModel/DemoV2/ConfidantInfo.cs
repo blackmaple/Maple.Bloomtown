@@ -23,37 +23,37 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 UnityEngine.Sprite iconBig
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"iconBig", "ICON_BIG")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"iconBig", "ICON_BIG")]
             
     // class 0x20 UnityEngine.Sprite previewSprite
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"previewSprite", "PREVIEW_SPRITE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"previewSprite", "PREVIEW_SPRITE")]
             
     // class 0x28 LocalizationManager.LocalizedField description
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
             
     // class 0x30 LocalizationManager.LocalizedField address
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"address", "ADDRESS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"address", "ADDRESS")]
             
     // class 0x38 System.Collections.Generic.List<ConfidantInfo.DateRestriction> dateRestrictions
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"dateRestrictions", "DATE_RESTRICTIONS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"dateRestrictions", "DATE_RESTRICTIONS")]
             
     // class 0x40 System.String giftHintLocale
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"giftHintLocale", "GIFT_HINT_LOCALE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"giftHintLocale", "GIFT_HINT_LOCALE")]
             
     // class 0x48 System.String dateSameDayLocale
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"dateSameDayLocale", "DATE_SAME_DAY_LOCALE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"dateSameDayLocale", "DATE_SAME_DAY_LOCALE")]
             
     // class 0x50 System.Collections.Generic.List<ConfidantInfo.ConfidantReward> rewards
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"rewards", "REWARDS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"rewards", "REWARDS")]
             
     // class 0x58 Character characterPrefab
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"characterPrefab", "CHARACTER_PREFAB")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"characterPrefab", "CHARACTER_PREFAB")]
             
     // class 0x60 System.String descriptionUid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
     public partial class ConfidantInfo
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -88,6 +88,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_ConfidantInfo(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_ConfidantInfo(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_ConfidantInfo obj) => obj._ptr;
+            public static implicit operator bool(Ptr_ConfidantInfo obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

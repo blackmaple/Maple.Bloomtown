@@ -9,24 +9,27 @@ using System.Threading.Tasks;
 
 namespace Maple.Bloomtown.GameModel.Demo
 {
-    
-    
-    /// <summary>
-    /// ["Assembly-CSharp".""."SocialStatType"]
-    /// </summary>
-    public enum SocialStatType : System.Int32
-    { 
 
-        
-        Knowledge = 0x00000000,
+    public partial class SocialStat
+    {
+        /// <summary>
+        /// ["Assembly-CSharp".""."SocialStatType"]
+        /// </summary>
+        public enum SocialStatType : System.Int32
+        {
 
-        Charm = 0x00000001,
 
-        Kindness = 0x00000002,
+            Knowledge = 0x00000000,
 
-        Proficiency = 0x00000003,
+            Charm = 0x00000001,
 
-        Guts = 0x00000004,
+            Kindness = 0x00000002,
+
+            Proficiency = 0x00000003,
+
+            Guts = 0x00000004,
+
+        }
 
     }
 

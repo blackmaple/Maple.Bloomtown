@@ -23,28 +23,28 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 System.String uid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"uid", "UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"uid", "UID")]
             
     // class 0x20 LocalizationManager.LocalizedField itemName
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"itemName", "ITEM_NAME")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"itemName", "ITEM_NAME")]
             
     // class 0x28 LocalizationManager.LocalizedField description
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
             
     // class 0x30 System.String nameUid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
             
     // class 0x38 System.String descriptionUid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
             
     // class 0x40 UnityEngine.Sprite smallIcon
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
             
     // struct 0x48 System.Single price
-    [MonoCollectorSearchFieldAttribute(typeof(System.Single),"price", "PRICE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"price", "PRICE")]
     public partial class Stackable
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -74,6 +74,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_Stackable(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_Stackable(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_Stackable obj) => obj._ptr;
+            public static implicit operator bool(Ptr_Stackable obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

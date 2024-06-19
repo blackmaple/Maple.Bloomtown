@@ -21,10 +21,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     
                 
     // struct 0x10 CustomDateTime date
-    [MonoCollectorSearchFieldAttribute(typeof(CustomDateTime),"date", "DATE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(CustomDateTime),"date", "DATE")]
             
     // enum 0x20 WeatherOnDay.WeatherType weatherType
-    [MonoCollectorSearchFieldAttribute(typeof(WeatherOnDay.WeatherType),"weatherType", "WEATHER_TYPE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(WeatherOnDay.WeatherType),"weatherType", "WEATHER_TYPE")]
     public partial class WeatherOnDay
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -45,6 +45,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_WeatherOnDay(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_WeatherOnDay(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_WeatherOnDay obj) => obj._ptr;
+            public static implicit operator bool(Ptr_WeatherOnDay obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

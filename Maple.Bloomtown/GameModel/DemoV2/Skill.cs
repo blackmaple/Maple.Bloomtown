@@ -21,10 +21,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     
                 
     // class 0x10 SkillInfo skillInfo
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"skillInfo", "SKILL_INFO")]
+      [MonoCollectorSearchFieldAttribute(typeof(SkillInfo.Ptr_SkillInfo),"skillInfo", "SKILL_INFO")]
             
     // struct 0x18 System.Int32 level
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"level", "LEVEL")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"level", "LEVEL")]
     public partial class Skill
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -45,6 +45,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_Skill(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_Skill(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_Skill obj) => obj._ptr;
+            public static implicit operator bool(Ptr_Skill obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

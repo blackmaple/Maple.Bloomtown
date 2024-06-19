@@ -22,7 +22,7 @@ namespace Maple.Bloomtown
 
         #region LoadService
 
-        protected sealed override bool EnableService => false;
+     //   protected sealed override bool EnableService => false;
 
         protected sealed override BloomtownGameContext LoadGameContext()
             => BloomtownGameContext.LoadBloomtownGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.Ver_Common, this.Logger);
@@ -164,7 +164,7 @@ namespace Maple.Bloomtown
         public sealed override async ValueTask<GameSkillDisplayDTO[]> GetListSkillDisplayAsync()
         {
             var gameSettings = await this.GetGameSettingsAsync().ConfigureAwait(false);
-            var datas = await this.MonoTaskAsync(static (context, data) => context.GetListSkillDisplay(data), gameSettings).ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (context, data) => context.GetListSkillDisplay(data).ToArray(), gameSettings).ConfigureAwait(false);
             foreach (var data in datas)
             {
                 if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, $"{data.ObjectId}.png", out var url))
@@ -183,7 +183,7 @@ namespace Maple.Bloomtown
             var datas = await this.MonoTaskAsync(static (context, data) => context.GetListCurrencyDisplay(), gameSettings).ConfigureAwait(false);
             foreach (var data in datas)
             {
-                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, "moneyIcon.png", out var url))
+                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, $"{data.ObjectId}.png", out var url))
                 {
                     data.DisplayImage = url;
                 }

@@ -23,55 +23,55 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 System.Threading.CancellationTokenSource m_CancellationTokenSource
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
             
     // class 0x20 System.String artName
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"artName", "ART_NAME")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"artName", "ART_NAME")]
             
     // class 0x28 System.Collections.Generic.List<BattleParticipantViewPart> viewParts
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"viewParts", "VIEW_PARTS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"viewParts", "VIEW_PARTS")]
             
     // class 0x30 UnityEngine.UI.Button button
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"button", "BUTTON")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"button", "BUTTON")]
             
     // class 0x38 ControllerInfo controllerInfo
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"controllerInfo", "CONTROLLER_INFO")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"controllerInfo", "CONTROLLER_INFO")]
             
     // abstract class 0x40 BattleParticipantController battleParticipantController
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"battleParticipantController", "BATTLE_PARTICIPANT_CONTROLLER")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"battleParticipantController", "BATTLE_PARTICIPANT_CONTROLLER")]
             
     // class 0x48 UnityEngine.Transform m_arrowTr
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_arrowTr", "M_ARROW_TR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_arrowTr", "M_ARROW_TR")]
             
     // class 0x50 UnityEngine.Transform m_heartTr
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_heartTr", "M_HEART_TR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_heartTr", "M_HEART_TR")]
             
     // class 0x58 UnityEngine.Transform m_pentagramTr
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_pentagramTr", "M_PENTAGRAM_TR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_pentagramTr", "M_PENTAGRAM_TR")]
             
     // class 0x60 StatusEffectAnimation m_statusEffectAnimation
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_statusEffectAnimation", "M_STATUS_EFFECT_ANIMATION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_statusEffectAnimation", "M_STATUS_EFFECT_ANIMATION")]
             
     // class 0x68 AnimatedObject m_chargedAttackTarget
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_chargedAttackTarget", "M_CHARGED_ATTACK_TARGET")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_chargedAttackTarget", "M_CHARGED_ATTACK_TARGET")]
             
     // class 0x70 UnityEngine.RuntimeAnimatorController m_savedController
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_savedController", "M_SAVED_CONTROLLER")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_savedController", "M_SAVED_CONTROLLER")]
             
     // enum 0x78 BattleParticipantView.StatusAnimationType statusAnimationType
-    [MonoCollectorSearchFieldAttribute(typeof(BattleParticipantView.StatusAnimationType),"statusAnimationType", "STATUS_ANIMATION_TYPE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(BattleParticipantView.StatusAnimationType),"statusAnimationType", "STATUS_ANIMATION_TYPE")]
             
     // struct 0x7C System.Boolean m_viewHidden
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_viewHidden", "M_VIEW_HIDDEN")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_viewHidden", "M_VIEW_HIDDEN")]
             
     // struct 0x7D System.Boolean playingAnimation
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"playingAnimation", "PLAYING_ANIMATION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"playingAnimation", "PLAYING_ANIMATION")]
             
     // struct 0x7E System.Boolean m_isCatching
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_isCatching", "M_IS_CATCHING")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_isCatching", "M_IS_CATCHING")]
     public partial class BattleParticipantView
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -101,6 +101,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_BattleParticipantView(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_BattleParticipantView(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_BattleParticipantView obj) => obj._ptr;
+            public static implicit operator bool(Ptr_BattleParticipantView obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

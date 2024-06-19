@@ -26,34 +26,34 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 System.Threading.CancellationTokenSource m_CancellationTokenSource
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
             
     // class 0x20 System.Collections.Generic.List<Quest> m_quests
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_quests", "M_QUESTS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_quests", "M_QUESTS")]
             
     // class 0x28 Logger m_logger
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_logger", "M_LOGGER")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_logger", "M_LOGGER")]
             
     // class 0x30 System.Collections.Generic.List<QuestStage> m_questStagesInProgress
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_questStagesInProgress", "M_QUEST_STAGES_IN_PROGRESS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_questStagesInProgress", "M_QUEST_STAGES_IN_PROGRESS")]
             
     // class 0x38 System.Collections.Generic.List<QuestStage> m_silentlyFinishedStages
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_silentlyFinishedStages", "M_SILENTLY_FINISHED_STAGES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_silentlyFinishedStages", "M_SILENTLY_FINISHED_STAGES")]
             
     // class 0x40 System.Collections.Generic.List<QuestStage> m_silentlyStartedStages
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_silentlyStartedStages", "M_SILENTLY_STARTED_STAGES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_silentlyStartedStages", "M_SILENTLY_STARTED_STAGES")]
             
     // class 0x48 System.Collections.Generic.List<QuestManager.FinishedQuestStages> m_questStagesInFinished
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_questStagesInFinished", "M_QUEST_STAGES_IN_FINISHED")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_questStagesInFinished", "M_QUEST_STAGES_IN_FINISHED")]
             
     // class 0x50 System.Collections.Generic.Dictionary<Quest,System.DateTime> m_startedDateQuests
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_startedDateQuests", "M_STARTED_DATE_QUESTS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_startedDateQuests", "M_STARTED_DATE_QUESTS")]
             
     // struct 0x58 System.Boolean mainQuestFailed
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"mainQuestFailed", "MAIN_QUEST_FAILED")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"mainQuestFailed", "MAIN_QUEST_FAILED")]
     public partial class QuestManager
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -83,6 +83,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_QuestManager(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_QuestManager(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_QuestManager obj) => obj._ptr;
+            public static implicit operator bool(Ptr_QuestManager obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

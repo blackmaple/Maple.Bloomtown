@@ -62,37 +62,37 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Collections.Generic.KeyValuePair<System.String,System.String>),"HighlightColor", "HIGHLIGHT_COLOR"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 System.Threading.CancellationTokenSource m_CancellationTokenSource
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
             
     // class 0x20 System.Collections.Generic.Dictionary<System.String,System.String> dict
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"dict", "DICT")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"dict", "DICT")]
             
     // class 0x28 System.String id
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"id", "ID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"id", "ID")]
             
     // class 0x30 System.Collections.Generic.List<System.String> txt_ids
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"txt_ids", "TXT_IDS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"txt_ids", "TXT_IDS")]
             
     // class 0x38 System.Collections.Generic.List<System.String> txts
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"txts", "TXTS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"txts", "TXTS")]
             
     // class 0x40 System.Collections.Generic.Dictionary<System.String,LocalizationManager.CutscenePhrase> cutsceneLocales
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"cutsceneLocales", "CUTSCENE_LOCALES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cutsceneLocales", "CUTSCENE_LOCALES")]
             
     // class 0x48 System.Collections.Generic.List<System.String> cutscene_uid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_uid", "CUTSCENE_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_uid", "CUTSCENE_UID")]
             
     // class 0x50 System.Collections.Generic.List<System.String> cutscene_txts
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_txts", "CUTSCENE_TXTS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_txts", "CUTSCENE_TXTS")]
             
     // class 0x58 System.Collections.Generic.List<System.SByte> cutscene_priorities
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_priorities", "CUTSCENE_PRIORITIES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cutscene_priorities", "CUTSCENE_PRIORITIES")]
             
     // struct 0x60 System.Boolean isReady
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"isReady", "IS_READY")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"isReady", "IS_READY")]
     public partial class LocalizationManager
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -127,6 +127,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_LocalizationManager(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_LocalizationManager(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_LocalizationManager obj) => obj._ptr;
+            public static implicit operator bool(Ptr_LocalizationManager obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

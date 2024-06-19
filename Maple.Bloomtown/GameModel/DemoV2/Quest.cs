@@ -23,64 +23,64 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
                 
     // struct 0x10 System.IntPtr m_CachedPtr
-    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
             
     // class 0x18 System.String uid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"uid", "UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"uid", "UID")]
             
     // class 0x20 LocalizationManager.LocalizedField questName
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"questName", "QUEST_NAME")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"questName", "QUEST_NAME")]
             
     // class 0x28 System.String questNameUid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"questNameUid", "QUEST_NAME_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"questNameUid", "QUEST_NAME_UID")]
             
     // class 0x30 LocalizationManager.LocalizedField description
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
             
     // class 0x38 System.String descriptionUid
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
             
     // class 0x40 LocalizationManager.LocalizedField objective
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"objective", "OBJECTIVE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"objective", "OBJECTIVE")]
             
     // class 0x48 Location blockLocation
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"blockLocation", "BLOCK_LOCATION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"blockLocation", "BLOCK_LOCATION")]
             
     // class 0x50 System.Collections.Generic.List<QuestStage> initialStages
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"initialStages", "INITIAL_STAGES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"initialStages", "INITIAL_STAGES")]
             
     // class 0x58 System.Collections.Generic.List<QuestStage> stages
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"stages", "STAGES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"stages", "STAGES")]
             
     // class 0x60 Quest parentalQuest
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"parentalQuest", "PARENTAL_QUEST")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"parentalQuest", "PARENTAL_QUEST")]
             
     // class 0x68 System.Collections.Generic.List<QuestStage> parentStages
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"parentStages", "PARENT_STAGES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"parentStages", "PARENT_STAGES")]
             
     // struct 0x70 CustomDateTime hardDeadline
-    [MonoCollectorSearchFieldAttribute(typeof(CustomDateTime),"hardDeadline", "HARD_DEADLINE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(CustomDateTime),"hardDeadline", "HARD_DEADLINE")]
             
     // class 0x80 System.String cutsceneOnDeadlineFail
-    [MonoCollectorSearchFieldAttribute(typeof(nint),"cutsceneOnDeadlineFail", "CUTSCENE_ON_DEADLINE_FAIL")]
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"cutsceneOnDeadlineFail", "CUTSCENE_ON_DEADLINE_FAIL")]
             
     // struct 0x88 System.Boolean isMain
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"isMain", "IS_MAIN")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"isMain", "IS_MAIN")]
             
     // struct 0x89 System.Boolean blocksFastTravel
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"blocksFastTravel", "BLOCKS_FAST_TRAVEL")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"blocksFastTravel", "BLOCKS_FAST_TRAVEL")]
             
     // struct 0x8A System.Boolean blocksActivities
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"blocksActivities", "BLOCKS_ACTIVITIES")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"blocksActivities", "BLOCKS_ACTIVITIES")]
             
     // struct 0x8B System.Boolean parentsLogicalAnd
-    [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"parentsLogicalAnd", "PARENTS_LOGICAL_AND")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"parentsLogicalAnd", "PARENTS_LOGICAL_AND")]
             
     // enum 0x8C QuestManager.DeadlineRestriction deadlineRestriction
-    [MonoCollectorSearchFieldAttribute(typeof(QuestManager.DeadlineRestriction),"deadlineRestriction", "DEADLINE_RESTRICTION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(QuestManager.DeadlineRestriction),"deadlineRestriction", "DEADLINE_RESTRICTION")]
             
     // struct 0x90 System.Int32 questDurationInDays
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"questDurationInDays", "QUEST_DURATION_IN_DAYS")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"questDurationInDays", "QUEST_DURATION_IN_DAYS")]
     public partial class Quest
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -115,6 +115,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_Quest(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_Quest(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_Quest obj) => obj._ptr;
+            public static implicit operator bool(Ptr_Quest obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

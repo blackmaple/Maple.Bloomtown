@@ -32,10 +32,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(nint),"ContainedInRandomStatus", "CONTAINED_IN_RANDOM_STATUS"), true]
                 
     // enum 0x10 StatusEffect.Type type
-    [MonoCollectorSearchFieldAttribute(typeof(StatusEffect.Type),"type", "TYPE")]
+    // [MonoCollectorSearchFieldAttribute(typeof(StatusEffect.Type),"type", "TYPE")]
             
     // struct 0x14 System.Int32 duration
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"duration", "DURATION")]
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"duration", "DURATION")]
     public partial class StatusEffect
     { 
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -56,6 +56,27 @@ namespace Maple.Bloomtown.GameModel.Demo
         
 
         
+        [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
+        public readonly unsafe partial struct Ptr_StatusEffect(nint ptr)
+        {
+
+            [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
+            readonly nint _ptr = ptr;
+            public static implicit operator Ptr_StatusEffect(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_StatusEffect obj) => obj._ptr;
+            public static implicit operator bool(Ptr_StatusEffect obj)=> obj.Valid();
+ 
+            public override string ToString()
+            {
+                return _ptr.ToString("X8");
+            }
+
+            [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            public bool Valid() => _ptr != nint.Zero;
+
+
+
+        }
 
     }
 

@@ -1,10 +1,7 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
 using Maple.MonoGameAssistant.Core;
-using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.MonoCollector;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using System.Security.AccessControl;
-using static Maple.Bloomtown.GameModel.Demo.PassiveEffect;
 
 namespace Maple.Bloomtown
 {
@@ -32,7 +29,7 @@ typeof(MonoCollectorClassInfo)
 
     //Monster
     [MonoCollectorType(typeof(BattleMonsterModel))]
-    //[MonoCollectorType(typeof(BattleMonsterView))]
+    [MonoCollectorType(typeof(BattleMonsterView))]
     [MonoCollectorType(typeof(PersonaProgress))]
 
     //skill
@@ -46,7 +43,7 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(Stackable))]
     [MonoCollectorType(typeof(Accessory))]
     [MonoCollectorType(typeof(Armor))]
-   // [MonoCollectorType(typeof(Bait))]
+    // [MonoCollectorType(typeof(Bait))]
     [MonoCollectorType(typeof(Book))]
     [MonoCollectorType(typeof(ConfidantGift))]
     [MonoCollectorType(typeof(Consumable))]
@@ -61,10 +58,15 @@ typeof(MonoCollectorClassInfo)
 
     [MonoCollectorType(typeof(Recipe))]
 
- //   [MonoCollectorType(typeof(Rod))]
+    //   [MonoCollectorType(typeof(Rod))]
     [MonoCollectorType(typeof(Seed))]
     [MonoCollectorType(typeof(Treasure))]
     [MonoCollectorType(typeof(SocialStat))]
+
+    [MonoCollectorType(typeof(Vinyl))]
+    [MonoCollectorType(typeof(Movie))]
+    [MonoCollectorType(typeof(Fish))]
+
     internal partial class BloomtownGameContext
     {
 
