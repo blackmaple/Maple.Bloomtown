@@ -1039,7 +1039,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <returns>class System.String</returns>
         [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getStat2Name")]
-        extern nint GET_GET_STAT2_NAME_00();
+        extern PMonoString GET_GET_STAT2_NAME_00();
 
 
         /// <summary>

@@ -125,7 +125,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"totalMoneyEarned", "TOTAL_MONEY_EARNED")]
 
     // struct 0x114 System.Single m_money
-    [MonoCollectorSearchFieldAttribute(typeof(System.Single), "m_money", "M_MONEY", IsReadOnly = false)]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Single), "m_money", "MONEY", IsReadOnly = false)]
 
     // struct 0x118 System.Int32 m_essence
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"m_essence", "M_ESSENCE")]

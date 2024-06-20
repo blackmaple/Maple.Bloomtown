@@ -82,8 +82,8 @@ namespace Maple.Bloomtown
             [
                 new()
                 {
-                    ObjectId = nameof(PlayerData.Ptr_PlayerData.M_MONEY),
-                    DisplayName =nameof(PlayerData.Ptr_PlayerData.M_MONEY),
+                    ObjectId = nameof(PlayerData.Ptr_PlayerData.MONEY),
+                    DisplayName =nameof(PlayerData.Ptr_PlayerData.MONEY),
                     DisplayCategory = nameof(GameSettings),
                 },
                   new()
@@ -142,8 +142,8 @@ namespace Maple.Bloomtown
                 return new GameCurrencyInfoDTO()
                 {
 
-                    ObjectId = nameof(PlayerData.Ptr_PlayerData.M_MONEY),
-                    DisplayValue = pPlayerData.M_MONEY.ToString()
+                    ObjectId = nameof(PlayerData.Ptr_PlayerData.MONEY),
+                    DisplayValue = pPlayerData.MONEY.ToString()
                 };
             }
 
@@ -170,11 +170,11 @@ namespace Maple.Bloomtown
             else
             {
                 value = Math.Clamp(value, 0, 999);
-                pPlayerData.M_MONEY = value;
+                pPlayerData.MONEY = value;
                 return new GameCurrencyInfoDTO()
                 {
 
-                    ObjectId = nameof(PlayerData.Ptr_PlayerData.M_MONEY),
+                    ObjectId = nameof(PlayerData.Ptr_PlayerData.MONEY),
                     DisplayValue = value.ToString()
                 };
             }
@@ -1223,7 +1223,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            return GameException.Throw<GameInventoryInfoDTO>($"找不到对应道具:{gameInventory.InventoryObject}");
+            return GameException.Throw<GameInventoryInfoDTO>($"Not Found Item:{gameInventory.InventoryObject}");
         }
 
 
@@ -1231,13 +1231,13 @@ namespace Maple.Bloomtown
         {
             if (string.IsNullOrEmpty(gameInventory.InventoryCategory))
             {
-                return GameException.Throw<GameInventoryInfoDTO>("游戏异常!");
+                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
             }
 
             var pGameSettings = pPlayerData.GAME_SETTINGS;
             if (pGameSettings.Valid() == false)
             {
-                return GameException.Throw<GameInventoryInfoDTO>("游戏异常!");
+                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
             }
             _ = int.TryParse(gameInventory.NewValue, out var count);
 
@@ -1738,7 +1738,7 @@ namespace Maple.Bloomtown
             }
 
 
-            return GameException.Throw<GameInventoryInfoDTO>($"找不到对应道具:{gameInventory.InventoryObject}");
+            return GameException.Throw<GameInventoryInfoDTO>($"Not Found Item:{gameInventory.InventoryObject}");
         }
 
         public static IEnumerable<UnitySpriteImageData> GetListInventoryIcon(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings, UnityEngineContext unityEngine)
@@ -2374,9 +2374,9 @@ namespace Maple.Bloomtown
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString()  },
                         //new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  },
 
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName =tameStat ,DisplayValue = tameStat  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Tame",DisplayValue = monsterModel.TAME_DIFFICULTY.ToString()  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Steal",DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName =tameStat ,DisplayValue = tameStat ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Tame",DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Steal",DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
 
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ROLE_NAME().ToString(),DisplayValue = monsterModel.MonsterRole.ToString()  },
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ELEMENT_NAME().ToString(),DisplayValue = monsterModel.Element.ToString()  },
@@ -2406,16 +2406,13 @@ namespace Maple.Bloomtown
                     var tameStat = monsterModel.TAME_STAT.ToString();
                     GameValueInfoDTO[] atts =
                     [
-                            new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "HP",DisplayValue = monsterModel.MAX_HP.ToString()   ,CanPreview=true},
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "SP",DisplayValue = monsterModel.MAX_SP.ToString()  ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "EXP",DisplayValue = monsterModel.EXP.ToString()  ,CanPreview=true },
-
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString()  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString()  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Endurance",DisplayValue = monsterModel.RAW_ENDURANCE.ToString()  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString()  },
-                        new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+ 
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString() ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString() ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Endurance",DisplayValue = monsterModel.RAW_ENDURANCE.ToString(),CanPreview=true  },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString(),CanPreview=true  },
+                        new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  ,CanPreview=true},
 
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName =tameStat ,DisplayValue = tameStat  },
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Tame",DisplayValue = monsterModel.TameDifficulty.ToString()  },
@@ -2517,7 +2514,7 @@ namespace Maple.Bloomtown
 
         public static IEnumerable<GameSkillDisplayDTO> GetListSkillDisplay(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings)
         {
-           
+
             var pListSkills = pGameSettings.SKILLS;
 
             foreach (var pSkillInfo in pListSkills)
@@ -2560,7 +2557,7 @@ namespace Maple.Bloomtown
                 }
             }
 
- 
+
         }
 
 
