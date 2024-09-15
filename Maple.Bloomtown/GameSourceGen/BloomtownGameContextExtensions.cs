@@ -2160,7 +2160,7 @@ namespace Maple.Bloomtown
             return new GameCharacterStatusDTO()
             {
                 ObjectId = uid,
-                CharacterAttributes = GetCharacterAttributes(uid, pCharacter, pCharacter.PLAYER_MODEL).ToArray(),
+                CharacterAttributes = []// GetCharacterAttributes(uid, pCharacter, pCharacter.PLAYER_MODEL).ToArray(),
             };
 
             static IEnumerable<GameValueInfoDTO> GetCharacterAttributes(string uid, Character.Ptr_Character pCharacter, BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
@@ -2218,7 +2218,7 @@ namespace Maple.Bloomtown
             return new GameCharacterEquipmentDTO()
             {
                 ObjectId = uid,
-                EquipmentAttributes = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
+                // EquipmentAttributes = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
             };
             static IEnumerable<GameValueInfoDTO> GetEquipmentAttributes(BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
             {
@@ -2296,7 +2296,7 @@ namespace Maple.Bloomtown
             return new GameCharacterSkillDTO()
             {
                 ObjectId = uid,
-                SkillInfos = [.. GetSkillInfos(pCharacter)],
+                SkillInfos = [],//[.. GetSkillInfos(pCharacter)],
             };
             static IEnumerable<GameValueInfoDTO> GetSkillInfos(Character.Ptr_Character pCharacter)
             {
@@ -2390,7 +2390,7 @@ namespace Maple.Bloomtown
                         DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
                         DisplayCategory = nameof(BattleMonsterModel),
                         MonsterAttributes = atts,
-                        SkillInfos = skills,
+                        SkillInfos = [],
 
                     };
 
@@ -2407,7 +2407,7 @@ namespace Maple.Bloomtown
                     GameValueInfoDTO[] atts =
                     [
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
- 
+
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString() ,CanPreview=true },
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString() ,CanPreview=true },
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Endurance",DisplayValue = monsterModel.RAW_ENDURANCE.ToString(),CanPreview=true  },
@@ -2430,7 +2430,7 @@ namespace Maple.Bloomtown
                         DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
                         DisplayCategory = nameof(PersonaProgress),
                         MonsterAttributes = atts,
-                        SkillInfos = skills,
+                        SkillInfos = [],
 
                     };
 
@@ -2645,5 +2645,50 @@ namespace Maple.Bloomtown
 
         //}
 
+    }
+
+
+
+    internal sealed class BloomtownGameEnvironment
+    {
+
+        // UIManager.Ptr_UIManager Ptr_UIManager { get; }
+        PopUpMessage.Ptr_PopUpMessage Ptr_PopUpMessage { get; }
+        StatsSync.Ptr_StatsSync Ptr_StatsSync { get; }
+        GameSettings.Ptr_GameSettings Ptr_GameSettings { get; }
+        PlayerData.Ptr_PlayerData Ptr_PlayerData { get; }
+        public BloomtownGameEnvironment(BloomtownGameContext gameContext)
+        {
+            var ptr_StatsSync = gameContext.StatsSync.INSTANCE;
+            if (ptr_StatsSync.Valid() == false)
+            {
+                return;
+            }
+            var ptr_GameSettings = ptr_StatsSync.GAME_SETTINGS;
+            if (ptr_GameSettings.Valid() == false)
+            {
+                return;
+            }
+
+            var ptr_UIManager = gameContext.UIManager.INSTANCE;
+            if (false == ptr_UIManager.Valid())
+            {
+                return;
+            }
+            var ptr_PopUpMessage = ptr_UIManager.POP_UP_MESSAGE;
+            if (false == ptr_PopUpMessage.Valid())
+            {
+                return;
+            }
+
+            this.Ptr_PlayerData = gameContext.PlayerData.INSTANCE;
+
+            this.Ptr_PopUpMessage = ptr_PopUpMessage;
+
+            this.Ptr_StatsSync = ptr_StatsSync;
+            this.Ptr_GameSettings = ptr_GameSettings;
+
+
+        }
     }
 }

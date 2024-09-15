@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework>net9.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -10,7 +10,7 @@
 		<PublishAot>true</PublishAot>
 		<IsAotCompatible>true</IsAotCompatible>
 		<OutputType>Library</OutputType>
-		<AssemblyName>winhttp</AssemblyName>
+		<AssemblyName>Maple</AssemblyName>
 
 
 		<DebuggerSupport>false</DebuggerSupport>
@@ -36,33 +36,17 @@
 	</ItemGroup>
 
 
-
-
 	<ItemGroup>
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.GameContext\Maple.GameContext.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.Core\Maple.MonoGameAssistant.Core.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.GameDTO\Maple.MonoGameAssistant.GameDTO.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.HotKey\Maple.MonoGameAssistant.HotKey.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.Logger\Maple.MonoGameAssistant.Logger.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.UnityCore\Maple.MonoGameAssistant.UnityCore.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.WebApi\Maple.MonoGameAssistant.WebApi.csproj" />
+		<PackageReference Include="Maple.MonoGameAssistant.GameContext" Version="1.0.0-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorDataV2" Version="1.0.1-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorGeneratorV2" Version="1.0.2-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.WebApi" Version="1.0.1-rc" />
+
 	</ItemGroup>
 
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.MonoCollectorDataV2\Maple.MonoGameAssistant.MonoCollectorDataV2.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.MonoCollector\Maple.MonoGameAssistant.MonoCollector.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.MonoCollectorGeneratorV2\Maple.MonoGameAssistant.MonoCollectorGeneratorV2.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllExportTmp\DllExport.cs" Link="GameDllExport\DllExport.cs" />
-		<AdditionalFiles Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllExportTmp\WinHttp.Api" Link="GameDllExport\WinHttp.Api" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllHijackData\Maple.MonoGameAssistant.DllHijackData.csproj" />
-		<ProjectReference Include="..\..\Maple.MonoGameAssistant\Maple.MonoGameAssistant.DllHijackGenerator\Maple.MonoGameAssistant.DllHijackGenerator.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" PrivateAssets="all" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="GameModel\DemoV2\" />
-	</ItemGroup>
+ 
+	 
 
  
 	

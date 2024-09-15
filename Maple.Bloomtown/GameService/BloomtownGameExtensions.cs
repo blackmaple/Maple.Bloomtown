@@ -1,29 +1,41 @@
-﻿using Maple.Bloomtown.GameModel.Demo;
-using Maple.GameContext;
-using Maple.MonoGameAssistant.Common;
-using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.Model;
+﻿using Maple.MonoGameAssistant.GameContext;
 using Maple.MonoGameAssistant.WebApi;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Routing;
+using Maple.MonoGameAssistant.WinApi;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Text.Json.Serialization;
 
 namespace Maple.Bloomtown
 {
-    internal sealed class BloomtownWebApiService()
-        : GameWebApi<BloomtownWebApiService, BloomtownGameService, BloomtownGameContext>("Bloomtown A Different Story Demo")
+    internal sealed class BloomtownGameExtensions()
     {
+        internal static async Task RunWebApiServiceAsync(int millisecondsDelay = 8000)
+        {
+            var webapp = WebApiServiceExtensions.AsRunWebApiService(p =>
+            {
+                p.GameName = "Bloomtown A Different Story";
+                p.QQ = "0";
+                p.Http = true;
+                p.AutoOpenUrl = true;
+
+            }, services =>
+            {
+                services.UseGameContextService<BloomtownGameService>();
+            });
+
+            //延迟启动
+            await Task.Delay(millisecondsDelay).ConfigureAwait(false);
+            await webapp.RunAsync().ConfigureAwait(false);
+
+        }
+
+
 
         [ModuleInitializer]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2255:不应在库中使用 “ModuleInitializer” 属性", Justification = "<挂起>")]
         public static void Initializer()
         {
-            Maple.MonoGameAssistant.DllExportTmp.DllExport.LoadApis();
-            Initializer(8000);
+            _ = RunWebApiServiceAsync();
         }
 
         [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)], EntryPoint = nameof(DllMain))]
@@ -48,5 +60,4 @@ namespace Maple.Bloomtown
         }
 
     }
-
 }

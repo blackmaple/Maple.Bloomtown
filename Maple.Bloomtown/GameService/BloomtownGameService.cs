@@ -1,33 +1,29 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
-using Maple.GameContext;
-using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
+using Maple.MonoGameAssistant.GameContext;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.HotKey;
 using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using Maple.MonoGameAssistant.UnityCore;
+using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
 
 
 namespace Maple.Bloomtown
 {
-    internal sealed partial class BloomtownGameService(
-        ILogger<BloomtownGameService> logger,
-        MonoRuntimeContext runtimeContext,
-        MonoGameSettings gameSettings)
-        : GameService<BloomtownGameContext>(logger, runtimeContext, gameSettings)
+    internal sealed partial class BloomtownGameService(ILogger<BloomtownGameService> logger, MonoRuntimeContext runtimeContext, MonoTaskScheduler monoTaskScheduler, MonoGameSettings gameSettings, HookWinMsgFactory hookWinMsgFactory)
+                : GameContextService<BloomtownGameContext>(logger, runtimeContext, monoTaskScheduler, gameSettings, hookWinMsgFactory)
     {
 
         #region LoadService
 
-     //   protected sealed override bool EnableService => false;
+        //   protected sealed override bool EnableService => false;
 
         protected sealed override BloomtownGameContext LoadGameContext()
-            => BloomtownGameContext.LoadBloomtownGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.Ver_Common, this.Logger);
+            => BloomtownGameContext.LoadGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.APP, this.Logger);
         protected sealed override UnityEngineContext LoadUnityEngineContext()
-            => new UnityEngineContext_Bloomtown(this.RuntimeContext, this.Logger);
+            => default!;// new UnityEngineContext_Bloomtown(this.RuntimeContext, this.Logger);
 
         protected sealed override GameSwitchDisplayDTO[] InitListGameSwitch()
         {
@@ -41,7 +37,7 @@ namespace Maple.Bloomtown
             var pGameSettings = await this.MonoTaskAsync((context) => context.GetGameSettings()).ConfigureAwait(false);
             if (pGameSettings.Valid())
             {
-                var gameIcons = await this.UnityTaskAsync((context, args)
+                var gameIcons = await this.UITaskAsync((context, args)
                 => context.GetListGameSettingsIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
                 (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
 
@@ -51,7 +47,7 @@ namespace Maple.Bloomtown
                 }
 
 
-                var monsterIcons = await this.UnityTaskAsync((context, args)
+                var monsterIcons = await this.UITaskAsync((context, args)
                         => context.GetListMonsterIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
                         (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
 
@@ -61,7 +57,7 @@ namespace Maple.Bloomtown
                 }
 
 
-                var skillIcons = await this.UnityTaskAsync((context, args)
+                var skillIcons = await this.UITaskAsync((context, args)
                   => context.GetListSkillIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
                   (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
                 foreach (var skillIcon in skillIcons)
@@ -69,7 +65,7 @@ namespace Maple.Bloomtown
                     this.GameSettings.WriteImageFile(skillIcon.ImageData.AsReadOnlySpan(), skillIcon.Category, $"{skillIcon.Name}.png");
                 }
 
-                var inventoryIcons = await this.UnityTaskAsync((context, args)
+                var inventoryIcons = await this.UITaskAsync((context, args)
                   => context.GetListInventoryIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
                   (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
                 foreach (var inventoryIcon in inventoryIcons)
@@ -86,7 +82,7 @@ namespace Maple.Bloomtown
             var pPlayerData = await this.MonoTaskAsync(context => context.GetPlayerData()).ConfigureAwait(false);
             if (pPlayerData.Valid())
             {
-                var playerIcons = await this.UnityTaskAsync((context, args)
+                var playerIcons = await this.UITaskAsync((context, args)
                     => context.GetListCharacterIcon(args.pPlayerData, args.UnityEngineContext).ToArray(),
                     (pPlayerData, this.UnityEngineContext)).ConfigureAwait(false);
                 foreach (var playerIcon in playerIcons)
