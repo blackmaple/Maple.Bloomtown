@@ -26,7 +26,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
 
     // struct 0x10 System.IntPtr m_CachedPtr
-    // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr), "m_CachedPtr", "M_CACHED_PTR")]
 
     // class 0x18 System.Threading.CancellationTokenSource m_CancellationTokenSource
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
@@ -935,8 +935,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Collections.Generic.List<Character> GetPlayerGroup()
         /// </summary>
         /// <returns>class System.Collections.Generic.List<Character></returns>
-          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetPlayerGroup")]
-           extern PMonoList_S<Character.Ptr_Character> GET_PLAYER_GROUP ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetPlayerGroup")]
+        extern PMonoList_S<Character.Ptr_Character> GET_PLAYER_GROUP();
 
 
         /// <summary>

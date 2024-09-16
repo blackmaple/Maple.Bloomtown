@@ -9,53 +9,13 @@ namespace Maple.Bloomtown
 {
     internal static class BloomtownGameContextExtensions
     {
-        public static void ShowMessage(this BloomtownGameContext @this, string? msg)
+
+        public static IEnumerable<UnitySpriteImageData> GetListGameSettingsIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
-            if (string.IsNullOrEmpty(msg))
+            var gameSettings = @this.Context.GameSettings;
+            foreach (var field in gameSettings.ClassInfo.FieldInfos.Where(static p => p.FieldType.TypeName == "UnityEngine.Sprite"))
             {
-                return;
-            }
-            var uiManager = @this.UIManager.INSTANCE;
-            if (uiManager.Valid() == false)
-            {
-                return;
-            }
-            var popUpMessage = uiManager.POP_UP_MESSAGE;
-            if (popUpMessage.Valid() == false)
-            {
-                return;
-            }
-            var pMonoString = @this.T(msg);
-            popUpMessage.SHOW_MESSAGE(pMonoString);
-        }
-
-        public static GameSettings.Ptr_GameSettings GetGameSettings(this BloomtownGameContext @this)
-        {
-            var pStatsSync = @this.StatsSync.INSTANCE;
-            if (pStatsSync.Valid() == false)
-            {
-                return default;
-            }
-
-            var pGameSettings = pStatsSync.GAME_SETTINGS;
-            if (pGameSettings.Valid() == false)
-            {
-                return default;
-            }
-            return pGameSettings;
-        }
-
-        public static PlayerData.Ptr_PlayerData GetPlayerData(this BloomtownGameContext @this)
-        {
-            return @this.PlayerData.INSTANCE;
-        }
-
-        public static IEnumerable<UnitySpriteImageData> GetListGameSettingsIcon(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings, UnityEngineContext unityEngine)
-        {
-
-            foreach (var field in @this.GameSettings.ClassInfo.FieldInfos.Where(static p => p.FieldType.TypeName == "UnityEngine.Sprite"))
-            {
-                var pSprite = @this.GameSettings.GetMemberFieldValue<Sprite.Ptr_Sprite>(pGameSettings, field.Name);
+                var pSprite = gameSettings.GetMemberFieldValue<Sprite.Ptr_Sprite>(@this.Ptr_GameSettings, field.Name);
                 if (pSprite.Valid())
                 {
                     var pIconData = unityEngine.ReadSprite2Png(pSprite);
@@ -125,12 +85,11 @@ namespace Maple.Bloomtown
 
 
         }
-
-        public static GameCurrencyInfoDTO GetCurrencyInfo(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameCurrencyObjectDTO gameCurrency)
+        public static GameCurrencyInfoDTO GetCurrencyInfo(this BloomtownGameEnvironment @this, GameCurrencyObjectDTO gameCurrency)
         {
             if (Enum.TryParse<SocialStat.SocialStatType>(gameCurrency.CurrencyObject, out var socialStatType))
             {
-                var pSocialStat = pPlayerData.PLAYER.GET_SOCIAL_STAT_BY_TYPE(socialStatType);
+                var pSocialStat = @this.Ptr_PlayerData.PLAYER.GET_SOCIAL_STAT_BY_TYPE(socialStatType);
                 return new GameCurrencyInfoDTO()
                 {
                     ObjectId = socialStatType.ToString(),
@@ -141,20 +100,16 @@ namespace Maple.Bloomtown
             {
                 return new GameCurrencyInfoDTO()
                 {
-
                     ObjectId = nameof(PlayerData.Ptr_PlayerData.MONEY),
-                    DisplayValue = pPlayerData.MONEY.ToString()
+                    DisplayValue = @this.Ptr_PlayerData.MONEY.ToString()
                 };
             }
 
         }
-
-        public static GameCurrencyInfoDTO UpdateCurrencyInfo(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameCurrencyModifyDTO gameCurrency)
+        public static GameCurrencyInfoDTO UpdateCurrencyInfo(this BloomtownGameEnvironment @this, GameCurrencyModifyDTO gameCurrency)
         {
-            _ = decimal.TryParse(gameCurrency.NewValue, out var val);
-            var value = Convert.ToInt32(val);
-
-
+            var value = gameCurrency.IntValue;
+            var pPlayerData = @this.Ptr_PlayerData;
             if (Enum.TryParse<SocialStat.SocialStatType>(gameCurrency.CurrencyObject, out var socialStatType))
             {
                 value = Math.Clamp(value, 1, 5);
@@ -184,10 +139,10 @@ namespace Maple.Bloomtown
         }
 
 
-        public static IEnumerable<GameInventoryDisplayDTO> GetListInventoryDisplay(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings)
+        public static IEnumerable<GameInventoryDisplayDTO> GetListInventoryDisplay(this BloomtownGameEnvironment @this)
         {
-
-            //装饰品
+            var pGameSettings = @this.Ptr_GameSettings;
+            //1.装饰品
             var pListAccessories = pGameSettings.ACCESSORIES;
             if (pListAccessories.Valid())
             {
@@ -234,7 +189,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //盔甲
+            //2.盔甲
             var pListArmor = pGameSettings.ARMORS;
             if (pListArmor.Valid())
             {
@@ -282,32 +237,7 @@ namespace Maple.Bloomtown
 
             }
 
-            //鱼饵
-            //var pListBaits = pGameSettings.Baits;
-            //if (pListBaits.Valid())
-            //{
-            //    foreach (var bait in pListBaits)
-            //    {
-            //        var uid = bait.UID.ToString()!;
-            //        yield return new GameInventoryDisplayDTO()
-            //        {
-            //            ObjectId = uid,
-            //            DisplayName = bait.ItemName.GET_VALUE().ToString(),
-            //            DisplayDesc = bait.Description.GET_VALUE().ToString(),
-            //            DisplayCategory = nameof(Bait),
-            //            ItemAttributes = GetItemAttributes(uid, bait).ToArray()
-
-            //        };
-
-            //    }
-            //    static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Bait.Ptr_Bait item)
-            //    {
-            //        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.Price), DisplayValue = item.Price.ToString("F2"), CanPreview = true };
-            //    }
-
-            //}
-
-            //书籍
+            //3.书籍
             var pListBooks = pGameSettings.BOOKS;
             if (pListBooks.Valid())
             {
@@ -330,7 +260,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //礼物
+            //4.礼物
             var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
             if (pListConfidantGifts.Valid())
             {
@@ -353,7 +283,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //消耗品
+            //5.消耗品
             var pListConsumables = pGameSettings.CONSUMABLES;
             if (pListConsumables.Valid())
             {
@@ -376,7 +306,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //材料
+            //6.材料
             var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
             if (pListCraftMaterials.Valid())
             {
@@ -399,7 +329,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //肥料
+            //7.肥料
             var pListFertilizers = pGameSettings.FERTILIZERS;
             if (pListFertilizers.Valid())
             {
@@ -422,43 +352,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-            //开锁器
-            var pLockpick = pGameSettings.LOCKPICK;
-            if (pLockpick.Valid())
-            {
-                var uid = pLockpick.UID.ToString()!;
-                yield return new GameInventoryDisplayDTO()
-                {
-                    ObjectId = uid,
-                    DisplayName = pLockpick.ITEM_NAME.GET_VALUE().ToString(),
-                    DisplayDesc = pLockpick.DESCRIPTION.GET_VALUE().ToString(),
-                    DisplayCategory = nameof(Lockpick),
-                    ItemAttributes = GetItemAttributes(uid, pLockpick).ToArray(),
-
-                };
-                static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Lockpick.Ptr_Lockpick item)
-                {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
-                }
-
-            }
-
-            //捕鱼
-            //var pFishHaul = pGameSettings.FishHaul;
-            //if (pFishHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            ////捕垃圾
-            //var pGarbageHaul = pGameSettings.GarbageHaul;
-            //if (pGarbageHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //近战武器
+            //8.近战武器
             var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
             if (pListMeleeWeapons.Valid())
             {
@@ -509,7 +403,7 @@ namespace Maple.Bloomtown
 
             }
 
-            //任务道具
+            //9.任务道具
             var pListQuestItems = pGameSettings.QUEST_ITEMS;
             if (pListQuestItems.Valid())
             {
@@ -535,7 +429,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //远程武器
+            //a.远程武器
             var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
             if (pListRangedWeapons.Valid())
             {
@@ -585,7 +479,7 @@ namespace Maple.Bloomtown
 
             }
 
-            //食谱
+            //b.食谱
             var pListRecipes = pGameSettings.RECIPES;
             if (pListRecipes.Valid())
             {
@@ -610,30 +504,7 @@ namespace Maple.Bloomtown
 
             }
 
-            //鱼竿
-            //var pListRods = pGameSettings.Rods;
-            //if (pListRods.Valid())
-            //{
-            //    foreach (var rod in pListRods)
-            //    {
-            //        var uid = rod.UID.ToString()!;
-            //        yield return new GameInventoryDisplayDTO()
-            //        {
-            //            ObjectId = uid,
-            //            DisplayName = rod.ItemName.GET_VALUE().ToString(),
-            //            DisplayDesc = rod.Description.GET_VALUE().ToString(),
-            //            DisplayCategory = nameof(Rod),
-            //            ItemAttributes = GetItemAttributes(uid, rod).ToArray(),
-            //        };
-
-            //    }
-            //    static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Rod.Ptr_Rod item)
-            //    {
-            //        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.Price), DisplayValue = item.Price.ToString("F2"), CanPreview = true };
-            //    }
-            //}
-
-            //种子
+            //c.种子
             var pListSeeds = pGameSettings.SEEDS;
             if (pListSeeds.Valid())
             {
@@ -656,7 +527,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //珍宝
+            //d.珍宝
             var pListTreasures = pGameSettings.TREASURES;
             if (pListTreasures.Valid())
             {
@@ -679,7 +550,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //唱片
+            //e.唱片
             var pListVinyl = pGameSettings.VINYLS;
             if (pListVinyl.Valid())
             {
@@ -702,7 +573,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //电影
+            //f.电影
             var pListMovie = pGameSettings.MOVIES;
             if (pListMovie.Valid())
             {
@@ -727,8 +598,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-            //鱼
+            //g.鱼
             var pListFish = pGameSettings.FISHES;
             if (pListFish.Valid())
             {
@@ -754,21 +624,12 @@ namespace Maple.Bloomtown
             }
 
         }
-
-        public static GameInventoryInfoDTO GetInventoryInfo(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameInventoryObjectDTO gameInventory)
+        public static GameInventoryInfoDTO GetInventoryInfo(this BloomtownGameEnvironment @this, GameInventoryObjectDTO gameInventory)
         {
-            if (string.IsNullOrEmpty(gameInventory.InventoryCategory))
-            {
-                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
-            }
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pGameSettings = @this.Ptr_GameSettings;
 
-            var pGameSettings = pPlayerData.GAME_SETTINGS;
-            if (pGameSettings.Valid() == false)
-            {
-                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
-            }
-
-            //装饰品
+            //1.装饰品
             if (gameInventory.InventoryCategory == nameof(Accessory))
             {
                 var pListAccessories = pGameSettings.ACCESSORIES;
@@ -792,7 +653,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //盔甲
+            //2.盔甲
             else if (gameInventory.InventoryCategory == nameof(Armor))
             {
                 var pListArmor = pGameSettings.ARMORS;
@@ -814,31 +675,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼饵
-            //else if (gameInventory.InventoryCategory == nameof(Bait))
-            //{
-            //    var pListBaits = pGameSettings.Baits;
-            //    if (pListBaits.Valid())
-            //    {
-            //        foreach (var bait in pListBaits)
-            //        {
-            //            var uid = bait.UID.ToString()!;
-            //            if (uid == gameInventory.InventoryObject)
-            //            {
-
-            //                return new GameInventoryInfoDTO()
-            //                {
-            //                    ObjectId = uid,
-            //                    DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(bait).ToString(),
-
-            //                };
-            //            }
-
-            //        }
-            //    }
-            //}
-
-            //书籍
+            //3.书籍
             else if (gameInventory.InventoryCategory == nameof(Book))
             {
                 var pListBooks = pGameSettings.BOOKS;
@@ -860,7 +697,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //礼物
+            //4.礼物
             else if (gameInventory.InventoryCategory == nameof(ConfidantGift))
             {
                 var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
@@ -882,8 +719,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-            //消耗品
+            //5.消耗品
             else if (gameInventory.InventoryCategory == nameof(Consumable))
             {
                 var pListConsumables = pGameSettings.CONSUMABLES;
@@ -906,7 +742,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //材料
+            //6.材料
             else if (gameInventory.InventoryCategory == nameof(CraftMaterial))
             {
                 var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
@@ -928,7 +764,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //肥料
+            //7.肥料
             else if (gameInventory.InventoryCategory == nameof(Fertilizer))
             {
                 var pListFertilizers = pGameSettings.FERTILIZERS;
@@ -950,44 +786,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-
-            //开锁器
-            else if (gameInventory.InventoryCategory == nameof(Lockpick))
-            {
-                var pLockpick = pGameSettings.LOCKPICK;
-                if (pLockpick.Valid())
-                {
-                    var uid = pLockpick.UID.ToString()!;
-                    if (uid == gameInventory.InventoryObject)
-                    {
-                        return new GameInventoryInfoDTO()
-                        {
-                            ObjectId = uid,
-
-                        };
-                    }
-
-
-                }
-            }
-
-
-            //捕鱼
-            //var pFishHaul = pGameSettings.FishHaul;
-            //if (pFishHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //捕垃圾
-            //var pGarbageHaul = pGameSettings.GarbageHaul;
-            //if (pGarbageHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //近战武器
+            //8.近战武器
             else if (gameInventory.InventoryCategory == nameof(MeleeWeapon))
             {
                 var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
@@ -1011,7 +810,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //任务道具
+            //9.任务道具
             else if (gameInventory.InventoryCategory == nameof(QuestItem))
             {
                 var pListQuestItems = pGameSettings.QUEST_ITEMS;
@@ -1036,7 +835,7 @@ namespace Maple.Bloomtown
             }
 
 
-            //远程武器
+            //a.远程武器
             else if (gameInventory.InventoryCategory == nameof(RangedWeapon))
             {
                 var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
@@ -1062,7 +861,7 @@ namespace Maple.Bloomtown
             }
 
 
-            //食谱
+            //b.食谱
             else if (gameInventory.InventoryCategory == nameof(Recipe))
             {
                 var pListRecipes = pGameSettings.RECIPES;
@@ -1084,32 +883,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-            //鱼竿
-            //else if (gameInventory.InventoryCategory == nameof(Rod))
-            //{
-            //    var pListRods = pGameSettings.Rods;
-            //    if (pListRods.Valid())
-            //    {
-            //        foreach (var rod in pListRods)
-            //        {
-            //            var uid = rod.UID.ToString()!;
-            //            if (uid == gameInventory.InventoryObject)
-            //            {
-            //                return new GameInventoryInfoDTO()
-            //                {
-            //                    ObjectId = uid,
-            //                    DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(rod).ToString(),
-
-            //                };
-            //            }
-
-            //        }
-            //    }
-            //}
-
-
-            //种子
+            //c.种子
             else if (gameInventory.InventoryCategory == nameof(Seed))
             {
                 var pListSeeds = pGameSettings.SEEDS;
@@ -1131,7 +905,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //珍宝
+            //d.珍宝
             else if (gameInventory.InventoryCategory == nameof(Treasure))
             {
                 var pListTreasures = pGameSettings.TREASURES;
@@ -1154,7 +928,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //唱片
+            //e.唱片
             else if (gameInventory.InventoryCategory == nameof(Vinyl))
             {
                 var pListTreasures = pGameSettings.VINYLS;
@@ -1177,7 +951,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //电影
+            //f.电影
             else if (gameInventory.InventoryCategory == nameof(Movie))
             {
                 var pListTreasures = pGameSettings.MOVIES;
@@ -1200,7 +974,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼
+            //g.鱼
             else if (gameInventory.InventoryCategory == nameof(Fish))
             {
                 var pListTreasures = pGameSettings.FISHES;
@@ -1223,25 +997,15 @@ namespace Maple.Bloomtown
                 }
             }
 
-            return GameException.Throw<GameInventoryInfoDTO>($"Not Found Item:{gameInventory.InventoryObject}");
+            return GameException.Throw<GameInventoryInfoDTO>($"Not Found:{gameInventory.InventoryObject}");
         }
-
-
-        public static GameInventoryInfoDTO UpdateInventoryInfo(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameInventoryModifyDTO gameInventory)
+        public static GameInventoryInfoDTO UpdateInventoryInfo(this BloomtownGameEnvironment @this, GameInventoryModifyDTO gameInventory)
         {
-            if (string.IsNullOrEmpty(gameInventory.InventoryCategory))
-            {
-                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
-            }
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pGameSettings = @this.Ptr_GameSettings;
 
-            var pGameSettings = pPlayerData.GAME_SETTINGS;
-            if (pGameSettings.Valid() == false)
-            {
-                return GameException.Throw<GameInventoryInfoDTO>("Game Error");
-            }
-            _ = int.TryParse(gameInventory.NewValue, out var count);
-
-            //装饰品
+            var count = gameInventory.InventoryCount;
+            //1.装饰品
             if (gameInventory.InventoryCategory == nameof(Accessory))
             {
                 var pListAccessories = pGameSettings.ACCESSORIES;
@@ -1268,7 +1032,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //盔甲
+            //2.盔甲
             else if (gameInventory.InventoryCategory == nameof(Armor))
             {
                 var pListArmor = pGameSettings.ARMORS;
@@ -1294,32 +1058,8 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼饵
-            //else if (gameInventory.InventoryCategory == nameof(Bait))
-            //{
-            //    var pListBaits = pGameSettings.Baits;
-            //    if (pListBaits.Valid())
-            //    {
-            //        foreach (var bait in pListBaits)
-            //        {
-            //            var uid = bait.UID.ToString()!;
-            //            if (uid == gameInventory.InventoryObject)
-            //            {
-            //                pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(bait, count);
 
-            //                return new GameInventoryInfoDTO()
-            //                {
-            //                    ObjectId = uid,
-            //                    DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(bait).ToString(),
-
-            //                };
-            //            }
-
-            //        }
-            //    }
-            //}
-
-            //书籍
+            //3.书籍*
             else if (gameInventory.InventoryCategory == nameof(Book))
             {
                 var pListBooks = pGameSettings.BOOKS;
@@ -1347,7 +1087,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //礼物
+            //4.礼物
             else if (gameInventory.InventoryCategory == nameof(ConfidantGift))
             {
                 var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
@@ -1372,7 +1112,7 @@ namespace Maple.Bloomtown
             }
 
 
-            //消耗品
+            //5.消耗品
             else if (gameInventory.InventoryCategory == nameof(Consumable))
             {
                 var pListConsumables = pGameSettings.CONSUMABLES;
@@ -1396,7 +1136,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //材料
+            //6.材料
             else if (gameInventory.InventoryCategory == nameof(CraftMaterial))
             {
                 var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
@@ -1419,7 +1159,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //肥料
+            //7.肥料
             else if (gameInventory.InventoryCategory == nameof(Fertilizer))
             {
                 var pListFertilizers = pGameSettings.FERTILIZERS;
@@ -1442,44 +1182,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-
-
-            //开锁器
-            else if (gameInventory.InventoryCategory == nameof(Lockpick))
-            {
-                var pLockpick = pGameSettings.LOCKPICK;
-                if (pLockpick.Valid())
-                {
-                    var uid = pLockpick.UID.ToString()!;
-                    if (uid == gameInventory.InventoryObject)
-                    {
-                        return new GameInventoryInfoDTO()
-                        {
-                            ObjectId = uid,
-
-                        };
-                    }
-
-
-                }
-            }
-
-
-            //捕鱼
-            //var pFishHaul = pGameSettings.FishHaul;
-            //if (pFishHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //捕垃圾
-            //var pGarbageHaul = pGameSettings.GarbageHaul;
-            //if (pGarbageHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //近战武器
+            //8.近战武器
             else if (gameInventory.InventoryCategory == nameof(MeleeWeapon))
             {
                 var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
@@ -1505,7 +1208,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //任务道具
+            //9.任务道具
             else if (gameInventory.InventoryCategory == nameof(QuestItem))
             {
                 var pListQuestItems = pGameSettings.QUEST_ITEMS;
@@ -1531,7 +1234,7 @@ namespace Maple.Bloomtown
             }
 
 
-            //远程武器
+            //a.远程武器
             else if (gameInventory.InventoryCategory == nameof(RangedWeapon))
             {
                 var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
@@ -1559,7 +1262,7 @@ namespace Maple.Bloomtown
             }
 
 
-            //食谱
+            //b.食谱*
             else if (gameInventory.InventoryCategory == nameof(Recipe))
             {
                 var pListRecipes = pGameSettings.RECIPES;
@@ -1593,32 +1296,8 @@ namespace Maple.Bloomtown
             }
 
 
-            //鱼竿
-            //else if (gameInventory.InventoryCategory == nameof(Rod))
-            //{
-            //    var pListRods = pGameSettings.Rods;
-            //    if (pListRods.Valid())
-            //    {
-            //        foreach (var rod in pListRods)
-            //        {
-            //            var uid = rod.UID.ToString()!;
-            //            if (uid == gameInventory.InventoryObject)
-            //            {
-            //                pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(rod, count);
-            //                return new GameInventoryInfoDTO()
-            //                {
-            //                    ObjectId = uid,
-            //                    DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(rod).ToString(),
 
-            //                };
-            //            }
-
-            //        }
-            //    }
-            //}
-
-
-            //种子
+            //c.种子
             else if (gameInventory.InventoryCategory == nameof(Seed))
             {
                 var pListSeeds = pGameSettings.SEEDS;
@@ -1641,7 +1320,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //珍宝
+            //d.珍宝
             else if (gameInventory.InventoryCategory == nameof(Treasure))
             {
                 var pListTreasures = pGameSettings.TREASURES;
@@ -1665,7 +1344,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //唱片
+            //e.唱片
             else if (gameInventory.InventoryCategory == nameof(Vinyl))
             {
                 var pListVinyls = pGameSettings.VINYLS;
@@ -1689,7 +1368,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //电影
+            //f.电影*
             else if (gameInventory.InventoryCategory == nameof(Movie))
             {
                 var pListMovies = pGameSettings.MOVIES;
@@ -1713,7 +1392,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼
+            //g.鱼
             else if (gameInventory.InventoryCategory == nameof(Fish))
             {
                 var pListFishes = pGameSettings.FISHES;
@@ -1738,13 +1417,14 @@ namespace Maple.Bloomtown
             }
 
 
-            return GameException.Throw<GameInventoryInfoDTO>($"Not Found Item:{gameInventory.InventoryObject}");
+            return GameException.Throw<GameInventoryInfoDTO>($"Not Found:{gameInventory.InventoryObject}");
         }
-
-        public static IEnumerable<UnitySpriteImageData> GetListInventoryIcon(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings, UnityEngineContext unityEngine)
+        public static IEnumerable<UnitySpriteImageData> GetListInventoryIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pGameSettings = @this.Ptr_GameSettings;
 
-            //装饰品
+            //1.装饰品
             var pListAccessories = pGameSettings.ACCESSORIES;
             if (pListAccessories.Valid())
             {
@@ -1763,7 +1443,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //盔甲
+            //2.盔甲
             var pListArmor = pGameSettings.ARMORS;
             if (pListArmor.Valid())
             {
@@ -1782,27 +1462,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼饵
-            //var pListBaits = pGameSettings.Baits;
-            //if (pListBaits.Valid())
-            //{
-            //    //Icon
-            //    foreach (var bait in pListBaits)
-            //    {
-            //        var pIcon = bait.GET_ICON_00();
-            //        if (pIcon.Valid())
-            //        {
-            //            var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-            //            if (pIconPng.Valid())
-            //            {
-            //                yield return new UnitySpriteImageData() { Category = nameof(Bait), Name = bait.UID.ToString(), ImageData = pIconPng };
-            //            }
-            //        }
-
-            //    }
-            //}
-
-            //书籍
+            //3.书籍
             var pListBooks = pGameSettings.BOOKS;
             if (pListBooks.Valid())
             {
@@ -1822,7 +1482,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //礼物
+            //4.礼物
             var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
             if (pListConfidantGifts.Valid())
             {
@@ -1841,7 +1501,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //消耗品
+            //5.消耗品
             var pListConsumables = pGameSettings.CONSUMABLES;
             if (pListConsumables.Valid())
             {
@@ -1860,7 +1520,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //材料
+            //6.材料
             var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
             if (pListCraftMaterials.Valid())
             {
@@ -1879,7 +1539,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //肥料
+            //7.肥料
             var pListFertilizers = pGameSettings.FERTILIZERS;
             if (pListFertilizers.Valid())
             {
@@ -1898,38 +1558,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //开锁器
-            var pLockpick = pGameSettings.LOCKPICK;
-            if (pLockpick.Valid())
-            {
-                //GetIcon()
-                var pIcon = pLockpick.GET_ICON_00();
-                if (pIcon.Valid())
-                {
-                    var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                    if (pIconPng.Valid())
-                    {
-                        yield return new UnitySpriteImageData() { Category = nameof(Lockpick), Name = pLockpick.UID.ToString(), ImageData = pIconPng };
-                    }
-                }
-
-            }
-
-            //捕鱼
-            //var pFishHaul = pGameSettings.FishHaul;
-            //if (pFishHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            ////捕垃圾
-            //var pGarbageHaul = pGameSettings.GarbageHaul;
-            //if (pGarbageHaul.Valid())
-            //{
-            //    //yield return ;
-            //}
-
-            //近战武器
+            //8.近战武器
             var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
             if (pListMeleeWeapons.Valid())
             {
@@ -1950,7 +1579,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //任务道具
+            //9.任务道具
             var pListQuestItems = pGameSettings.QUEST_ITEMS;
             if (pListQuestItems.Valid())
             {
@@ -1970,7 +1599,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //远程武器
+            //a.远程武器
             var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
             if (pListRangedWeapons.Valid())
             {
@@ -1990,7 +1619,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //食谱
+            //b.食谱
             var pListRecipes = pGameSettings.RECIPES;
             if (pListRecipes.Valid())
             {
@@ -2010,27 +1639,8 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼竿
-            //var pListRods = pGameSettings.Rods;
-            //if (pListRods.Valid())
-            //{
-            //    //GetIcon
-            //    foreach (var rod in pListRods)
-            //    {
-            //        var pIcon = rod.GET_ICON_00();
-            //        if (pIcon.Valid())
-            //        {
-            //            var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-            //            if (pIconPng.Valid())
-            //            {
-            //                yield return new UnitySpriteImageData() { Category = nameof(Rod), Name = rod.UID.ToString(), ImageData = pIconPng };
-            //            }
-            //        }
 
-            //    }
-            //}
-
-            //种子
+            //c.种子
             var pListSeeds = pGameSettings.SEEDS;
             if (pListSeeds.Valid())
             {
@@ -2048,7 +1658,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //珍宝
+            //d.珍宝
             var pListTreasures = pGameSettings.TREASURES;
             if (pListTreasures.Valid())
             {
@@ -2067,7 +1677,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //唱片
+            //e.唱片
             var pListVinyls = pGameSettings.VINYLS;
             if (pListVinyls.Valid())
             {
@@ -2086,7 +1696,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //电影
+            //f.电影
             var pListMovies = pGameSettings.MOVIES;
             if (pListMovies.Valid())
             {
@@ -2105,7 +1715,7 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //鱼
+            //g.鱼
             var pListFishes = pGameSettings.FISHES;
             if (pListFishes.Valid())
             {
@@ -2126,8 +1736,23 @@ namespace Maple.Bloomtown
 
         }
 
-        public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings)
+
+
+        static Character.Ptr_Character GetCharacterThrowIfNotFound(this BloomtownGameEnvironment @this, PlayerData.Ptr_PlayerData pPlayerData, GameCharacterObjectDTO gameCharacter)
         {
+            var uid = gameCharacter.CharacterId;
+            using var playerId = @this.Context.T2(uid);
+
+            var pCharacter = pPlayerData.GET_CHARACTER(playerId);
+            if (pCharacter.Valid() == false)
+            {
+                return GameException.Throw<Character.Ptr_Character>($"Not Found:{uid}");
+            }
+            return pCharacter;
+        }
+        public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameEnvironment @this)
+        {
+            var pGameSettings = @this.Ptr_GameSettings;
             var pListPlayerModels = pGameSettings.PLAYER_MODELS;
             if (pListPlayerModels.Valid())
             {
@@ -2145,40 +1770,33 @@ namespace Maple.Bloomtown
                 }
             }
         }
-
-        public static GameCharacterStatusDTO GetCharacterStatus(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameCharacterObjectDTO gameCharacter)
+        public static GameCharacterStatusDTO GetCharacterStatus(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
-            var uid = gameCharacter.CharacterId;
-            var playerId = @this.T(uid);
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pPlayerData = @this.Ptr_PlayerData;
 
-            var pCharacter = pPlayerData.GET_CHARACTER(playerId);
-            if (pCharacter.Valid() == false)
-            {
-                return GameException.Throw<GameCharacterStatusDTO>($"Not Found Character:{uid}");
-            }
+            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
 
             return new GameCharacterStatusDTO()
             {
-                ObjectId = uid,
-                CharacterAttributes = []// GetCharacterAttributes(uid, pCharacter, pCharacter.PLAYER_MODEL).ToArray(),
+                ObjectId = gameCharacter.CharacterId,
+                CharacterAttributes = GetCharacterAttributes(pCharacter).ToArray(),
             };
 
-            static IEnumerable<GameValueInfoDTO> GetCharacterAttributes(string uid, Character.Ptr_Character pCharacter, BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
+            static IEnumerable<GameSwitchDisplayDTO> GetCharacterAttributes(Character.Ptr_Character pCharacter)
             {
+                BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel = pCharacter.PLAYER_MODEL;
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.CUR_HP), DisplayName = "HP", ContentValue = pCharacter.CUR_HP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_MAX_HP), DisplayName = "MaxHP", ContentValue = pCharacter.GET_MAX_HP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = nameof(Character.Ptr_Character.CUR_HP), DisplayValue = pCharacter.CUR_HP.ToString(), CanWrite = true };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "MaxHP", DisplayValue = pCharacter.GET_MAX_HP().ToString() };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.CUR_SP), DisplayName = "SP", ContentValue = pCharacter.CUR_SP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_MAX_SP), DisplayName = "MaxSP", ContentValue = pCharacter.GET_MAX_SP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = nameof(Character.Ptr_Character.CUR_SP), DisplayValue = pCharacter.CUR_SP.ToString(), CanWrite = true };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "MaxSP", DisplayValue = pCharacter.GET_MAX_SP().ToString() };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.LEVEL), DisplayName = "Lv", ContentValue = pCharacter.LEVEL.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.LEVEL_EXP), DisplayName = "Exp", ContentValue = pCharacter.LEVEL_EXP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
 
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = nameof(Character.Ptr_Character.LEVEL), DisplayValue = pCharacter.LEVEL.ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = nameof(Character.Ptr_Character.LEVEL_EXP), DisplayValue = pCharacter.LEVEL_EXP.ToString(), CanWrite = true };
-
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = $"Persona.Lv", DisplayValue = pCharacter.GET_PERSONA_LEVEL().ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = $"Persona.Exp", DisplayValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), CanWrite = true };
-
-
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_PERSONA_LEVEL), DisplayName = "P.Lv", ContentValue = pCharacter.GET_PERSONA_LEVEL().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_PERSONA_LEVEL_EXP), DisplayName = "P.Exp", ContentValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
 
                 var pPersonas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToArray();
                 int totalAgility = pPlayerModel.AGILITY_FROM_ITEMS;
@@ -2194,35 +1812,36 @@ namespace Maple.Bloomtown
                     totalMagic += pPersonas.Max(p => p.GET_MAGIC());
                     totalLuck += pPersonas.Max(p => p.GET_LUCK());
                 }
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "AGI", DisplayValue = totalAgility.ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "STR", DisplayValue = totalStrength.ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "EN", DisplayValue = totalEndurance.ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "MAGIC", DisplayValue = totalMagic.ToString() };
-                yield return new GameValueInfoDTO { ObjectId = uid, DisplayName = "LUCK", DisplayValue = totalLuck.ToString() };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_AGILITY), DisplayName = "AGI", ContentValue = totalAgility.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_STRENGTH), DisplayName = "STR", ContentValue = totalStrength.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_ENDURANCE), DisplayName = "EN", ContentValue = totalEndurance.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_MAGIC), DisplayName = "MAGIC", ContentValue = totalMagic.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_LUCK), DisplayName = "LUCK", ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
             }
 
         }
-
-        public static GameCharacterEquipmentDTO GetCharacterEquipment(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameCharacterObjectDTO gameCharacter)
+        public static GameCharacterEquipmentDTO GetCharacterEquipment(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
-            var uid = gameCharacter.CharacterId;
-            var playerId = @this.T(uid);
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pPlayerData = @this.Ptr_PlayerData;
 
-            var pCharacter = pPlayerData.GET_CHARACTER(playerId);
-            if (pCharacter.Valid() == false)
-            {
-                return GameException.Throw<GameCharacterEquipmentDTO>($"Not Found Character:{uid}");
-            }
+            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
+
 
             return new GameCharacterEquipmentDTO()
             {
-                ObjectId = uid,
-                // EquipmentAttributes = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
+                ObjectId = gameCharacter.CharacterId,
+                EquipmentInfos = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
             };
-            static IEnumerable<GameValueInfoDTO> GetEquipmentAttributes(BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
+            static IEnumerable<GameEquipmentInfoDTO> GetEquipmentAttributes(BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
             {
-                var meleeWeapon_UID = default(string);
+                var defMeleeWeapon = new GameEquipmentInfoDTO()
+                {
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(MeleeWeapon),
+                    CanWrite = true
+                };
                 var pMeleeWeapon = pPlayerModel.MELEE_WEAPON;
                 if (pMeleeWeapon.Valid() == false)
                 {
@@ -2230,11 +1849,18 @@ namespace Maple.Bloomtown
                 }
                 if (pMeleeWeapon.Valid())
                 {
-                    meleeWeapon_UID = pMeleeWeapon.UID.ToString();
+                    defMeleeWeapon.ObjectId = pMeleeWeapon.UID.ToString()!;
+                    defMeleeWeapon.DisplayName = pMeleeWeapon.ITEM_NAME.GET_VALUE().ToString();
+                    defMeleeWeapon.DisplayDesc = pMeleeWeapon.DESCRIPTION.GET_VALUE().ToString();
                 }
-                yield return new GameValueInfoDTO() { ObjectId = nameof(MeleeWeapon), DisplayName = nameof(MeleeWeapon), DisplayValue = meleeWeapon_UID, CanWrite = true };
+                yield return defMeleeWeapon;
 
-                var rangedWeapon_UID = default(string);
+                var defRangedWeapon = new GameEquipmentInfoDTO()
+                {
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(RangedWeapon),
+                    CanWrite = true
+                };
                 var pRangedWeapon = pPlayerModel.RANGED_WEAPON;
                 if (pRangedWeapon.Valid() == false)
                 {
@@ -2242,11 +1868,20 @@ namespace Maple.Bloomtown
                 }
                 if (pRangedWeapon.Valid())
                 {
-                    rangedWeapon_UID = pRangedWeapon.UID.ToString();
-                }
-                yield return new GameValueInfoDTO() { ObjectId = nameof(RangedWeapon), DisplayName = nameof(RangedWeapon), DisplayValue = rangedWeapon_UID, CanWrite = true };
+                    defRangedWeapon.ObjectId = pRangedWeapon.UID.ToString()!;
+                    defRangedWeapon.DisplayName = pRangedWeapon.ITEM_NAME.GET_VALUE().ToString();
+                    defRangedWeapon.DisplayDesc = pRangedWeapon.DESCRIPTION.GET_VALUE().ToString();
 
-                var armor_UID = default(string);
+                }
+                yield return defRangedWeapon;
+
+
+                var defArmor = new GameEquipmentInfoDTO()
+                {
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(Armor),
+                    CanWrite = true
+                };
                 var pArmor = pPlayerModel.ARMOR;
                 if (pArmor.Valid() == false)
                 {
@@ -2254,48 +1889,68 @@ namespace Maple.Bloomtown
                 }
                 if (pArmor.Valid())
                 {
-                    armor_UID = pArmor.UID.ToString();
+                    defArmor.ObjectId = pArmor.UID.ToString()!;
+                    defArmor.DisplayName = pArmor.ITEM_NAME.GET_VALUE().ToString();
+                    defArmor.DisplayDesc = pArmor.DESCRIPTION.GET_VALUE().ToString();
                 }
-                yield return new GameValueInfoDTO() { ObjectId = nameof(Armor), DisplayName = nameof(Armor), DisplayValue = armor_UID, CanWrite = true };
+                yield return defArmor;
 
-                var accessory_UID = default(string);
+
+                var defAccessory = new GameEquipmentInfoDTO()
+                {
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(Accessory),
+                    CanWrite = true
+                };
                 var pAccessory = pPlayerModel.ACCESSORY;
                 if (pAccessory.Valid())
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = nameof(Accessory), DisplayName = nameof(Accessory), DisplayValue = accessory_UID, CanWrite = true };
+                    defAccessory.ObjectId = pArmor.UID.ToString()!;
+                    defAccessory.DisplayName = pAccessory.ITEM_NAME.GET_VALUE().ToString();
+                    defAccessory.DisplayDesc = pAccessory.DESCRIPTION.GET_VALUE().ToString();
                 }
+                yield return defAccessory;
 
-                var defaultPersona_UID = pPlayerModel.DEFAULT_PERSONA.UID.ToString();
-                yield return new GameValueInfoDTO() { ObjectId = nameof(BattleMonsterModel), DisplayName = nameof(BattleMonsterModel), DisplayValue = defaultPersona_UID, };
-
-                var personaProgress_UID = default(string);
-                var pPersonaProgress = pPlayerModel.PERSONA_PROGRESS;
-                if (pPersonaProgress.Valid())
+                var defDefaultPersona = new GameEquipmentInfoDTO()
                 {
-                    personaProgress_UID = pPersonaProgress.MONSTER_MODEL.UID.ToString();
-                    personaProgress_UID = personaProgress_UID != defaultPersona_UID ? personaProgress_UID : string.Empty;
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(BattleMonsterModel),
+                    CanWrite = true
+                };
+                var defaultPersona = pPlayerModel.DEFAULT_PERSONA;
+                if (defaultPersona.Valid())
+                {
+                    defDefaultPersona.ObjectId = defaultPersona.UID.ToString()!;
+                    defDefaultPersona.DisplayName = defaultPersona.UNIT_NAME.GET_VALUE().ToString();
                 }
+                yield return defDefaultPersona;
 
-                yield return new GameValueInfoDTO() { ObjectId = nameof(PersonaProgress), DisplayName = nameof(PersonaProgress), DisplayValue = personaProgress_UID, CanWrite = true };
+                var defPersonaProgress = new GameEquipmentInfoDTO()
+                {
+                    ObjectId = string.Empty,
+                    DisplayCategory = nameof(PersonaProgress),
+                    CanWrite = true
+                };
+                var pPersonaProgress = pPlayerModel.PERSONA_PROGRESS;
+                if (pPersonaProgress.Valid() && (nint)pPersonaProgress.MONSTER_MODEL != defaultPersona)
+                {
+                    defPersonaProgress.ObjectId = pPersonaProgress.MONSTER_MODEL.UID.ToString()!;
+                    defPersonaProgress.DisplayName = pPersonaProgress.MONSTER_MODEL.UNIT_NAME.GET_VALUE().ToString();
+                }
+                yield return defPersonaProgress;
 
             }
         }
 
-        public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, GameCharacterObjectDTO gameCharacter)
+        public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
-            var uid = gameCharacter.CharacterId;
-            var playerId = @this.T(uid);
-
-            var pCharacter = pPlayerData.GET_CHARACTER(playerId);
-            if (pCharacter.Valid() == false)
-            {
-                return GameException.Throw<GameCharacterSkillDTO>($"Not Found Character:{uid}");
-            }
-
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
 
             return new GameCharacterSkillDTO()
             {
-                ObjectId = uid,
+                ObjectId = gameCharacter.CharacterId,
                 SkillInfos = [],//[.. GetSkillInfos(pCharacter)],
             };
             static IEnumerable<GameValueInfoDTO> GetSkillInfos(Character.Ptr_Character pCharacter)
@@ -2561,89 +2216,7 @@ namespace Maple.Bloomtown
         }
 
 
-        //public static void DebugAddPersona(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData)
-        //{
 
-        //    var pGameSettings = pPlayerData.GameSettings;
-        //    if (pGameSettings.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    var pListPersonaModels = pGameSettings.PersonaModels;
-        //    if (pListPersonaModels.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    if (pListPersonaModels.Size <= 0)
-        //    {
-        //        return;
-        //    }
-        //    ref var ref_first = ref pListPersonaModels[0];
-        //    var first_val = ref_first;
-        //    try
-        //    {
-        //        foreach (var personaModel in pListPersonaModels)
-        //        {
-        //            ref_first = personaModel;
-        //            pPlayerData.DEBUG_ADD_PERSONA();
-        //        }
-        //    }
-        //    finally
-        //    {
-        //        ref_first = first_val;
-        //    }
-
-        //    @this.ShowMessage("DebugAddPersona ok");
-        //}
-        //public static void DebugAddPersonaEx(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData)
-        //{
-
-        //    var pGameSettings = pPlayerData.GameSettings;
-        //    if (pGameSettings.Valid() == false)
-        //    {
-        //        return;
-        //    }
-
-        //    var pListMonsterModels = pGameSettings.MonsterModels;
-        //    if (pListMonsterModels.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    var first = pListMonsterModels.AsEnumerable().Where(static p =>
-        //    {
-        //        var role = p.MonsterRole;
-        //        if (role == MonsterRole.Boss || role == MonsterRole.Elite)
-        //        {
-        //            var pSkills = p.Skills;
-        //            return pSkills.Valid() && pSkills.Size > 0;
-        //        }
-        //        return false;
-        //    }).FirstOrDefault();
-        //    if (first.Valid() == false)
-        //    {
-        //        return;
-        //    }
-
-        //    var pPlayerCharacter = pPlayerData.Player;
-        //    if (pPlayerCharacter.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    var pPlayerModel = pPlayerCharacter.PlayerModel;
-        //    if (pPlayerModel.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    var pDefaultPersona = pPlayerModel.DefaultPersona;
-        //    if (pDefaultPersona.Valid() == false)
-        //    {
-        //        return;
-        //    }
-        //    pDefaultPersona.Skills = first.Skills;
-
-        //    @this.ShowMessage("DebugAddPersonaEx ok");
-
-        //}
 
     }
 
@@ -2651,14 +2224,16 @@ namespace Maple.Bloomtown
 
     internal sealed class BloomtownGameEnvironment
     {
-
+        public BloomtownGameContext Context { get; }
         // UIManager.Ptr_UIManager Ptr_UIManager { get; }
-        PopUpMessage.Ptr_PopUpMessage Ptr_PopUpMessage { get; }
-        StatsSync.Ptr_StatsSync Ptr_StatsSync { get; }
-        GameSettings.Ptr_GameSettings Ptr_GameSettings { get; }
-        PlayerData.Ptr_PlayerData Ptr_PlayerData { get; }
+        public PopUpMessage.Ptr_PopUpMessage Ptr_PopUpMessage { get; }
+        public StatsSync.Ptr_StatsSync Ptr_StatsSync { get; }
+        public GameSettings.Ptr_GameSettings Ptr_GameSettings { get; }
+        public PlayerData.Ptr_PlayerData Ptr_PlayerData { get; }
         public BloomtownGameEnvironment(BloomtownGameContext gameContext)
         {
+            this.Context = gameContext;
+
             var ptr_StatsSync = gameContext.StatsSync.INSTANCE;
             if (ptr_StatsSync.Valid() == false)
             {
@@ -2671,24 +2246,35 @@ namespace Maple.Bloomtown
             }
 
             var ptr_UIManager = gameContext.UIManager.INSTANCE;
-            if (false == ptr_UIManager.Valid())
+            if (ptr_UIManager.Valid())
             {
-                return;
+                var ptr_PopUpMessage = ptr_UIManager.POP_UP_MESSAGE;
+                if (ptr_PopUpMessage.Valid())
+                {
+                    this.Ptr_PopUpMessage = ptr_PopUpMessage;
+                }
             }
-            var ptr_PopUpMessage = ptr_UIManager.POP_UP_MESSAGE;
-            if (false == ptr_PopUpMessage.Valid())
-            {
-                return;
-            }
+
 
             this.Ptr_PlayerData = gameContext.PlayerData.INSTANCE;
-
-            this.Ptr_PopUpMessage = ptr_PopUpMessage;
-
             this.Ptr_StatsSync = ptr_StatsSync;
             this.Ptr_GameSettings = ptr_GameSettings;
-
-
         }
+
+        public bool InGame()
+        {
+            return this.Ptr_PlayerData.Valid() && this.Ptr_PlayerData.M_CACHED_PTR != nint.Zero;
+        }
+
+        public void ShowMessage(string? msg)
+        {
+            if (string.IsNullOrEmpty(msg))
+            {
+                return;
+            }
+            using var pMonoString = this.Context.T2(msg);
+            this.Ptr_PopUpMessage.SHOW_MESSAGE(pMonoString);
+        }
+
     }
 }

@@ -9,6 +9,8 @@
 
 		<PublishAot>true</PublishAot>
 		<IsAotCompatible>true</IsAotCompatible>
+		<OptimizationPreference>Speed</OptimizationPreference>
+
 		<OutputType>Library</OutputType>
 		<AssemblyName>Maple</AssemblyName>
 
