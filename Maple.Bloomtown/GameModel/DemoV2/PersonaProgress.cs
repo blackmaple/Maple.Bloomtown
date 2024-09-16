@@ -21,7 +21,7 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
     // class 0x10 BattleMonsterModel monsterModel
-      [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterModel.Ptr_BattleMonsterModel),"monsterModel", "MONSTER_MODEL")]
+    [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterModel.Ptr_BattleMonsterModel), "monsterModel", "MONSTER_MODEL")]
 
     // class 0x18 UnityEngine.Sprite monsterPreviewMini
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"monsterPreviewMini", "MONSTER_PREVIEW_MINI")]
@@ -98,7 +98,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// struct System.Int32 SkillCountMax "0"
         /// </summary>
-        /// public const System.Int32 SKILL_COUNT_MAX=>"0";
+        public const System.Int32 SKILL_COUNT_MAX = 8;
 
 
 
@@ -230,8 +230,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Collections.Generic.List<Skill> get_skills()
         /// </summary>
         /// <returns>class System.Collections.Generic.List<Skill></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_skills")]
-        ///  extern nint GET_SKILLS ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_skills")]
+        extern PMonoList_S<Skill.Ptr_Skill> GET_SKILLS();
 
 
         /// <summary>

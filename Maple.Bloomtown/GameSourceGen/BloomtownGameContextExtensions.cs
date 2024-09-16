@@ -3,12 +3,37 @@ using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace Maple.Bloomtown
 {
     internal static class BloomtownGameContextExtensions
     {
+        const string CONST_CURR_HP = "属性*HP";
+        const string CONST_MAX_HP = "属性*MaxHP";
+        const string CONST_CURR_SP = "属性*SP";
+        const string CONST_MAX_SP = "属性*MaxSP";
+        const string CONST_Lv = "属性*Lv";
+        const string CONST_Exp = "属性*Exp";
+
+        const string CONST_PersonaLv = "人格*Lv";
+        const string CONST_PersonaExp = "人格*Exp";
+
+        const string CONST_Agility = "属性*敏捷";
+        const string CONST_Strength = "属性*力量";
+        const string CONST_Endurance = "属性*耐力";
+        const string CONST_Magic = "属性*魔力";
+        const string CONST_Luck = "属性*幸运";
+
+        const string CONST_Tame = "怪兽*驯化";
+        const string CONST_Steal = "怪兽*窃取";
+        const string CONST_SocialStat = "怪兽*社交";
+
+        const string CONST_SkillMinLv = "技能*MinLv";
+        const string CONST_SkillMaxLv = "技能*MaxLv";
+
+        public static BloomtownGameEnvironment GetBloomtownGameEnvironment(this BloomtownGameContext @this) => new(@this);
 
         public static IEnumerable<UnitySpriteImageData> GetListGameSettingsIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
@@ -1736,19 +1761,18 @@ namespace Maple.Bloomtown
 
         }
 
-
-
-        static Character.Ptr_Character GetCharacterThrowIfNotFound(this BloomtownGameEnvironment @this, PlayerData.Ptr_PlayerData pPlayerData, GameCharacterObjectDTO gameCharacter)
+        static Character.Ptr_Character GetCharacterThrowIfNotFound(this PlayerData.Ptr_PlayerData pPlayerData, string uid)
         {
-            var uid = gameCharacter.CharacterId;
-            using var playerId = @this.Context.T2(uid);
-
-            var pCharacter = pPlayerData.GET_CHARACTER(playerId);
-            if (pCharacter.Valid() == false)
+            var pPlayerGroup = pPlayerData.GET_PLAYER_GROUP();
+            var span_uid = uid.AsSpan();
+            foreach (var player in pPlayerGroup)
             {
-                return GameException.Throw<Character.Ptr_Character>($"Not Found:{uid}");
+                if (MemoryExtensions.SequenceEqual(player.UID.AsReadOnlySpan(), span_uid))
+                {
+                    return player;
+                }
             }
-            return pCharacter;
+            return GameException.Throw<Character.Ptr_Character>($"Not Found:{uid}");
         }
         public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameEnvironment @this)
         {
@@ -1775,7 +1799,7 @@ namespace Maple.Bloomtown
             var pGameSettings = @this.Ptr_GameSettings;
             var pPlayerData = @this.Ptr_PlayerData;
 
-            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(gameCharacter.CharacterId);
 
             return new GameCharacterStatusDTO()
             {
@@ -1786,17 +1810,17 @@ namespace Maple.Bloomtown
             static IEnumerable<GameSwitchDisplayDTO> GetCharacterAttributes(Character.Ptr_Character pCharacter)
             {
                 BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel = pCharacter.PLAYER_MODEL;
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.CUR_HP), DisplayName = "HP", ContentValue = pCharacter.CUR_HP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_MAX_HP), DisplayName = "MaxHP", ContentValue = pCharacter.GET_MAX_HP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_HP), DisplayName = CONST_CURR_HP, ContentValue = pCharacter.CUR_HP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_HP), DisplayName = CONST_MAX_HP, ContentValue = pCharacter.GET_MAX_HP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.CUR_SP), DisplayName = "SP", ContentValue = pCharacter.CUR_SP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_MAX_SP), DisplayName = "MaxSP", ContentValue = pCharacter.GET_MAX_SP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_SP), DisplayName = CONST_CURR_SP, ContentValue = pCharacter.CUR_SP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_SP), DisplayName = CONST_MAX_SP, ContentValue = pCharacter.GET_MAX_SP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.LEVEL), DisplayName = "Lv", ContentValue = pCharacter.LEVEL.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.LEVEL_EXP), DisplayName = "Exp", ContentValue = pCharacter.LEVEL_EXP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Lv), DisplayName = CONST_Lv, ContentValue = pCharacter.LEVEL.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Exp), DisplayName = CONST_Exp, ContentValue = pCharacter.LEVEL_EXP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
 
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_PERSONA_LEVEL), DisplayName = "P.Lv", ContentValue = pCharacter.GET_PERSONA_LEVEL().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(Character.Ptr_Character.GET_PERSONA_LEVEL_EXP), DisplayName = "P.Exp", ContentValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaLv), DisplayName = CONST_PersonaLv, ContentValue = pCharacter.GET_PERSONA_LEVEL().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaExp), DisplayName = CONST_PersonaExp, ContentValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
 
                 var pPersonas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToArray();
                 int totalAgility = pPlayerModel.AGILITY_FROM_ITEMS;
@@ -1812,11 +1836,11 @@ namespace Maple.Bloomtown
                     totalMagic += pPersonas.Max(p => p.GET_MAGIC());
                     totalLuck += pPersonas.Max(p => p.GET_LUCK());
                 }
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_AGILITY), DisplayName = "AGI", ContentValue = totalAgility.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_STRENGTH), DisplayName = "STR", ContentValue = totalStrength.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_ENDURANCE), DisplayName = "EN", ContentValue = totalEndurance.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_MAGIC), DisplayName = "MAGIC", ContentValue = totalMagic.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(PersonaProgress.Ptr_PersonaProgress.GET_LUCK), DisplayName = "LUCK", ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Agility), DisplayName = CONST_Agility, ContentValue = totalAgility.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Strength), DisplayName = CONST_Strength, ContentValue = totalStrength.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Endurance), DisplayName = CONST_Endurance, ContentValue = totalEndurance.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Magic), DisplayName = CONST_Magic, ContentValue = totalMagic.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Luck), DisplayName = CONST_Luck, ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
             }
 
@@ -1826,7 +1850,7 @@ namespace Maple.Bloomtown
             var pGameSettings = @this.Ptr_GameSettings;
             var pPlayerData = @this.Ptr_PlayerData;
 
-            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(gameCharacter.CharacterId);
 
 
             return new GameCharacterEquipmentDTO()
@@ -1941,56 +1965,68 @@ namespace Maple.Bloomtown
 
             }
         }
-
         public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
             var pPlayerData = @this.Ptr_PlayerData;
-            var pCharacter = @this.GetCharacterThrowIfNotFound(pPlayerData, gameCharacter);
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(gameCharacter.CharacterId);
 
             return new GameCharacterSkillDTO()
             {
                 ObjectId = gameCharacter.CharacterId,
-                SkillInfos = [],//[.. GetSkillInfos(pCharacter)],
+                SkillInfos = GameSkillInfoDTO(pCharacter),
             };
-            static IEnumerable<GameValueInfoDTO> GetSkillInfos(Character.Ptr_Character pCharacter)
+            static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
+            {
+                GameSkillInfoDTO[] skillInfoDTOs =
+                [
+                   new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                ];
+
+                var index = 0;
+
+                foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
+                {
+                    var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
+                    if (cacheSkillInfo is null)
+                    {
+                        break;
+                    }
+                    cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
+                    cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
+                    cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
+                }
+
+                return skillInfoDTOs;
+            }
+            static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
             {
                 foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
                 {
-                    var monsterModel = pPersonas.MONSTER_MODEL;
-                    if (monsterModel.Valid())
+                    foreach (var skill in pPersonas.GET_SKILLS())
                     {
-                        var pSkills = monsterModel.SKILLS;
-                        if (pSkills.Valid())
+                        var skillInfo = skill.SKILL_INFO;
+                        if (skillInfo.Valid())
                         {
-                            foreach (var skill in pSkills)
-                            {
-                                var pSkillInfo = skill.SKILL_INFO;
-                                if (pSkillInfo.Valid())
-                                {
-                                    var uid = pSkillInfo.UID.ToString()!;
-                                    yield return new GameValueInfoDTO()
-                                    {
-                                        ObjectId = nameof(Skill),
-                                        DisplayName = nameof(Skill),
-                                        DisplayValue = uid,
-                                    };
-                                }
-                            }
+                            yield return skillInfo;
                         }
                     }
                 }
-            }
 
+            }
         }
-
-        public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameContext @this, PlayerData.Ptr_PlayerData pPlayerData, UnityEngineContext unityEngine)
+        public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
+            var pPlayerData = @this.Ptr_PlayerData;
             var pPlayerGroup = pPlayerData.GET_PLAYER_GROUP();
-            if (pPlayerGroup.Valid() == false)
-            {
-                yield break;
-            }
+
             foreach (var player in pPlayerGroup)
             {
                 var pAvatar = player.AVATAR_MINI;
@@ -2007,18 +2043,37 @@ namespace Maple.Bloomtown
             }
         }
 
-        public static IEnumerable<GameMonsterDisplayDTO> GetListMonsterDisplay(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings)
+        public static IEnumerable<GameMonsterDisplayDTO> GetListMonsterDisplay(this BloomtownGameEnvironment @this)
         {
+            var pGameSettings = @this.Ptr_GameSettings;
+
             var pListMonsterModels = pGameSettings.MONSTER_MODELS;
             if (pListMonsterModels.Valid())
             {
                 foreach (var monsterModel in pListMonsterModels)
                 {
-                    var uid = monsterModel.UID.ToString()!;
-                    var tameStat = monsterModel.TAME_STAT.ToString();
-                    GameValueInfoDTO[] atts =
-                    [
-                            new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+                    yield return GetMonsterInfo(monsterModel, nameof(BattleMonsterModel));
+
+                }
+            }
+
+            var pListPersonaModels = pGameSettings.PERSONA_MODELS;
+            if (pListPersonaModels.Valid())
+            {
+                foreach (var monsterModel in pListPersonaModels)
+                {
+                    yield return GetMonsterInfo(monsterModel, nameof(PersonaProgress));
+
+                }
+            }
+
+            static GameMonsterDisplayDTO GetMonsterInfo(BattleMonsterModel.Ptr_BattleMonsterModel monsterModel, string displayCategory)
+            {
+                var uid = monsterModel.UID.ToString()!;
+                var tameStat = monsterModel.TAME_STAT.ToString();
+                GameValueInfoDTO[] atts =
+                [
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "HP",DisplayValue = monsterModel.MAX_HP.ToString()   ,CanPreview=true},
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "SP",DisplayValue = monsterModel.MAX_SP.ToString()  ,CanPreview=true },
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = "EXP",DisplayValue = monsterModel.EXP.ToString()  ,CanPreview=true },
@@ -2037,64 +2092,20 @@ namespace Maple.Bloomtown
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ELEMENT_NAME().ToString(),DisplayValue = monsterModel.Element.ToString()  },
                     ];
 
-                    var skills = GetGameSkillInfo(monsterModel.SKILLS).ToArray();
+                var skills = GetSkillInfos(monsterModel.SKILLS).ToArray();
 
-                    yield return new GameMonsterDisplayDTO()
-                    {
-                        ObjectId = uid,
-                        DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
-                        DisplayCategory = nameof(BattleMonsterModel),
-                        MonsterAttributes = atts,
-                        SkillInfos = [],
-
-                    };
-
-                }
-            }
-
-            var pListPersonaModels = pGameSettings.PERSONA_MODELS;
-            if (pListPersonaModels.Valid())
-            {
-                foreach (var monsterModel in pListPersonaModels)
+                return new GameMonsterDisplayDTO()
                 {
-                    var uid = monsterModel.UID.ToString()!;
-                    var tameStat = monsterModel.TAME_STAT.ToString();
-                    GameValueInfoDTO[] atts =
-                    [
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+                    ObjectId = uid,
+                    DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                    DisplayCategory = displayCategory,
+                    MonsterAttributes = atts,
+                    SkillInfos = skills,
 
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Endurance",DisplayValue = monsterModel.RAW_ENDURANCE.ToString(),CanPreview=true  },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString(),CanPreview=true  },
-                        new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  ,CanPreview=true},
-
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName =tameStat ,DisplayValue = tameStat  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Tame",DisplayValue = monsterModel.TameDifficulty.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Steal",DisplayValue = monsterModel.StealDifficulty.ToString()  },
-
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ROLE_NAME().ToString(),DisplayValue = monsterModel.MonsterRole.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ELEMENT_NAME().ToString(),DisplayValue = monsterModel.Element.ToString()  },
-                    ];
-
-                    var skills = GetGameSkillInfo(monsterModel.SKILLS).ToArray();
-
-                    yield return new GameMonsterDisplayDTO()
-                    {
-                        ObjectId = uid,
-                        DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
-                        DisplayCategory = nameof(PersonaProgress),
-                        MonsterAttributes = atts,
-                        SkillInfos = [],
-
-                    };
-
-                }
+                };
             }
 
-
-
-            static IEnumerable<GameValueInfoDTO> GetGameSkillInfo(PMonoList_S<Skill.Ptr_Skill> pListSkills)
+            static IEnumerable<GameSkillInfoDTO> GetSkillInfos(PMonoList_S<Skill.Ptr_Skill> pListSkills)
             {
                 if (pListSkills.Valid())
                 {
@@ -2103,14 +2114,12 @@ namespace Maple.Bloomtown
                         var pSkillInfo = skill.SKILL_INFO;
                         if (pSkillInfo.Valid())
                         {
-                            var uid = pSkillInfo.UID.ToString()!;
-
-
-                            yield return new GameValueInfoDTO()
+                            yield return new GameSkillInfoDTO()
                             {
-                                ObjectId = uid,
+                                ObjectId = pSkillInfo.UID.ToString()!,
+                                DisplayCategory = nameof(SkillInfo),
                                 DisplayName = pSkillInfo.ITEM_NAME.GET_VALUE().ToString(),
-                                DisplayValue = pSkillInfo.DESCRIPTION.GET_VALUE().ToString(),
+                                DisplayDesc = pSkillInfo.DESCRIPTION.GET_VALUE().ToString(),
                             };
                         }
                     }
@@ -2118,9 +2127,10 @@ namespace Maple.Bloomtown
 
             }
         }
-
-        public static IEnumerable<UnitySpriteImageData> GetListMonsterIcon(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings, UnityEngineContext unityEngine)
+        public static IEnumerable<UnitySpriteImageData> GetListMonsterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
+
+            var pGameSettings = @this.Ptr_GameSettings;
 
             var pListMonsterModels = pGameSettings.MONSTER_MODELS;
             if (pListMonsterModels.Valid())
@@ -2167,114 +2177,81 @@ namespace Maple.Bloomtown
             }
         }
 
-        public static IEnumerable<GameSkillDisplayDTO> GetListSkillDisplay(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings)
+        public static IEnumerable<GameSkillDisplayDTO> GetListSkillDisplay(this BloomtownGameEnvironment @this)
         {
-
+            var pGameSettings = @this.Ptr_GameSettings;
             var pListSkills = pGameSettings.SKILLS;
-
             foreach (var pSkillInfo in pListSkills)
+            {
+                yield return GetSkillInfo(pSkillInfo, nameof(SkillInfo));
+            }
+
+
+            var pListBuffs = pGameSettings.BUFFS;
+            foreach (var pSkillInfo in pListBuffs)
+            {
+                yield return GetSkillInfo(pSkillInfo, nameof(SkillEffect));
+            }
+            static GameSkillDisplayDTO GetSkillInfo(SkillInfo.Ptr_SkillInfo pSkillInfo, string displayCategory)
             {
                 var uid = pSkillInfo.UID.ToString()!;
                 var atts = new GameValueInfoDTO[]
                 {
-                    new(){ ObjectId = "StartLevel", DisplayName = "StartLevel", DisplayValue = pSkillInfo.START_LEVEL.ToString() },
-                    new(){ ObjectId = "EndLevel", DisplayName = "EndLevel", DisplayValue = pSkillInfo.END_LEVEL.ToString() },
+                    new(){ ObjectId = nameof(CONST_SkillMinLv), DisplayName = CONST_SkillMinLv, DisplayValue = pSkillInfo.START_LEVEL.ToString() },
+                    new(){ ObjectId = nameof(CONST_SkillMaxLv), DisplayName = CONST_SkillMaxLv, DisplayValue = pSkillInfo.END_LEVEL.ToString() },
                 };
-                yield return new GameSkillDisplayDTO()
+                return new GameSkillDisplayDTO()
                 {
                     ObjectId = uid,
+                    DisplayCategory = displayCategory,
                     DisplayName = pSkillInfo.ITEM_NAME.GET_VALUE().ToString(),
-                    DisplayCategory = nameof(Skill),
                     DisplayDesc = pSkillInfo.DESCRIPTION.GET_VALUE().ToString(),
                     SkillAttributes = atts
                 };
+
             }
 
-
-
-
         }
-
-        public static IEnumerable<UnitySpriteImageData> GetListSkillIcon(this BloomtownGameContext @this, GameSettings.Ptr_GameSettings pGameSettings, UnityEngineContext unityEngine)
+        public static IEnumerable<UnitySpriteImageData> GetListSkillIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
-
+            var pGameSettings = @this.Ptr_GameSettings;
             var pListSkills = pGameSettings.SKILLS;
             foreach (var pSkillInfo in pListSkills)
             {
+                if (TryGetImageData(nameof(SkillInfo), pSkillInfo, unityEngine, out var imageData))
+                {
+                    yield return imageData;
+                }
+            }
+
+            var pListBuffs = pGameSettings.BUFFS;
+            foreach (var pSkillInfo in pListBuffs)
+            {
+                if (TryGetImageData(nameof(SkillEffect), pSkillInfo, unityEngine, out var imageData))
+                {
+                    yield return imageData;
+                }
+            }
+
+            static bool TryGetImageData(string category, SkillInfo.Ptr_SkillInfo pSkillInfo, UnityEngineContext unityEngine, [MaybeNullWhen(false)] out UnitySpriteImageData imageData)
+            {
+                Unsafe.SkipInit(out imageData);
                 var pIcon = pSkillInfo.GET_ICON_00();
                 if (pIcon.Valid())
                 {
                     var pIconPng = unityEngine.ReadSprite2Png(pIcon);
                     if (pIconPng.Valid())
                     {
-                        yield return new UnitySpriteImageData() { Category = nameof(SkillInfo), Name = pSkillInfo.UID.ToString(), ImageData = pIconPng };
+                        imageData = new UnitySpriteImageData() { Category = nameof(SkillInfo), Name = pSkillInfo.UID.ToString(), ImageData = pIconPng };
+                        return true;
                     }
                 }
+                return false;
             }
-
-
         }
 
 
 
-
-    }
-
-
-
-    internal sealed class BloomtownGameEnvironment
-    {
-        public BloomtownGameContext Context { get; }
-        // UIManager.Ptr_UIManager Ptr_UIManager { get; }
-        public PopUpMessage.Ptr_PopUpMessage Ptr_PopUpMessage { get; }
-        public StatsSync.Ptr_StatsSync Ptr_StatsSync { get; }
-        public GameSettings.Ptr_GameSettings Ptr_GameSettings { get; }
-        public PlayerData.Ptr_PlayerData Ptr_PlayerData { get; }
-        public BloomtownGameEnvironment(BloomtownGameContext gameContext)
-        {
-            this.Context = gameContext;
-
-            var ptr_StatsSync = gameContext.StatsSync.INSTANCE;
-            if (ptr_StatsSync.Valid() == false)
-            {
-                return;
-            }
-            var ptr_GameSettings = ptr_StatsSync.GAME_SETTINGS;
-            if (ptr_GameSettings.Valid() == false)
-            {
-                return;
-            }
-
-            var ptr_UIManager = gameContext.UIManager.INSTANCE;
-            if (ptr_UIManager.Valid())
-            {
-                var ptr_PopUpMessage = ptr_UIManager.POP_UP_MESSAGE;
-                if (ptr_PopUpMessage.Valid())
-                {
-                    this.Ptr_PopUpMessage = ptr_PopUpMessage;
-                }
-            }
-
-
-            this.Ptr_PlayerData = gameContext.PlayerData.INSTANCE;
-            this.Ptr_StatsSync = ptr_StatsSync;
-            this.Ptr_GameSettings = ptr_GameSettings;
-        }
-
-        public bool InGame()
-        {
-            return this.Ptr_PlayerData.Valid() && this.Ptr_PlayerData.M_CACHED_PTR != nint.Zero;
-        }
-
-        public void ShowMessage(string? msg)
-        {
-            if (string.IsNullOrEmpty(msg))
-            {
-                return;
-            }
-            using var pMonoString = this.Context.T2(msg);
-            this.Ptr_PopUpMessage.SHOW_MESSAGE(pMonoString);
-        }
 
     }
 }

@@ -9,7 +9,7 @@ namespace Maple.Bloomtown
 {
     internal sealed class BloomtownGameExtensions()
     {
-        internal static async Task RunWebApiServiceAsync(int millisecondsDelay = 8000)
+        internal static async Task RunWebApiServiceAsync(int millisecondsDelay = 15*1000)
         {
             var webapp = WebApiServiceExtensions.AsRunWebApiService(p =>
             {
