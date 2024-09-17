@@ -42,10 +42,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_skill", "M_SKILL")]
 
     // struct 0x48 System.Int32 level
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"level", "LEVEL")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "level", "LEVEL", IsReadOnly = false)]
 
     // struct 0x4C System.Int32 exp
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"exp", "EXP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "exp", "EXP", IsReadOnly = false)]
 
     // struct 0x50 System.Int32 levelOfGetLastSkill
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"levelOfGetLastSkill", "LEVEL_OF_GET_LAST_SKILL")]
@@ -157,8 +157,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="skill">class Skill</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddSkill")]
-        ///  extern void ADD_SKILL (nint skill);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddSkill")]
+        extern void ADD_SKILL(nint skill);
 
 
         /// <summary>
@@ -280,8 +280,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Int32 GetNearestSkillLevel()
         /// </summary>
         /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetNearestSkillLevel")]
-        ///  extern System.Int32 GET_NEAREST_SKILL_LEVEL ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetNearestSkillLevel")]
+        extern System.Int32 GET_NEAREST_SKILL_LEVEL();
 
 
         /// <summary>
@@ -314,8 +314,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="skill">class Skill</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("RemoveSkill")]
-        ///  extern void REMOVE_SKILL (nint skill);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("RemoveSkill")]
+        extern void REMOVE_SKILL(nint skill);
 
 
         /// <summary>
@@ -340,8 +340,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="lvl">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetLevel")]
-        ///  extern void SET_LEVEL (System.Int32 lvl);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetLevel")]
+        extern void SET_LEVEL(System.Int32 lvl);
 
 
         /// <summary>
@@ -404,65 +404,65 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="count">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_PersonaProgress))]
-        ///  extern void ADD_EXP_01 (System.Int32 count);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_PersonaProgress))]
+        extern void ADD_EXP_01(System.Int32 count);
 
 
-        /// public static partial class Search_PersonaProgress
-        /// {
-        /// 
-        ///     
+        public static partial class Search_PersonaProgress
+        {
+            /// 
+            ///     
 
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void .ctor(BattleMonsterModel monsterModel)
-        /// </summary>
-        /// public static bool .CTOR_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "BattleMonsterModel");
-        ///     
-        ///  
-        /// 
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
 
 
-        /// <summary>
-        ///   System.Void .ctor(System.String dataStr)
-        /// </summary>
-        /// public static bool .CTOR_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "System.String");
-        ///     
-        ///  
-        /// 
+            /// <summary>
+            ///   System.Void .ctor(BattleMonsterModel monsterModel)
+            /// </summary>
+            /// public static bool .CTOR_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "BattleMonsterModel");
+            ///     
+            ///  
+            /// 
 
 
-        /// <summary>
-        ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies, System.Int32 personasOnCharacter)
-        /// </summary>
-        /// public static bool ADD_EXP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Collections.Generic.List<BattleMonsterController>", "System.Int32");
-        ///     
-        ///  
-        /// 
+            /// <summary>
+            ///   System.Void .ctor(System.String dataStr)
+            /// </summary>
+            /// public static bool .CTOR_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "System.String");
+            ///     
+            ///  
+            /// 
 
 
-        /// <summary>
-        ///   System.Void AddExp(System.Int32 count)
-        /// </summary>
-        /// public static bool ADD_EXP_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Int32");
-        ///     
-        ///  
-        /// 
-        /// 
-        /// }
+            /// <summary>
+            ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies, System.Int32 personasOnCharacter)
+            /// </summary>
+            /// public static bool ADD_EXP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Collections.Generic.List<BattleMonsterController>", "System.Int32");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void AddExp(System.Int32 count)
+            /// </summary>
+            public static bool ADD_EXP_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Int32");
+            ///     
+            ///  
+            /// 
+            /// 
+        }
 
     }
 

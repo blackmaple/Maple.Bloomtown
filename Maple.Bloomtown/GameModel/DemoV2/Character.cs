@@ -78,16 +78,16 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"activePersonaProgress", "ACTIVE_PERSONA_PROGRESS")]
 
     // class 0xA0 MeleeWeapon meleeWeapon
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"meleeWeapon", "MELEE_WEAPON")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "meleeWeapon", "MELEE_WEAPON")]
 
     // class 0xA8 RangedWeapon rangedWeapon
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"rangedWeapon", "RANGED_WEAPON")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "rangedWeapon", "RANGED_WEAPON")]
 
     // class 0xB0 Armor armor
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"armor", "ARMOR")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "armor", "ARMOR")]
 
     // class 0xB8 Accessory accessory
-      [MonoCollectorSearchFieldAttribute(typeof(nint),"accessory", "ACCESSORY")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "accessory", "ACCESSORY")]
 
     // class 0xC0 ControllerInfo controllerInfo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"controllerInfo", "CONTROLLER_INFO")]
@@ -114,10 +114,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"customX", "CUSTOM_X")]
 
     // struct 0xF8 System.Int32 curHP
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curHP", "CUR_HP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curHP", "CUR_HP", IsReadOnly = false)]
 
     // struct 0xFC System.Int32 curSP
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curSP", "CUR_SP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curSP", "CUR_SP", IsReadOnly = false)]
 
     // struct 0x100 UnityEngine.Vector2 _bubblePosition
     // [MonoCollectorSearchFieldAttribute(typeof(UnityEngine.Vector2),"_bubblePosition", "_BUBBLE_POSITION")]
@@ -126,10 +126,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"_bubblePositionFound", "_BUBBLE_POSITION_FOUND")]
 
     // struct 0x10C System.Int32 level
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "level", "LEVEL")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "level", "LEVEL", IsReadOnly = false)]
 
     // struct 0x110 System.Int32 levelExp
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "levelExp", "LEVEL_EXP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "levelExp", "LEVEL_EXP", IsReadOnly = false)]
 
     // struct 0x114 System.Boolean m_modelReset
     // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_modelReset", "M_MODEL_RESET")]
@@ -627,7 +627,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="lvl">struct System.Int32</param>
         /// <returns>struct System.Int32</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetExpToLevel")]
-        /// static extern System.Int32 GET_EXP_TO_LEVEL (System.Int32 lvl);
+        /// static extern System.Int32 GET_EXP_TO_LEVEL(System.Int32 lvl);
 
 
         /// <summary>
@@ -1125,8 +1125,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="lvl">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetLevel")]
-        ///  extern void SET_LEVEL (System.Int32 lvl);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetLevel")]
+        extern void SET_LEVEL(System.Int32 lvl);
 
 
         /// <summary>
@@ -1282,8 +1282,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="count">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_Character))]
-        ///  extern void ADD_EXP_01 (System.Int32 count);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_Character))]
+        extern void ADD_EXP_01(System.Int32 count);
 
 
         /// <summary>
@@ -2075,931 +2075,931 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///  extern System.Boolean TRY_GET_COMPONENT_01 (nint component);
 
 
-        /// public static partial class Search_Character
-        /// {
-        /// 
-        ///     
-
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void .ctor()
-        /// </summary>
-        /// public static bool .CTOR_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies)
-        /// </summary>
-        /// public static bool ADD_EXP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Collections.Generic.List<BattleMonsterController>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void AddExp(System.Int32 count)
-        /// </summary>
-        /// public static bool ADD_EXP_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Int32");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void CancelInvoke()
-        /// </summary>
-        /// public static bool CANCEL_INVOKE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void CancelInvoke(System.String methodName)
-        /// </summary>
-        /// public static bool CANCEL_INVOKE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void CancelInvoke(UnityEngine.MonoBehaviour self, System.String methodName)
-        /// </summary>
-        /// public static bool CANCEL_INVOKE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke", "UnityEngine.MonoBehaviour", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void Destroy(UnityEngine.Object obj, System.Single t)
-        /// </summary>
-        /// public static bool DESTROY_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Destroy", "UnityEngine.Object", "System.Single");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void Destroy(UnityEngine.Object obj)
-        /// </summary>
-        /// public static bool DESTROY_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Destroy", "UnityEngine.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void DestroyImmediate(UnityEngine.Object obj, System.Boolean allowDestroyingAssets)
-        /// </summary>
-        /// public static bool DESTROY_IMMEDIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyImmediate", "UnityEngine.Object", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void DestroyImmediate(UnityEngine.Object obj)
-        /// </summary>
-        /// public static bool DESTROY_IMMEDIATE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyImmediate", "UnityEngine.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void DestroyObject(UnityEngine.Object obj, System.Single t)
-        /// </summary>
-        /// public static bool DESTROY_OBJECT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyObject", "UnityEngine.Object", "System.Single");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Void DestroyObject(UnityEngine.Object obj)
-        /// </summary>
-        /// public static bool DESTROY_OBJECT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyObject", "UnityEngine.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void Equip(Equipment item)
-        /// </summary>
-        /// public static bool EQUIP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Equipment");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void Equip(MeleeWeapon item)
-        /// </summary>
-        /// public static bool EQUIP_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "MeleeWeapon");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void Equip(RangedWeapon item)
-        /// </summary>
-        /// public static bool EQUIP_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "RangedWeapon");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void Equip(Armor item)
-        /// </summary>
-        /// public static bool EQUIP_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Armor");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void Equip(Accessory item)
-        /// </summary>
-        /// public static bool EQUIP_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Accessory");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindAnyObjectByType()
-        /// </summary>
-        /// public static bool FIND_ANY_OBJECT_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindAnyObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
-        /// </summary>
-        /// public static bool FIND_ANY_OBJECT_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "UnityEngine.FindObjectsInactive");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindAnyObjectByType(System.Type type)
-        /// </summary>
-        /// public static bool FIND_ANY_OBJECT_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindAnyObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
-        /// </summary>
-        /// public static bool FIND_ANY_OBJECT_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "System.Type", "UnityEngine.FindObjectsInactive");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindFirstObjectByType()
-        /// </summary>
-        /// public static bool FIND_FIRST_OBJECT_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindFirstObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
-        /// </summary>
-        /// public static bool FIND_FIRST_OBJECT_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "UnityEngine.FindObjectsInactive");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindFirstObjectByType(System.Type type)
-        /// </summary>
-        /// public static bool FIND_FIRST_OBJECT_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindFirstObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
-        /// </summary>
-        /// public static bool FIND_FIRST_OBJECT_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "System.Type", "UnityEngine.FindObjectsInactive");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindObjectOfType()
-        /// </summary>
-        /// public static bool FIND_OBJECT_OF_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T FindObjectOfType(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool FIND_OBJECT_OF_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindObjectOfType(System.Type type)
-        /// </summary>
-        /// public static bool FIND_OBJECT_OF_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object FindObjectOfType(System.Type type, System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool FIND_OBJECT_OF_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Type", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsSortMode sortMode)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "System.Type", "UnityEngine.FindObjectsSortMode");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "System.Type", "UnityEngine.FindObjectsInactive", "UnityEngine.FindObjectsSortMode");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T[] FindObjectsByType(UnityEngine.FindObjectsSortMode sortMode)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "UnityEngine.FindObjectsSortMode");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T[] FindObjectsByType(UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "UnityEngine.FindObjectsInactive", "UnityEngine.FindObjectsSortMode");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_OF_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type, System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_OF_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Type", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T[] FindObjectsOfType()
-        /// </summary>
-        /// public static bool FIND_OBJECTS_OF_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T[] FindObjectsOfType(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool FIND_OBJECTS_OF_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component GetComponent(System.Type type)
-        /// </summary>
-        /// public static bool GET_COMPONENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponent", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T GetComponent()
-        /// </summary>
-        /// public static bool GET_COMPONENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponent");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component GetComponentInChildren(System.Type t, System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_CHILDREN_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Type", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component GetComponentInChildren(System.Type t)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_CHILDREN_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T GetComponentInChildren(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_CHILDREN_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T GetComponentInChildren()
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_CHILDREN_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component GetComponentInParent(System.Type t, System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_PARENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Type", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component GetComponentInParent(System.Type t)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_PARENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T GetComponentInParent(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_PARENT_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T GetComponentInParent()
-        /// </summary>
-        /// public static bool GET_COMPONENT_IN_PARENT_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component[] GetComponents(System.Type type)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void GetComponents(System.Type type, System.Collections.Generic.List<UnityEngine.Component> results)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Type", "System.Collections.Generic.List<UnityEngine.Component>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void GetComponents(System.Collections.Generic.List<T> results)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Collections.Generic.List<T>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T[] GetComponents()
-        /// </summary>
-        /// public static bool GET_COMPONENTS_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component[] GetComponentsInChildren(System.Type t)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_CHILDREN_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T[] GetComponentsInChildren(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_CHILDREN_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void GetComponentsInChildren(System.Boolean includeInactive, System.Collections.Generic.List<T> result)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_CHILDREN_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Boolean", "System.Collections.Generic.List<T>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T[] GetComponentsInChildren()
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_CHILDREN_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void GetComponentsInChildren(System.Collections.Generic.List<T> results)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_CHILDREN_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Collections.Generic.List<T>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component[] GetComponentsInParent(System.Type t, System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_PARENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Type", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Component[] GetComponentsInParent(System.Type t)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_PARENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Type");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T[] GetComponentsInParent(System.Boolean includeInactive)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_PARENT_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void GetComponentsInParent(System.Boolean includeInactive, System.Collections.Generic.List<T> results)
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_PARENT_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Boolean", "System.Collections.Generic.List<T>");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   T[] GetComponentsInParent()
-        /// </summary>
-        /// public static bool GET_COMPONENTS_IN_PARENT_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Single GetMagicAttackPower()
-        /// </summary>
-        /// public static bool GET_MAGIC_ATTACK_POWER_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Single GetMagicAttackPower(PersonaProgress persona)
-        /// </summary>
-        /// public static bool GET_MAGIC_ATTACK_POWER_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower", "PersonaProgress");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
-        /// </summary>
-        /// public static bool INSTANTIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Vector3", "UnityEngine.Quaternion");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
-        /// </summary>
-        /// public static bool INSTANTIATE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Vector3", "UnityEngine.Quaternion", "UnityEngine.Transform");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original)
-        /// </summary>
-        /// public static bool INSTANTIATE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
-        /// </summary>
-        /// public static bool INSTANTIATE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace)
-        /// </summary>
-        /// public static bool INSTANTIATE_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T Instantiate(T original)
-        /// </summary>
-        /// public static bool INSTANTIATE_05 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
-        /// </summary>
-        /// public static bool INSTANTIATE_06 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
-        /// </summary>
-        /// public static bool INSTANTIATE_07 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion", "UnityEngine.Transform");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T Instantiate(T original, UnityEngine.Transform parent)
-        /// </summary>
-        /// public static bool INSTANTIATE_08 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  T Instantiate(T original, UnityEngine.Transform parent, System.Boolean worldPositionStays)
-        /// </summary>
-        /// public static bool INSTANTIATE_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform", "System.Boolean");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Boolean IsInvoking()
-        /// </summary>
-        /// public static bool IS_INVOKING_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Boolean IsInvoking(System.String methodName)
-        /// </summary>
-        /// public static bool IS_INVOKING_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.Boolean IsInvoking(UnityEngine.MonoBehaviour self, System.String methodName)
-        /// </summary>
-        /// public static bool IS_INVOKING_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking", "UnityEngine.MonoBehaviour", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void SetDirection(System.Single dirX, System.Single dirY)
-        /// </summary>
-        /// public static bool SET_DIRECTION_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "System.Single", "System.Single");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void SetDirection(CharacterAnimation.Direction dir)
-        /// </summary>
-        /// public static bool SET_DIRECTION_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "CharacterAnimation.Direction");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Coroutine StartCoroutine(System.String methodName)
-        /// </summary>
-        /// public static bool START_COROUTINE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Coroutine StartCoroutine(System.String methodName, System.Object value)
-        /// </summary>
-        /// public static bool START_COROUTINE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.String", "System.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   UnityEngine.Coroutine StartCoroutine(System.Collections.IEnumerator routine)
-        /// </summary>
-        /// public static bool START_COROUTINE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.Collections.IEnumerator");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void StopCoroutine(System.Collections.IEnumerator routine)
-        /// </summary>
-        /// public static bool STOP_COROUTINE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "System.Collections.IEnumerator");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void StopCoroutine(UnityEngine.Coroutine routine)
-        /// </summary>
-        /// public static bool STOP_COROUTINE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "UnityEngine.Coroutine");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Void StopCoroutine(System.String methodName)
-        /// </summary>
-        /// public static bool STOP_COROUTINE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "System.String");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.String ToString()
-        /// </summary>
-        /// public static bool TO_STRING_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ToString");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        /// static  System.String ToString(UnityEngine.Object obj)
-        /// </summary>
-        /// public static bool TO_STRING_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ToString", "UnityEngine.Object");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Boolean TryGetComponent(System.Type type, UnityEngine.Component& component)
-        /// </summary>
-        /// public static bool TRY_GET_COMPONENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "TryGetComponent", "System.Type", "UnityEngine.Component&");
-        ///     
-        ///  
-        /// 
-
-
-        /// <summary>
-        ///   System.Boolean TryGetComponent(T& component)
-        /// </summary>
-        /// public static bool TRY_GET_COMPONENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "TryGetComponent", "T&");
-        ///     
-        ///  
-        /// 
-        /// 
-        /// }
+        public static partial class Search_Character
+        {
+            /// 
+            ///     
+
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void .ctor()
+            /// </summary>
+            /// public static bool .CTOR_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies)
+            /// </summary>
+            /// public static bool ADD_EXP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Collections.Generic.List<BattleMonsterController>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void AddExp(System.Int32 count)
+            /// </summary>
+            public static bool ADD_EXP_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Int32");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void CancelInvoke()
+            /// </summary>
+            /// public static bool CANCEL_INVOKE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void CancelInvoke(System.String methodName)
+            /// </summary>
+            /// public static bool CANCEL_INVOKE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void CancelInvoke(UnityEngine.MonoBehaviour self, System.String methodName)
+            /// </summary>
+            /// public static bool CANCEL_INVOKE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "CancelInvoke", "UnityEngine.MonoBehaviour", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void Destroy(UnityEngine.Object obj, System.Single t)
+            /// </summary>
+            /// public static bool DESTROY_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Destroy", "UnityEngine.Object", "System.Single");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void Destroy(UnityEngine.Object obj)
+            /// </summary>
+            /// public static bool DESTROY_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Destroy", "UnityEngine.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void DestroyImmediate(UnityEngine.Object obj, System.Boolean allowDestroyingAssets)
+            /// </summary>
+            /// public static bool DESTROY_IMMEDIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyImmediate", "UnityEngine.Object", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void DestroyImmediate(UnityEngine.Object obj)
+            /// </summary>
+            /// public static bool DESTROY_IMMEDIATE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyImmediate", "UnityEngine.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void DestroyObject(UnityEngine.Object obj, System.Single t)
+            /// </summary>
+            /// public static bool DESTROY_OBJECT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyObject", "UnityEngine.Object", "System.Single");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Void DestroyObject(UnityEngine.Object obj)
+            /// </summary>
+            /// public static bool DESTROY_OBJECT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyObject", "UnityEngine.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void Equip(Equipment item)
+            /// </summary>
+            /// public static bool EQUIP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Equipment");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void Equip(MeleeWeapon item)
+            /// </summary>
+            /// public static bool EQUIP_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "MeleeWeapon");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void Equip(RangedWeapon item)
+            /// </summary>
+            /// public static bool EQUIP_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "RangedWeapon");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void Equip(Armor item)
+            /// </summary>
+            /// public static bool EQUIP_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Armor");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void Equip(Accessory item)
+            /// </summary>
+            /// public static bool EQUIP_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Accessory");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindAnyObjectByType()
+            /// </summary>
+            /// public static bool FIND_ANY_OBJECT_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindAnyObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// </summary>
+            /// public static bool FIND_ANY_OBJECT_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "UnityEngine.FindObjectsInactive");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindAnyObjectByType(System.Type type)
+            /// </summary>
+            /// public static bool FIND_ANY_OBJECT_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindAnyObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// </summary>
+            /// public static bool FIND_ANY_OBJECT_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindAnyObjectByType", "System.Type", "UnityEngine.FindObjectsInactive");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindFirstObjectByType()
+            /// </summary>
+            /// public static bool FIND_FIRST_OBJECT_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindFirstObjectByType(UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// </summary>
+            /// public static bool FIND_FIRST_OBJECT_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "UnityEngine.FindObjectsInactive");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindFirstObjectByType(System.Type type)
+            /// </summary>
+            /// public static bool FIND_FIRST_OBJECT_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindFirstObjectByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive)
+            /// </summary>
+            /// public static bool FIND_FIRST_OBJECT_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindFirstObjectByType", "System.Type", "UnityEngine.FindObjectsInactive");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindObjectOfType()
+            /// </summary>
+            /// public static bool FIND_OBJECT_OF_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T FindObjectOfType(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool FIND_OBJECT_OF_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindObjectOfType(System.Type type)
+            /// </summary>
+            /// public static bool FIND_OBJECT_OF_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object FindObjectOfType(System.Type type, System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool FIND_OBJECT_OF_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectOfType", "System.Type", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsSortMode sortMode)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_BY_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "System.Type", "UnityEngine.FindObjectsSortMode");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object[] FindObjectsByType(System.Type type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_BY_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "System.Type", "UnityEngine.FindObjectsInactive", "UnityEngine.FindObjectsSortMode");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T[] FindObjectsByType(UnityEngine.FindObjectsSortMode sortMode)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_BY_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "UnityEngine.FindObjectsSortMode");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T[] FindObjectsByType(UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_BY_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsByType", "UnityEngine.FindObjectsInactive", "UnityEngine.FindObjectsSortMode");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_OF_TYPE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object[] FindObjectsOfType(System.Type type, System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_OF_TYPE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Type", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T[] FindObjectsOfType()
+            /// </summary>
+            /// public static bool FIND_OBJECTS_OF_TYPE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T[] FindObjectsOfType(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool FIND_OBJECTS_OF_TYPE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "FindObjectsOfType", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component GetComponent(System.Type type)
+            /// </summary>
+            /// public static bool GET_COMPONENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponent", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T GetComponent()
+            /// </summary>
+            /// public static bool GET_COMPONENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponent");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component GetComponentInChildren(System.Type t, System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_CHILDREN_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Type", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component GetComponentInChildren(System.Type t)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_CHILDREN_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T GetComponentInChildren(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_CHILDREN_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T GetComponentInChildren()
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_CHILDREN_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInChildren");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component GetComponentInParent(System.Type t, System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_PARENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Type", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component GetComponentInParent(System.Type t)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_PARENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T GetComponentInParent(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_PARENT_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T GetComponentInParent()
+            /// </summary>
+            /// public static bool GET_COMPONENT_IN_PARENT_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentInParent");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component[] GetComponents(System.Type type)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void GetComponents(System.Type type, System.Collections.Generic.List<UnityEngine.Component> results)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Type", "System.Collections.Generic.List<UnityEngine.Component>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void GetComponents(System.Collections.Generic.List<T> results)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents", "System.Collections.Generic.List<T>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T[] GetComponents()
+            /// </summary>
+            /// public static bool GET_COMPONENTS_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponents");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component[] GetComponentsInChildren(System.Type t)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_CHILDREN_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T[] GetComponentsInChildren(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_CHILDREN_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void GetComponentsInChildren(System.Boolean includeInactive, System.Collections.Generic.List<T> result)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_CHILDREN_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Boolean", "System.Collections.Generic.List<T>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T[] GetComponentsInChildren()
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_CHILDREN_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void GetComponentsInChildren(System.Collections.Generic.List<T> results)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_CHILDREN_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInChildren", "System.Collections.Generic.List<T>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component[] GetComponentsInParent(System.Type t, System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_PARENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Type", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Component[] GetComponentsInParent(System.Type t)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_PARENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Type");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T[] GetComponentsInParent(System.Boolean includeInactive)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_PARENT_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void GetComponentsInParent(System.Boolean includeInactive, System.Collections.Generic.List<T> results)
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_PARENT_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent", "System.Boolean", "System.Collections.Generic.List<T>");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   T[] GetComponentsInParent()
+            /// </summary>
+            /// public static bool GET_COMPONENTS_IN_PARENT_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetComponentsInParent");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Single GetMagicAttackPower()
+            /// </summary>
+            /// public static bool GET_MAGIC_ATTACK_POWER_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Single GetMagicAttackPower(PersonaProgress persona)
+            /// </summary>
+            /// public static bool GET_MAGIC_ATTACK_POWER_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower", "PersonaProgress");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+            /// </summary>
+            /// public static bool INSTANTIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
+            /// </summary>
+            /// public static bool INSTANTIATE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Vector3", "UnityEngine.Quaternion", "UnityEngine.Transform");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original)
+            /// </summary>
+            /// public static bool INSTANTIATE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
+            /// </summary>
+            /// public static bool INSTANTIATE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace)
+            /// </summary>
+            /// public static bool INSTANTIATE_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T Instantiate(T original)
+            /// </summary>
+            /// public static bool INSTANTIATE_05 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+            /// </summary>
+            /// public static bool INSTANTIATE_06 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
+            /// </summary>
+            /// public static bool INSTANTIATE_07 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion", "UnityEngine.Transform");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T Instantiate(T original, UnityEngine.Transform parent)
+            /// </summary>
+            /// public static bool INSTANTIATE_08 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  T Instantiate(T original, UnityEngine.Transform parent, System.Boolean worldPositionStays)
+            /// </summary>
+            /// public static bool INSTANTIATE_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform", "System.Boolean");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Boolean IsInvoking()
+            /// </summary>
+            /// public static bool IS_INVOKING_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Boolean IsInvoking(System.String methodName)
+            /// </summary>
+            /// public static bool IS_INVOKING_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.Boolean IsInvoking(UnityEngine.MonoBehaviour self, System.String methodName)
+            /// </summary>
+            /// public static bool IS_INVOKING_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "IsInvoking", "UnityEngine.MonoBehaviour", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void SetDirection(System.Single dirX, System.Single dirY)
+            /// </summary>
+            /// public static bool SET_DIRECTION_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "System.Single", "System.Single");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void SetDirection(CharacterAnimation.Direction dir)
+            /// </summary>
+            /// public static bool SET_DIRECTION_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "CharacterAnimation.Direction");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Coroutine StartCoroutine(System.String methodName)
+            /// </summary>
+            /// public static bool START_COROUTINE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Coroutine StartCoroutine(System.String methodName, System.Object value)
+            /// </summary>
+            /// public static bool START_COROUTINE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.String", "System.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   UnityEngine.Coroutine StartCoroutine(System.Collections.IEnumerator routine)
+            /// </summary>
+            /// public static bool START_COROUTINE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StartCoroutine", "System.Collections.IEnumerator");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void StopCoroutine(System.Collections.IEnumerator routine)
+            /// </summary>
+            /// public static bool STOP_COROUTINE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "System.Collections.IEnumerator");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void StopCoroutine(UnityEngine.Coroutine routine)
+            /// </summary>
+            /// public static bool STOP_COROUTINE_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "UnityEngine.Coroutine");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Void StopCoroutine(System.String methodName)
+            /// </summary>
+            /// public static bool STOP_COROUTINE_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "StopCoroutine", "System.String");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.String ToString()
+            /// </summary>
+            /// public static bool TO_STRING_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ToString");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            /// static  System.String ToString(UnityEngine.Object obj)
+            /// </summary>
+            /// public static bool TO_STRING_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ToString", "UnityEngine.Object");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Boolean TryGetComponent(System.Type type, UnityEngine.Component& component)
+            /// </summary>
+            /// public static bool TRY_GET_COMPONENT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "TryGetComponent", "System.Type", "UnityEngine.Component&");
+            ///     
+            ///  
+            /// 
+
+
+            /// <summary>
+            ///   System.Boolean TryGetComponent(T& component)
+            /// </summary>
+            /// public static bool TRY_GET_COMPONENT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "TryGetComponent", "T&");
+            ///     
+            ///  
+            /// 
+            /// 
+        }
 
     }
 

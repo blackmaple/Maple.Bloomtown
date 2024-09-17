@@ -3,6 +3,7 @@ using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
@@ -70,7 +71,6 @@ namespace Maple.Bloomtown
 
 
         }
-
 
         public static GameCurrencyDisplayDTO[] GetListCurrencyDisplay(this BloomtownGameContext @this)
         {
@@ -1876,6 +1876,7 @@ namespace Maple.Bloomtown
             }
             return GameException.Throw<Character.Ptr_Character>($"Not Found:{uid}");
         }
+
         public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameEnvironment @this)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -1896,6 +1897,45 @@ namespace Maple.Bloomtown
                 }
             }
         }
+
+
+        static IEnumerable<GameSwitchDisplayDTO> GetCharacterAttributes(Character.Ptr_Character pCharacter)
+        {
+            BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel = pCharacter.PLAYER_MODEL;
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_HP), DisplayName = CONST_CURR_HP, ContentValue = pCharacter.CUR_HP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_HP), DisplayName = CONST_MAX_HP, ContentValue = pCharacter.GET_MAX_HP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_SP), DisplayName = CONST_CURR_SP, ContentValue = pCharacter.CUR_SP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_SP), DisplayName = CONST_MAX_SP, ContentValue = pCharacter.GET_MAX_SP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Lv), DisplayName = CONST_Lv, ContentValue = pCharacter.LEVEL.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Exp), DisplayName = CONST_Exp, ContentValue = pCharacter.LEVEL_EXP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaLv), DisplayName = CONST_PersonaLv, ContentValue = pCharacter.GET_PERSONA_LEVEL().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaExp), DisplayName = CONST_PersonaExp, ContentValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
+
+            var pPersonas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToArray();
+            int totalAgility = pPlayerModel.AGILITY_FROM_ITEMS;
+            int totalStrength = pPlayerModel.STRENGTH_FROM_ITEMS;
+            int totalEndurance = pPlayerModel.ENDURANCE_FROM_ITEMS;
+            int totalMagic = pPlayerModel.MAGIC_FROM_ITEMS;
+            int totalLuck = pPlayerModel.LUCK_FROM_ITEMS;
+            if (pPersonas.Length != 0)
+            {
+                totalAgility += pPersonas.Max(p => p.GET_AGILITY());
+                totalStrength += pPersonas.Max(p => p.GET_STRENGTH());
+                totalEndurance += pPersonas.Max(p => p.GET_ENDURANCE());
+                totalMagic += pPersonas.Max(p => p.GET_MAGIC());
+                totalLuck += pPersonas.Max(p => p.GET_LUCK());
+            }
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Agility), DisplayName = CONST_Agility, ContentValue = totalAgility.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Strength), DisplayName = CONST_Strength, ContentValue = totalStrength.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Endurance), DisplayName = CONST_Endurance, ContentValue = totalEndurance.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Magic), DisplayName = CONST_Magic, ContentValue = totalMagic.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+            yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Luck), DisplayName = CONST_Luck, ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
+
+        }
+
         public static GameCharacterStatusDTO GetCharacterStatus(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -1909,42 +1949,54 @@ namespace Maple.Bloomtown
                 CharacterAttributes = GetCharacterAttributes(pCharacter).ToArray(),
             };
 
-            static IEnumerable<GameSwitchDisplayDTO> GetCharacterAttributes(Character.Ptr_Character pCharacter)
+
+        }
+        public static GameCharacterStatusDTO UpdateCharacterStatus(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO)
+        {
+            var pPlayerData = @this.Ptr_PlayerData;
+
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
+
+            if (characterModifyDTO.ModifyObject == nameof(CONST_CURR_HP))
             {
-                BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel = pCharacter.PLAYER_MODEL;
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_HP), DisplayName = CONST_CURR_HP, ContentValue = pCharacter.CUR_HP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_HP), DisplayName = CONST_MAX_HP, ContentValue = pCharacter.GET_MAX_HP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_CURR_SP), DisplayName = CONST_CURR_SP, ContentValue = pCharacter.CUR_SP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_MAX_SP), DisplayName = CONST_MAX_SP, ContentValue = pCharacter.GET_MAX_SP().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Lv), DisplayName = CONST_Lv, ContentValue = pCharacter.LEVEL.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Exp), DisplayName = CONST_Exp, ContentValue = pCharacter.LEVEL_EXP.ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaLv), DisplayName = CONST_PersonaLv, ContentValue = pCharacter.GET_PERSONA_LEVEL().ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_PersonaExp), DisplayName = CONST_PersonaExp, ContentValue = pCharacter.GET_PERSONA_LEVEL_EXP().ToString(), UIType = (int)EnumGameSwitchUIType.TextEditor };
-
-                var pPersonas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToArray();
-                int totalAgility = pPlayerModel.AGILITY_FROM_ITEMS;
-                int totalStrength = pPlayerModel.STRENGTH_FROM_ITEMS;
-                int totalEndurance = pPlayerModel.ENDURANCE_FROM_ITEMS;
-                int totalMagic = pPlayerModel.MAGIC_FROM_ITEMS;
-                int totalLuck = pPlayerModel.LUCK_FROM_ITEMS;
-                if (pPersonas.Length != 0)
-                {
-                    totalAgility += pPersonas.Max(p => p.GET_AGILITY());
-                    totalStrength += pPersonas.Max(p => p.GET_STRENGTH());
-                    totalEndurance += pPersonas.Max(p => p.GET_ENDURANCE());
-                    totalMagic += pPersonas.Max(p => p.GET_MAGIC());
-                    totalLuck += pPersonas.Max(p => p.GET_LUCK());
-                }
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Agility), DisplayName = CONST_Agility, ContentValue = totalAgility.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Strength), DisplayName = CONST_Strength, ContentValue = totalStrength.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Endurance), DisplayName = CONST_Endurance, ContentValue = totalEndurance.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Magic), DisplayName = CONST_Magic, ContentValue = totalMagic.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-                yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Luck), DisplayName = CONST_Luck, ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
-
+                pCharacter.CUR_HP = characterModifyDTO.IntValue;
             }
+            else if (characterModifyDTO.ModifyObject == nameof(CONST_CURR_SP))
+            {
+                pCharacter.CUR_SP = characterModifyDTO.IntValue;
+            }
+            else if (characterModifyDTO.ModifyObject == nameof(CONST_Lv))
+            {
+                pCharacter.SET_LEVEL(characterModifyDTO.IntValue);
+            }
+            else if (characterModifyDTO.ModifyObject == nameof(CONST_Exp))
+            {
+                pCharacter.LEVEL_EXP = 0;
+                pCharacter.ADD_EXP_01(characterModifyDTO.IntValue);
+            }
+            else if (characterModifyDTO.ModifyObject == nameof(CONST_PersonaLv))
+            {
+                var lv = characterModifyDTO.IntValue;
+                foreach (var p in pCharacter.GET_AVAILABLE_PERSONAS())
+                {
+                    p.SET_LEVEL(lv);
+                }
+            }
+            else if (characterModifyDTO.ModifyObject == nameof(CONST_PersonaExp))
+            {
+                var exp = characterModifyDTO.IntValue;
+                foreach (var p in pCharacter.GET_AVAILABLE_PERSONAS())
+                {
+                    p.EXP = 0;
+                    p.ADD_EXP_01(exp);
+                }
+            }
+            return new GameCharacterStatusDTO()
+            {
+                ObjectId = characterModifyDTO.CharacterId,
+                CharacterAttributes = GetCharacterAttributes(pCharacter).ToArray(),
+            };
+
 
         }
         public static GameCharacterEquipmentDTO GetCharacterEquipment(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
@@ -2067,6 +2119,52 @@ namespace Maple.Bloomtown
 
             }
         }
+
+        static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
+        {
+            GameSkillInfoDTO[] skillInfoDTOs =
+            [
+               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+                ];
+
+            var index = 0;
+
+            foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
+            {
+                var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
+                if (cacheSkillInfo is null)
+                {
+                    break;
+                }
+                cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
+                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
+                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
+            }
+
+            return skillInfoDTOs;
+        }
+        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
+        {
+            foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
+            {
+                foreach (var skill in pPersonas.GET_SKILLS())
+                {
+                    var skillInfo = skill.SKILL_INFO;
+                    if (skillInfo.Valid())
+                    {
+                        yield return skillInfo;
+                    }
+                }
+            }
+
+        }
         public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -2078,51 +2176,90 @@ namespace Maple.Bloomtown
                 ObjectId = gameCharacter.CharacterId,
                 SkillInfos = GameSkillInfoDTO(pCharacter),
             };
-            static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
+
+        }
+        public static GameCharacterSkillDTO UpdateCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO)
+        {
+            var oldSkillId = characterModifyDTO.ModifyObject;
+            var removeOldSkill = !string.IsNullOrEmpty(oldSkillId);
+
+            var newSkillId = characterModifyDTO.NewValue;
+            var addNewSkill = !string.IsNullOrEmpty(newSkillId);
+            if (!removeOldSkill && !addNewSkill)
             {
-                GameSkillInfoDTO[] skillInfoDTOs =
-                [
-                   new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                ];
+                return GameException.Throw<GameCharacterSkillDTO>("ERROR ARGS");
+            }
 
-                var index = 0;
 
-                foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
+
+            var personas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToImmutableArray();
+            if (removeOldSkill)
+            {
+                foreach (var pPersonas in personas)
                 {
-                    var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
-                    if (cacheSkillInfo is null)
+                    if (TryGetSkill(pPersonas, oldSkillId, out var ptr_Skill))
                     {
+                        pPersonas.REMOVE_SKILL(ptr_Skill);
+                    }
+                }
+            }
+            if (addNewSkill && TryGetSkillInfo(pGameSettings, newSkillId, out var ptr_SkillInfo))
+            {
+                foreach (var pPersonas in personas)
+                {
+                    if (!TryGetSkill(pPersonas, newSkillId, out var _))
+                    {
+                        var newSkill = @this.Context.Skill.GCNew<Skill.Ptr_Skill>(false);
+                        newSkill.Target.CTOR_01(ptr_SkillInfo);
+
+                        pPersonas.LEVEL = pPersonas.GET_NEAREST_SKILL_LEVEL();
+                        pPersonas.ADD_SKILL(newSkill);
                         break;
                     }
-                    cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
-                    cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
-                    cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
                 }
-
-                return skillInfoDTOs;
             }
-            static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
+
+
+            return new GameCharacterSkillDTO()
             {
-                foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
+                ObjectId = characterModifyDTO.CharacterId,
+                SkillInfos = GameSkillInfoDTO(pCharacter),
+            };
+
+            static bool TryGetSkillInfo(GameSettings.Ptr_GameSettings pGameSettings, ReadOnlySpan<char> uid, out SkillInfo.Ptr_SkillInfo ptr_SkillInfo)
+            {
+                Unsafe.SkipInit(out ptr_SkillInfo);
+                foreach (var skillInfo in pGameSettings.SKILLS)
                 {
-                    foreach (var skill in pPersonas.GET_SKILLS())
+                    if (MemoryExtensions.SequenceEqual(skillInfo.UID.AsReadOnlySpan(), uid))
                     {
-                        var skillInfo = skill.SKILL_INFO;
-                        if (skillInfo.Valid())
+                        ptr_SkillInfo = skillInfo;
+                        return true;
+                    }
+                }
+                return default;
+            }
+            static bool TryGetSkill(PersonaProgress.Ptr_PersonaProgress personaProgress, ReadOnlySpan<char> uid, out Skill.Ptr_Skill ptr_Skill)
+            {
+                Unsafe.SkipInit(out ptr_Skill);
+                foreach (var skill in personaProgress.GET_SKILLS())
+                {
+                    var skillInfo = skill.SKILL_INFO;
+                    if (skillInfo.Valid())
+                    {
+                        if (MemoryExtensions.SequenceEqual(skillInfo.UID.AsReadOnlySpan(), uid))
                         {
-                            yield return skillInfo;
+                            ptr_Skill = skill;
+                            return true;
                         }
                     }
                 }
-
+                return default;
             }
+
         }
         public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {

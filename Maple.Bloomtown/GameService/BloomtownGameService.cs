@@ -194,10 +194,11 @@ namespace Maple.Bloomtown
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var data = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateInventoryInfo(args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
-            return data; 
+            return data;
         }
         #endregion
 
+        #region Character
 
         public sealed override async ValueTask<GameCharacterDisplayDTO[]> GetListCharacterDisplayAsync()
         {
@@ -212,6 +213,44 @@ namespace Maple.Bloomtown
             }
             return datas;
         }
+
+        public sealed override async ValueTask<GameCharacterStatusDTO> GetCharacterStatusAsync(GameCharacterObjectDTO characterObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCharacterStatus(args.characterObjectDTO), (gameEnvironment, characterObjectDTO)).ConfigureAwait(false);
+            return datas;
+        }
+        public sealed override async ValueTask<GameCharacterStatusDTO> UpdateCharacterStatusAsync(GameCharacterModifyDTO characterModifyDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateCharacterStatus(args.characterModifyDTO), (gameEnvironment, characterModifyDTO)).ConfigureAwait(false);
+            return datas;
+
+        }
+
+        public sealed override async ValueTask<GameCharacterSkillDTO> GetCharacterSkillAsync(GameCharacterObjectDTO characterObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCharacterSkill(args.characterObjectDTO), (gameEnvironment, characterObjectDTO)).ConfigureAwait(false);
+            return datas;
+        }
+        public sealed override async ValueTask<GameCharacterSkillDTO> UpdateCharacterSkillAsync(GameCharacterModifyDTO characterModifyDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateCharacterSkill(args.characterModifyDTO), (gameEnvironment, characterModifyDTO)).ConfigureAwait(false);
+            return datas;
+
+        }
+
+        public sealed override async ValueTask<GameCharacterEquipmentDTO> GetCharacterEquipmentAsync(GameCharacterObjectDTO characterObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCharacterEquipment(args.characterObjectDTO), (gameEnvironment, characterObjectDTO)).ConfigureAwait(false);
+            return datas;
+
+        }
+        #endregion
+
         public sealed override async ValueTask<GameMonsterDisplayDTO[]> GetListMonsterDisplayAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
