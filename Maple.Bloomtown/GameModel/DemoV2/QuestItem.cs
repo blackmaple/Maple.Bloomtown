@@ -10,8 +10,8 @@ using System.Threading.Tasks;
 
 namespace Maple.Bloomtown.GameModel.Demo
 {
-    
-    
+
+
     /// <summary>
     /// class ["Assembly-CSharp".""."QuestItem"]
     /// [Stackable]=>[Descriptable]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
@@ -45,12 +45,12 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
 
     // struct 0x48 System.Single price
-      [MonoCollectorSearchFieldAttribute(typeof(System.Single),"price", "PRICE")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Single), "price", "PRICE")]
 
     // class 0x50 UnityEngine.Sprite icon
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
     public partial class QuestItem
-    { 
+    {
         //public const string Const_ImageName = "Assembly-CSharp";
         //public static byte[] Static_ImageName { get; } = [65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112];
 
@@ -64,25 +64,25 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
 
-                    
+
         /// <summary>
         /// class System.String PathToResources ""
         /// </summary>
         /// public const nint PATH_TO_RESOURCES=>"";
-            
+
         /// <summary>
         /// class System.String objectIsNullMessage "The Object you want to instantiate is null."
         /// </summary>
         /// public const nint OBJECT_IS_NULL_MESSAGE=>"The Object you want to instantiate is null.";
-            
+
         /// <summary>
         /// class System.String cloneDestroyedMessage "Instantiate failed because the clone was destroyed during creati"
         /// </summary>
         /// public const nint CLONE_DESTROYED_MESSAGE=>"Instantiate failed because the clone was destroyed during creati";
-            
-        
 
-        
+
+
+
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
         public readonly unsafe partial struct Ptr_QuestItem(nint ptr)
         {
@@ -91,8 +91,8 @@ namespace Maple.Bloomtown.GameModel.Demo
             readonly nint _ptr = ptr;
             public static implicit operator Ptr_QuestItem(nint ptr) => new(ptr);
             public static implicit operator nint(Ptr_QuestItem obj) => obj._ptr;
-            public static implicit operator bool(Ptr_QuestItem obj)=> obj.Valid();
- 
+            public static implicit operator bool(Ptr_QuestItem obj) => obj.Valid();
+
             public override string ToString()
             {
                 return _ptr.ToString("X8");
@@ -107,11 +107,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
     }
 
-        /// <summary>
-        /// ["Assembly-CSharp".""."QuestItem"]
-        /// </summary>
-        public partial class QuestItem
-        {
+    /// <summary>
+    /// ["Assembly-CSharp".""."QuestItem"]
+    /// </summary>
+    public partial class QuestItem
+    {
 
 
 
@@ -128,8 +128,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="amount">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Add")]
-        ///  extern void ADD (System.Int32 amount);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Add")]
+        extern void ADD(System.Int32 amount);
 
 
         /// <summary>
@@ -290,8 +290,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Int32 get_count()
         /// </summary>
         /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_count")]
-        ///  extern System.Int32 GET_COUNT ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_count")]
+        extern System.Int32 GET_COUNT();
 
 
         /// <summary>
@@ -542,8 +542,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="value">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_count")]
-        ///  extern void SET_COUNT (System.Int32 value);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_count")]
+        extern void SET_COUNT(System.Int32 value);
 
 
         /// <summary>

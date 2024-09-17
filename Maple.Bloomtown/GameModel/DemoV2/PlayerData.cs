@@ -736,8 +736,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="book">class Book</param>
         /// <returns>class Book.BookData</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetBookData")]
-        ///  extern nint GET_BOOK_DATA (nint book);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetBookData")]
+        extern nint GET_BOOK_DATA(nint book);
 
 
         /// <summary>
@@ -1559,8 +1559,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="count">struct System.Int32</param>
         /// <param name="progress">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetBookData")]
-        ///  extern void SET_BOOK_DATA (nint book, System.Int32 count, System.Single progress);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetBookData")]
+        extern void SET_BOOK_DATA(nint book, System.Int32 count, System.Single progress);
 
 
         /// <summary>

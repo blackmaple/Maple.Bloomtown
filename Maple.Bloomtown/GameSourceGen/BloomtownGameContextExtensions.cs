@@ -28,10 +28,21 @@ namespace Maple.Bloomtown
 
         const string CONST_Tame = "怪兽*驯化";
         const string CONST_Steal = "怪兽*窃取";
-        const string CONST_SocialStat = "怪兽*社交";
+        const string CONST_MonsterSocialStat = "怪兽*社交";
+        const string CONST_SocialStat = "社交";
 
         const string CONST_SkillMinLv = "技能*MinLv";
         const string CONST_SkillMaxLv = "技能*MaxLv";
+        const float CONST_BookFullProgress = 1F;
+        const float CONST_BookSetProgress = 1F - 0.1F;
+        const float CONST_BookZeroProgress = 0F;
+        const int CONST_ITEM_ZERO = 0;
+        const string CONST_PRICE = "单价";
+        const string CONST_Day = "星期";
+        const string CONST_MONEY = "金币";
+        const string CONST_MINUTES = "耗时";
+        const string CONST_RARITY = "稀有";
+
 
         public static BloomtownGameEnvironment GetBloomtownGameEnvironment(this BloomtownGameContext @this) => new(@this);
 
@@ -68,7 +79,7 @@ namespace Maple.Bloomtown
                 new()
                 {
                     ObjectId = nameof(PlayerData.Ptr_PlayerData.MONEY),
-                    DisplayName =nameof(PlayerData.Ptr_PlayerData.MONEY),
+                    DisplayName =CONST_MONEY,
                     DisplayCategory = nameof(GameSettings),
                 },
                   new()
@@ -186,7 +197,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Accessory.Ptr_Accessory item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
 
                     var name = item.GET_GET_STAT1_NAME().ToString();
                     if (false == string.IsNullOrEmpty(name))
@@ -233,7 +244,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Armor.Ptr_Armor item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
 
                     var name = item.GET_GET_STAT1_NAME_00().ToString();
                     if (false == string.IsNullOrEmpty(name))
@@ -281,7 +292,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Book.Ptr_Book item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -304,7 +315,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, ConfidantGift.Ptr_ConfidantGift item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -327,7 +338,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Consumable.Ptr_Consumable item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -350,7 +361,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, CraftMaterial.Ptr_CraftMaterial item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -373,7 +384,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Fertilizer.Ptr_Fertilizer item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -399,7 +410,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, MeleeWeapon.Ptr_MeleeWeapon item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
 
                     var name = item.GET_GET_STAT1_NAME_00().ToString();
                     if (false == string.IsNullOrEmpty(name))
@@ -450,7 +461,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, QuestItem.Ptr_QuestItem item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -475,7 +486,7 @@ namespace Maple.Bloomtown
 
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, RangedWeapon.Ptr_RangedWeapon item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
 
                     var name = item.GET_GET_STAT1_NAME_00().ToString();
                     if (false == string.IsNullOrEmpty(name))
@@ -524,7 +535,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Recipe.Ptr_Recipe item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.MINUTES_TO_CRAFT), DisplayValue = item.MINUTES_TO_CRAFT.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_MINUTES, DisplayValue = item.MINUTES_TO_CRAFT.ToString("F2"), CanPreview = true };
                 }
 
             }
@@ -548,7 +559,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Seed.Ptr_Seed item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -571,7 +582,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Treasure.Ptr_Treasure item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -594,7 +605,7 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Vinyl.Ptr_Vinyl item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
                 }
             }
 
@@ -617,8 +628,8 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Movie.Ptr_Movie item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item._DAY_OF_WEEK), DisplayValue = item._DAY_OF_WEEK.ToString(), CanPreview = true };
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item._SOCIAL_STAT_REWARD), DisplayValue = item._SOCIAL_STAT_REWARD.ToString(), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_Day, DisplayValue = item._DAY_OF_WEEK.ToString(), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_SocialStat, DisplayValue = item._SOCIAL_STAT_REWARD.ToString(), CanPreview = true };
 
                 }
             }
@@ -642,8 +653,8 @@ namespace Maple.Bloomtown
                 }
                 static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Fish.Ptr_Fish item)
                 {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.PRICE), DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(item.RARITY), DisplayValue = item.RARITY.ToString(), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_RARITY, DisplayValue = item.RARITY.ToString(), CanPreview = true };
 
                 }
             }
@@ -651,7 +662,7 @@ namespace Maple.Bloomtown
         }
         public static GameInventoryInfoDTO GetInventoryInfo(this BloomtownGameEnvironment @this, GameInventoryObjectDTO gameInventory)
         {
-            var pPlayerData = @this.Ptr_PlayerData;
+            // var pPlayerData = @this.Ptr_PlayerData;
             var pGameSettings = @this.Ptr_GameSettings;
 
             //1.装饰品
@@ -670,7 +681,7 @@ namespace Maple.Bloomtown
                             {
                                 ObjectId = uid,
 
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(accessory).ToString(),
+                                DisplayValue = accessory.GET_COUNT().ToString(),
                             };
                         }
 
@@ -692,7 +703,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(armor).ToString(),
+                                DisplayValue = armor.GET_COUNT().ToString(),
 
                             };
                         }
@@ -736,7 +747,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(confidantGift).ToString(),
+                                DisplayValue = confidantGift.GET_COUNT().ToString(),
 
                             };
                         }
@@ -759,7 +770,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(consumable).ToString(),
+                                DisplayValue = consumable.GET_COUNT().ToString(),
 
                             };
                         }
@@ -781,7 +792,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(craftMaterial).ToString(),
+                                DisplayValue = craftMaterial.GET_COUNT().ToString(),
 
                             };
                         }
@@ -803,7 +814,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(fertilizer).ToString(),
+                                DisplayValue = fertilizer.GET_COUNT().ToString(),
 
                             };
                         }
@@ -826,7 +837,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(meleeWeapon).ToString(),
+                                DisplayValue = meleeWeapon.GET_COUNT().ToString(),
 
                             };
                         }
@@ -849,7 +860,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(questItem).ToString(),
+                                DisplayValue = questItem.GET_COUNT().ToString(),
 
                             };
                         }
@@ -875,7 +886,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(rangedWeapon).ToString(),
+                                DisplayValue = rangedWeapon.GET_COUNT().ToString(),
 
                             };
                         }
@@ -900,7 +911,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = recipe.GET_AVAILABLE().ToString()
+                                DisplayValue = (recipe.GET_AVAILABLE() ? 1 : 0).ToString()
                             };
                         }
 
@@ -922,7 +933,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(seed).ToString(),
+                                DisplayValue = seed.GET_COUNT().ToString(),
 
                             };
                         }
@@ -944,7 +955,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(treasure).ToString(),
+                                DisplayValue = treasure.GET_COUNT().ToString(),
 
                             };
                         }
@@ -956,18 +967,18 @@ namespace Maple.Bloomtown
             //e.唱片
             else if (gameInventory.InventoryCategory == nameof(Vinyl))
             {
-                var pListTreasures = pGameSettings.VINYLS;
-                if (pListTreasures.Valid())
+                var vinyls = pGameSettings.VINYLS;
+                if (vinyls.Valid())
                 {
-                    foreach (var treasure in pListTreasures)
+                    foreach (var vinyl in vinyls)
                     {
-                        var uid = treasure.UID.ToString()!;
+                        var uid = vinyl.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(treasure).ToString(),
+                                DisplayValue = vinyl.GET_COUNT().ToString(),
 
                             };
                         }
@@ -979,18 +990,18 @@ namespace Maple.Bloomtown
             //f.电影
             else if (gameInventory.InventoryCategory == nameof(Movie))
             {
-                var pListTreasures = pGameSettings.MOVIES;
-                if (pListTreasures.Valid())
+                var movies = pGameSettings.MOVIES;
+                if (movies.Valid())
                 {
-                    foreach (var treasure in pListTreasures)
+                    foreach (var movie in movies)
                     {
-                        var uid = treasure.UID.ToString()!;
+                        var uid = movie.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(treasure).ToString(),
+                                //   DisplayValue = ,
 
                             };
                         }
@@ -1002,18 +1013,18 @@ namespace Maple.Bloomtown
             //g.鱼
             else if (gameInventory.InventoryCategory == nameof(Fish))
             {
-                var pListTreasures = pGameSettings.FISHES;
-                if (pListTreasures.Valid())
+                var fishes = pGameSettings.FISHES;
+                if (fishes.Valid())
                 {
-                    foreach (var treasure in pListTreasures)
+                    foreach (var fish in fishes)
                     {
-                        var uid = treasure.UID.ToString()!;
+                        var uid = fish.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(treasure).ToString(),
+                                DisplayValue = fish.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1026,7 +1037,7 @@ namespace Maple.Bloomtown
         }
         public static GameInventoryInfoDTO UpdateInventoryInfo(this BloomtownGameEnvironment @this, GameInventoryModifyDTO gameInventory)
         {
-            var pPlayerData = @this.Ptr_PlayerData;
+            //  var pPlayerData = @this.Ptr_PlayerData;
             var pGameSettings = @this.Ptr_GameSettings;
 
             var count = gameInventory.InventoryCount;
@@ -1042,14 +1053,18 @@ namespace Maple.Bloomtown
                         if (uid == gameInventory.InventoryObject)
                         {
 
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(accessory, count);
+                            accessory.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                accessory.ADD_00(count);
+                            }
 
 
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
 
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(accessory).ToString(),
+                                DisplayValue = accessory.GET_COUNT().ToString(),
                             };
                         }
 
@@ -1068,14 +1083,19 @@ namespace Maple.Bloomtown
                         var uid = armor.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(armor, count);
+                            armor.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                armor.ADD_00(count);
+                            }
+
 
 
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
 
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(armor).ToString(),
+                                DisplayValue = armor.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1095,12 +1115,15 @@ namespace Maple.Bloomtown
                         var uid = book.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            if (float.TryParse(gameInventory.NewValue, out var progress))
+
+                            book.SET_PROGRESS(CONST_BookZeroProgress);
+                            book.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
                             {
-                                pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(book, 1);
-                                book.SET_PROGRESS(0);
-                                book.SET_PROGRESS(progress);
+                                book.SET_COUNT(1);
+                                book.SET_PROGRESS(CONST_BookSetProgress);
                             }
+
 
                             return new GameInventoryInfoDTO()
                             {
@@ -1123,12 +1146,21 @@ namespace Maple.Bloomtown
                         var uid = confidantGift.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(confidantGift, count);
+
+
+                            confidantGift.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                confidantGift.ADD(count);
+                            }
+
+
 
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(confidantGift).ToString(),
+
+                                DisplayValue = confidantGift.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1149,11 +1181,19 @@ namespace Maple.Bloomtown
 
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(consumable, count);
+                            consumable.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                consumable.ADD(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(consumable).ToString(),
+
+                                DisplayValue = consumable.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1172,11 +1212,19 @@ namespace Maple.Bloomtown
                         var uid = craftMaterial.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(craftMaterial, count);
+                            craftMaterial.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                craftMaterial.ADD(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(craftMaterial).ToString(),
+
+                                DisplayValue = craftMaterial.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1195,11 +1243,19 @@ namespace Maple.Bloomtown
                         var uid = fertilizer.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(fertilizer, count);
+                            fertilizer.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                fertilizer.ADD(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(fertilizer).ToString(),
+
+                                DisplayValue = fertilizer.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1219,12 +1275,19 @@ namespace Maple.Bloomtown
 
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(meleeWeapon, count);
+                            meleeWeapon.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                meleeWeapon.ADD_00(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
 
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(meleeWeapon).ToString(),
+                                DisplayValue = meleeWeapon.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1244,11 +1307,19 @@ namespace Maple.Bloomtown
                         var uid = questItem.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(questItem, count);
+                            questItem.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                questItem.ADD(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(questItem).ToString(),
+
+                                DisplayValue = questItem.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1271,12 +1342,19 @@ namespace Maple.Bloomtown
 
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(rangedWeapon, count);
+                            rangedWeapon.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                rangedWeapon.ADD_00(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
 
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(rangedWeapon).ToString(),
+                                DisplayValue = rangedWeapon.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1298,9 +1376,7 @@ namespace Maple.Bloomtown
                         var uid = recipe.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-
-
-                            if (bool.TryParse(gameInventory.NewValue, out var available) && available)
+                            if (count > 0)
                             {
                                 recipe.LEARN_RECIPE();
                             }
@@ -1312,7 +1388,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = recipe.GET_AVAILABLE().ToString()
+                                DisplayValue = (recipe.GET_AVAILABLE() ? 1 : 0).ToString()
                             };
                         }
 
@@ -1333,11 +1409,19 @@ namespace Maple.Bloomtown
                         var uid = seed.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(seed, count);
+                            seed.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                seed.ADD(count);
+                            }
+
+
+
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(seed).ToString(),
+
+                                DisplayValue = seed.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1356,11 +1440,16 @@ namespace Maple.Bloomtown
                         var uid = treasure.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(treasure, count);
+                            treasure.SET_COUNT(CONST_ITEM_ZERO);
+                            if (count > 0)
+                            {
+                                treasure.ADD(count);
+                            }
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(treasure).ToString(),
+
+                                DisplayValue = treasure.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1380,11 +1469,17 @@ namespace Maple.Bloomtown
                         var uid = vinyl.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(vinyl, count);
+                            vinyl.SET_COUNT(CONST_ITEM_ZERO);
+                            vinyl.SET_SHOWED(false);
+                            if (count > 0)
+                            {
+                                vinyl.ADD_00(1);
+                                vinyl.SET_SHOWED(true);
+                            }
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(vinyl).ToString(),
+                                DisplayValue = vinyl.GET_COUNT().ToString(),
 
                             };
                         }
@@ -1428,13 +1523,20 @@ namespace Maple.Bloomtown
                         var uid = fish.UID.ToString()!;
                         if (uid == gameInventory.InventoryObject)
                         {
-                            pPlayerData.SET_ITEM_IN_INVENTORY_COUNT(fish, count);
+                            fish.SET_COUNT(CONST_ITEM_ZERO);
+                            fish.SET_SHOWED(false);
+                            if (count > 0)
+                            {
+                                fish.ADD_00(1);
+                                fish.SET_SHOWED(true);
+                            }
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = pPlayerData.GET_ITEM_IN_INVENTORY_COUNT(fish).ToString(),
+                                DisplayValue = fish.GET_COUNT().ToString(),
 
                             };
+
                         }
 
                     }
@@ -2073,10 +2175,10 @@ namespace Maple.Bloomtown
                 var tameStat = monsterModel.TAME_STAT.ToString();
                 GameValueInfoDTO[] atts =
                 [
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "LV",DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "HP",DisplayValue = monsterModel.MAX_HP.ToString()   ,CanPreview=true},
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "SP",DisplayValue = monsterModel.MAX_SP.ToString()  ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "EXP",DisplayValue = monsterModel.EXP.ToString()  ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Lv,DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_MAX_HP,DisplayValue = monsterModel.MAX_HP.ToString()   ,CanPreview=true},
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_MAX_SP,DisplayValue = monsterModel.MAX_SP.ToString()  ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Exp,DisplayValue = monsterModel.EXP.ToString()  ,CanPreview=true },
 
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString()  },
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString()  },
@@ -2084,9 +2186,9 @@ namespace Maple.Bloomtown
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString()  },
                         //new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  },
 
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName =tameStat ,DisplayValue = tameStat ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Tame",DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Steal",DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName =CONST_MonsterSocialStat ,DisplayValue = tameStat ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Tame,DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Steal,DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
 
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ROLE_NAME().ToString(),DisplayValue = monsterModel.MonsterRole.ToString()  },
                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ELEMENT_NAME().ToString(),DisplayValue = monsterModel.Element.ToString()  },

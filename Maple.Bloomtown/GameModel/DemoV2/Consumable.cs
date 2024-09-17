@@ -30,10 +30,10 @@ namespace Maple.Bloomtown.GameModel.Demo
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "uid", "UID")]
 
     // class 0x20 LocalizationManager.LocalizedField itemName
-      [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField),"itemName", "ITEM_NAME")]
+    [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "itemName", "ITEM_NAME")]
 
     // class 0x28 LocalizationManager.LocalizedField description
-      [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField),"description", "DESCRIPTION")]
+    [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "description", "DESCRIPTION")]
 
     // class 0x30 System.String nameUid
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
@@ -45,7 +45,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
 
     // struct 0x48 System.Single price
-      [MonoCollectorSearchFieldAttribute(typeof(System.Single),"price", "PRICE")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Single), "price", "PRICE")]
 
     // class 0x50 UnityEngine.Sprite icon
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
@@ -137,8 +137,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="amount">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Add")]
-        ///  extern void ADD (System.Int32 amount);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Add")]
+        extern void ADD(System.Int32 amount);
 
 
         /// <summary>
@@ -316,8 +316,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Int32 get_count()
         /// </summary>
         /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_count")]
-        ///  extern System.Int32 GET_COUNT ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_count")]
+        extern System.Int32 GET_COUNT();
 
 
         /// <summary>
@@ -576,8 +576,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="value">struct System.Int32</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_count")]
-        ///  extern void SET_COUNT (System.Int32 value);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("set_count")]
+        extern void SET_COUNT(System.Int32 value);
 
 
         /// <summary>

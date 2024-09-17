@@ -23,7 +23,7 @@ namespace Maple.Bloomtown
         protected sealed override BloomtownGameContext LoadGameContext()
             => BloomtownGameContext.LoadGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.APP, this.Logger);
         protected sealed override UnityEngineContext LoadUnityEngineContext()
-            =>  new UnityEngineContext_Bloomtown(this.RuntimeContext, this.Logger);
+            => new UnityEngineContext_Bloomtown(this.RuntimeContext, this.Logger);
 
         protected sealed override GameSwitchDisplayDTO[] InitListGameSwitch()
         {
@@ -97,27 +97,33 @@ namespace Maple.Bloomtown
 
         #region  WebApi
 
-        private Task<BloomtownGameEnvironment> GetBloomtownGameEnvironmentAsync()
+        #region GameEnvironment
+
+        private Task<BloomtownGameEnvironment> GetGameEnvironmentAsync()
         {
             return this.MonoTaskAsync(context => context.GetBloomtownGameEnvironment());
         }
-        private async Task<BloomtownGameEnvironment> GetBloomtownGameEnvironmentThrowIfNotInGameAsync()
+        private async Task<BloomtownGameEnvironment> GetGameEnvironmentThrowIfNotInGameAsync()
         {
-            BloomtownGameEnvironment gameEnvironment = await GetBloomtownGameEnvironmentAsync().ConfigureAwait(false);
+            BloomtownGameEnvironment gameEnvironment = await GetGameEnvironmentAsync().ConfigureAwait(false);
             if (gameEnvironment.InGame())
             {
                 return gameEnvironment;
             }
             return GameException.ThrowIfNotLoaded<BloomtownGameEnvironment>();
         }
+        #endregion
 
+
+
+        #region LoadResourceAsync
         public sealed override async ValueTask<GameSessionInfoDTO> LoadResourceAsync()
         {
             if (this.UnityEngineContext is null)
             {
                 return GameException.Throw<GameSessionInfoDTO>($"NOT LOADED:{nameof(Maple.MonoGameAssistant.UnityCore.UnityEngine.UnityEngineContext)}");
             }
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var taskGameSettingsIcon = this.UITaskAsync((_, args) => args.gameEnvironment.GetListGameSettingsIcon(args.UnityEngineContext).ToArray(), (gameEnvironment, this.UnityEngineContext)).AsTask();
             var taskListCharacterIcon = this.UITaskAsync((_, args) => args.gameEnvironment.GetListCharacterIcon(args.UnityEngineContext).ToArray(), (gameEnvironment, this.UnityEngineContext)).AsTask();
             var taskListInventoryIcon = this.UITaskAsync((_, args) => args.gameEnvironment.GetListInventoryIcon(args.UnityEngineContext).ToArray(), (gameEnvironment, this.UnityEngineContext)).AsTask();
@@ -132,7 +138,9 @@ namespace Maple.Bloomtown
             }
             return await this.GetSessionInfoAsync().ConfigureAwait(false);
         }
+        #endregion
 
+        #region Currency
         public sealed override async ValueTask<GameCurrencyDisplayDTO[]> GetListCurrencyDisplayAsync()
         {
             var datas = await this.MonoTaskAsync(static (context) => context.GetListCurrencyDisplay()).ConfigureAwait(false);
@@ -147,21 +155,53 @@ namespace Maple.Bloomtown
         }
         public sealed override async ValueTask<GameCurrencyInfoDTO> GetCurrencyInfoAsync(GameCurrencyObjectDTO currencyObjectDTO)
         {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var data = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCurrencyInfo(args.currencyObjectDTO), (gameEnvironment, currencyObjectDTO)).ConfigureAwait(false);
             return data;
         }
         public sealed override async ValueTask<GameCurrencyInfoDTO> UpdateCurrencyInfoAsync(GameCurrencyModifyDTO currencyModifyDTO)
         {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var data = await this.MonoTaskAsync(static (context, args) => args.gameEnvironment.UpdateCurrencyInfo(args.currencyModifyDTO), (gameEnvironment, currencyModifyDTO)).ConfigureAwait(false);
             return data;
         }
+        #endregion
+
+        #region Inventory
+
+        public sealed override async ValueTask<GameInventoryDisplayDTO[]> GetListInventoryDisplayAsync()
+        {
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListInventoryDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
+            foreach (var data in datas)
+            {
+                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, $"{data.ObjectId}.png", out var url))
+                {
+                    data.DisplayImage = url;
+                }
+            }
+            return datas;
+
+
+        }
+        public sealed override async ValueTask<GameInventoryInfoDTO> GetInventoryInfoAsync(GameInventoryObjectDTO inventoryObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var data = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetInventoryInfo(args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
+            return data;
+        }
+        public sealed override async ValueTask<GameInventoryInfoDTO> UpdateInventoryInfoAsync(GameInventoryModifyDTO inventoryObjectDTO)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+            var data = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateInventoryInfo(args.inventoryObjectDTO), (gameEnvironment, inventoryObjectDTO)).ConfigureAwait(false);
+            return data; 
+        }
+        #endregion
 
 
         public sealed override async ValueTask<GameCharacterDisplayDTO[]> GetListCharacterDisplayAsync()
         {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListCharacterDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
             foreach (var data in datas)
             {
@@ -172,24 +212,9 @@ namespace Maple.Bloomtown
             }
             return datas;
         }
-        public sealed override async ValueTask<GameInventoryDisplayDTO[]> GetListInventoryDisplayAsync()
-        {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentAsync().ConfigureAwait(false);
-            var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListInventoryDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
-             foreach (var data in datas)
-            {
-                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, $"{data.ObjectId}.png", out var url))
-                {
-                    data.DisplayImage = url;
-                }
-            }
-            return datas;
-
-
-        }
         public sealed override async ValueTask<GameMonsterDisplayDTO[]> GetListMonsterDisplayAsync()
         {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListMonsterDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
             foreach (var data in datas)
             {
@@ -203,7 +228,7 @@ namespace Maple.Bloomtown
         }
         public sealed override async ValueTask<GameSkillDisplayDTO[]> GetListSkillDisplayAsync()
         {
-            var gameEnvironment = await this.GetBloomtownGameEnvironmentAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListSkillDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
             foreach (var data in datas)
             {
@@ -240,19 +265,6 @@ namespace Maple.Bloomtown
 
 
 
-        //public sealed override async ValueTask<GameInventoryInfoDTO> GetInventoryInfoAsync(GameInventoryObjectDTO inventoryObjectDTO)
-        //{
-        //    var playerData = await this.GetGamePlayerDataAsync().ConfigureAwait(false);
-        //    var data = await this.MonoTaskAsync(static (context, args) => context.GetInventoryInfo(args.playerData, args.inventoryObjectDTO), (playerData, inventoryObjectDTO)).ConfigureAwait(false);
-        //    return data;
-
-        //}
-        //public sealed override async ValueTask<GameInventoryInfoDTO> UpdateInventoryInfoAsync(GameInventoryModifyDTO inventoryObjectDTO)
-        //{
-        //    var playerData = await this.GetGamePlayerDataAsync().ConfigureAwait(false);
-        //    var data = await this.MonoTaskAsync(static (context, args) => context.UpdateInventoryInfo(args.playerData, args.inventoryObjectDTO), (playerData, inventoryObjectDTO)).ConfigureAwait(false);
-        //    return data;
-        //}
 
 
 
