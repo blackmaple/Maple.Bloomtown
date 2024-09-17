@@ -22,7 +22,7 @@
 		<EventSourceSupport>false</EventSourceSupport>
 		<InvariantGlobalization>true</InvariantGlobalization>
 		<MetadataUpdaterSupport>false</MetadataUpdaterSupport>
-		<StackTraceSupport>false</StackTraceSupport>
+		<!--<StackTraceSupport>false</StackTraceSupport>-->
 		<UseSystemResourceKeys>true</UseSystemResourceKeys>
 
 

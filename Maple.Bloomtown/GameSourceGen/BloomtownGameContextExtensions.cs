@@ -43,8 +43,8 @@ namespace Maple.Bloomtown
         const string CONST_MONEY = "金币";
         const string CONST_MINUTES = "耗时";
         const string CONST_RARITY = "稀有";
-
-
+        const string CONST_MONSTERROLE = "怪兽*角色";
+        const string CONST_PassiveEffect = "被动";
         public static BloomtownGameEnvironment GetBloomtownGameEnvironment(this BloomtownGameContext @this) => new(@this);
 
         public static IEnumerable<UnitySpriteImageData> GetListGameSettingsIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
@@ -220,7 +220,7 @@ namespace Maple.Bloomtown
                     var pPassive = item.GET_PASSIVE();
                     if (pPassive.Valid())
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(PassiveEffect), DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
                     }
                 }
             }
@@ -267,7 +267,7 @@ namespace Maple.Bloomtown
                     var pPassive = item.GET_PASSIVE();
                     if (pPassive.Valid())
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(PassiveEffect), DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
                     }
                 }
 
@@ -433,7 +433,7 @@ namespace Maple.Bloomtown
                     var pPassive = item.GET_PASSIVE();
                     if (pPassive.Valid())
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(PassiveEffect), DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
                     }
                 }
 
@@ -509,7 +509,7 @@ namespace Maple.Bloomtown
                     var pPassive = item.GET_PASSIVE();
                     if (pPassive.Valid())
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = nameof(PassiveEffect), DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
                     }
                 }
 
@@ -726,7 +726,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = book.GET_PROGRESS().ToString("F2"),
+                                DisplayValue = book.GET_COUNT().ToString(),
                             };
                         }
                     }
@@ -1128,7 +1128,7 @@ namespace Maple.Bloomtown
                             return new GameInventoryInfoDTO()
                             {
                                 ObjectId = uid,
-                                DisplayValue = book.GET_PROGRESS().ToString("F2"),
+                                DisplayValue = book.GET_COUNT().ToString(),
                             };
                         }
                     }
@@ -2124,14 +2124,14 @@ namespace Maple.Bloomtown
         {
             GameSkillInfoDTO[] skillInfoDTOs =
             [
-               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
-                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) },
+               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
                 ];
 
             var index = 0;
@@ -2291,7 +2291,7 @@ namespace Maple.Bloomtown
             {
                 foreach (var monsterModel in pListMonsterModels)
                 {
-                    yield return GetMonsterInfo(monsterModel, nameof(BattleMonsterModel));
+                    yield return GetMonsterInfo(monsterModel);
 
                 }
             }
@@ -2301,12 +2301,12 @@ namespace Maple.Bloomtown
             {
                 foreach (var monsterModel in pListPersonaModels)
                 {
-                    yield return GetMonsterInfo(monsterModel, nameof(PersonaProgress));
+                    yield return GetPersonaInfo(monsterModel);
 
                 }
             }
 
-            static GameMonsterDisplayDTO GetMonsterInfo(BattleMonsterModel.Ptr_BattleMonsterModel monsterModel, string displayCategory)
+            static GameMonsterDisplayDTO GetMonsterInfo(BattleMonsterModel.Ptr_BattleMonsterModel monsterModel)
             {
                 var uid = monsterModel.UID.ToString()!;
                 var tameStat = monsterModel.TAME_STAT.ToString();
@@ -2317,18 +2317,8 @@ namespace Maple.Bloomtown
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_MAX_SP,DisplayValue = monsterModel.MAX_SP.ToString()  ,CanPreview=true },
                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Exp,DisplayValue = monsterModel.EXP.ToString()  ,CanPreview=true },
 
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Strength",DisplayValue = monsterModel.RAW_STRENGTH.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Magic",DisplayValue = monsterModel.RAW_MAGIC.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Endurance",DisplayValue = monsterModel.RAW_ENDURANCE.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = "Agility",DisplayValue = monsterModel.RAW_AGILITY.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId =uid, DisplayName = "Luck",DisplayValue = monsterModel.RAW_LUCK.ToString()  },
 
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName =CONST_MonsterSocialStat ,DisplayValue = tameStat ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Tame,DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
-                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Steal,DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
-
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ROLE_NAME().ToString(),DisplayValue = monsterModel.MonsterRole.ToString()  },
-                        //new GameValueInfoDTO{ ObjectId = uid, DisplayName = monsterModel.GET_ELEMENT_NAME().ToString(),DisplayValue = monsterModel.Element.ToString()  },
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_MONSTERROLE,DisplayValue = monsterModel.MONSTER_ROLE.ToString(),CanPreview=true  },
                     ];
 
                 var skills = GetSkillInfos(monsterModel.SKILLS).ToArray();
@@ -2337,12 +2327,44 @@ namespace Maple.Bloomtown
                 {
                     ObjectId = uid,
                     DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
-                    DisplayCategory = displayCategory,
+                    DisplayCategory = nameof(BattleMonsterModel),
                     MonsterAttributes = atts,
                     SkillInfos = skills,
 
                 };
             }
+            static GameMonsterDisplayDTO GetPersonaInfo(BattleMonsterModel.Ptr_BattleMonsterModel monsterModel)
+            {
+                var uid = monsterModel.UID.ToString()!;
+                var tameStat = monsterModel.TAME_STAT.ToString();
+                GameValueInfoDTO[] atts =
+                [
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Lv,DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Strength,DisplayValue = monsterModel.RAW_STRENGTH.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Magic,DisplayValue = monsterModel.RAW_MAGIC.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Endurance,DisplayValue = monsterModel.RAW_ENDURANCE.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Agility,DisplayValue = monsterModel.RAW_AGILITY.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId =uid, DisplayName = CONST_Luck,DisplayValue = monsterModel.RAW_LUCK.ToString() ,CanPreview=true },
+
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName =CONST_MonsterSocialStat ,DisplayValue = tameStat ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Tame,DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Steal,DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
+
+                    ];
+
+                var skills = GetSkillInfos(monsterModel.SKILLS).ToArray();
+
+                return new GameMonsterDisplayDTO()
+                {
+                    ObjectId = uid,
+                    DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                    DisplayCategory = nameof(PersonaProgress),
+                    MonsterAttributes = atts,
+                    SkillInfos = skills,
+
+                };
+            }
+
 
             static IEnumerable<GameSkillInfoDTO> GetSkillInfos(PMonoList_S<Skill.Ptr_Skill> pListSkills)
             {

@@ -74,10 +74,10 @@ namespace Maple.Bloomtown.GameModel.Demo
       [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"exp", "EXP")]
 
     // enum 0x74 MonsterPersonality monsterType
-    // [MonoCollectorSearchFieldAttribute(typeof(MonsterPersonality),"monsterType", "MONSTER_TYPE")]
+     [MonoCollectorSearchFieldAttribute(typeof(MonsterPersonality),"monsterType", "MONSTER_TYPE")]
 
     // enum 0x78 MonsterRole monsterRole
-    // [MonoCollectorSearchFieldAttribute(typeof(MonsterRole),"monsterRole", "MONSTER_ROLE")]
+     [MonoCollectorSearchFieldAttribute(typeof(MonsterRole),"monsterRole", "MONSTER_ROLE")]
 
     // enum 0x7C SocialStat.SocialStatType tameStat
       [MonoCollectorSearchFieldAttribute(typeof(SocialStat.SocialStatType),"tameStat", "TAME_STAT")]
