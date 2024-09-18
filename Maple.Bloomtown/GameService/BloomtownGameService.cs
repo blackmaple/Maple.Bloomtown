@@ -8,6 +8,7 @@ using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace Maple.Bloomtown
@@ -97,7 +98,13 @@ namespace Maple.Bloomtown
 
         #region  WebApi
 
+        public required ListGeneric ListPersonaProgress { get; set; }
+
         #region GameEnvironment
+        protected sealed override async ValueTask LoadGameDataAsync()
+        {
+            this.ListPersonaProgress = await this.MonoTaskAsync(p => p.GetListPersonaProgress()).ConfigureAwait(false) ?? throw new GameException("ERR LoadGameDataAsync");
+        }
 
         private Task<BloomtownGameEnvironment> GetGameEnvironmentAsync()
         {
@@ -113,8 +120,6 @@ namespace Maple.Bloomtown
             return GameException.ThrowIfNotLoaded<BloomtownGameEnvironment>();
         }
         #endregion
-
-
 
         #region LoadResourceAsync
         public sealed override async ValueTask<GameSessionInfoDTO> LoadResourceAsync()
@@ -251,6 +256,8 @@ namespace Maple.Bloomtown
         }
         #endregion
 
+        #region Monster
+
         public sealed override async ValueTask<GameMonsterDisplayDTO[]> GetListMonsterDisplayAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
@@ -265,6 +272,26 @@ namespace Maple.Bloomtown
             return datas;
 
         }
+
+
+        public sealed override ValueTask<GameCharacterSkillDTO> AddMonsterMemberAsync(GameMonsterObjectDTO monsterObjectDTO)
+        {
+            //var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+            //var datas = await this.MonoTaskAsync(static (_, gameEnvironment) => gameEnvironment.GetListMonsterDisplay().ToArray(), gameEnvironment).ConfigureAwait(false);
+            //foreach (var data in datas)
+            //{
+            //    if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, $"{data.ObjectId}.png", out var url))
+            //    {
+            //        data.DisplayImage = url;
+            //    }
+            //}
+            //return datas;
+        }
+        #endregion
+
+
+        #region Skill
+
         public sealed override async ValueTask<GameSkillDisplayDTO[]> GetListSkillDisplayAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
@@ -280,43 +307,7 @@ namespace Maple.Bloomtown
 
         }
 
-        //public sealed override async ValueTask<GameCharacterStatusDTO> GetCharacterStatusAsync(GameCharacterObjectDTO characterObjectDTO)
-        //{
-        //    var playerData = await this.GetGamePlayerDataAsync().ConfigureAwait(false);
-        //    var data = await this.MonoTaskAsync(static (context, args) => context.GetCharacterStatus(args.playerData, args.characterObjectDTO), (playerData, characterObjectDTO)).ConfigureAwait(false);
-        //    return data;
-        //}
-        //public sealed override async ValueTask<GameCharacterEquipmentDTO> GetCharacterEquipmentAsync(GameCharacterObjectDTO characterObjectDTO)
-        //{
-        //    var playerData = await this.GetGamePlayerDataAsync().ConfigureAwait(false);
-        //    var data = await this.MonoTaskAsync(static (context, args) => context.GetCharacterEquipment(args.playerData, args.characterObjectDTO), (playerData, characterObjectDTO)).ConfigureAwait(false);
-        //    return data;
-        //}
-        //public sealed override async ValueTask<GameCharacterSkillDTO> GetCharacterSkillAsync(GameCharacterObjectDTO characterObjectDTO)
-        //{
-        //    var playerData = await this.GetGamePlayerDataAsync().ConfigureAwait(false);
-        //    var data = await this.MonoTaskAsync(static (context, args) => context.GetCharacterSkill(args.playerData, args.characterObjectDTO), (playerData, characterObjectDTO)).ConfigureAwait(false);
-        //    return data;
-        //}
-
-
-
-
-
-
-
-
-
-
-        ////public sealed override ValueTask<GameSwitchDisplayDTO[]> GetListSwitchDisplayAsync()
-        ////{
-
-        ////}
-
-        //public sealed override ValueTask<GameSwitchDisplayDTO> UpdateSwitchDisplayAsync(GameSwitchModifyDTO gameSwitchModify)
-        //=> GameException.Throw<ValueTask<GameSwitchDisplayDTO>>("NotImplemented");
-
-
+        #endregion
 
         #endregion
 

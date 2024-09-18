@@ -376,8 +376,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="monsterModel">class BattleMonsterModel</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_PersonaProgress))]
-        ///  extern void .CTOR_01 (nint monsterModel);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_PersonaProgress))]
+        extern void CTOR_01(nint monsterModel);
 
 
         /// <summary>
@@ -426,8 +426,8 @@ namespace Maple.Bloomtown.GameModel.Demo
             /// <summary>
             ///   System.Void .ctor(BattleMonsterModel monsterModel)
             /// </summary>
-            /// public static bool .CTOR_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "BattleMonsterModel");
+            public static bool CTOR_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor", "BattleMonsterModel");
             ///     
             ///  
             /// 

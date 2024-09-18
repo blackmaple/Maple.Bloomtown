@@ -1,11 +1,13 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
+using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Maple.Bloomtown
 {
@@ -45,6 +47,19 @@ namespace Maple.Bloomtown
         const string CONST_RARITY = "稀有";
         const string CONST_MONSTERROLE = "怪兽*角色";
         const string CONST_PassiveEffect = "被动";
+
+
+        public static ListGeneric? GetListPersonaProgress(this BloomtownGameContext @this)
+        {
+            var fieldInfo = @this.PlayerData.ClassInfo.FieldInfos.Find(p => MemoryExtensions.SequenceEqual(p.Name.AsSpan(), "personasCaught"));
+            if (fieldInfo is not null)
+            {
+                var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(fieldInfo.FieldType.Pointer);
+                return new ListGeneric(@this, classInfo);
+            }
+            return default;
+        }
+
         public static BloomtownGameEnvironment GetBloomtownGameEnvironment(this BloomtownGameContext @this) => new(@this);
 
         public static IEnumerable<UnitySpriteImageData> GetListGameSettingsIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
@@ -71,7 +86,430 @@ namespace Maple.Bloomtown
 
 
         }
+        public static IEnumerable<UnitySpriteImageData> GetListInventoryIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
+        {
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pGameSettings = @this.Ptr_GameSettings;
 
+            //1.装饰品
+            var pListAccessories = pGameSettings.ACCESSORIES;
+            if (pListAccessories.Valid())
+            {
+                //null
+                foreach (var accessory in pListAccessories)
+                {
+                    var pIcon = accessory.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Accessory), Name = accessory.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //2.盔甲
+            var pListArmor = pGameSettings.ARMORS;
+            if (pListArmor.Valid())
+            {
+                //getIcon
+                foreach (var armor in pListArmor)
+                {
+                    var pIcon = armor.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Armor), Name = armor.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //3.书籍
+            var pListBooks = pGameSettings.BOOKS;
+            if (pListBooks.Valid())
+            {
+                //bookIcon
+                foreach (var book in pListBooks)
+                {
+                    var pIcon = book.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Book), Name = book.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //4.礼物
+            var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
+            if (pListConfidantGifts.Valid())
+            {
+                //giftIcon
+                foreach (var confidantGift in pListConfidantGifts)
+                {
+                    var pIcon = confidantGift.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(ConfidantGift), Name = confidantGift.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //5.消耗品
+            var pListConsumables = pGameSettings.CONSUMABLES;
+            if (pListConsumables.Valid())
+            {
+                //GetIcon
+                foreach (var consumable in pListConsumables)
+                {
+                    var pIcon = consumable.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Consumable), Name = consumable.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //6.材料
+            var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
+            if (pListCraftMaterials.Valid())
+            {
+                //GetIcon()
+                foreach (var craftMaterial in pListCraftMaterials)
+                {
+                    var pIcon = craftMaterial.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(CraftMaterial), Name = craftMaterial.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //7.肥料
+            var pListFertilizers = pGameSettings.FERTILIZERS;
+            if (pListFertilizers.Valid())
+            {
+                //GetIcon()
+                foreach (var fertilizer in pListFertilizers)
+                {
+                    var pIcon = fertilizer.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Fertilizer), Name = fertilizer.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //8.近战武器
+            var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
+            if (pListMeleeWeapons.Valid())
+            {
+                //GetIcon()
+                foreach (var meleeWeapon in pListMeleeWeapons)
+                {
+
+                    var pIcon = meleeWeapon.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(MeleeWeapon), Name = meleeWeapon.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //9.任务道具
+            var pListQuestItems = pGameSettings.QUEST_ITEMS;
+            if (pListQuestItems.Valid())
+            {
+                //GetIcon()
+                foreach (var questItem in pListQuestItems)
+                {
+                    var pIcon = questItem.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(QuestItem), Name = questItem.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //a.远程武器
+            var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
+            if (pListRangedWeapons.Valid())
+            {
+                //GetIcon()
+                foreach (var rangedWeapon in pListRangedWeapons)
+                {
+                    var pIcon = rangedWeapon.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(RangedWeapon), Name = rangedWeapon.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //b.食谱
+            var pListRecipes = pGameSettings.RECIPES;
+            if (pListRecipes.Valid())
+            {
+                //GetIcon()
+                foreach (var recipe in pListRecipes)
+                {
+                    var pIcon = recipe.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Recipe), Name = recipe.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+
+            //c.种子
+            var pListSeeds = pGameSettings.SEEDS;
+            if (pListSeeds.Valid())
+            {
+                foreach (var seed in pListSeeds)
+                {
+                    var pIcon = seed.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Seed), Name = seed.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //d.珍宝
+            var pListTreasures = pGameSettings.TREASURES;
+            if (pListTreasures.Valid())
+            {
+                //null
+                foreach (var treasure in pListTreasures)
+                {
+                    var pIcon = treasure.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Treasure), Name = treasure.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+            //e.唱片
+            var pListVinyls = pGameSettings.VINYLS;
+            if (pListVinyls.Valid())
+            {
+                foreach (var vinyl in pListVinyls)
+                {
+                    var pIcon = vinyl.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Vinyl), Name = vinyl.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //f.电影
+            var pListMovies = pGameSettings.MOVIES;
+            if (pListMovies.Valid())
+            {
+                foreach (var movie in pListMovies)
+                {
+                    var pIcon = movie.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Movie), Name = movie.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+
+                }
+            }
+
+            //g.鱼
+            var pListFishes = pGameSettings.FISHES;
+            if (pListFishes.Valid())
+            {
+                foreach (var fish in pListFishes)
+                {
+                    var pIcon = fish.GET_ICON_00();
+                    if (pIcon.Valid())
+                    {
+                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        if (pIconPng.Valid())
+                        {
+                            yield return new UnitySpriteImageData() { Category = nameof(Fish), Name = fish.UID.ToString(), ImageData = pIconPng };
+                        }
+                    }
+                }
+            }
+
+
+        }
+        public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
+        {
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pPlayerGroup = pPlayerData.GET_PLAYER_GROUP();
+
+            foreach (var player in pPlayerGroup)
+            {
+                var pAvatar = player.AVATAR_MINI;
+                //  player.GET_AVATAR(Emotion.Normal);
+                if (pAvatar.Valid())
+                {
+                    var pAvatarIcon = unityEngine.ReadSprite2Png(pAvatar);
+                    if (pAvatarIcon.Valid())
+                    {
+                        yield return new UnitySpriteImageData() { Category = nameof(Character), Name = player.UID.ToString(), ImageData = pAvatarIcon };
+                    }
+                }
+
+            }
+        }
+        public static IEnumerable<UnitySpriteImageData> GetListMonsterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
+        {
+
+            var pGameSettings = @this.Ptr_GameSettings;
+
+            var pListMonsterModels = pGameSettings.MONSTER_MODELS;
+            if (pListMonsterModels.Valid())
+            {
+                foreach (var monsterModel in pListMonsterModels)
+                {
+                    if (TryGetUnitySpriteImageData(nameof(BattleMonsterModel), monsterModel, unityEngine, out var imageData))
+                    {
+                        yield return imageData;
+                    }
+                }
+            }
+
+            var pListPersonaModels = pGameSettings.PERSONA_MODELS;
+            if (pListPersonaModels.Valid())
+            {
+                foreach (var monsterModel in pListPersonaModels)
+                {
+                    if (TryGetUnitySpriteImageData(nameof(PersonaProgress), monsterModel, unityEngine, out var imageData))
+                    {
+                        yield return imageData;
+                    }
+                }
+            }
+
+            static bool TryGetUnitySpriteImageData(string category, BattleMonsterModel.Ptr_BattleMonsterModel monsterModel, UnityEngineContext unityEngine, out UnitySpriteImageData imageData)
+            {
+                Unsafe.SkipInit(out imageData);
+                var pViewData = monsterModel.VIEW_PREFAB;
+                if (pViewData.Valid())
+                {
+                    var pPreview = pViewData.MONSTER_PREVIEW;
+                    if (pPreview.Valid())
+                    {
+                        var pPreviewIcon = unityEngine.ReadSprite2Png(pPreview);
+                        if (pPreviewIcon.Valid())
+                        {
+                            imageData = new UnitySpriteImageData() { Category = category, Name = monsterModel.UID.ToString(), ImageData = pPreviewIcon };
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+        }
+        public static IEnumerable<UnitySpriteImageData> GetListSkillIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
+        {
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pListSkills = pGameSettings.SKILLS;
+            foreach (var pSkillInfo in pListSkills)
+            {
+                if (TryGetImageData(nameof(SkillInfo), pSkillInfo, unityEngine, out var imageData))
+                {
+                    yield return imageData;
+                }
+            }
+
+            var pListBuffs = pGameSettings.BUFFS;
+            foreach (var pSkillInfo in pListBuffs)
+            {
+                if (TryGetImageData(nameof(SkillEffect), pSkillInfo, unityEngine, out var imageData))
+                {
+                    yield return imageData;
+                }
+            }
+
+            static bool TryGetImageData(string category, SkillInfo.Ptr_SkillInfo pSkillInfo, UnityEngineContext unityEngine, [MaybeNullWhen(false)] out UnitySpriteImageData imageData)
+            {
+                Unsafe.SkipInit(out imageData);
+                var pIcon = pSkillInfo.GET_ICON_00();
+                if (pIcon.Valid())
+                {
+                    var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                    if (pIconPng.Valid())
+                    {
+                        imageData = new UnitySpriteImageData() { Category = nameof(SkillInfo), Name = pSkillInfo.UID.ToString(), ImageData = pIconPng };
+                        return true;
+                    }
+                }
+                return false;
+            }
+        }
+
+        #region Currency
         public static GameCurrencyDisplayDTO[] GetListCurrencyDisplay(this BloomtownGameContext @this)
         {
             return
@@ -174,7 +612,9 @@ namespace Maple.Bloomtown
 
         }
 
+        #endregion
 
+        #region Inventory
         public static IEnumerable<GameInventoryDisplayDTO> GetListInventoryDisplay(this BloomtownGameEnvironment @this)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -1546,323 +1986,9 @@ namespace Maple.Bloomtown
 
             return GameException.Throw<GameInventoryInfoDTO>($"Not Found:{gameInventory.InventoryObject}");
         }
-        public static IEnumerable<UnitySpriteImageData> GetListInventoryIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
-        {
-            var pPlayerData = @this.Ptr_PlayerData;
-            var pGameSettings = @this.Ptr_GameSettings;
+        #endregion
 
-            //1.装饰品
-            var pListAccessories = pGameSettings.ACCESSORIES;
-            if (pListAccessories.Valid())
-            {
-                //null
-                foreach (var accessory in pListAccessories)
-                {
-                    var pIcon = accessory.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Accessory), Name = accessory.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //2.盔甲
-            var pListArmor = pGameSettings.ARMORS;
-            if (pListArmor.Valid())
-            {
-                //getIcon
-                foreach (var armor in pListArmor)
-                {
-                    var pIcon = armor.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Armor), Name = armor.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //3.书籍
-            var pListBooks = pGameSettings.BOOKS;
-            if (pListBooks.Valid())
-            {
-                //bookIcon
-                foreach (var book in pListBooks)
-                {
-                    var pIcon = book.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Book), Name = book.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //4.礼物
-            var pListConfidantGifts = pGameSettings.CONFIDANT_GIFTS;
-            if (pListConfidantGifts.Valid())
-            {
-                //giftIcon
-                foreach (var confidantGift in pListConfidantGifts)
-                {
-                    var pIcon = confidantGift.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(ConfidantGift), Name = confidantGift.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //5.消耗品
-            var pListConsumables = pGameSettings.CONSUMABLES;
-            if (pListConsumables.Valid())
-            {
-                //GetIcon
-                foreach (var consumable in pListConsumables)
-                {
-                    var pIcon = consumable.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Consumable), Name = consumable.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //6.材料
-            var pListCraftMaterials = pGameSettings.CRAFT_MATERIALS;
-            if (pListCraftMaterials.Valid())
-            {
-                //GetIcon()
-                foreach (var craftMaterial in pListCraftMaterials)
-                {
-                    var pIcon = craftMaterial.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(CraftMaterial), Name = craftMaterial.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //7.肥料
-            var pListFertilizers = pGameSettings.FERTILIZERS;
-            if (pListFertilizers.Valid())
-            {
-                //GetIcon()
-                foreach (var fertilizer in pListFertilizers)
-                {
-                    var pIcon = fertilizer.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Fertilizer), Name = fertilizer.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //8.近战武器
-            var pListMeleeWeapons = pGameSettings.MELEE_WEAPONS;
-            if (pListMeleeWeapons.Valid())
-            {
-                //GetIcon()
-                foreach (var meleeWeapon in pListMeleeWeapons)
-                {
-
-                    var pIcon = meleeWeapon.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(MeleeWeapon), Name = meleeWeapon.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //9.任务道具
-            var pListQuestItems = pGameSettings.QUEST_ITEMS;
-            if (pListQuestItems.Valid())
-            {
-                //GetIcon()
-                foreach (var questItem in pListQuestItems)
-                {
-                    var pIcon = questItem.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(QuestItem), Name = questItem.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //a.远程武器
-            var pListRangedWeapons = pGameSettings.RANGED_WEAPONS;
-            if (pListRangedWeapons.Valid())
-            {
-                //GetIcon()
-                foreach (var rangedWeapon in pListRangedWeapons)
-                {
-                    var pIcon = rangedWeapon.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(RangedWeapon), Name = rangedWeapon.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //b.食谱
-            var pListRecipes = pGameSettings.RECIPES;
-            if (pListRecipes.Valid())
-            {
-                //GetIcon()
-                foreach (var recipe in pListRecipes)
-                {
-                    var pIcon = recipe.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Recipe), Name = recipe.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-
-            //c.种子
-            var pListSeeds = pGameSettings.SEEDS;
-            if (pListSeeds.Valid())
-            {
-                foreach (var seed in pListSeeds)
-                {
-                    var pIcon = seed.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Seed), Name = seed.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //d.珍宝
-            var pListTreasures = pGameSettings.TREASURES;
-            if (pListTreasures.Valid())
-            {
-                //null
-                foreach (var treasure in pListTreasures)
-                {
-                    var pIcon = treasure.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Treasure), Name = treasure.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-            //e.唱片
-            var pListVinyls = pGameSettings.VINYLS;
-            if (pListVinyls.Valid())
-            {
-                foreach (var vinyl in pListVinyls)
-                {
-                    var pIcon = vinyl.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Vinyl), Name = vinyl.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //f.电影
-            var pListMovies = pGameSettings.MOVIES;
-            if (pListMovies.Valid())
-            {
-                foreach (var movie in pListMovies)
-                {
-                    var pIcon = movie.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Movie), Name = movie.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-
-                }
-            }
-
-            //g.鱼
-            var pListFishes = pGameSettings.FISHES;
-            if (pListFishes.Valid())
-            {
-                foreach (var fish in pListFishes)
-                {
-                    var pIcon = fish.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Fish), Name = fish.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
-
-
-        }
-
+        #region Character
         static Character.Ptr_Character GetCharacterThrowIfNotFound(this PlayerData.Ptr_PlayerData pPlayerData, string uid)
         {
             var pPlayerGroup = pPlayerData.GET_PLAYER_GROUP();
@@ -1876,29 +2002,6 @@ namespace Maple.Bloomtown
             }
             return GameException.Throw<Character.Ptr_Character>($"Not Found:{uid}");
         }
-
-        public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameEnvironment @this)
-        {
-            var pGameSettings = @this.Ptr_GameSettings;
-            var pListPlayerModels = pGameSettings.PLAYER_MODELS;
-            if (pListPlayerModels.Valid())
-            {
-                foreach (var playerModel in pListPlayerModels)
-                {
-                    var uid = playerModel.UID.ToString()!;
-
-                    yield return new GameCharacterDisplayDTO()
-                    {
-                        ObjectId = uid,
-                        DisplayName = playerModel.UNIT_NAME.GET_VALUE().ToString(),
-                        DisplayCategory = nameof(Character),
-                    };
-
-                }
-            }
-        }
-
-
         static IEnumerable<GameSwitchDisplayDTO> GetCharacterAttributes(Character.Ptr_Character pCharacter)
         {
             BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel = pCharacter.PLAYER_MODEL;
@@ -1935,7 +2038,111 @@ namespace Maple.Bloomtown
             yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Luck), DisplayName = CONST_Luck, ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
         }
+        static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
+        {
+            GameSkillInfoDTO[] skillInfoDTOs =
+            [
+               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                ];
 
+            var index = 0;
+
+            foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
+            {
+                var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
+                if (cacheSkillInfo is null)
+                {
+                    break;
+                }
+                cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
+                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
+                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
+            }
+
+            return skillInfoDTOs;
+        }
+        static GameSkillInfoDTO[] GameSkillInfoDTO(this PersonaProgress.Ptr_PersonaProgress pPersonas)
+        {
+            GameSkillInfoDTO[] skillInfoDTOs =
+            [
+               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
+                ];
+
+            var index = 0;
+
+            foreach (var skillInfo in pPersonas.GetPtrSkillInfos())
+            {
+                var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
+                if (cacheSkillInfo is null)
+                {
+                    break;
+                }
+                cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
+                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
+                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
+            }
+
+            return skillInfoDTOs;
+        }
+
+        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
+        {
+            foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
+            {
+                foreach (var skillInfo in pPersonas.GetPtrSkillInfos())
+                {
+                    yield return skillInfo;
+                }
+            }
+
+        }
+        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(this PersonaProgress.Ptr_PersonaProgress pPersonas)
+        {
+            foreach (var skill in pPersonas.GET_SKILLS())
+            {
+                var skillInfo = skill.SKILL_INFO;
+                if (skillInfo.Valid())
+                {
+                    yield return skillInfo;
+                }
+            }
+
+        }
+
+        public static IEnumerable<GameCharacterDisplayDTO> GetListCharacterDisplay(this BloomtownGameEnvironment @this)
+        {
+            var pGameSettings = @this.Ptr_GameSettings;
+            var pListPlayerModels = pGameSettings.PLAYER_MODELS;
+            if (pListPlayerModels.Valid())
+            {
+                foreach (var playerModel in pListPlayerModels)
+                {
+                    var uid = playerModel.UID.ToString()!;
+
+                    yield return new GameCharacterDisplayDTO()
+                    {
+                        ObjectId = uid,
+                        DisplayName = playerModel.UNIT_NAME.GET_VALUE().ToString(),
+                        DisplayCategory = nameof(Character),
+                    };
+
+                }
+            }
+        }
         public static GameCharacterStatusDTO GetCharacterStatus(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -2018,7 +2225,7 @@ namespace Maple.Bloomtown
                 {
                     ObjectId = string.Empty,
                     DisplayCategory = nameof(MeleeWeapon),
-                    CanWrite = true
+                    CanWrite = false
                 };
                 var pMeleeWeapon = pPlayerModel.MELEE_WEAPON;
                 if (pMeleeWeapon.Valid() == false)
@@ -2037,7 +2244,7 @@ namespace Maple.Bloomtown
                 {
                     ObjectId = string.Empty,
                     DisplayCategory = nameof(RangedWeapon),
-                    CanWrite = true
+                    CanWrite = false
                 };
                 var pRangedWeapon = pPlayerModel.RANGED_WEAPON;
                 if (pRangedWeapon.Valid() == false)
@@ -2058,7 +2265,7 @@ namespace Maple.Bloomtown
                 {
                     ObjectId = string.Empty,
                     DisplayCategory = nameof(Armor),
-                    CanWrite = true
+                    CanWrite = false
                 };
                 var pArmor = pPlayerModel.ARMOR;
                 if (pArmor.Valid() == false)
@@ -2078,7 +2285,7 @@ namespace Maple.Bloomtown
                 {
                     ObjectId = string.Empty,
                     DisplayCategory = nameof(Accessory),
-                    CanWrite = true
+                    CanWrite = false
                 };
                 var pAccessory = pPlayerModel.ACCESSORY;
                 if (pAccessory.Valid())
@@ -2120,51 +2327,6 @@ namespace Maple.Bloomtown
             }
         }
 
-        static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
-        {
-            GameSkillInfoDTO[] skillInfoDTOs =
-            [
-               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                ];
-
-            var index = 0;
-
-            foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
-            {
-                var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
-                if (cacheSkillInfo is null)
-                {
-                    break;
-                }
-                cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
-                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
-                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
-            }
-
-            return skillInfoDTOs;
-        }
-        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
-        {
-            foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
-            {
-                foreach (var skill in pPersonas.GET_SKILLS())
-                {
-                    var skillInfo = skill.SKILL_INFO;
-                    if (skillInfo.Valid())
-                    {
-                        yield return skillInfo;
-                    }
-                }
-            }
-
-        }
         public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -2261,26 +2423,7 @@ namespace Maple.Bloomtown
             }
 
         }
-        public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
-        {
-            var pPlayerData = @this.Ptr_PlayerData;
-            var pPlayerGroup = pPlayerData.GET_PLAYER_GROUP();
-
-            foreach (var player in pPlayerGroup)
-            {
-                var pAvatar = player.AVATAR_MINI;
-                //  player.GET_AVATAR(Emotion.Normal);
-                if (pAvatar.Valid())
-                {
-                    var pAvatarIcon = unityEngine.ReadSprite2Png(pAvatar);
-                    if (pAvatarIcon.Valid())
-                    {
-                        yield return new UnitySpriteImageData() { Category = nameof(Character), Name = player.UID.ToString(), ImageData = pAvatarIcon };
-                    }
-                }
-
-            }
-        }
+        #endregion
 
         public static IEnumerable<GameMonsterDisplayDTO> GetListMonsterDisplay(this BloomtownGameEnvironment @this)
         {
@@ -2388,54 +2531,38 @@ namespace Maple.Bloomtown
 
             }
         }
-        public static IEnumerable<UnitySpriteImageData> GetListMonsterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
+        public GameCharacterSkillDTO AddMonsterMemberAsync(this BloomtownGameEnvironment @this, GameMonsterObjectDTO monsterObjectDTO)
         {
-
             var pGameSettings = @this.Ptr_GameSettings;
 
-            var pListMonsterModels = pGameSettings.MONSTER_MODELS;
-            if (pListMonsterModels.Valid())
+            if (!pGameSettings.TryGetPersonaModel(monsterObjectDTO.MonsterObject, out var battleMonsterModel))
             {
-                foreach (var monsterModel in pListMonsterModels)
-                {
-                    if (TryGetUnitySpriteImageData(nameof(BattleMonsterModel), monsterModel, unityEngine, out var imageData))
-                    {
-                        yield return imageData;
-                    }
-                }
+                return GameException.Throw<GameCharacterSkillDTO>($"NOT FOUND {monsterObjectDTO.MonsterObject}");
             }
 
+            var pPersonaModel = @this.Context.PersonaProgress.GCNew<PersonaProgress.Ptr_PersonaProgress>(false);
+            pPersonaModel.Target.CTOR_01(battleMonsterModel);
+            @this.Ptr_PlayerData.PERSONAS_CAUGHT.ADD(pPersonaModel);
+
+
+
+        }
+        static bool  TryGetPersonaModel(this GameSettings.Ptr_GameSettings pGameSettings,ReadOnlySpan<char>uid, out BattleMonsterModel.Ptr_BattleMonsterModel ptr_BattleMonsterModel)
+        {
+            Unsafe.SkipInit(out ptr_BattleMonsterModel);
             var pListPersonaModels = pGameSettings.PERSONA_MODELS;
             if (pListPersonaModels.Valid())
             {
                 foreach (var monsterModel in pListPersonaModels)
                 {
-                    if (TryGetUnitySpriteImageData(nameof(PersonaProgress), monsterModel, unityEngine, out var imageData))
+                    if (MemoryExtensions.SequenceEqual(monsterModel.UID.AsReadOnlySpan(),uid))
                     {
-                        yield return imageData;
+                        ptr_BattleMonsterModel = monsterModel;
+                        return true;
                     }
                 }
             }
-
-            static bool TryGetUnitySpriteImageData(string category, BattleMonsterModel.Ptr_BattleMonsterModel monsterModel, UnityEngineContext unityEngine, out UnitySpriteImageData imageData)
-            {
-                Unsafe.SkipInit(out imageData);
-                var pViewData = monsterModel.VIEW_PREFAB;
-                if (pViewData.Valid())
-                {
-                    var pPreview = pViewData.MONSTER_PREVIEW;
-                    if (pPreview.Valid())
-                    {
-                        var pPreviewIcon = unityEngine.ReadSprite2Png(pPreview);
-                        if (pPreviewIcon.Valid())
-                        {
-                            imageData = new UnitySpriteImageData() { Category = category, Name = monsterModel.UID.ToString(), ImageData = pPreviewIcon };
-                            return true;
-                        }
-                    }
-                }
-                return false;
-            }
+            return false;
         }
 
         public static IEnumerable<GameSkillDisplayDTO> GetListSkillDisplay(this BloomtownGameEnvironment @this)
@@ -2472,43 +2599,6 @@ namespace Maple.Bloomtown
 
             }
 
-        }
-        public static IEnumerable<UnitySpriteImageData> GetListSkillIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
-        {
-            var pGameSettings = @this.Ptr_GameSettings;
-            var pListSkills = pGameSettings.SKILLS;
-            foreach (var pSkillInfo in pListSkills)
-            {
-                if (TryGetImageData(nameof(SkillInfo), pSkillInfo, unityEngine, out var imageData))
-                {
-                    yield return imageData;
-                }
-            }
-
-            var pListBuffs = pGameSettings.BUFFS;
-            foreach (var pSkillInfo in pListBuffs)
-            {
-                if (TryGetImageData(nameof(SkillEffect), pSkillInfo, unityEngine, out var imageData))
-                {
-                    yield return imageData;
-                }
-            }
-
-            static bool TryGetImageData(string category, SkillInfo.Ptr_SkillInfo pSkillInfo, UnityEngineContext unityEngine, [MaybeNullWhen(false)] out UnitySpriteImageData imageData)
-            {
-                Unsafe.SkipInit(out imageData);
-                var pIcon = pSkillInfo.GET_ICON_00();
-                if (pIcon.Valid())
-                {
-                    var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                    if (pIconPng.Valid())
-                    {
-                        imageData = new UnitySpriteImageData() { Category = nameof(SkillInfo), Name = pSkillInfo.UID.ToString(), ImageData = pIconPng };
-                        return true;
-                    }
-                }
-                return false;
-            }
         }
 
 
