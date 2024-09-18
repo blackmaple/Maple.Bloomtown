@@ -1,9 +1,12 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
+using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualBasic;
 using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
@@ -47,7 +50,6 @@ namespace Maple.Bloomtown
         const string CONST_RARITY = "稀有";
         const string CONST_MONSTERROLE = "怪兽*角色";
         const string CONST_PassiveEffect = "被动";
-
 
         public static ListGeneric? GetListPersonaProgress(this BloomtownGameContext @this)
         {
@@ -2038,23 +2040,13 @@ namespace Maple.Bloomtown
             yield return new GameSwitchDisplayDTO { ObjectId = nameof(CONST_Luck), DisplayName = CONST_Luck, ContentValue = totalLuck.ToString(), UIType = (int)EnumGameSwitchUIType.Label };
 
         }
-        static GameSkillInfoDTO[] GameSkillInfoDTO(Character.Ptr_Character pCharacter)
+        static GameSkillInfoDTO[] GameSkillInfoDTO(this Character.Ptr_Character pCharacter) => GameSkillInfoDTO(pCharacter.GetPtrSkillInfos(), PersonaProgress.SKILL_COUNT_MAX << 1);
+        static GameSkillInfoDTO[] GameSkillInfoDTO(this PersonaProgress.Ptr_PersonaProgress pPersonas) => GameSkillInfoDTO(pPersonas.GetPtrSkillInfos(), PersonaProgress.SKILL_COUNT_MAX);
+        static GameSkillInfoDTO[] GameSkillInfoDTO(this IEnumerable<SkillInfo.Ptr_SkillInfo> skillInfos, int count)
         {
-            GameSkillInfoDTO[] skillInfoDTOs =
-            [
-               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                ];
-
-            var index = 0;
-
-            foreach (var skillInfo in GetPtrSkillInfos(pCharacter))
+            var skillInfoDTOs = Enumerable.Range(0, count).Select(_ => new GameSkillInfoDTO() { ObjectId = string.Empty, DisplayCategory = nameof(SkillInfo), CanWrite = true }).ToArray();
+            int index = 0;
+            foreach (var skillInfo in skillInfos)
             {
                 var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
                 if (cacheSkillInfo is null)
@@ -2065,54 +2057,22 @@ namespace Maple.Bloomtown
                 cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
                 cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
             }
-
             return skillInfoDTOs;
         }
-        static GameSkillInfoDTO[] GameSkillInfoDTO(this PersonaProgress.Ptr_PersonaProgress pPersonas)
+        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(this Character.Ptr_Character pCharacter)
         {
-            GameSkillInfoDTO[] skillInfoDTOs =
-            [
-               new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                    new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                     new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                      new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                       new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                        new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                         new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                          new  (){ObjectId = string.Empty,DisplayCategory=  nameof(SkillInfo) ,CanWrite = true},
-                ];
-
-            var index = 0;
-
-            foreach (var skillInfo in pPersonas.GetPtrSkillInfos())
+            foreach (var ptr_Persona in pCharacter.GET_AVAILABLE_PERSONAS())
             {
-                var cacheSkillInfo = skillInfoDTOs.ElementAtOrDefault(index++);
-                if (cacheSkillInfo is null)
-                {
-                    break;
-                }
-                cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
-                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
-                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
-            }
-
-            return skillInfoDTOs;
-        }
-
-        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(Character.Ptr_Character pCharacter)
-        {
-            foreach (var pPersonas in pCharacter.GET_AVAILABLE_PERSONAS())
-            {
-                foreach (var skillInfo in pPersonas.GetPtrSkillInfos())
+                foreach (var skillInfo in ptr_Persona.GetPtrSkillInfos())
                 {
                     yield return skillInfo;
                 }
             }
 
         }
-        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(this PersonaProgress.Ptr_PersonaProgress pPersonas)
+        static IEnumerable<SkillInfo.Ptr_SkillInfo> GetPtrSkillInfos(this PersonaProgress.Ptr_PersonaProgress ptr_Persona)
         {
-            foreach (var skill in pPersonas.GET_SKILLS())
+            foreach (var skill in ptr_Persona.GET_SKILLS())
             {
                 var skillInfo = skill.SKILL_INFO;
                 if (skillInfo.Valid())
@@ -2299,7 +2259,7 @@ namespace Maple.Bloomtown
                 var defDefaultPersona = new GameEquipmentInfoDTO()
                 {
                     ObjectId = string.Empty,
-                    DisplayCategory = nameof(BattleMonsterModel),
+                    DisplayCategory = nameof(PersonaProgress),
                     CanWrite = true
                 };
                 var defaultPersona = pPlayerModel.DEFAULT_PERSONA;
@@ -2336,12 +2296,14 @@ namespace Maple.Bloomtown
             return new GameCharacterSkillDTO()
             {
                 ObjectId = gameCharacter.CharacterId,
-                SkillInfos = GameSkillInfoDTO(pCharacter),
+                SkillInfos = pCharacter.GameSkillInfoDTO(),
             };
 
         }
-        public static GameCharacterSkillDTO UpdateCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO)
+        static void UpdateMonsterSkill(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO, params ReadOnlySpan<PersonaProgress.Ptr_PersonaProgress> personaProgresses)
         {
+            var pGameSettings = @this.Ptr_GameSettings;
+
             var oldSkillId = characterModifyDTO.ModifyObject;
             var removeOldSkill = !string.IsNullOrEmpty(oldSkillId);
 
@@ -2349,18 +2311,12 @@ namespace Maple.Bloomtown
             var addNewSkill = !string.IsNullOrEmpty(newSkillId);
             if (!removeOldSkill && !addNewSkill)
             {
-                return GameException.Throw<GameCharacterSkillDTO>("ERROR ARGS");
+                return GameException.Throw("ERROR ARGS");
             }
 
-
-            var pGameSettings = @this.Ptr_GameSettings;
-            var pPlayerData = @this.Ptr_PlayerData;
-            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
-
-            var personas = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToImmutableArray();
             if (removeOldSkill)
             {
-                foreach (var pPersonas in personas)
+                foreach (var pPersonas in personaProgresses)
                 {
                     if (TryGetSkill(pPersonas, oldSkillId, out var ptr_Skill))
                     {
@@ -2370,7 +2326,7 @@ namespace Maple.Bloomtown
             }
             if (addNewSkill && TryGetSkillInfo(pGameSettings, newSkillId, out var ptr_SkillInfo))
             {
-                foreach (var pPersonas in personas)
+                foreach (var pPersonas in personaProgresses)
                 {
                     if (!TryGetSkill(pPersonas, newSkillId, out var _))
                     {
@@ -2383,13 +2339,6 @@ namespace Maple.Bloomtown
                     }
                 }
             }
-
-
-            return new GameCharacterSkillDTO()
-            {
-                ObjectId = characterModifyDTO.CharacterId,
-                SkillInfos = GameSkillInfoDTO(pCharacter),
-            };
 
             static bool TryGetSkillInfo(GameSettings.Ptr_GameSettings pGameSettings, ReadOnlySpan<char> uid, out SkillInfo.Ptr_SkillInfo ptr_SkillInfo)
             {
@@ -2421,6 +2370,39 @@ namespace Maple.Bloomtown
                 }
                 return default;
             }
+
+
+        }
+        public static GameCharacterSkillDTO UpdateCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO)
+        {
+            @this.Context.Logger.LogInformation("{CharacterCategory}:{CharacterId}", , characterModifyDTO.CharacterId);
+
+
+            PersonaProgress.Ptr_PersonaProgress[] personaProgresses;
+            var pPlayerData = @this.Ptr_PlayerData;
+
+            if (characterModifyDTO.CharacterCategory == nameof(Character))
+            {
+                var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
+                personaProgresses = pCharacter.GET_AVAILABLE_PERSONAS().AsReadOnlySpan().ToArray();
+                UpdateMonsterSkill(@this, characterModifyDTO, personaProgresses);
+                return new GameCharacterSkillDTO()
+                {
+                    ObjectId = characterModifyDTO.CharacterId,
+                    SkillInfos = GameSkillInfoDTO(pCharacter),
+                };
+            }
+            else if(@this.Ptr_GameSettings.TryGetPersonaModel(characterModifyDTO.CharacterId,out var battleMonsterModel)
+            {
+                UpdateMonsterSkill(@this, characterModifyDTO, battleMonsterModel);
+
+            }
+
+
+
+
+
+
 
         }
         #endregion
@@ -2531,7 +2513,7 @@ namespace Maple.Bloomtown
 
             }
         }
-        public GameCharacterSkillDTO AddMonsterMemberAsync(this BloomtownGameEnvironment @this, GameMonsterObjectDTO monsterObjectDTO)
+        public static GameCharacterSkillDTO AddMonsterMember(this BloomtownGameEnvironment @this, GameMonsterObjectDTO monsterObjectDTO)
         {
             var pGameSettings = @this.Ptr_GameSettings;
 
@@ -2543,11 +2525,14 @@ namespace Maple.Bloomtown
             var pPersonaModel = @this.Context.PersonaProgress.GCNew<PersonaProgress.Ptr_PersonaProgress>(false);
             pPersonaModel.Target.CTOR_01(battleMonsterModel);
             @this.Ptr_PlayerData.PERSONAS_CAUGHT.ADD(pPersonaModel);
-
-
+            return new GameCharacterSkillDTO()
+            {
+                ObjectId = monsterObjectDTO.MonsterObject,
+                SkillInfos = pPersonaModel.Target.GameSkillInfoDTO(),
+            };
 
         }
-        static bool  TryGetPersonaModel(this GameSettings.Ptr_GameSettings pGameSettings,ReadOnlySpan<char>uid, out BattleMonsterModel.Ptr_BattleMonsterModel ptr_BattleMonsterModel)
+        static bool TryGetPersonaModel(this GameSettings.Ptr_GameSettings pGameSettings, ReadOnlySpan<char> uid, out BattleMonsterModel.Ptr_BattleMonsterModel ptr_BattleMonsterModel)
         {
             Unsafe.SkipInit(out ptr_BattleMonsterModel);
             var pListPersonaModels = pGameSettings.PERSONA_MODELS;
@@ -2555,7 +2540,7 @@ namespace Maple.Bloomtown
             {
                 foreach (var monsterModel in pListPersonaModels)
                 {
-                    if (MemoryExtensions.SequenceEqual(monsterModel.UID.AsReadOnlySpan(),uid))
+                    if (MemoryExtensions.SequenceEqual(monsterModel.UID.AsReadOnlySpan(), uid))
                     {
                         ptr_BattleMonsterModel = monsterModel;
                         return true;
