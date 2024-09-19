@@ -33,7 +33,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"monsterPreviewMicro", "MONSTER_PREVIEW_MICRO")]
 
     // class 0x30 BattlePlayerModel holder
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"holder", "HOLDER")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "holder", "HOLDER", IsReadOnly = false)]
 
     // class 0x38 System.Collections.Generic.List<Resist> m_saveResists
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_saveResists", "M_SAVE_RESISTS")]

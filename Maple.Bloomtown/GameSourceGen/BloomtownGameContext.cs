@@ -14,6 +14,10 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(LocalizationManager))]
     [MonoCollectorType(typeof(LocalizedField))]
 
+
+    [MonoCollectorType(typeof(BattleManager))]
+    [MonoCollectorType(typeof(MessageManager))]
+
     [MonoCollectorType(typeof(GameManager))]
     [MonoCollectorType(typeof(UIManager))]
     [MonoCollectorType(typeof(PopUpMessage))]
