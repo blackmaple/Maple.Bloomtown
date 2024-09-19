@@ -261,10 +261,13 @@ namespace Maple.Bloomtown
             return datas;
 
         }
+        public sealed override ValueTask<GameCharacterEquipmentDTO> UpdateCharacterEquipmentAsync(GameCharacterModifyDTO characterModifyDTO)
+        {
+            return base.UpdateCharacterEquipmentAsync(characterModifyDTO);
+        }
         #endregion
 
         #region Monster
-
         public sealed override async ValueTask<GameMonsterDisplayDTO[]> GetListMonsterDisplayAsync()
         {
             var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
@@ -274,10 +277,9 @@ namespace Maple.Bloomtown
 
         }
 
-
         public sealed override async ValueTask<GameCharacterSkillDTO> AddMonsterMemberAsync(GameMonsterObjectDTO monsterObjectDTO)
         {
-            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.AddMonsterMember(args.monsterObjectDTO), (gameEnvironment, monsterObjectDTO)).ConfigureAwait(false);
             FillGameResourceUrl<GameSkillInfoDTO>(data => data.DisplayCategory!, default, datas.SkillInfos);
             return datas;
@@ -296,6 +298,13 @@ namespace Maple.Bloomtown
 
         }
 
+        public sealed override async ValueTask<GameSkillDisplayDTO> AddSkillDisplayAsync(GameSkillObjectDTO gameSkillObject)
+        {
+            var gameEnvironment = await this.GetGameEnvironmentAsync().ConfigureAwait(false);
+            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.AddSkillDisplay(args.gameSkillObject), (gameEnvironment, gameSkillObject)).ConfigureAwait(false);
+            FillGameResourceUrl(default, datas);
+            return datas;
+        }
         #endregion
 
         #endregion

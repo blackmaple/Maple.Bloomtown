@@ -10,6 +10,8 @@ namespace Maple.Bloomtown
         public StatsSync.Ptr_StatsSync Ptr_StatsSync { get; }
         public GameSettings.Ptr_GameSettings Ptr_GameSettings { get; }
         public PlayerData.Ptr_PlayerData Ptr_PlayerData { get; }
+
+        public GameManager.Ptr_GameManager Ptr_GameManager { get; }
         public BloomtownGameEnvironment(BloomtownGameContext gameContext)
         {
             this.Context = gameContext;
@@ -39,6 +41,7 @@ namespace Maple.Bloomtown
             this.Ptr_PlayerData = gameContext.PlayerData.INSTANCE;
             this.Ptr_StatsSync = ptr_StatsSync;
             this.Ptr_GameSettings = ptr_GameSettings;
+            this.Ptr_GameManager = gameContext.GameManager.INSTANCE;
         }
 
         public bool InGame()

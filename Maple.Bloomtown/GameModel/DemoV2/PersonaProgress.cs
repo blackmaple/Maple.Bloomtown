@@ -198,8 +198,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.String get_getUID()
         /// </summary>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getUID")]
-        ///  extern nint GET_GET_UID ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getUID")]
+        extern PMonoString GET_GET_UID();
 
 
         /// <summary>

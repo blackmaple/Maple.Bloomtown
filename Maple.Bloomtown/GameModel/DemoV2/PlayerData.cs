@@ -60,6 +60,7 @@ namespace Maple.Bloomtown.GameModel.Demo
 
     // class 0x68 System.Collections.Generic.List<PersonaProgress> personasCaught
     [MonoCollectorSearchFieldAttribute(typeof(ListGeneric.Ptr_ListGeneric), "personasCaught", "PERSONAS_CAUGHT")]
+    [MonoCollectorSearchFieldAttribute(typeof(PMonoList_S<PersonaProgress.Ptr_PersonaProgress>), "personasCaught", "M_PERSONAS_CAUGHT")]
 
     // class 0x70 System.Collections.Generic.List<Follower> followers
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"followers", "FOLLOWERS")]

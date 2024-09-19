@@ -14,7 +14,7 @@ typeof(MonoCollectorClassInfo)
     [MonoCollectorType(typeof(LocalizationManager))]
     [MonoCollectorType(typeof(LocalizedField))]
 
-
+    [MonoCollectorType(typeof(GameManager))]
     [MonoCollectorType(typeof(UIManager))]
     [MonoCollectorType(typeof(PopUpMessage))]
     [MonoCollectorType(typeof(StatsSync))]
@@ -35,9 +35,12 @@ typeof(MonoCollectorClassInfo)
     //skill
     [MonoCollectorType(typeof(Skill))]
     [MonoCollectorType(typeof(SkillInfo))]
-
+    
     //buffer
+
+    [MonoCollectorType(typeof(SkillEffect))]
     [MonoCollectorType(typeof(PassiveEffect))]
+    [MonoCollectorType(typeof(EffectTemplate))]
 
     //item
     [MonoCollectorType(typeof(Stackable))]

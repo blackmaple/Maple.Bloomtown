@@ -21,7 +21,7 @@ namespace Maple.Bloomtown
     
                 
     // class 0x10 EffectTemplate effectTemplate
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"effectTemplate", "EFFECT_TEMPLATE")]
+     [MonoCollectorSearchFieldAttribute(typeof(EffectTemplate.Ptr_EffectTemplate),"effectTemplate", "EFFECT_TEMPLATE")]
             
     // abstract class 0x18 Descriptable descriptable
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptable", "DESCRIPTABLE")]
