@@ -2346,7 +2346,7 @@ namespace Maple.Bloomtown
             {
                 ObjectId = string.Empty,
                 DisplayCategory = nameof(PersonaProgress),
-                CanWrite = true
+                CanWrite = false
             };
             var defaultPersona = pPlayerModel.DEFAULT_PERSONA;
             if (defaultPersona.Valid())
@@ -2400,22 +2400,13 @@ namespace Maple.Bloomtown
             }
 
 
-            if (characterModifyDTO.CharacterCategory != nameof(PersonaProgress))
+            if (characterModifyDTO.ModifyCategory != nameof(PersonaProgress))
             {
                 return GameException.Throw<GameCharacterEquipmentDTO>("NotImplemented");
             }
 
             var pPlayerData = @this.Ptr_PlayerData;
             var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
-
-            if (addNewMonster)
-            {
-                if (!pPlayerData.TryGetPersonaProgress(newMonsterId, out var persona))
-                {
-                    persona = @this.AddPersonaProgress(newMonsterId!);
-                }
-                pCharacter.SET_ACTIVE_PERSONA(persona);
-            }
 
             if (removeMonster)
             {
@@ -2429,6 +2420,16 @@ namespace Maple.Bloomtown
                 }
             }
 
+            if (addNewMonster)
+            {
+                if (!pPlayerData.TryGetPersonaProgress(newMonsterId, out var persona))
+                {
+                    persona = @this.AddPersonaProgress(newMonsterId!);
+                }
+                pCharacter.SET_ACTIVE_PERSONA(persona);
+            }
+
+            
 
             return new GameCharacterEquipmentDTO()
             {

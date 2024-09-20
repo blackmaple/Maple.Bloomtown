@@ -266,7 +266,7 @@ namespace Maple.Bloomtown
 
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateCharacterEquipment(args.characterModifyDTO), (gameEnvironment, characterModifyDTO)).ConfigureAwait(false);
-            FillGameResourceUrl<GameEquipmentInfoDTO>(data => data.DisplayCategory!, default, datas.EquipmentInfos);
+            FillGameResourceUrl(default, datas.EquipmentInfos);
             return datas;
         }
         #endregion
