@@ -1,5 +1,4 @@
-﻿using Maple.Bloomtown.GameModel.Demo;
-using Maple.MonoGameAssistant.Core;
+﻿using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameContext;
 using Maple.MonoGameAssistant.GameDTO;
 using Maple.MonoGameAssistant.HotKey;
@@ -8,8 +7,6 @@ using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
-using System.Diagnostics.CodeAnalysis;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 namespace Maple.Bloomtown
@@ -99,21 +96,24 @@ namespace Maple.Bloomtown
 
         #region  WebApi
 
-        void FillGameResourceUrl(Func<GameObjectDisplayDTO, string>? getName, params ReadOnlySpan<GameObjectDisplayDTO> displayDTOs)
-        {
-            FillGameResourceUrl(data => data.DisplayCategory!, getName, displayDTOs);
-        }
-
-        void FillGameResourceUrl<T>(Func<T, string> getCategory, Func<T, string>? getName, params ReadOnlySpan<T> displayDTOs)
-            where T : GameDisplayDTO
+        void FillGameResourceUrlImp<T>(Func<T, string>? getName, params ReadOnlySpan<T> displayDTOs)
+            where T : GameObjectDisplayDTO
         {
             foreach (var data in displayDTOs)
             {
-                if (this.GameSettings.TryGetGameResourceUrl(getCategory(data), getName is not null ? getName(data) : $"{data.ObjectId}.png", out var url))
+                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, getName is not null ? getName(data) : $"{data.ObjectId}.png", out var url))
                 {
                     data.DisplayImage = url;
                 }
             }
+        }
+        void FillGameResourceUrl(Func<GameObjectDisplayDTO, string>? getName, GameObjectDisplayDTO[]? displayDTOs)
+        {
+            FillGameResourceUrlImp(getName, displayDTOs);
+        }
+        void FillGameResourceUrl(Func<GameObjectDisplayDTO, string>? getName, GameObjectDisplayDTO displayDTOs)
+        {
+            FillGameResourceUrlImp(getName, displayDTOs);
         }
 
         public required ListGeneric ListPersonaProgress { get; set; }
@@ -239,7 +239,7 @@ namespace Maple.Bloomtown
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCharacterSkill(args.characterObjectDTO), (gameEnvironment, characterObjectDTO)).ConfigureAwait(false);
-            FillGameResourceUrl<GameSkillInfoDTO>(data => data.DisplayCategory!, default, datas.SkillInfos);
+            FillGameResourceUrl(default, datas.SkillInfos);
 
             return datas;
         }
@@ -247,7 +247,7 @@ namespace Maple.Bloomtown
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.UpdateCharacterSkill(args.characterModifyDTO), (gameEnvironment, characterModifyDTO)).ConfigureAwait(false);
-            FillGameResourceUrl<GameSkillInfoDTO>(data => data.DisplayCategory!, default, datas.SkillInfos);
+            FillGameResourceUrl(default, datas.SkillInfos);
 
             return datas;
 
@@ -257,7 +257,7 @@ namespace Maple.Bloomtown
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.GetCharacterEquipment(args.characterObjectDTO), (gameEnvironment, characterObjectDTO)).ConfigureAwait(false);
-            FillGameResourceUrl<GameEquipmentInfoDTO>(data => data.DisplayCategory!, default, datas.EquipmentInfos);
+            FillGameResourceUrl(default, datas.EquipmentInfos);
             return datas;
 
         }
@@ -281,7 +281,7 @@ namespace Maple.Bloomtown
         {
             var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
             var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.AddMonsterMember(args.monsterObjectDTO), (gameEnvironment, monsterObjectDTO)).ConfigureAwait(false);
-            FillGameResourceUrl<GameSkillInfoDTO>(data => data.DisplayCategory!, default, datas.SkillInfos);
+            FillGameResourceUrl(default, datas.SkillInfos);
             return datas;
         }
         #endregion
