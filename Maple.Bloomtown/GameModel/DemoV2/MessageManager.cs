@@ -1,27 +1,30 @@
 
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using Maple.MonoGameAssistant.RawDotNet;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maple.Bloomtown.GameModel.Demo
+namespace Maple.Bloomtown
 {
 
 
     /// <summary>
-    /// class ["Assembly-CSharp".""."Character"]
+    /// class ["Assembly-CSharp".""."MessageManager"]
     /// [UnityEngine.MonoBehaviour]=>[UnityEngine.Behaviour]=>[UnityEngine.Component]=>[UnityEngine.Object]=>[System.Object]
-    /// [ISaveable]=>[ICliffable]
+    /// 
     /// </summary>
-    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x02000228U)]
-    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [67, 104, 97, 114, 97, 99, 116, 101, 114])]
+    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x020006E3U)]
+    [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [77, 101, 115, 115, 97, 103, 101, 77, 97, 110, 97, 103, 101, 114])]
+
+    //  class static MessageManager instance
+    [MonoCollectorSearchFieldAttribute(typeof(MessageManager.Ptr_MessageManager), "instance", "INSTANCE", true)]
 
     //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
-    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
+    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
 
     // struct 0x10 System.IntPtr m_CachedPtr
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
@@ -29,120 +32,15 @@ namespace Maple.Bloomtown.GameModel.Demo
     // class 0x18 System.Threading.CancellationTokenSource m_CancellationTokenSource
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_CancellationTokenSource", "M_CANCELLATION_TOKEN_SOURCE")]
 
-    // class 0x20 System.String uid
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "uid", "UID")]
+    // class 0x20 System.Collections.Generic.List<FloatingText> floatingTextQueue
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"floatingTextQueue", "FLOATING_TEXT_QUEUE")]
 
-    // class 0x28 UnitName unitName
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"unitName", "UNIT_NAME")]
+    // class 0x28 GameSettings gameSettings
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"gameSettings", "GAME_SETTINGS")]
 
-    // class 0x30 BattlePlayerModel playerModel
-    [MonoCollectorSearchFieldAttribute(typeof(BattlePlayerModel.Ptr_BattlePlayerModel), "playerModel", "PLAYER_MODEL")]
-
-    // class 0x38 UnityEngine.Sprite avatarMini
-    [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite), "avatarMini", "AVATAR_MINI")]
-
-    // class 0x40 UnityEngine.Sprite avatarMicro
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarMicro", "AVATAR_MICRO")]
-
-    // class 0x48 UnityEngine.Sprite avatarNormal
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarNormal", "AVATAR_NORMAL")]
-
-    // class 0x50 UnityEngine.Sprite avatarThreat
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarThreat", "AVATAR_THREAT")]
-
-    // class 0x58 UnityEngine.Sprite avatarJoy
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarJoy", "AVATAR_JOY")]
-
-    // class 0x60 UnityEngine.Sprite avatarSadness
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarSadness", "AVATAR_SADNESS")]
-
-    // class 0x68 UnityEngine.Sprite avatarSurprise
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarSurprise", "AVATAR_SURPRISE")]
-
-    // class 0x70 UnityEngine.Sprite[] avatarNormalAnimated
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarNormalAnimated", "AVATAR_NORMAL_ANIMATED")]
-
-    // class 0x78 UnityEngine.Sprite[] avatarThreatAnimated
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarThreatAnimated", "AVATAR_THREAT_ANIMATED")]
-
-    // class 0x80 UnityEngine.Sprite[] avatarJoyAnimated
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarJoyAnimated", "AVATAR_JOY_ANIMATED")]
-
-    // class 0x88 UnityEngine.Sprite[] avatarSadnessAnimated
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarSadnessAnimated", "AVATAR_SADNESS_ANIMATED")]
-
-    // class 0x90 UnityEngine.Sprite[] avatarSurpriseAnimated
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"avatarSurpriseAnimated", "AVATAR_SURPRISE_ANIMATED")]
-
-    // class 0x98 PersonaProgress activePersonaProgress
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"activePersonaProgress", "ACTIVE_PERSONA_PROGRESS")]
-
-    // class 0xA0 MeleeWeapon meleeWeapon
-    [MonoCollectorSearchFieldAttribute(typeof(nint), "meleeWeapon", "MELEE_WEAPON")]
-
-    // class 0xA8 RangedWeapon rangedWeapon
-    [MonoCollectorSearchFieldAttribute(typeof(nint), "rangedWeapon", "RANGED_WEAPON")]
-
-    // class 0xB0 Armor armor
-    [MonoCollectorSearchFieldAttribute(typeof(nint), "armor", "ARMOR")]
-
-    // class 0xB8 Accessory accessory
-    [MonoCollectorSearchFieldAttribute(typeof(nint), "accessory", "ACCESSORY")]
-
-    // class 0xC0 ControllerInfo controllerInfo
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"controllerInfo", "CONTROLLER_INFO")]
-
-    // class 0xC8 TopDownMovement movement
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"movement", "MOVEMENT")]
-
-    // class 0xD0 CharacterAnimation characterAnimation
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"characterAnimation", "CHARACTER_ANIMATION")]
-
-    // class 0xD8 CliffManager m_activeCliff
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_activeCliff", "M_ACTIVE_CLIFF")]
-
-    // class 0xE0 Logger m_logger
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_logger", "M_LOGGER")]
-
-    // struct 0xE8 UnityEngine.Vector2 bubbleOffset
-    // [MonoCollectorSearchFieldAttribute(typeof(UnityEngine.Vector2),"bubbleOffset", "BUBBLE_OFFSET")]
-
-    // struct 0xF0 System.Int32 demonsCount
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"demonsCount", "DEMONS_COUNT")]
-
-    // struct 0xF4 System.Single customX
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"customX", "CUSTOM_X")]
-
-    // struct 0xF8 System.Int32 curHP
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curHP", "CUR_HP", IsReadOnly = false)]
-
-    // struct 0xFC System.Int32 curSP
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "curSP", "CUR_SP", IsReadOnly = false)]
-
-    // struct 0x100 UnityEngine.Vector2 _bubblePosition
-    // [MonoCollectorSearchFieldAttribute(typeof(UnityEngine.Vector2),"_bubblePosition", "_BUBBLE_POSITION")]
-
-    // struct 0x108 System.Boolean _bubblePositionFound
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"_bubblePositionFound", "_BUBBLE_POSITION_FOUND")]
-
-    // struct 0x10C System.Int32 level
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "level", "LEVEL", IsReadOnly = false)]
-
-    // struct 0x110 System.Int32 levelExp
-    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "levelExp", "LEVEL_EXP", IsReadOnly = false)]
-
-    // struct 0x114 System.Boolean m_modelReset
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_modelReset", "M_MODEL_RESET")]
-
-    // struct 0x118 System.Single m_cliffProgress
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"m_cliffProgress", "M_CLIFF_PROGRESS")]
-
-    // struct 0x11C UnityEngine.Vector2 m_animationOffset
-    // [MonoCollectorSearchFieldAttribute(typeof(UnityEngine.Vector2),"m_animationOffset", "M_ANIMATION_OFFSET")]
-
-    // struct 0x124 System.Boolean m_loaded
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Boolean),"m_loaded", "M_LOADED")]
-    public partial class Character
+    // struct 0x30 System.Single m_delay
+    // [MonoCollectorSearchFieldAttribute(typeof(System.Single),"m_delay", "M_DELAY")]
+    public partial class MessageManager
     {
         //public const string Const_ImageName = "Assembly-CSharp";
         //public static byte[] Static_ImageName { get; } = [65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112];
@@ -150,10 +48,10 @@ namespace Maple.Bloomtown.GameModel.Demo
         //public const string Const_Namespace = "";
         //public static byte[] Static_Namespace { get; } = [];
 
-        //public const string Const_ClassName = "Character";
-        //public static byte[] Static_ClassName { get; } = [67, 104, 97, 114, 97, 99, 116, 101, 114];
+        //public const string Const_ClassName = "MessageManager";
+        //public static byte[] Static_ClassName { get; } = [77, 101, 115, 115, 97, 103, 101, 77, 97, 110, 97, 103, 101, 114];
 
-        //public const uint Const_TypeToken = 0x02000228U;
+        //public const uint Const_TypeToken = 0x020006E3U;
 
 
 
@@ -172,14 +70,14 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         [System.Runtime.InteropServices.StructLayoutAttribute(System.Runtime.InteropServices.LayoutKind.Sequential)]
-        public readonly unsafe partial struct Ptr_Character(nint ptr)
+        public readonly unsafe partial struct Ptr_MessageManager(nint ptr)
         {
 
             [System.Runtime.InteropServices.MarshalAsAttribute(System.Runtime.InteropServices.UnmanagedType.SysInt)]
             readonly nint _ptr = ptr;
-            public static implicit operator Ptr_Character(nint ptr) => new(ptr);
-            public static implicit operator nint(Ptr_Character obj) => obj._ptr;
-            public static implicit operator bool(Ptr_Character obj) => obj.Valid();
+            public static implicit operator Ptr_MessageManager(nint ptr) => new(ptr);
+            public static implicit operator nint(Ptr_MessageManager obj) => obj._ptr;
+            public static implicit operator bool(Ptr_MessageManager obj) => obj.Valid();
 
             public override string ToString()
             {
@@ -196,9 +94,9 @@ namespace Maple.Bloomtown.GameModel.Demo
     }
 
     /// <summary>
-    /// ["Assembly-CSharp".""."Character"]
+    /// ["Assembly-CSharp".""."MessageManager"]
     /// </summary>
-    public partial class Character
+    public partial class MessageManager
     {
 
 
@@ -212,43 +110,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Boolean <GetAvailablePersonas>b__74_0(PersonaProgress x)
-        /// </summary>
-        /// <param name="x">class PersonaProgress</param>
-        /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("<GetAvailablePersonas>b__74_0")]
-        ///  extern System.Boolean <GET_AVAILABLE_PERSONAS>B__74_0 (nint x);
-
-
-        /// <summary>
-        ///   System.Boolean <InitializationCor>b__93_2(BattlePlayerModel x)
-        /// </summary>
-        /// <param name="x">class BattlePlayerModel</param>
-        /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("<InitializationCor>b__93_2")]
-        ///  extern System.Boolean <INITIALIZATION_COR>B__93_2 (nint x);
-
-
-        /// <summary>
-        ///   System.Void ApplyWorldEffect(Character caster, EffectHolder effectHolder, EffectTemplate.EffectPrimitive primitive)
-        /// </summary>
-        /// <param name="caster">class Character</param>
-        /// <param name="effectHolder">abstract class EffectHolder</param>
-        /// <param name="primitive">class EffectTemplate.EffectPrimitive</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ApplyWorldEffect")]
-        ///  extern void APPLY_WORLD_EFFECT (nint caster, nint effectHolder, nint primitive);
-
-
-        /// <summary>
-        ///   System.Void Awake()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Awake")]
-        ///  extern void AWAKE ();
-
-
-        /// <summary>
         /// static  System.Void CheckNullArgument(System.Object arg, System.String message)
         /// </summary>
         /// <param name="arg">class System.Object</param>
@@ -256,14 +117,6 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Void</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CheckNullArgument")]
         /// static extern void CHECK_NULL_ARGUMENT (nint arg, nint message);
-
-
-        /// <summary>
-        ///   System.Void ClearModel()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ClearModel")]
-        ///  extern void CLEAR_MODEL ();
 
 
         /// <summary>
@@ -291,15 +144,6 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Boolean</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CurrentThreadIsMainThread")]
         /// static extern System.Boolean CURRENT_THREAD_IS_MAIN_THREAD ();
-
-
-        /// <summary>
-        ///   System.Void Deserialize(System.String dataStr)
-        /// </summary>
-        /// <param name="dataStr">class System.String</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Deserialize")]
-        ///  extern void DESERIALIZE (nint dataStr);
 
 
         /// <summary>
@@ -383,43 +227,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Void FullyRestoreHp()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FullyRestoreHp")]
-        ///  extern void FULLY_RESTORE_HP ();
-
-
-        /// <summary>
-        ///   System.Void FullyRestoreSp()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FullyRestoreSp")]
-        ///  extern void FULLY_RESTORE_SP ();
-
-
-        /// <summary>
-        ///   UnityEngine.Vector2 get_BubblePosition()
-        /// </summary>
-        /// <returns>struct UnityEngine.Vector2</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_BubblePosition")]
-        ///  extern UnityEngine.Vector2 GET_BUBBLE_POSITION ();
-
-
-        /// <summary>
         ///   System.Threading.CancellationToken get_destroyCancellationToken()
         /// </summary>
         /// <returns>struct System.Threading.CancellationToken</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_destroyCancellationToken")]
         ///  extern System.Threading.CancellationToken GET_DESTROY_CANCELLATION_TOKEN ();
-
-
-        /// <summary>
-        ///   UnityEngine.Vector2 get_direction()
-        /// </summary>
-        /// <returns>struct UnityEngine.Vector2</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_direction")]
-        ///  extern UnityEngine.Vector2 GET_DIRECTION ();
 
 
         /// <summary>
@@ -439,14 +251,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.String get_getUID()
-        /// </summary>
-        /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getUID")]
-        ///  extern nint GET_GET_UID ();
-
-
-        /// <summary>
         ///   UnityEngine.HideFlags get_hideFlags()
         /// </summary>
         /// <returns>enum UnityEngine.HideFlags</returns>
@@ -463,59 +267,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Boolean get_isLoaded()
-        /// </summary>
-        /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_isLoaded")]
-        ///  extern System.Boolean GET_IS_LOADED ();
-
-
-        /// <summary>
-        ///   System.Int32 get_maxHP()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_maxHP")]
-        extern System.Int32 GET_MAX_HP();
-
-
-        /// <summary>
-        ///   System.Int32 get_maxSP()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_maxSP")]
-        extern System.Int32 GET_MAX_SP();
-
-
-        /// <summary>
         ///   System.String get_name()
         /// </summary>
         /// <returns>class System.String</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_name")]
         ///  extern nint GET_NAME ();
-
-
-        /// <summary>
-        /// static  System.String get_pathToControllers()
-        /// </summary>
-        /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_pathToControllers")]
-        /// static extern nint GET_PATH_TO_CONTROLLERS ();
-
-
-        /// <summary>
-        ///   System.Int32 get_personaLevel()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_personaLevel")]
-        extern System.Int32 GET_PERSONA_LEVEL();
-
-
-        /// <summary>
-        ///   System.Int32 get_personaLevelExp()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_personaLevelExp")]
-        extern System.Int32 GET_PERSONA_LEVEL_EXP();
 
 
         /// <summary>
@@ -543,53 +299,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   UnityEngine.Sprite[] GetAnimatedAvatar(Character.Emotion emotion)
-        /// </summary>
-        /// <param name="emotion">enum Character.Emotion</param>
-        /// <returns>class UnityEngine.Sprite[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAnimatedAvatar")]
-        ///  extern nint GET_ANIMATED_AVATAR (Character.Emotion emotion);
-
-
-        /// <summary>
-        ///   UnityEngine.Vector2 GetAnimationOffset()
-        /// </summary>
-        /// <returns>struct UnityEngine.Vector2</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAnimationOffset")]
-        ///  extern UnityEngine.Vector2 GET_ANIMATION_OFFSET ();
-
-
-        /// <summary>
-        ///   System.Collections.Generic.List<PersonaProgress> GetAvailablePersonas()
-        /// </summary>
-        /// <returns>class System.Collections.Generic.List<PersonaProgress></returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAvailablePersonas")]
-        extern PMonoList_S<PersonaProgress.Ptr_PersonaProgress> GET_AVAILABLE_PERSONAS();
-
-
-        /// <summary>
-        ///   UnityEngine.Sprite GetAvatar(Character.Emotion emotion)
-        /// </summary>
-        /// <param name="emotion">enum Character.Emotion</param>
-        /// <returns>class UnityEngine.Sprite</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetAvatar")]
-        ///  extern nint GET_AVATAR (Character.Emotion emotion);
-
-
-        /// <summary>
         ///   System.IntPtr GetCachedPtr()
         /// </summary>
         /// <returns>struct System.IntPtr</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCachedPtr")]
         ///  extern System.IntPtr GET_CACHED_PTR ();
-
-
-        /// <summary>
-        ///   System.Single GetCliffOffset()
-        /// </summary>
-        /// <returns>struct System.Single</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetCliffOffset")]
-        ///  extern System.Single GET_CLIFF_OFFSET ();
 
 
         /// <summary>
@@ -613,32 +327,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   Equipment GetEquipment(Equipment.Slot slot)
-        /// </summary>
-        /// <param name="slot">enum Equipment.Slot</param>
-        /// <returns>abstract class Equipment</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetEquipment")]
-        ///  extern nint GET_EQUIPMENT (Equipment.Slot slot);
-
-
-        /// <summary>
-        /// static  System.Int32 GetExpToLevel(System.Int32 lvl)
-        /// </summary>
-        /// <param name="lvl">struct System.Int32</param>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetExpToLevel")]
-        /// static extern System.Int32 GET_EXP_TO_LEVEL(System.Int32 lvl);
-
-
-        /// <summary>
-        ///   UnityEngine.Vector2 GetFeetPosition()
-        /// </summary>
-        /// <returns>struct UnityEngine.Vector2</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetFeetPosition")]
-        ///  extern UnityEngine.Vector2 GET_FEET_POSITION ();
-
-
-        /// <summary>
         ///   System.Int32 GetHashCode()
         /// </summary>
         /// <returns>struct System.Int32</returns>
@@ -652,40 +340,6 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Int32</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetInstanceID")]
         ///  extern System.Int32 GET_INSTANCE_ID ();
-
-
-        /// <summary>
-        ///   System.Int32 GetMaxHP()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxHP")]
-        ///  extern System.Int32 GET_MAX_HP ();
-
-
-        /// <summary>
-        ///   System.Int32 GetMaxHPForLvl(System.Int32 lvl)
-        /// </summary>
-        /// <param name="lvl">struct System.Int32</param>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxHPForLvl")]
-        ///  extern System.Int32 GET_MAX_HP_FOR_LVL (System.Int32 lvl);
-
-
-        /// <summary>
-        ///   System.Int32 GetMaxSP()
-        /// </summary>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxSP")]
-        ///  extern System.Int32 GET_MAX_SP ();
-
-
-        /// <summary>
-        ///   System.Int32 GetMaxSPForLvl(System.Int32 lvl)
-        /// </summary>
-        /// <param name="lvl">struct System.Int32</param>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMaxSPForLvl")]
-        ///  extern System.Int32 GET_MAX_SP_FOR_LVL (System.Int32 lvl);
 
 
         /// <summary>
@@ -706,80 +360,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Int32 GetOverallStat(PersonaProgress.StateType stateType)
-        /// </summary>
-        /// <param name="stateType">enum PersonaProgress.StateType</param>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetOverallStat")]
-        ///  extern System.Int32 GET_OVERALL_STAT (PersonaProgress.StateType stateType);
-
-
-        /// <summary>
-        ///   System.Int32 GetOverallStatFromAnotherPersona(PersonaProgress personaProgress, PersonaProgress.StateType stateType)
-        /// </summary>
-        /// <param name="personaProgress">class PersonaProgress</param>
-        /// <param name="stateType">enum PersonaProgress.StateType</param>
-        /// <returns>struct System.Int32</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetOverallStatFromAnotherPersona")]
-        ///  extern System.Int32 GET_OVERALL_STAT_FROM_ANOTHER_PERSONA (nint personaProgress, PersonaProgress.StateType stateType);
-
-
-        /// <summary>
-        ///   System.String GetPathToControllers()
-        /// </summary>
-        /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetPathToControllers")]
-        ///  extern nint GET_PATH_TO_CONTROLLERS ();
-
-
-        /// <summary>
-        ///   System.String GetPathToExploringController(System.String postfix)
-        /// </summary>
-        /// <param name="postfix">class System.String</param>
-        /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetPathToExploringController")]
-        ///  extern nint GET_PATH_TO_EXPLORING_CONTROLLER (nint postfix);
-
-
-        /// <summary>
         ///   System.String GetScriptClassName()
         /// </summary>
         /// <returns>class System.String</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetScriptClassName")]
         ///  extern nint GET_SCRIPT_CLASS_NAME ();
-
-
-        /// <summary>
-        ///   System.Collections.Generic.List<EffectHolder> GetSkills()
-        /// </summary>
-        /// <returns>class System.Collections.Generic.List<EffectHolder></returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetSkills")]
-        ///  extern nint GET_SKILLS ();
-
-
-        /// <summary>
-        ///   System.Single GetStrengthAttackPower()
-        /// </summary>
-        /// <returns>struct System.Single</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetStrengthAttackPower")]
-        ///  extern System.Single GET_STRENGTH_ATTACK_POWER ();
-
-
-        /// <summary>
-        ///   System.Void Heal(System.Int32 power)
-        /// </summary>
-        /// <param name="power">struct System.Int32</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Heal")]
-        ///  extern void HEAL (System.Int32 power);
-
-
-        /// <summary>
-        ///   System.Collections.IEnumerator InitializationCor()
-        /// </summary>
-        /// <returns>interface System.Collections.IEnumerator</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InitializationCor")]
-        ///  extern nint INITIALIZATION_COR ();
 
 
         /// <summary>
@@ -927,27 +512,12 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Void LoadDefaultArmor()
+        /// static  System.String LocalizeMessage(System.String text)
         /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("LoadDefaultArmor")]
-        ///  extern void LOAD_DEFAULT_ARMOR ();
-
-
-        /// <summary>
-        ///   System.Void LoadDefaultGun()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("LoadDefaultGun")]
-        ///  extern void LOAD_DEFAULT_GUN ();
-
-
-        /// <summary>
-        ///   System.Void LoadDefaultWeapon()
-        /// </summary>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("LoadDefaultWeapon")]
-        ///  extern void LOAD_DEFAULT_WEAPON ();
+        /// <param name="text">class System.String</param>
+        /// <returns>class System.String</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("LocalizeMessage")]
+        /// static extern nint LOCALIZE_MESSAGE (nint text);
 
 
         /// <summary>
@@ -964,34 +534,6 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Void</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("OnCancellationTokenCreated")]
         ///  extern void ON_CANCELLATION_TOKEN_CREATED ();
-
-
-        /// <summary>
-        ///   System.Void OnCliffEntered(CliffManager cliff)
-        /// </summary>
-        /// <param name="cliff">class CliffManager</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("OnCliffEntered")]
-        ///  extern void ON_CLIFF_ENTERED (nint cliff);
-
-
-        /// <summary>
-        ///   System.Void OnCliffExited(CliffManager cliff)
-        /// </summary>
-        /// <param name="cliff">class CliffManager</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("OnCliffExited")]
-        ///  extern void ON_CLIFF_EXITED (nint cliff);
-
-
-        /// <summary>
-        ///   System.Void OnCliffStairs(CliffManager cliff, System.Single amount)
-        /// </summary>
-        /// <param name="cliff">class CliffManager</param>
-        /// <param name="amount">struct System.Single</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("OnCliffStairs")]
-        ///  extern void ON_CLIFF_STAIRS (nint cliff, System.Single amount);
 
 
         /// <summary>
@@ -1041,23 +583,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Void RestoreMana(System.Int32 power)
-        /// </summary>
-        /// <param name="power">struct System.Int32</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("RestoreMana")]
-        ///  extern void RESTORE_MANA (System.Int32 power);
-
-
-        /// <summary>
-        ///   System.String Serialize()
-        /// </summary>
-        /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Serialize")]
-        ///  extern nint SERIALIZE ();
-
-
-        /// <summary>
         ///   System.Void set_enabled(System.Boolean value)
         /// </summary>
         /// <param name="value">struct System.Boolean</param>
@@ -1103,33 +628,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Void SetActivePersona(PersonaProgress personaProgress)
-        /// </summary>
-        /// <param name="personaProgress">class PersonaProgress</param>
-        /// <returns>struct System.Void</returns>
-          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetActivePersona")]
-           extern void SET_ACTIVE_PERSONA (nint personaProgress);
-
-
-        /// <summary>
-        ///   System.Void SetAnimationOffset(UnityEngine.Vector2 animationOffset)
-        /// </summary>
-        /// <param name="animationOffset">struct UnityEngine.Vector2</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetAnimationOffset")]
-        ///  extern void SET_ANIMATION_OFFSET (UnityEngine.Vector2 animationOffset);
-
-
-        /// <summary>
-        ///   System.Void SetLevel(System.Int32 lvl)
-        /// </summary>
-        /// <param name="lvl">struct System.Int32</param>
-        /// <returns>struct System.Void</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetLevel")]
-        extern void SET_LEVEL(System.Int32 lvl);
-
-
-        /// <summary>
         /// static  System.Void SetName(UnityEngine.Object obj, System.String name)
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
@@ -1137,6 +635,25 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Void</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetName")]
         /// static extern void SET_NAME (nint obj, nint name);
+
+
+        /// <summary>
+        ///   System.Void ShowIcon(UnityEngine.Sprite icon, UnityEngine.Vector3 position)
+        /// </summary>
+        /// <param name="icon">class UnityEngine.Sprite</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <returns>struct System.Void</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowIcon")]
+        ///  extern void SHOW_ICON (nint icon, UnityEngine.Vector3 position);
+
+
+        /// <summary>
+        ///   FloatingText SpawnFloatingText(UnityEngine.Vector3 position)
+        /// </summary>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <returns>class FloatingText</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SpawnFloatingText")]
+        ///  extern nint SPAWN_FLOATING_TEXT (UnityEngine.Vector3 position);
 
 
         /// <summary>
@@ -1202,29 +719,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   System.Void Unequip(Equipment.Slot typeSlot)
-        /// </summary>
-        /// <param name="typeSlot">enum Equipment.Slot</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Unequip")]
-        ///  extern void UNEQUIP (Equipment.Slot typeSlot);
-
-
-        /// <summary>
-        ///   System.Void UnequipPersona(PersonaProgress personaProgress)
-        /// </summary>
-        /// <param name="personaProgress">class PersonaProgress</param>
-        /// <returns>struct System.Void</returns>
-          [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("UnequipPersona")]
-           extern void UNEQUIP_PERSONA (nint personaProgress);
-
-
-        /// <summary>
-        ///   System.Void UpdateOffset()
+        ///   System.Void Update()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("UpdateOffset")]
-        ///  extern void UPDATE_OFFSET ();
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Update")]
+        ///  extern void UPDATE ();
 
 
 
@@ -1232,7 +731,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_MessageManager))]
         ///  extern void .CTOR_00 ();
 
 
@@ -1240,7 +739,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_MessageManager))]
         ///  extern void .CTOR_01 ();
 
 
@@ -1248,7 +747,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_MessageManager))]
         ///  extern void .CTOR_02 ();
 
 
@@ -1256,7 +755,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_MessageManager))]
         ///  extern void .CTOR_03 ();
 
 
@@ -1264,33 +763,15 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Void .ctor()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".ctor", Search = typeof(Search_MessageManager))]
         ///  extern void .CTOR_04 ();
-
-
-        /// <summary>
-        ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies)
-        /// </summary>
-        /// <param name="defeatedEnemies">class System.Collections.Generic.List<BattleMonsterController></param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_Character))]
-        ///  extern void ADD_EXP_00 (nint defeatedEnemies);
-
-
-        /// <summary>
-        ///   System.Void AddExp(System.Int32 count)
-        /// </summary>
-        /// <param name="count">struct System.Int32</param>
-        /// <returns>struct System.Void</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("AddExp", Search = typeof(Search_Character))]
-        extern void ADD_EXP_01(System.Int32 count);
 
 
         /// <summary>
         ///   System.Void CancelInvoke()
         /// </summary>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_MessageManager))]
         ///  extern void CANCEL_INVOKE_00 ();
 
 
@@ -1299,7 +780,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="methodName">class System.String</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_MessageManager))]
         ///  extern void CANCEL_INVOKE_01 (nint methodName);
 
 
@@ -1309,7 +790,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="self">class UnityEngine.MonoBehaviour</param>
         /// <param name="methodName">class System.String</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("CancelInvoke", Search = typeof(Search_MessageManager))]
         /// static extern void CANCEL_INVOKE_02 (nint self, nint methodName);
 
 
@@ -1319,7 +800,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_00 (nint obj, System.Single t);
 
 
@@ -1328,7 +809,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Destroy", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_01 (nint obj);
 
 
@@ -1338,7 +819,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="allowDestroyingAssets">struct System.Boolean</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_IMMEDIATE_00 (nint obj, System.Boolean allowDestroyingAssets);
 
 
@@ -1347,7 +828,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyImmediate", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_IMMEDIATE_01 (nint obj);
 
 
@@ -1357,7 +838,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="obj">class UnityEngine.Object</param>
         /// <param name="t">struct System.Single</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_OBJECT_00 (nint obj, System.Single t);
 
 
@@ -1366,60 +847,15 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("DestroyObject", Search = typeof(Search_MessageManager))]
         /// static extern void DESTROY_OBJECT_01 (nint obj);
-
-
-        /// <summary>
-        ///   System.Void Equip(Equipment item)
-        /// </summary>
-        /// <param name="item">abstract class Equipment</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equip", Search = typeof(Search_Character))]
-        ///  extern void EQUIP_00 (nint item);
-
-
-        /// <summary>
-        ///   System.Void Equip(MeleeWeapon item)
-        /// </summary>
-        /// <param name="item">class MeleeWeapon</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equip", Search = typeof(Search_Character))]
-        ///  extern void EQUIP_01 (nint item);
-
-
-        /// <summary>
-        ///   System.Void Equip(RangedWeapon item)
-        /// </summary>
-        /// <param name="item">class RangedWeapon</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equip", Search = typeof(Search_Character))]
-        ///  extern void EQUIP_02 (nint item);
-
-
-        /// <summary>
-        ///   System.Void Equip(Armor item)
-        /// </summary>
-        /// <param name="item">class Armor</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equip", Search = typeof(Search_Character))]
-        ///  extern void EQUIP_03 (nint item);
-
-
-        /// <summary>
-        ///   System.Void Equip(Accessory item)
-        /// </summary>
-        /// <param name="item">class Accessory</param>
-        /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Equip", Search = typeof(Search_Character))]
-        ///  extern void EQUIP_04 (nint item);
 
 
         /// <summary>
         /// static  T FindAnyObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_00 ();
 
 
@@ -1428,7 +864,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -1437,7 +873,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -1447,7 +883,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindAnyObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_ANY_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -1455,7 +891,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// static  T FindFirstObjectByType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_00 ();
 
 
@@ -1464,7 +900,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_01 (UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -1473,7 +909,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_02 (nint type);
 
 
@@ -1483,7 +919,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindFirstObjectByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_FIRST_OBJECT_BY_TYPE_03 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive);
 
 
@@ -1491,7 +927,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// static  T FindObjectOfType()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECT_OF_TYPE_00 ();
 
 
@@ -1500,7 +936,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECT_OF_TYPE_01 (System.Boolean includeInactive);
 
 
@@ -1509,7 +945,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECT_OF_TYPE_02 (nint type);
 
 
@@ -1519,7 +955,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECT_OF_TYPE_03 (nint type, System.Boolean includeInactive);
 
 
@@ -1529,7 +965,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_00 (nint type, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -1540,7 +976,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_01 (nint type, UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -1549,7 +985,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_02 (UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -1559,7 +995,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="findObjectsInactive">enum UnityEngine.FindObjectsInactive</param>
         /// <param name="sortMode">enum UnityEngine.FindObjectsSortMode</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsByType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_BY_TYPE_03 (UnityEngine.FindObjectsInactive findObjectsInactive, UnityEngine.FindObjectsSortMode sortMode);
 
 
@@ -1568,7 +1004,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_00 (nint type);
 
 
@@ -1578,7 +1014,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_01 (nint type, System.Boolean includeInactive);
 
 
@@ -1586,7 +1022,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// static  T[] FindObjectsOfType()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_02 ();
 
 
@@ -1595,7 +1031,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("FindObjectsOfType", Search = typeof(Search_MessageManager))]
         /// static extern nint FIND_OBJECTS_OF_TYPE_03 (System.Boolean includeInactive);
 
 
@@ -1604,7 +1040,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_00 (nint type);
 
 
@@ -1612,7 +1048,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T GetComponent()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_01 ();
 
 
@@ -1622,7 +1058,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="t">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Component</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_CHILDREN_00 (nint t, System.Boolean includeInactive);
 
 
@@ -1631,7 +1067,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="t">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_CHILDREN_01 (nint t);
 
 
@@ -1640,7 +1076,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_CHILDREN_02 (System.Boolean includeInactive);
 
 
@@ -1648,7 +1084,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T GetComponentInChildren()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_CHILDREN_03 ();
 
 
@@ -1658,7 +1094,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="t">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Component</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_PARENT_00 (nint t, System.Boolean includeInactive);
 
 
@@ -1667,7 +1103,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="t">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_PARENT_01 (nint t);
 
 
@@ -1676,7 +1112,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_PARENT_02 (System.Boolean includeInactive);
 
 
@@ -1684,7 +1120,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T GetComponentInParent()
         /// </summary>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENT_IN_PARENT_03 ();
 
 
@@ -1693,7 +1129,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="type">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_00 (nint type);
 
 
@@ -1703,7 +1139,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="results">class System.Collections.Generic.List<UnityEngine.Component></param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_MessageManager))]
         ///  extern void GET_COMPONENTS_01 (nint type, nint results);
 
 
@@ -1712,7 +1148,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="results">class System.Collections.Generic.List<T></param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_MessageManager))]
         ///  extern void GET_COMPONENTS_02 (nint results);
 
 
@@ -1720,7 +1156,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T[] GetComponents()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponents", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_03 ();
 
 
@@ -1729,7 +1165,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="t">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_CHILDREN_00 (nint t);
 
 
@@ -1738,7 +1174,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_CHILDREN_01 (System.Boolean includeInactive);
 
 
@@ -1748,7 +1184,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <param name="result">class System.Collections.Generic.List<T></param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_MessageManager))]
         ///  extern void GET_COMPONENTS_IN_CHILDREN_02 (System.Boolean includeInactive, nint result);
 
 
@@ -1756,7 +1192,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T[] GetComponentsInChildren()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_CHILDREN_03 ();
 
 
@@ -1765,7 +1201,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="results">class System.Collections.Generic.List<T></param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInChildren", Search = typeof(Search_MessageManager))]
         ///  extern void GET_COMPONENTS_IN_CHILDREN_04 (nint results);
 
 
@@ -1775,7 +1211,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="t">abstract class System.Type</param>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class UnityEngine.Component[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_PARENT_00 (nint t, System.Boolean includeInactive);
 
 
@@ -1784,7 +1220,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="t">abstract class System.Type</param>
         /// <returns>class UnityEngine.Component[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_PARENT_01 (nint t);
 
 
@@ -1793,7 +1229,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_PARENT_02 (System.Boolean includeInactive);
 
 
@@ -1803,7 +1239,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="includeInactive">struct System.Boolean</param>
         /// <param name="results">class System.Collections.Generic.List<T></param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_MessageManager))]
         ///  extern void GET_COMPONENTS_IN_PARENT_03 (System.Boolean includeInactive, nint results);
 
 
@@ -1811,25 +1247,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   T[] GetComponentsInParent()
         /// </summary>
         /// <returns>class T[]</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComponentsInParent", Search = typeof(Search_MessageManager))]
         ///  extern nint GET_COMPONENTS_IN_PARENT_04 ();
-
-
-        /// <summary>
-        ///   System.Single GetMagicAttackPower()
-        /// </summary>
-        /// <returns>struct System.Single</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMagicAttackPower", Search = typeof(Search_Character))]
-        ///  extern System.Single GET_MAGIC_ATTACK_POWER_00 ();
-
-
-        /// <summary>
-        ///   System.Single GetMagicAttackPower(PersonaProgress persona)
-        /// </summary>
-        /// <param name="persona">class PersonaProgress</param>
-        /// <returns>struct System.Single</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetMagicAttackPower", Search = typeof(Search_Character))]
-        ///  extern System.Single GET_MAGIC_ATTACK_POWER_01 (nint persona);
 
 
         /// <summary>
@@ -1839,7 +1258,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_00 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -1851,7 +1270,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_01 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -1860,7 +1279,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="original">class UnityEngine.Object</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_02 (nint original);
 
 
@@ -1870,7 +1289,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="original">class UnityEngine.Object</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_03 (nint original, nint parent);
 
 
@@ -1881,7 +1300,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="instantiateInWorldSpace">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_04 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
 
 
@@ -1890,7 +1309,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="original">class T</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_05 (nint original);
 
 
@@ -1901,7 +1320,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="position">struct UnityEngine.Vector3</param>
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_06 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
@@ -1913,7 +1332,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
@@ -1923,7 +1342,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="original">class T</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_08 (nint original, nint parent);
 
 
@@ -1934,7 +1353,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <param name="worldPositionStays">struct System.Boolean</param>
         /// <returns>class T</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_MessageManager))]
         /// static extern nint INSTANTIATE_09 (nint original, nint parent, System.Boolean worldPositionStays);
 
 
@@ -1942,7 +1361,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.Boolean IsInvoking()
         /// </summary>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_MessageManager))]
         ///  extern System.Boolean IS_INVOKING_00 ();
 
 
@@ -1951,7 +1370,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="methodName">class System.String</param>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_MessageManager))]
         ///  extern System.Boolean IS_INVOKING_01 (nint methodName);
 
 
@@ -1961,27 +1380,31 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="self">class UnityEngine.MonoBehaviour</param>
         /// <param name="methodName">class System.String</param>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("IsInvoking", Search = typeof(Search_MessageManager))]
         /// static extern System.Boolean IS_INVOKING_02 (nint self, nint methodName);
 
 
         /// <summary>
-        ///   System.Void SetDirection(System.Single dirX, System.Single dirY)
+        ///   System.Void ShowText(System.String text, UnityEngine.Vector3 position, MessageManager.TextTypes textType, UsageInfo usageInfo)
         /// </summary>
-        /// <param name="dirX">struct System.Single</param>
-        /// <param name="dirY">struct System.Single</param>
+        /// <param name="text">class System.String</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="textType">enum MessageManager.TextTypes</param>
+        /// <param name="usageInfo">class UsageInfo</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetDirection", Search = typeof(Search_Character))]
-        ///  extern void SET_DIRECTION_00 (System.Single dirX, System.Single dirY);
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowText", Search = typeof(Search_MessageManager))]
+        ///  extern void SHOW_TEXT_00 (nint text, UnityEngine.Vector3 position, MessageManager.TextTypes textType, nint usageInfo);
 
 
         /// <summary>
-        ///   System.Void SetDirection(CharacterAnimation.Direction dir)
+        ///   System.Void ShowText(System.String text, UnityEngine.Vector3 position, MessageManager.TextTypes textType)
         /// </summary>
-        /// <param name="dir">enum CharacterAnimation.Direction</param>
+        /// <param name="text">class System.String</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="textType">enum MessageManager.TextTypes</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("SetDirection", Search = typeof(Search_Character))]
-        ///  extern void SET_DIRECTION_01 (CharacterAnimation.Direction dir);
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ShowText", Search = typeof(Search_MessageManager))]
+        extern void SHOW_TEXT_01(nint text, REF_MONO_VECTOR3 position, TextTypes textType);
 
 
         /// <summary>
@@ -1989,7 +1412,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="methodName">class System.String</param>
         /// <returns>class UnityEngine.Coroutine</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern nint START_COROUTINE_00 (nint methodName);
 
 
@@ -1999,7 +1422,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="methodName">class System.String</param>
         /// <param name="value">class System.Object</param>
         /// <returns>class UnityEngine.Coroutine</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern nint START_COROUTINE_01 (nint methodName, nint value);
 
 
@@ -2008,7 +1431,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="routine">interface System.Collections.IEnumerator</param>
         /// <returns>class UnityEngine.Coroutine</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StartCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern nint START_COROUTINE_02 (nint routine);
 
 
@@ -2017,7 +1440,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="routine">interface System.Collections.IEnumerator</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern void STOP_COROUTINE_00 (nint routine);
 
 
@@ -2026,7 +1449,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="routine">class UnityEngine.Coroutine</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern void STOP_COROUTINE_01 (nint routine);
 
 
@@ -2035,7 +1458,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="methodName">class System.String</param>
         /// <returns>struct System.Void</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("StopCoroutine", Search = typeof(Search_MessageManager))]
         ///  extern void STOP_COROUTINE_02 (nint methodName);
 
 
@@ -2043,7 +1466,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.String ToString()
         /// </summary>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_MessageManager))]
         ///  extern nint TO_STRING_00 ();
 
 
@@ -2052,7 +1475,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="obj">class UnityEngine.Object</param>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("ToString", Search = typeof(Search_MessageManager))]
         /// static extern nint TO_STRING_01 (nint obj);
 
 
@@ -2062,7 +1485,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="type">abstract class System.Type</param>
         /// <param name="component">class UnityEngine.Component&</param>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("TryGetComponent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("TryGetComponent", Search = typeof(Search_MessageManager))]
         ///  extern System.Boolean TRY_GET_COMPONENT_00 (nint type, nint component);
 
 
@@ -2071,11 +1494,11 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// </summary>
         /// <param name="component">class T&</param>
         /// <returns>struct System.Boolean</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("TryGetComponent", Search = typeof(Search_Character))]
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("TryGetComponent", Search = typeof(Search_MessageManager))]
         ///  extern System.Boolean TRY_GET_COMPONENT_01 (nint component);
 
 
-        public static partial class Search_Character
+        public static partial class Search_MessageManager
         {
             /// 
             ///     
@@ -2125,26 +1548,6 @@ namespace Maple.Bloomtown.GameModel.Demo
             /// </summary>
             /// public static bool .CTOR_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
             ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, ".ctor");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void AddExp(System.Collections.Generic.List<BattleMonsterController> defeatedEnemies)
-            /// </summary>
-            /// public static bool ADD_EXP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Collections.Generic.List<BattleMonsterController>");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void AddExp(System.Int32 count)
-            /// </summary>
-            public static bool ADD_EXP_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "AddExp", "System.Int32");
             ///     
             ///  
             /// 
@@ -2235,56 +1638,6 @@ namespace Maple.Bloomtown.GameModel.Demo
             /// </summary>
             /// public static bool DESTROY_OBJECT_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
             ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "DestroyObject", "UnityEngine.Object");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void Equip(Equipment item)
-            /// </summary>
-            /// public static bool EQUIP_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Equipment");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void Equip(MeleeWeapon item)
-            /// </summary>
-            /// public static bool EQUIP_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "MeleeWeapon");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void Equip(RangedWeapon item)
-            /// </summary>
-            /// public static bool EQUIP_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "RangedWeapon");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void Equip(Armor item)
-            /// </summary>
-            /// public static bool EQUIP_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Armor");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Void Equip(Accessory item)
-            /// </summary>
-            /// public static bool EQUIP_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Equip", "Accessory");
             ///     
             ///  
             /// 
@@ -2731,26 +2084,6 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
             /// <summary>
-            ///   System.Single GetMagicAttackPower()
-            /// </summary>
-            /// public static bool GET_MAGIC_ATTACK_POWER_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
-            ///   System.Single GetMagicAttackPower(PersonaProgress persona)
-            /// </summary>
-            /// public static bool GET_MAGIC_ATTACK_POWER_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "GetMagicAttackPower", "PersonaProgress");
-            ///     
-            ///  
-            /// 
-
-
-            /// <summary>
             /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
             /// </summary>
             /// public static bool INSTANTIATE_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
@@ -2881,20 +2214,20 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
             /// <summary>
-            ///   System.Void SetDirection(System.Single dirX, System.Single dirY)
+            ///   System.Void ShowText(System.String text, UnityEngine.Vector3 position, MessageManager.TextTypes textType, UsageInfo usageInfo)
             /// </summary>
-            /// public static bool SET_DIRECTION_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "System.Single", "System.Single");
+            /// public static bool SHOW_TEXT_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ShowText", "System.String", "UnityEngine.Vector3", "MessageManager.TextTypes", "UsageInfo");
             ///     
             ///  
             /// 
 
 
             /// <summary>
-            ///   System.Void SetDirection(CharacterAnimation.Direction dir)
+            ///   System.Void ShowText(System.String text, UnityEngine.Vector3 position, MessageManager.TextTypes textType)
             /// </summary>
-            /// public static bool SET_DIRECTION_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
-            ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "SetDirection", "CharacterAnimation.Direction");
+            public static bool SHOW_TEXT_01(Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+                => Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "ShowText", "System.String", "UnityEngine.Vector3", "MessageManager.TextTypes");
             ///     
             ///  
             /// 

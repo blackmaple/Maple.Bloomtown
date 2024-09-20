@@ -622,9 +622,63 @@ namespace Maple.Bloomtown
         #endregion
 
         #region Inventory
+        static int GetPersonaProgressCount(this BloomtownGameEnvironment @this, string uid)
+        {
+            var count = 0;
+            foreach (var data in @this.Ptr_PlayerData.M_PERSONAS_CAUGHT.AsReadOnlySpan())
+            {
+                if (MemoryExtensions.SequenceEqual(data.GET_GET_UID().AsReadOnlySpan(), uid))
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
         public static IEnumerable<GameInventoryDisplayDTO> GetListInventoryDisplay(this BloomtownGameEnvironment @this)
         {
             var pGameSettings = @this.Ptr_GameSettings;
+
+            //0.人格面具
+            var pListPersonaModels = pGameSettings.PERSONA_MODELS;
+            if (pListPersonaModels.Valid())
+            {
+                foreach (var monsterModel in pListPersonaModels)
+                {
+                    var uid = monsterModel.UID.ToString()!;
+                    yield return new GameInventoryDisplayDTO()
+                    {
+                        ObjectId = uid,
+                        DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                        DisplayDesc = string.Empty,
+                        DisplayCategory = nameof(PersonaProgress),
+
+                        ItemAttributes = GetItemAttributes(uid, monsterModel),
+                    };
+
+                }
+                static GameValueInfoDTO[] GetItemAttributes(string uid, BattleMonsterModel.Ptr_BattleMonsterModel monsterModel)
+                {
+
+                    var tameStat = monsterModel.TAME_STAT.ToString();
+                    GameValueInfoDTO[] atts =
+                    [
+                        new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Lv,DisplayValue = monsterModel.LEVEL.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Strength,DisplayValue = monsterModel.RAW_STRENGTH.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Magic,DisplayValue = monsterModel.RAW_MAGIC.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Endurance,DisplayValue = monsterModel.RAW_ENDURANCE.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Agility,DisplayValue = monsterModel.RAW_AGILITY.ToString() ,CanPreview=true },
+                         new GameValueInfoDTO{ ObjectId =uid, DisplayName = CONST_Luck,DisplayValue = monsterModel.RAW_LUCK.ToString() ,CanPreview=true },
+
+                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName =CONST_MonsterSocialStat ,DisplayValue = tameStat ,CanPreview=true },
+                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Tame,DisplayValue = monsterModel.TAME_DIFFICULTY.ToString() ,CanPreview=true },
+                         //new GameValueInfoDTO{ ObjectId = uid, DisplayName = CONST_Steal,DisplayValue = monsterModel.STEAL_DIFFICULTY.ToString()  ,CanPreview=true},
+
+                    ];
+                    return atts;
+                }
+
+            }
+
             //1.装饰品
             var pListAccessories = pGameSettings.ACCESSORIES;
             if (pListAccessories.Valid())
@@ -1112,6 +1166,20 @@ namespace Maple.Bloomtown
             // var pPlayerData = @this.Ptr_PlayerData;
             var pGameSettings = @this.Ptr_GameSettings;
 
+            //0.人格面具
+            if (gameInventory.InventoryCategory == nameof(PersonaProgress))
+            {
+                var uid = gameInventory.InventoryObject;
+                return new GameInventoryInfoDTO()
+                {
+                    ObjectId = uid,
+                    InventoryCount = @this.GetPersonaProgressCount(uid)
+                };
+
+
+            }
+
+
             //1.装饰品
             if (gameInventory.InventoryCategory == nameof(Accessory))
             {
@@ -1488,6 +1556,29 @@ namespace Maple.Bloomtown
             var pGameSettings = @this.Ptr_GameSettings;
 
             var count = gameInventory.InventoryCount;
+
+            //0.人格面具
+            if (gameInventory.InventoryCategory == nameof(PersonaProgress))
+            {
+                var uid = gameInventory.InventoryObject;
+                var hasCount = @this.GetPersonaProgressCount(uid);
+
+                for (int i = hasCount; i < count; ++i)
+                {
+                    @this.AddPersonaProgress(uid);
+                }
+
+                return new GameInventoryInfoDTO()
+                {
+                    ObjectId = uid,
+                    InventoryCount = count
+                };
+
+
+            }
+
+
+
             //1.装饰品
             if (gameInventory.InventoryCategory == nameof(Accessory))
             {
@@ -2173,6 +2264,114 @@ namespace Maple.Bloomtown
 
         }
 
+
+        static IEnumerable<GameEquipmentInfoDTO> GetEquipmentAttributes(BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
+        {
+            var defMeleeWeapon = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(MeleeWeapon),
+                CanWrite = false
+            };
+            var pMeleeWeapon = pPlayerModel.MELEE_WEAPON;
+            if (pMeleeWeapon.Valid() == false)
+            {
+                pMeleeWeapon = pPlayerModel.DEFAULT_WEAPON;
+            }
+            if (pMeleeWeapon.Valid())
+            {
+                defMeleeWeapon.ObjectId = pMeleeWeapon.UID.ToString()!;
+                defMeleeWeapon.DisplayName = pMeleeWeapon.ITEM_NAME.GET_VALUE().ToString();
+                defMeleeWeapon.DisplayDesc = pMeleeWeapon.DESCRIPTION.GET_VALUE().ToString();
+            }
+            yield return defMeleeWeapon;
+
+            var defRangedWeapon = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(RangedWeapon),
+                CanWrite = false
+            };
+            var pRangedWeapon = pPlayerModel.RANGED_WEAPON;
+            if (pRangedWeapon.Valid() == false)
+            {
+                pRangedWeapon = pPlayerModel.DEFAULT_GUN;
+            }
+            if (pRangedWeapon.Valid())
+            {
+                defRangedWeapon.ObjectId = pRangedWeapon.UID.ToString()!;
+                defRangedWeapon.DisplayName = pRangedWeapon.ITEM_NAME.GET_VALUE().ToString();
+                defRangedWeapon.DisplayDesc = pRangedWeapon.DESCRIPTION.GET_VALUE().ToString();
+
+            }
+            yield return defRangedWeapon;
+
+
+            var defArmor = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(Armor),
+                CanWrite = false
+            };
+            var pArmor = pPlayerModel.ARMOR;
+            if (pArmor.Valid() == false)
+            {
+                pArmor = pPlayerModel.DEFAULT_ARMOR;
+            }
+            if (pArmor.Valid())
+            {
+                defArmor.ObjectId = pArmor.UID.ToString()!;
+                defArmor.DisplayName = pArmor.ITEM_NAME.GET_VALUE().ToString();
+                defArmor.DisplayDesc = pArmor.DESCRIPTION.GET_VALUE().ToString();
+            }
+            yield return defArmor;
+
+
+            var defAccessory = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(Accessory),
+                CanWrite = false
+            };
+            var pAccessory = pPlayerModel.ACCESSORY;
+            if (pAccessory.Valid())
+            {
+                defAccessory.ObjectId = pArmor.UID.ToString()!;
+                defAccessory.DisplayName = pAccessory.ITEM_NAME.GET_VALUE().ToString();
+                defAccessory.DisplayDesc = pAccessory.DESCRIPTION.GET_VALUE().ToString();
+            }
+            yield return defAccessory;
+
+            var defDefaultPersona = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(PersonaProgress),
+                CanWrite = true
+            };
+            var defaultPersona = pPlayerModel.DEFAULT_PERSONA;
+            if (defaultPersona.Valid())
+            {
+                defDefaultPersona.ObjectId = defaultPersona.UID.ToString()!;
+                defDefaultPersona.DisplayName = defaultPersona.UNIT_NAME.GET_VALUE().ToString();
+            }
+            yield return defDefaultPersona;
+
+            var defPersonaProgress = new GameEquipmentInfoDTO()
+            {
+                ObjectId = string.Empty,
+                DisplayCategory = nameof(PersonaProgress),
+                CanWrite = true
+            };
+            var pPersonaProgress = pPlayerModel.PERSONA_PROGRESS;
+            if (pPersonaProgress.Valid() && (nint)pPersonaProgress.MONSTER_MODEL != defaultPersona)
+            {
+                defPersonaProgress.ObjectId = pPersonaProgress.MONSTER_MODEL.UID.ToString()!;
+                defPersonaProgress.DisplayName = pPersonaProgress.MONSTER_MODEL.UNIT_NAME.GET_VALUE().ToString();
+            }
+            yield return defPersonaProgress;
+
+        }
+
         public static GameCharacterEquipmentDTO GetCharacterEquipment(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
             var pGameSettings = @this.Ptr_GameSettings;
@@ -2186,117 +2385,61 @@ namespace Maple.Bloomtown
                 ObjectId = gameCharacter.CharacterId,
                 EquipmentInfos = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
             };
-            static IEnumerable<GameEquipmentInfoDTO> GetEquipmentAttributes(BattlePlayerModel.Ptr_BattlePlayerModel pPlayerModel)
+        }
+
+        public static GameCharacterEquipmentDTO UpdateCharacterEquipment(this BloomtownGameEnvironment @this, GameCharacterModifyDTO characterModifyDTO)
+        {
+            var oldMonsterId = characterModifyDTO.ModifyObject;
+            var removeMonster = !string.IsNullOrEmpty(oldMonsterId);
+
+            var newMonsterId = characterModifyDTO.NewValue;
+            var addNewMonster = !string.IsNullOrEmpty(newMonsterId);
+            if (!removeMonster && !addNewMonster)
             {
-                var defMeleeWeapon = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(MeleeWeapon),
-                    CanWrite = false
-                };
-                var pMeleeWeapon = pPlayerModel.MELEE_WEAPON;
-                if (pMeleeWeapon.Valid() == false)
-                {
-                    pMeleeWeapon = pPlayerModel.DEFAULT_WEAPON;
-                }
-                if (pMeleeWeapon.Valid())
-                {
-                    defMeleeWeapon.ObjectId = pMeleeWeapon.UID.ToString()!;
-                    defMeleeWeapon.DisplayName = pMeleeWeapon.ITEM_NAME.GET_VALUE().ToString();
-                    defMeleeWeapon.DisplayDesc = pMeleeWeapon.DESCRIPTION.GET_VALUE().ToString();
-                }
-                yield return defMeleeWeapon;
-
-                var defRangedWeapon = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(RangedWeapon),
-                    CanWrite = false
-                };
-                var pRangedWeapon = pPlayerModel.RANGED_WEAPON;
-                if (pRangedWeapon.Valid() == false)
-                {
-                    pRangedWeapon = pPlayerModel.DEFAULT_GUN;
-                }
-                if (pRangedWeapon.Valid())
-                {
-                    defRangedWeapon.ObjectId = pRangedWeapon.UID.ToString()!;
-                    defRangedWeapon.DisplayName = pRangedWeapon.ITEM_NAME.GET_VALUE().ToString();
-                    defRangedWeapon.DisplayDesc = pRangedWeapon.DESCRIPTION.GET_VALUE().ToString();
-
-                }
-                yield return defRangedWeapon;
-
-
-                var defArmor = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(Armor),
-                    CanWrite = false
-                };
-                var pArmor = pPlayerModel.ARMOR;
-                if (pArmor.Valid() == false)
-                {
-                    pArmor = pPlayerModel.DEFAULT_ARMOR;
-                }
-                if (pArmor.Valid())
-                {
-                    defArmor.ObjectId = pArmor.UID.ToString()!;
-                    defArmor.DisplayName = pArmor.ITEM_NAME.GET_VALUE().ToString();
-                    defArmor.DisplayDesc = pArmor.DESCRIPTION.GET_VALUE().ToString();
-                }
-                yield return defArmor;
-
-
-                var defAccessory = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(Accessory),
-                    CanWrite = false
-                };
-                var pAccessory = pPlayerModel.ACCESSORY;
-                if (pAccessory.Valid())
-                {
-                    defAccessory.ObjectId = pArmor.UID.ToString()!;
-                    defAccessory.DisplayName = pAccessory.ITEM_NAME.GET_VALUE().ToString();
-                    defAccessory.DisplayDesc = pAccessory.DESCRIPTION.GET_VALUE().ToString();
-                }
-                yield return defAccessory;
-
-                var defDefaultPersona = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(PersonaProgress),
-                    CanWrite = true
-                };
-                var defaultPersona = pPlayerModel.DEFAULT_PERSONA;
-                if (defaultPersona.Valid())
-                {
-                    defDefaultPersona.ObjectId = defaultPersona.UID.ToString()!;
-                    defDefaultPersona.DisplayName = defaultPersona.UNIT_NAME.GET_VALUE().ToString();
-                }
-                yield return defDefaultPersona;
-
-                var defPersonaProgress = new GameEquipmentInfoDTO()
-                {
-                    ObjectId = string.Empty,
-                    DisplayCategory = nameof(PersonaProgress),
-                    CanWrite = true
-                };
-                var pPersonaProgress = pPlayerModel.PERSONA_PROGRESS;
-                if (pPersonaProgress.Valid() && (nint)pPersonaProgress.MONSTER_MODEL != defaultPersona)
-                {
-                    defPersonaProgress.ObjectId = pPersonaProgress.MONSTER_MODEL.UID.ToString()!;
-                    defPersonaProgress.DisplayName = pPersonaProgress.MONSTER_MODEL.UNIT_NAME.GET_VALUE().ToString();
-                }
-                yield return defPersonaProgress;
-
+                return GameException.Throw<GameCharacterEquipmentDTO>("ERROR ARGS");
             }
+
+
+            if (characterModifyDTO.CharacterCategory != nameof(PersonaProgress))
+            {
+                return GameException.Throw<GameCharacterEquipmentDTO>("NotImplemented");
+            }
+
+            var pPlayerData = @this.Ptr_PlayerData;
+            var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(characterModifyDTO.CharacterId);
+
+            if (addNewMonster)
+            {
+                if (!pPlayerData.TryGetPersonaProgress(newMonsterId, out var persona))
+                {
+                    persona = @this.AddPersonaProgress(newMonsterId!);
+                }
+                pCharacter.SET_ACTIVE_PERSONA(persona);
+            }
+
+            if (removeMonster)
+            {
+                foreach (var persona in pCharacter.GET_AVAILABLE_PERSONAS())
+                {
+                    if (MemoryExtensions.SequenceEqual(persona.GET_GET_UID().AsReadOnlySpan(), oldMonsterId))
+                    {
+                        pCharacter.UNEQUIP_PERSONA(persona);
+                        break;
+                    }
+                }
+            }
+
+
+            return new GameCharacterEquipmentDTO()
+            {
+                ObjectId = characterModifyDTO.CharacterId,
+                EquipmentInfos = GetEquipmentAttributes(pCharacter.PLAYER_MODEL).ToArray(),
+            };
         }
 
         public static GameCharacterSkillDTO GetCharacterSkill(this BloomtownGameEnvironment @this, GameCharacterObjectDTO gameCharacter)
         {
-            var pGameSettings = @this.Ptr_GameSettings;
+            //    var pGameSettings = @this.Ptr_GameSettings;
             var pPlayerData = @this.Ptr_PlayerData;
             var pCharacter = pPlayerData.GetCharacterThrowIfNotFound(gameCharacter.CharacterId);
 
@@ -2307,8 +2450,9 @@ namespace Maple.Bloomtown
             };
 
         }
-        static PersonaProgress.Ptr_PersonaProgress GetPersonaProgressThrowIfNotFound(this PlayerData.Ptr_PlayerData ptr_PlayerData, ReadOnlySpan<char> uid)
+        static bool TryGetPersonaProgress(this PlayerData.Ptr_PlayerData ptr_PlayerData, ReadOnlySpan<char> uid, out PersonaProgress.Ptr_PersonaProgress personaProgress)
         {
+            Unsafe.SkipInit(out personaProgress);
             var pListPersonaModels = ptr_PlayerData.M_PERSONAS_CAUGHT;
             if (pListPersonaModels.Valid())
             {
@@ -2316,9 +2460,18 @@ namespace Maple.Bloomtown
                 {
                     if (MemoryExtensions.SequenceEqual(monsterModel.GET_GET_UID().AsReadOnlySpan(), uid))
                     {
-                        return monsterModel;
+                        personaProgress = monsterModel;
+                        return true;
                     }
                 }
+            }
+            return default;
+        }
+        static PersonaProgress.Ptr_PersonaProgress GetPersonaProgressThrowIfNotFound(this PlayerData.Ptr_PlayerData ptr_PlayerData, ReadOnlySpan<char> uid)
+        {
+            if (ptr_PlayerData.TryGetPersonaProgress(uid, out var personaProgress))
+            {
+                return personaProgress;
             }
             return GameException.Throw<PersonaProgress.Ptr_PersonaProgress>($"Not Found:{uid}");
         }
@@ -2536,17 +2689,21 @@ namespace Maple.Bloomtown
 
             }
         }
-        public static GameCharacterSkillDTO AddMonsterMember(this BloomtownGameEnvironment @this, GameMonsterObjectDTO monsterObjectDTO)
+        static PersonaProgress.Ptr_PersonaProgress AddPersonaProgress(this BloomtownGameEnvironment @this, string uid)
         {
-            var pGameSettings = @this.Ptr_GameSettings;
-            var battleMonsterModel = pGameSettings.GetPersonaMonsterModelThrowIfNotFound(monsterObjectDTO.MonsterObject);
+            var battleMonsterModel = @this.Ptr_GameSettings.GetPersonaMonsterModelThrowIfNotFound(uid);
             var pPersonaModel = @this.Context.PersonaProgress.GCNew<PersonaProgress.Ptr_PersonaProgress>(false);
             pPersonaModel.Target.CTOR_01(battleMonsterModel);
             @this.Ptr_PlayerData.PERSONAS_CAUGHT.ADD(pPersonaModel);
+            return pPersonaModel;
+        }
+        public static GameCharacterSkillDTO AddMonsterMember(this BloomtownGameEnvironment @this, GameMonsterObjectDTO monsterObjectDTO)
+        {
+            var pPersonaModel = @this.AddPersonaProgress(monsterObjectDTO.MonsterObject);
             return new GameCharacterSkillDTO()
             {
                 ObjectId = monsterObjectDTO.MonsterObject,
-                SkillInfos = pPersonaModel.Target.GameSkillInfoDTO(),
+                SkillInfos = pPersonaModel.GameSkillInfoDTO(),
             };
 
         }
