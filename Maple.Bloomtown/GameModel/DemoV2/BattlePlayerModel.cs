@@ -35,7 +35,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "unitName", "UNIT_NAME")]
 
     // class 0x30 System.String unitNameUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"unitNameUid", "UNIT_NAME_UID")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "unitNameUid", "UNIT_NAME_UID")]
 
     // class 0x38 System.Collections.Generic.List<PassiveEffect> passiveEffects
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"passiveEffects", "PASSIVE_EFFECTS")]
@@ -59,31 +59,31 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawLuck", "RAW_LUCK")]
 
     // class 0x58 MeleeWeapon defaultWeapon
-      [MonoCollectorSearchFieldAttribute(typeof(MeleeWeapon.Ptr_MeleeWeapon),"defaultWeapon", "DEFAULT_WEAPON")]
+    [MonoCollectorSearchFieldAttribute(typeof(MeleeWeapon.Ptr_MeleeWeapon), "defaultWeapon", "DEFAULT_WEAPON")]
 
     // class 0x60 RangedWeapon defaultGun
-      [MonoCollectorSearchFieldAttribute(typeof(RangedWeapon.Ptr_RangedWeapon),"defaultGun", "DEFAULT_GUN")]
+    [MonoCollectorSearchFieldAttribute(typeof(RangedWeapon.Ptr_RangedWeapon), "defaultGun", "DEFAULT_GUN")]
 
     // class 0x68 Armor defaultArmor
-      [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor),"defaultArmor", "DEFAULT_ARMOR")]
+    [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor), "defaultArmor", "DEFAULT_ARMOR")]
 
     // class 0x70 BattleMonsterModel defaultPersona
-      [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterModel.Ptr_BattleMonsterModel),"defaultPersona", "DEFAULT_PERSONA")]
+    [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterModel.Ptr_BattleMonsterModel), "defaultPersona", "DEFAULT_PERSONA")]
 
     // class 0x78 PersonaProgress personaProgress
-      [MonoCollectorSearchFieldAttribute(typeof(PersonaProgress.Ptr_PersonaProgress),"personaProgress", "PERSONA_PROGRESS")]
+    [MonoCollectorSearchFieldAttribute(typeof(PersonaProgress.Ptr_PersonaProgress), "personaProgress", "PERSONA_PROGRESS")]
 
     // class 0x80 MeleeWeapon meleeWeapon
-      [MonoCollectorSearchFieldAttribute(typeof(MeleeWeapon.Ptr_MeleeWeapon),"meleeWeapon", "MELEE_WEAPON")]
+    [MonoCollectorSearchFieldAttribute(typeof(MeleeWeapon.Ptr_MeleeWeapon), "meleeWeapon", "MELEE_WEAPON")]
 
     // class 0x88 RangedWeapon rangedWeapon
-      [MonoCollectorSearchFieldAttribute(typeof(RangedWeapon.Ptr_RangedWeapon),"rangedWeapon", "RANGED_WEAPON")]
+    [MonoCollectorSearchFieldAttribute(typeof(RangedWeapon.Ptr_RangedWeapon), "rangedWeapon", "RANGED_WEAPON")]
 
     // class 0x90 Armor armor
-      [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor),"armor", "ARMOR")]
+    [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor), "armor", "ARMOR")]
 
     // class 0x98 Accessory accessory
-      [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor),"accessory", "ACCESSORY")]
+    [MonoCollectorSearchFieldAttribute(typeof(Armor.Ptr_Armor), "accessory", "ACCESSORY")]
 
     // enum 0xA0 BattlePlayerModel.Tactics tactics
     // [MonoCollectorSearchFieldAttribute(typeof(BattlePlayerModel.Tactics),"tactics", "TACTICS")]
@@ -991,8 +991,8 @@ namespace Maple.Bloomtown.GameModel.Demo
         ///   System.String GetName()
         /// </summary>
         /// <returns>class System.String</returns>
-        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetName", Search = typeof(Search_BattlePlayerModel))]
-        ///  extern nint GET_NAME_00 ();
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetName")]
+        extern PMonoString GET_NAME_00();
 
 
         /// <summary>

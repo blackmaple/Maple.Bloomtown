@@ -245,7 +245,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"weathers", "WEATHERS")]
 
     // class 0x258 System.Collections.Generic.List<Treasure> treasures
-    [MonoCollectorSearchFieldAttribute(typeof(PMonoList_S<Treasure.Ptr_Treasure>), "treasures", "TREASURES")]
+  //  [MonoCollectorSearchFieldAttribute(typeof(PMonoList_S<Treasure.Ptr_Treasure>), "treasures", "TREASURES")]
 
     // class 0x260 GameSettings.KeyValueList constants
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"constants", "CONSTANTS")]

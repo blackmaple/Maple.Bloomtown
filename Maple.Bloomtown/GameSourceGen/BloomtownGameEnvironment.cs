@@ -79,5 +79,10 @@ namespace Maple.Bloomtown
             using var pMonoString = this.Context.T2(msg);
             this.Ptr_MessageManager.SHOW_TEXT_01(pMonoString, new MonoGameAssistant.RawDotNet.REF_MONO_VECTOR3(), TextTypes.Damage);
         }
+
+        public static string? L(nint uid)
+        {
+            return LocalizationManager.Ptr_LocalizationManager.L(uid).ToString();
+        }
     }
 }

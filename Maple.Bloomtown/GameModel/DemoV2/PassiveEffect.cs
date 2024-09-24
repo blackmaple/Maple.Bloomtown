@@ -35,12 +35,12 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"description", "DESCRIPTION")]
 
     // class 0x28 System.String nameUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
+    //[MonoCollectorSearchFieldAttribute(typeof(nint), "nameUid", "NAME_UID")]
 
     // class 0x30 System.String descriptionUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+    //[MonoCollectorSearchFieldAttribute(typeof(nint), "descriptionUid", "DESCRIPTION_UID")]
 
-    // class 0x38 System.String argStr
+    //// class 0x38 System.String argStr
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "argStr", "ARG_STR")]
 
     // enum 0x40 PassiveEffect.Effect effect

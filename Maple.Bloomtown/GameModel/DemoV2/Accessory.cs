@@ -1,4 +1,5 @@
 
+using Maple.Bloomtown.GameModel.Demo;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
@@ -8,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Maple.Bloomtown.GameModel.Demo
+namespace Maple.Bloomtown
 {
 
 
@@ -17,11 +18,11 @@ namespace Maple.Bloomtown.GameModel.Demo
     /// [Equipment]=>[Sellable]=>[Stackable]=>[Descriptable]=>[UnityEngine.ScriptableObject]=>[UnityEngine.Object]=>[System.Object]
     /// 
     /// </summary>
-    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x0200045DU)]
+    //[Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], 0x02000469U)]
     [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorSettingsAttribute([65, 115, 115, 101, 109, 98, 108, 121, 45, 67, 83, 104, 97, 114, 112], [], [65, 99, 99, 101, 115, 115, 111, 114, 121])]
 
     //  struct static System.Int32 OffsetOfInstanceIDInCPlusPlusObject
-    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT"), true]
+    //  [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"OffsetOfInstanceIDInCPlusPlusObject", "OFFSET_OF_INSTANCE_ID_IN_C_PLUS_PLUS_OBJECT", true)]
 
     // struct 0x10 System.IntPtr m_CachedPtr
     // [MonoCollectorSearchFieldAttribute(typeof(System.IntPtr),"m_CachedPtr", "M_CACHED_PTR")]
@@ -36,28 +37,28 @@ namespace Maple.Bloomtown.GameModel.Demo
     [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "description", "DESCRIPTION")]
 
     // class 0x30 System.String nameUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
+      [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
 
     // class 0x38 System.String descriptionUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+      [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
 
-    // class 0x40 UnityEngine.Sprite smallIcon
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"smallIcon", "SMALL_ICON")]
-
-    // struct 0x48 System.Single price
+    // struct 0x40 System.Single price
     [MonoCollectorSearchFieldAttribute(typeof(System.Single), "price", "PRICE")]
 
-    // class 0x50 System.String howToObtain
+    // class 0x48 System.String howToObtain
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"howToObtain", "HOW_TO_OBTAIN")]
 
-    // class 0x58 PassiveEffect m_passive
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_passive", "M_PASSIVE")]
+    // class 0x50 System.Collections.Generic.List<PassiveEffect> m_passives
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"m_passives", "M_PASSIVES")]
 
-    // struct 0x60 System.Int32 tier
+    // struct 0x58 System.Int32 tier
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"tier", "TIER")]
 
-    // struct 0x64 System.Int32 countEquipped
+    // struct 0x5C System.Int32 countEquipped
     // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"countEquipped", "COUNT_EQUIPPED")]
+
+    // class 0x60 UnityEngine.Sprite icon
+    // [MonoCollectorSearchFieldAttribute(typeof(nint),"icon", "ICON")]
     public partial class Accessory
     {
         //public const string Const_ImageName = "Assembly-CSharp";
@@ -69,7 +70,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         //public const string Const_ClassName = "Accessory";
         //public static byte[] Static_ClassName { get; } = [65, 99, 99, 101, 115, 115, 111, 114, 121];
 
-        //public const uint Const_TypeToken = 0x0200045DU;
+        //public const uint Const_TypeToken = 0x02000469U;
 
 
 
@@ -130,6 +131,16 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>struct System.Void</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute(".cctor")]
         /// static extern void .CCTOR ();
+
+
+        /// <summary>
+        /// static  System.String <GetComparingDescription>g__AddPart|37_0(System.String text, System.String part)
+        /// </summary>
+        /// <param name="text">class System.String</param>
+        /// <param name="part">class System.String</param>
+        /// <returns>class System.String</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("<GetComparingDescription>g__AddPart|37_0")]
+        /// static extern nint <GET_COMPARING_DESCRIPTION>G__ADD_PART|37_0 (nint text, nint part);
 
 
         /// <summary>
@@ -360,6 +371,22 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
+        ///   System.Int32 get_getStat4()
+        /// </summary>
+        /// <returns>struct System.Int32</returns>
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getStat4")]
+        extern System.Int32 GET_GET_STAT4();
+
+
+        /// <summary>
+        ///   System.String get_getStat4Name()
+        /// </summary>
+        /// <returns>class System.String</returns>
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getStat4Name")]
+        extern PMonoString GET_GET_STAT4_NAME();
+
+
+        /// <summary>
         ///   System.String get_getUID()
         /// </summary>
         /// <returns>class System.String</returns>
@@ -392,11 +419,11 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        ///   PassiveEffect get_passive()
+        ///   System.Collections.Generic.List<PassiveEffect> get_passives()
         /// </summary>
-        /// <returns>class PassiveEffect</returns>
-        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_passive")]
-        extern PassiveEffect.Ptr_PassiveEffect GET_PASSIVE();
+        /// <returns>class System.Collections.Generic.List<PassiveEffect></returns>
+        [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_passives")]
+        extern PMonoList_S<PassiveEffect.Ptr_PassiveEffect> GET_PASSIVES();
 
 
         /// <summary>
@@ -432,6 +459,19 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
+        /// static  System.String GetComparingDescription(Equipment selectedEquipment, Equipment currentEquipment, UnityEngine.Color positiveColor, UnityEngine.Color negativeColor, System.Boolean addPrice)
+        /// </summary>
+        /// <param name="selectedEquipment">abstract class Equipment</param>
+        /// <param name="currentEquipment">abstract class Equipment</param>
+        /// <param name="positiveColor">struct UnityEngine.Color</param>
+        /// <param name="negativeColor">struct UnityEngine.Color</param>
+        /// <param name="addPrice">struct System.Boolean</param>
+        /// <returns>class System.String</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetComparingDescription")]
+        /// static extern nint GET_COMPARING_DESCRIPTION (nint selectedEquipment, nint currentEquipment, UnityEngine.Color positiveColor, UnityEngine.Color negativeColor, System.Boolean addPrice);
+
+
+        /// <summary>
         ///   System.String GetDescription()
         /// </summary>
         /// <returns>class System.String</returns>
@@ -445,6 +485,14 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>class LocalizationManager.LocalizedField</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetDescriptionField")]
         ///  extern nint GET_DESCRIPTION_FIELD ();
+
+
+        /// <summary>
+        ///   System.Collections.Generic.List<Character> GetEquipCharacters()
+        /// </summary>
+        /// <returns>class System.Collections.Generic.List<Character></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("GetEquipCharacters")]
+        ///  extern nint GET_EQUIP_CHARACTERS ();
 
 
         /// <summary>
@@ -497,6 +545,41 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <returns>class UnityEngine.Object</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_CloneSingleWithParent")]
         /// static extern nint INTERNAL_CLONE_SINGLE_WITH_PARENT (nint data, nint parent, System.Boolean worldPositionStays);
+
+
+        /// <summary>
+        /// static  UnityEngine.Object Internal_CloneSingleWithScene(UnityEngine.Object data, UnityEngine.SceneManagement.Scene scene)
+        /// </summary>
+        /// <param name="data">class UnityEngine.Object</param>
+        /// <param name="scene">struct UnityEngine.SceneManagement.Scene</param>
+        /// <returns>class UnityEngine.Object</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_CloneSingleWithScene")]
+        /// static extern nint INTERNAL_CLONE_SINGLE_WITH_SCENE (nint data, UnityEngine.SceneManagement.Scene scene);
+
+
+        /// <summary>
+        /// static  UnityEngine.Object Internal_CloneSingleWithScene_Injected(UnityEngine.Object data, UnityEngine.SceneManagement.Scene& scene)
+        /// </summary>
+        /// <param name="data">class UnityEngine.Object</param>
+        /// <param name="scene">struct UnityEngine.SceneManagement.Scene&</param>
+        /// <returns>class UnityEngine.Object</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_CloneSingleWithScene_Injected")]
+        /// static extern nint INTERNAL_CLONE_SINGLE_WITH_SCENE_INJECTED (nint data, UnityEngine.SceneManagement.Scene& scene);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation Internal_InstantiateAsyncWithParent(UnityEngine.Object original, System.Int32 count, UnityEngine.Transform parent, System.IntPtr positions, System.Int32 positionsCount, System.IntPtr rotations, System.Int32 rotationsCount)
+        /// </summary>
+        /// <param name="original">class UnityEngine.Object</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <param name="positions">struct System.IntPtr</param>
+        /// <param name="positionsCount">struct System.Int32</param>
+        /// <param name="rotations">struct System.IntPtr</param>
+        /// <param name="rotationsCount">struct System.Int32</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Internal_InstantiateAsyncWithParent")]
+        /// static extern nint INTERNAL_INSTANTIATE_ASYNC_WITH_PARENT (nint original, System.Int32 count, nint parent, System.IntPtr positions, System.Int32 positionsCount, System.IntPtr rotations, System.Int32 rotationsCount);
 
 
         /// <summary>
@@ -1145,13 +1228,23 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
+        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.SceneManagement.Scene scene)
+        /// </summary>
+        /// <param name="original">class UnityEngine.Object</param>
+        /// <param name="scene">struct UnityEngine.SceneManagement.Scene</param>
+        /// <returns>class UnityEngine.Object</returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_03 (nint original, UnityEngine.SceneManagement.Scene scene);
+
+
+        /// <summary>
         /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
         /// </summary>
         /// <param name="original">class UnityEngine.Object</param>
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class UnityEngine.Object</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_03 (nint original, nint parent);
+        /// static extern nint INSTANTIATE_04 (nint original, nint parent);
 
 
         /// <summary>
@@ -1162,7 +1255,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="instantiateInWorldSpace">struct System.Boolean</param>
         /// <returns>class UnityEngine.Object</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_04 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
+        /// static extern nint INSTANTIATE_05 (nint original, nint parent, System.Boolean instantiateInWorldSpace);
 
 
         /// <summary>
@@ -1171,7 +1264,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="original">class T</param>
         /// <returns>class T</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_05 (nint original);
+        /// static extern nint INSTANTIATE_06 (nint original);
 
 
         /// <summary>
@@ -1182,7 +1275,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="rotation">struct UnityEngine.Quaternion</param>
         /// <returns>class T</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_06 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
+        /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
 
 
         /// <summary>
@@ -1194,7 +1287,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_07 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
+        /// static extern nint INSTANTIATE_08 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, nint parent);
 
 
         /// <summary>
@@ -1204,7 +1297,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="parent">class UnityEngine.Transform</param>
         /// <returns>class T</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_08 (nint original, nint parent);
+        /// static extern nint INSTANTIATE_09 (nint original, nint parent);
 
 
         /// <summary>
@@ -1215,7 +1308,120 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <param name="worldPositionStays">struct System.Boolean</param>
         /// <returns>class T</returns>
         /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("Instantiate", Search = typeof(Search_Accessory))]
-        /// static extern nint INSTANTIATE_09 (nint original, nint parent, System.Boolean worldPositionStays);
+        /// static extern nint INSTANTIATE_0A (nint original, nint parent, System.Boolean worldPositionStays);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_00 (nint original);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Transform parent)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_01 (nint original, nint parent);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="rotation">struct UnityEngine.Quaternion</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_02 (nint original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Transform parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="rotation">struct UnityEngine.Quaternion</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_03 (nint original, nint parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_04 (nint original, System.Int32 count);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_05 (nint original, System.Int32 count, nint parent);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="rotation">struct UnityEngine.Quaternion</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_06 (nint original, System.Int32 count, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="positions">struct System.ReadOnlySpan<UnityEngine.Vector3></param>
+        /// <param name="rotations">struct System.ReadOnlySpan<UnityEngine.Quaternion></param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_07 (nint original, System.Int32 count, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <param name="position">struct UnityEngine.Vector3</param>
+        /// <param name="rotation">struct UnityEngine.Quaternion</param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_08 (nint original, System.Int32 count, nint parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation);
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations)
+        /// </summary>
+        /// <param name="original">class T</param>
+        /// <param name="count">struct System.Int32</param>
+        /// <param name="parent">class UnityEngine.Transform</param>
+        /// <param name="positions">struct System.ReadOnlySpan<UnityEngine.Vector3></param>
+        /// <param name="rotations">struct System.ReadOnlySpan<UnityEngine.Quaternion></param>
+        /// <returns>class UnityEngine.AsyncInstantiateOperation<T></returns>
+        /// [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("InstantiateAsync", Search = typeof(Search_Accessory))]
+        /// static extern nint INSTANTIATE_ASYNC_09 (nint original, System.Int32 count, nint parent, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations);
 
 
         /// <summary>
@@ -1780,9 +1986,19 @@ namespace Maple.Bloomtown.GameModel.Demo
 
 
         /// <summary>
-        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
+        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.SceneManagement.Scene scene)
         /// </summary>
         /// public static bool INSTANTIATE_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.SceneManagement.Scene");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent)
+        /// </summary>
+        /// public static bool INSTANTIATE_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform");
         ///     
         ///  
@@ -1792,7 +2008,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  UnityEngine.Object Instantiate(UnityEngine.Object original, UnityEngine.Transform parent, System.Boolean instantiateInWorldSpace)
         /// </summary>
-        /// public static bool INSTANTIATE_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_05 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "UnityEngine.Object", "UnityEngine.Transform", "System.Boolean");
         ///     
         ///  
@@ -1802,7 +2018,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  T Instantiate(T original)
         /// </summary>
-        /// public static bool INSTANTIATE_05 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_06 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T");
         ///     
         ///  
@@ -1812,7 +2028,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
         /// </summary>
-        /// public static bool INSTANTIATE_06 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_07 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion");
         ///     
         ///  
@@ -1822,7 +2038,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  T Instantiate(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent)
         /// </summary>
-        /// public static bool INSTANTIATE_07 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_08 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion", "UnityEngine.Transform");
         ///     
         ///  
@@ -1832,7 +2048,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  T Instantiate(T original, UnityEngine.Transform parent)
         /// </summary>
-        /// public static bool INSTANTIATE_08 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform");
         ///     
         ///  
@@ -1842,8 +2058,108 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// static  T Instantiate(T original, UnityEngine.Transform parent, System.Boolean worldPositionStays)
         /// </summary>
-        /// public static bool INSTANTIATE_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        /// public static bool INSTANTIATE_0A (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
         ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "Instantiate", "T", "UnityEngine.Transform", "System.Boolean");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_00 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Transform parent)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_01 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "UnityEngine.Transform");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_02 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, UnityEngine.Transform parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_03 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "UnityEngine.Transform", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_04 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_05 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32", "UnityEngine.Transform");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_06 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_07 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32", "System.ReadOnlySpan<UnityEngine.Vector3>", "System.ReadOnlySpan<UnityEngine.Quaternion>");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_08 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32", "UnityEngine.Transform", "UnityEngine.Vector3", "UnityEngine.Quaternion");
+        ///     
+        ///  
+        /// 
+
+
+        /// <summary>
+        /// static  UnityEngine.AsyncInstantiateOperation<T> InstantiateAsync(T original, System.Int32 count, UnityEngine.Transform parent, System.ReadOnlySpan<UnityEngine.Vector3> positions, System.ReadOnlySpan<UnityEngine.Quaternion> rotations)
+        /// </summary>
+        /// public static bool INSTANTIATE_ASYNC_09 (Maple.MonoGameAssistant.Model.MonoMethodInfoDTO monoMethodInfoDTO)
+        ///     =>  Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.SearchMonoMethodInfo(monoMethodInfoDTO, "InstantiateAsync", "T", "System.Int32", "UnityEngine.Transform", "System.ReadOnlySpan<UnityEngine.Vector3>", "System.ReadOnlySpan<UnityEngine.Quaternion>");
         ///     
         ///  
         /// 
