@@ -26,73 +26,11 @@ namespace Maple.Bloomtown
 
         protected sealed override GameSwitchDisplayDTO[] InitListGameSwitch()
         {
-            return Enumerable.Range(0, 10).Select(p => new GameSwitchDisplayDTO { ObjectId = p.ToString(), DisplayName = $"DisplayName_{p}", DisplayDesc = $"DisplayDesc_{p}", SwitchValue = false }).ToArray();
+            return [];// return Enumerable.Range(0, 10).Select(p => new GameSwitchDisplayDTO { ObjectId = p.ToString(), DisplayName = $"DisplayName_{p}", DisplayDesc = $"DisplayDesc_{p}", SwitchValue = false }).ToArray();
         }
         #endregion
 
-        #region KeyDown
-        //protected sealed override async ValueTask F5_KeyDown()
-        //{
-        //    //var pGameSettings = await this.MonoTaskAsync((context) => context.GetGameSettings()).ConfigureAwait(false);
-        //    //if (pGameSettings.Valid())
-        //    //{
-        //    //    var gameIcons = await this.UITaskAsync((context, args)
-        //    //    => context.GetListGameSettingsIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
-        //    //    (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
 
-        //    //    foreach (var gameIcon in gameIcons)
-        //    //    {
-        //    //        this.GameSettings.WriteImageFile(gameIcon.ImageData.AsReadOnlySpan(), gameIcon.Category, $"{gameIcon.Name}.png");
-        //    //    }
-
-
-        //    //    var monsterIcons = await this.UITaskAsync((context, args)
-        //    //            => context.GetListMonsterIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
-        //    //            (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
-
-        //    //    foreach (var monsterIcon in monsterIcons)
-        //    //    {
-        //    //        this.GameSettings.WriteImageFile(monsterIcon.ImageData.AsReadOnlySpan(), monsterIcon.Category, $"{monsterIcon.Name}.png");
-        //    //    }
-
-
-        //    //    var skillIcons = await this.UITaskAsync((context, args)
-        //    //      => context.GetListSkillIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
-        //    //      (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
-        //    //    foreach (var skillIcon in skillIcons)
-        //    //    {
-        //    //        this.GameSettings.WriteImageFile(skillIcon.ImageData.AsReadOnlySpan(), skillIcon.Category, $"{skillIcon.Name}.png");
-        //    //    }
-
-        //    //    var inventoryIcons = await this.UITaskAsync((context, args)
-        //    //      => context.GetListInventoryIcon(args.pGameSettings, args.UnityEngineContext).ToArray(),
-        //    //      (pGameSettings, this.UnityEngineContext)).ConfigureAwait(false);
-        //    //    foreach (var inventoryIcon in inventoryIcons)
-        //    //    {
-        //    //        this.GameSettings.WriteImageFile(inventoryIcon.ImageData.AsReadOnlySpan(), inventoryIcon.Category, $"{inventoryIcon.Name}.png");
-        //    //    }
-
-
-
-
-        //    //}
-
-
-        //    //var pPlayerData = await this.MonoTaskAsync(context => context.GetPlayerData()).ConfigureAwait(false);
-        //    //if (pPlayerData.Valid())
-        //    //{
-        //    //    var playerIcons = await this.UITaskAsync((context, args)
-        //    //        => context.GetListCharacterIcon(args.pPlayerData, args.UnityEngineContext).ToArray(),
-        //    //        (pPlayerData, this.UnityEngineContext)).ConfigureAwait(false);
-        //    //    foreach (var playerIcon in playerIcons)
-        //    //    {
-        //    //        this.GameSettings.WriteImageFile(playerIcon.ImageData.AsReadOnlySpan(), playerIcon.Category, $"{playerIcon.Name}.png");
-        //    //    }
-
-        //    //}
-
-        //}
-        #endregion
 
         #region  WebApi
 

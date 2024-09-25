@@ -67,7 +67,7 @@ typeof(MonoCollectorClassInfo)
 
     //   [MonoCollectorType(typeof(Rod))]
     [MonoCollectorType(typeof(Seed))]
-    [MonoCollectorType(typeof(Treasure))]
+    //[MonoCollectorType(typeof(Treasure))]
     [MonoCollectorType(typeof(SocialStat))]
 
     [MonoCollectorType(typeof(Vinyl))]

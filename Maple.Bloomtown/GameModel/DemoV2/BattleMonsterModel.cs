@@ -29,64 +29,64 @@ namespace Maple.Bloomtown.GameModel.Demo
     [MonoCollectorSearchFieldAttribute(typeof(PMonoString), "uid", "UID")]
 
     // abstract class 0x20 BattleParticipantView viewPrefab
-      [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterView.Ptr_BattleMonsterView),"viewPrefab", "VIEW_PREFAB")]
+    [MonoCollectorSearchFieldAttribute(typeof(BattleMonsterView.Ptr_BattleMonsterView), "viewPrefab", "VIEW_PREFAB")]
 
     // class 0x28 LocalizationManager.LocalizedField unitName
-      [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField),"unitName", "UNIT_NAME")]
+    [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "unitName", "UNIT_NAME")]
 
     // class 0x30 System.String unitNameUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"unitNameUid", "UNIT_NAME_UID")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "unitNameUid", "UNIT_NAME_UID")]
 
     // class 0x38 System.Collections.Generic.List<PassiveEffect> passiveEffects
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"passiveEffects", "PASSIVE_EFFECTS")]
 
     // struct 0x40 System.Int32 level
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"level", "LEVEL")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "level", "LEVEL")]
 
     // struct 0x44 System.Int32 rawStrength
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawStrength", "RAW_STRENGTH")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "rawStrength", "RAW_STRENGTH")]
 
     // struct 0x48 System.Int32 rawMagic
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawMagic", "RAW_MAGIC")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "rawMagic", "RAW_MAGIC")]
 
     // struct 0x4C System.Int32 rawEndurance
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawEndurance", "RAW_ENDURANCE")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "rawEndurance", "RAW_ENDURANCE")]
 
     // struct 0x50 System.Int32 rawAgility
-     [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawAgility", "RAW_AGILITY")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "rawAgility", "RAW_AGILITY")]
 
     // struct 0x54 System.Int32 rawLuck
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"rawLuck", "RAW_LUCK")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "rawLuck", "RAW_LUCK")]
 
     // class 0x58 System.Collections.Generic.List<Resist> resists
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"resists", "RESISTS")]
 
     // class 0x60 System.Collections.Generic.List<Skill> skills
-      [MonoCollectorSearchFieldAttribute(typeof(PMonoList_S<Skill.Ptr_Skill>),"skills", "SKILLS")]
+    [MonoCollectorSearchFieldAttribute(typeof(PMonoList_S<Skill.Ptr_Skill>), "skills", "SKILLS")]
 
     // struct 0x68 System.Int32 maxHP
-     [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"maxHP", "MAX_HP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "maxHP", "MAX_HP")]
 
     // struct 0x6C System.Int32 maxSP
-     [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"maxSP", "MAX_SP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "maxSP", "MAX_SP")]
 
     // struct 0x70 System.Int32 exp
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"exp", "EXP")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "exp", "EXP")]
 
     // enum 0x74 MonsterPersonality monsterType
-     [MonoCollectorSearchFieldAttribute(typeof(MonsterPersonality),"monsterType", "MONSTER_TYPE")]
+    [MonoCollectorSearchFieldAttribute(typeof(MonsterPersonality), "monsterType", "MONSTER_TYPE")]
 
     // enum 0x78 MonsterRole monsterRole
-     [MonoCollectorSearchFieldAttribute(typeof(MonsterRole),"monsterRole", "MONSTER_ROLE")]
+    [MonoCollectorSearchFieldAttribute(typeof(MonsterRole), "monsterRole", "MONSTER_ROLE")]
 
     // enum 0x7C SocialStat.SocialStatType tameStat
-      [MonoCollectorSearchFieldAttribute(typeof(SocialStat.SocialStatType),"tameStat", "TAME_STAT")]
+    [MonoCollectorSearchFieldAttribute(typeof(SocialStat.SocialStatType), "tameStat", "TAME_STAT")]
 
     // struct 0x80 System.Int32 tameDifficulty
-      [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"tameDifficulty", "TAME_DIFFICULTY")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "tameDifficulty", "TAME_DIFFICULTY")]
 
     // struct 0x84 System.Int32 stealDifficulty
-     [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"stealDifficulty", "STEAL_DIFFICULTY")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "stealDifficulty", "STEAL_DIFFICULTY")]
 
     // enum 0x88 DamageType element
     // [MonoCollectorSearchFieldAttribute(typeof(DamageType),"element", "ELEMENT")]

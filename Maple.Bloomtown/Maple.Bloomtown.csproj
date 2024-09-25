@@ -56,7 +56,7 @@
 		<PackageReference Include="Maple.MonoGameAssistant.GameContext" Version="1.0.0-rc" />
 		<PackageReference Include="Maple.MonoGameAssistant.GameDTO" Version="1.0.1-rc" />
 		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorDataV2" Version="1.0.1-rc" />
-		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorGeneratorV2" Version="1.0.2-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorGeneratorV2" Version="1.0.2-rc" OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
 		<PackageReference Include="Maple.MonoGameAssistant.WebApi" Version="1.0.1-rc" />
 
 	</ItemGroup>
@@ -71,7 +71,7 @@
 	<Target Name="PostPublishActions" AfterTargets="Publish">
 		<PropertyGroup>
 			<Time>$([System.DateTime]::Now.ToString("yyyyMMddHHmmss"))</Time>
-			<TargetDir>C:\Program Files (x86)\Steam\steamapps\common\Bloomtown A Different Story Demo\</TargetDir>
+			<TargetDir>C:\Program Files (x86)\Steam\steamapps\common\Bloomtown\</TargetDir>
 			<PublishDllPath>$(PublishDir)$(AssemblyName).dll</PublishDllPath>
 			<TargetFileName>$(AssemblyName).dll</TargetFileName>
 			<BackupFileName>$(AssemblyName).dll.bak_$(Time)</BackupFileName>

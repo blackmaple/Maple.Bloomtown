@@ -36,13 +36,13 @@ namespace Maple.Bloomtown.GameModel.Demo
     [MonoCollectorSearchFieldAttribute(typeof(LocalizedField.Ptr_LocalizedField), "description", "DESCRIPTION")]
 
     // class 0x30 System.String nameUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"nameUid", "NAME_UID")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "nameUid", "NAME_UID")]
 
     // class 0x38 System.String descriptionUid
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"descriptionUid", "DESCRIPTION_UID")]
+    [MonoCollectorSearchFieldAttribute(typeof(nint), "descriptionUid", "DESCRIPTION_UID")]
 
     // class 0x40 SkillEffect effectHolder
-     [MonoCollectorSearchFieldAttribute(typeof(SkillEffect.Ptr_SkillEffect),"effectHolder", "EFFECT_HOLDER")]
+    [MonoCollectorSearchFieldAttribute(typeof(SkillEffect.Ptr_SkillEffect), "effectHolder", "EFFECT_HOLDER")]
 
     // class 0x48 PassiveEffect passive
     [MonoCollectorSearchFieldAttribute(typeof(nint), "passive", "PASSIVE")]

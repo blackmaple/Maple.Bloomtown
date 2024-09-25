@@ -1,18 +1,10 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
-using Maple.MonoGameAssistant.Common;
 using Maple.MonoGameAssistant.Core;
 using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.UnityCore;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualBasic;
-using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Transactions;
 
 namespace Maple.Bloomtown
 {
@@ -76,7 +68,7 @@ namespace Maple.Bloomtown
                 var pSprite = gameSettings.GetMemberFieldValue<Sprite.Ptr_Sprite>(@this.Ptr_GameSettings, field.Name);
                 if (pSprite.Valid())
                 {
-                    var pIconData = unityEngine.ReadSprite2Png(pSprite);
+                    var pIconData = unityEngine.ReadSprite2Png2(pSprite);
                     if (pIconData.Valid())
                     {
                         yield return new UnitySpriteImageData()
@@ -107,7 +99,7 @@ namespace Maple.Bloomtown
                     var pIcon = accessory.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Accessory), Name = accessory.UID.ToString(), ImageData = pIconPng };
@@ -126,7 +118,7 @@ namespace Maple.Bloomtown
                     var pIcon = armor.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Armor), Name = armor.UID.ToString(), ImageData = pIconPng };
@@ -145,7 +137,7 @@ namespace Maple.Bloomtown
                     var pIcon = book.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Book), Name = book.UID.ToString(), ImageData = pIconPng };
@@ -165,7 +157,7 @@ namespace Maple.Bloomtown
                     var pIcon = confidantGift.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(ConfidantGift), Name = confidantGift.UID.ToString(), ImageData = pIconPng };
@@ -184,7 +176,7 @@ namespace Maple.Bloomtown
                     var pIcon = consumable.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Consumable), Name = consumable.UID.ToString(), ImageData = pIconPng };
@@ -203,7 +195,7 @@ namespace Maple.Bloomtown
                     var pIcon = craftMaterial.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(CraftMaterial), Name = craftMaterial.UID.ToString(), ImageData = pIconPng };
@@ -222,7 +214,7 @@ namespace Maple.Bloomtown
                     var pIcon = fertilizer.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Fertilizer), Name = fertilizer.UID.ToString(), ImageData = pIconPng };
@@ -242,7 +234,7 @@ namespace Maple.Bloomtown
                     var pIcon = meleeWeapon.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(MeleeWeapon), Name = meleeWeapon.UID.ToString(), ImageData = pIconPng };
@@ -262,7 +254,7 @@ namespace Maple.Bloomtown
                     var pIcon = questItem.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(QuestItem), Name = questItem.UID.ToString(), ImageData = pIconPng };
@@ -282,7 +274,7 @@ namespace Maple.Bloomtown
                     var pIcon = rangedWeapon.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(RangedWeapon), Name = rangedWeapon.UID.ToString(), ImageData = pIconPng };
@@ -302,7 +294,7 @@ namespace Maple.Bloomtown
                     var pIcon = recipe.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Recipe), Name = recipe.UID.ToString(), ImageData = pIconPng };
@@ -322,7 +314,7 @@ namespace Maple.Bloomtown
                     var pIcon = seed.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Seed), Name = seed.UID.ToString(), ImageData = pIconPng };
@@ -332,23 +324,23 @@ namespace Maple.Bloomtown
             }
 
             //d.珍宝
-            var pListTreasures = pGameSettings.TREASURES;
-            if (pListTreasures.Valid())
-            {
-                //null
-                foreach (var treasure in pListTreasures)
-                {
-                    var pIcon = treasure.GET_ICON_00();
-                    if (pIcon.Valid())
-                    {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
-                        if (pIconPng.Valid())
-                        {
-                            yield return new UnitySpriteImageData() { Category = nameof(Treasure), Name = treasure.UID.ToString(), ImageData = pIconPng };
-                        }
-                    }
-                }
-            }
+            //var pListTreasures = pGameSettings.TREASURES;
+            //if (pListTreasures.Valid())
+            //{
+            //    //null
+            //    foreach (var treasure in pListTreasures)
+            //    {
+            //        var pIcon = treasure.GET_ICON_00();
+            //        if (pIcon.Valid())
+            //        {
+            //            var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
+            //            if (pIconPng.Valid())
+            //            {
+            //                yield return new UnitySpriteImageData() { Category = nameof(Treasure), Name = treasure.UID.ToString(), ImageData = pIconPng };
+            //            }
+            //        }
+            //    }
+            //}
 
             //e.唱片
             var pListVinyls = pGameSettings.VINYLS;
@@ -359,7 +351,7 @@ namespace Maple.Bloomtown
                     var pIcon = vinyl.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Vinyl), Name = vinyl.UID.ToString(), ImageData = pIconPng };
@@ -378,7 +370,7 @@ namespace Maple.Bloomtown
                     var pIcon = movie.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Movie), Name = movie.UID.ToString(), ImageData = pIconPng };
@@ -397,7 +389,7 @@ namespace Maple.Bloomtown
                     var pIcon = fish.GET_ICON_00();
                     if (pIcon.Valid())
                     {
-                        var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                        var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                         if (pIconPng.Valid())
                         {
                             yield return new UnitySpriteImageData() { Category = nameof(Fish), Name = fish.UID.ToString(), ImageData = pIconPng };
@@ -419,7 +411,7 @@ namespace Maple.Bloomtown
                 //  player.GET_AVATAR(Emotion.Normal);
                 if (pAvatar.Valid())
                 {
-                    var pAvatarIcon = unityEngine.ReadSprite2Png(pAvatar);
+                    var pAvatarIcon = unityEngine.ReadSprite2Png2(pAvatar);
                     if (pAvatarIcon.Valid())
                     {
                         yield return new UnitySpriteImageData() { Category = nameof(Character), Name = player.UID.ToString(), ImageData = pAvatarIcon };
@@ -466,7 +458,7 @@ namespace Maple.Bloomtown
                     var pPreview = pViewData.MONSTER_PREVIEW;
                     if (pPreview.Valid())
                     {
-                        var pPreviewIcon = unityEngine.ReadSprite2Png(pPreview);
+                        var pPreviewIcon = unityEngine.ReadSprite2Png2(pPreview);
                         if (pPreviewIcon.Valid())
                         {
                             imageData = new UnitySpriteImageData() { Category = category, Name = monsterModel.UID.ToString(), ImageData = pPreviewIcon };
@@ -504,7 +496,7 @@ namespace Maple.Bloomtown
                 var pIcon = pSkillInfo.GET_ICON_00();
                 if (pIcon.Valid())
                 {
-                    var pIconPng = unityEngine.ReadSprite2Png(pIcon);
+                    var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
                     if (pIconPng.Valid())
                     {
                         imageData = new UnitySpriteImageData() { Category = nameof(SkillInfo), Name = pSkillInfo.UID.ToString(), ImageData = pIconPng };
@@ -648,7 +640,7 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID),
                         DisplayDesc = string.Empty,
                         DisplayCategory = nameof(PersonaProgress),
 
@@ -689,8 +681,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = accessory.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = accessory.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(accessory.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(accessory.DESCRIPTION_UID),
                         DisplayCategory = nameof(Accessory),
 
                         ItemAttributes = GetItemAttributes(uid, accessory).ToArray(),
@@ -718,10 +710,19 @@ namespace Maple.Bloomtown
                         yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT3().ToString(), CanPreview = true };
                     }
 
-                    var pPassive = item.GET_PASSIVE();
-                    if (pPassive.Valid())
+                    name = item.GET_GET_STAT4_NAME().ToString();
+                    if (false == string.IsNullOrEmpty(name))
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT4().ToString(), CanPreview = true };
+                    }
+
+                    var pPassives = item.GET_PASSIVES();
+                    if (pPassives.Valid())
+                    {
+                        foreach (var pPassive in pPassives)
+                        {
+                            yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        }
                     }
                 }
             }
@@ -736,8 +737,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = armor.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = armor.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(armor.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(armor.DESCRIPTION_UID),
                         DisplayCategory = nameof(Armor),
                         ItemAttributes = GetItemAttributes(uid, armor).ToArray(),
 
@@ -765,10 +766,19 @@ namespace Maple.Bloomtown
                         yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT3().ToString(), CanPreview = true };
                     }
 
-                    var pPassive = item.GET_PASSIVE();
-                    if (pPassive.Valid())
+                    name = item.GET_GET_STAT4_NAME().ToString();
+                    if (false == string.IsNullOrEmpty(name))
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT4().ToString(), CanPreview = true };
+                    }
+
+                    var pPassives = item.GET_PASSIVES();
+                    if (pPassives.Valid())
+                    {
+                        foreach (var pPassive in pPassives)
+                        {
+                            yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        }
                     }
                 }
 
@@ -784,8 +794,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = book.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = book.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(book.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(book.DESCRIPTION_UID),
                         DisplayCategory = nameof(Book),
                         ItemAttributes = GetItemAttributes(uid, book).ToArray()
 
@@ -807,8 +817,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = confidantGift.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = confidantGift.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(confidantGift.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(confidantGift.DESCRIPTION_UID),
                         DisplayCategory = nameof(ConfidantGift),
                         ItemAttributes = GetItemAttributes(uid, confidantGift).ToArray()
 
@@ -830,8 +840,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = consumable.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = consumable.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(consumable.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(consumable.DESCRIPTION_UID),
                         DisplayCategory = nameof(Consumable),
                         ItemAttributes = GetItemAttributes(uid, consumable).ToArray(),
 
@@ -853,8 +863,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = craftMaterial.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = craftMaterial.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(craftMaterial.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(craftMaterial.DESCRIPTION_UID),
                         DisplayCategory = nameof(CraftMaterial),
                         ItemAttributes = GetItemAttributes(uid, craftMaterial).ToArray(),
 
@@ -876,8 +886,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = fertilizer.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = fertilizer.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(fertilizer.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(fertilizer.DESCRIPTION_UID),
                         DisplayCategory = nameof(Fertilizer),
                         ItemAttributes = GetItemAttributes(uid, fertilizer).ToArray()
 
@@ -901,8 +911,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = meleeWeapon.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = meleeWeapon.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(meleeWeapon.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(meleeWeapon.DESCRIPTION_UID),
                         DisplayCategory = nameof(MeleeWeapon),
 
                         ItemAttributes = GetItemAttributes(uid, meleeWeapon).ToArray(),
@@ -931,10 +941,19 @@ namespace Maple.Bloomtown
                         yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT3().ToString(), CanPreview = true };
                     }
 
-                    var pPassive = item.GET_PASSIVE();
-                    if (pPassive.Valid())
+                    name = item.GET_GET_STAT4_NAME_00().ToString();
+                    if (false == string.IsNullOrEmpty(name))
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT4_00().ToString(), CanPreview = true };
+                    }
+
+                    var pPassives = item.GET_PASSIVES();
+                    if (pPassives.Valid())
+                    {
+                        foreach (var pPassive in pPassives)
+                        {
+                            yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        }
                     }
                 }
 
@@ -951,8 +970,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = questItem.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = questItem.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(questItem.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(questItem.DESCRIPTION_UID),
                         DisplayCategory = nameof(QuestItem),
                         ItemAttributes = GetItemAttributes(uid, questItem).ToArray(),
 
@@ -976,8 +995,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = rangedWeapon.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = rangedWeapon.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(rangedWeapon.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(rangedWeapon.DESCRIPTION_UID),
                         DisplayCategory = nameof(RangedWeapon),
                         ItemAttributes = GetItemAttributes(uid, rangedWeapon).ToArray(),
                     };
@@ -1007,10 +1026,19 @@ namespace Maple.Bloomtown
                         yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT3_00().ToString(), CanPreview = true };
                     }
 
-                    var pPassive = item.GET_PASSIVE();
-                    if (pPassive.Valid())
+                    name = item.GET_GET_STAT4_NAME_00().ToString();
+                    if (false == string.IsNullOrEmpty(name))
                     {
-                        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        yield return new() { ObjectId = uid, DisplayName = name, DisplayValue = item.GET_GET_STAT4_00().ToString(), CanPreview = true };
+                    }
+
+                    var pPassives = item.GET_PASSIVES();
+                    if (pPassives.Valid())
+                    {
+                        foreach (var pPassive in pPassives)
+                        {
+                            yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PassiveEffect, DisplayValue = pPassive.ARG_STR.ToString() };
+                        }
                     }
                 }
 
@@ -1026,8 +1054,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = recipe.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = recipe.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(recipe.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(recipe.DESCRIPTION_UID),
                         DisplayCategory = nameof(Recipe),
                         ItemAttributes = GetItemAttributes(uid, recipe).ToArray(),
 
@@ -1051,8 +1079,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = seed.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = seed.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(seed.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(seed.DESCRIPTION_UID),
                         DisplayCategory = nameof(Seed),
                         ItemAttributes = GetItemAttributes(uid, seed).ToArray(),
 
@@ -1065,27 +1093,27 @@ namespace Maple.Bloomtown
             }
 
             //d.珍宝
-            var pListTreasures = pGameSettings.TREASURES;
-            if (pListTreasures.Valid())
-            {
-                foreach (var treasure in pListTreasures)
-                {
-                    var uid = treasure.UID.ToString()!;
-                    yield return new GameInventoryDisplayDTO()
-                    {
-                        ObjectId = uid,
-                        DisplayName = treasure.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = treasure.DESCRIPTION.GET_VALUE().ToString(),
-                        DisplayCategory = nameof(Treasure),
-                        ItemAttributes = GetItemAttributes(uid, treasure).ToArray()
-                    };
+            //var pListTreasures = pGameSettings.TREASURES;
+            //if (pListTreasures.Valid())
+            //{
+            //    foreach (var treasure in pListTreasures)
+            //    {
+            //        var uid = treasure.UID.ToString()!;
+            //        yield return new GameInventoryDisplayDTO()
+            //        {
+            //            ObjectId = uid,
+            //            DisplayName = treasure.ITEM_NAME.GET_VALUE().ToString(),
+            //            DisplayDesc = treasure.DESCRIPTION.GET_VALUE().ToString(),
+            //            DisplayCategory = nameof(Treasure),
+            //            ItemAttributes = GetItemAttributes(uid, treasure).ToArray()
+            //        };
 
-                }
-                static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Treasure.Ptr_Treasure item)
-                {
-                    yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
-                }
-            }
+            //    }
+            //    static IEnumerable<GameValueInfoDTO> GetItemAttributes(string uid, Treasure.Ptr_Treasure item)
+            //    {
+            //        yield return new GameValueInfoDTO() { ObjectId = uid, DisplayName = CONST_PRICE, DisplayValue = item.PRICE.ToString("F2"), CanPreview = true };
+            //    }
+            //}
 
             //e.唱片
             var pListVinyl = pGameSettings.VINYLS;
@@ -1097,8 +1125,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = vinyl.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = vinyl.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(vinyl.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(vinyl.DESCRIPTION_UID),
                         DisplayCategory = nameof(Vinyl),
                         ItemAttributes = GetItemAttributes(uid, vinyl).ToArray()
                     };
@@ -1120,8 +1148,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = movie.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = movie.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(movie.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(movie.DESCRIPTION_UID),
                         DisplayCategory = nameof(Movie),
                         ItemAttributes = GetItemAttributes(uid, movie).ToArray()
                     };
@@ -1145,8 +1173,8 @@ namespace Maple.Bloomtown
                     yield return new GameInventoryDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = fish.ITEM_NAME.GET_VALUE().ToString(),
-                        DisplayDesc = fish.DESCRIPTION.GET_VALUE().ToString(),
+                        DisplayName = BloomtownGameEnvironment.L(fish.NAME_UID),
+                        DisplayDesc = BloomtownGameEnvironment.L(fish.DESCRIPTION_UID),
                         DisplayCategory = nameof(Fish),
                         ItemAttributes = GetItemAttributes(uid, fish).ToArray()
                     };
@@ -1456,28 +1484,28 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //d.珍宝
-            else if (gameInventory.InventoryCategory == nameof(Treasure))
-            {
-                var pListTreasures = pGameSettings.TREASURES;
-                if (pListTreasures.Valid())
-                {
-                    foreach (var treasure in pListTreasures)
-                    {
-                        var uid = treasure.UID.ToString()!;
-                        if (uid == gameInventory.InventoryObject)
-                        {
-                            return new GameInventoryInfoDTO()
-                            {
-                                ObjectId = uid,
-                                DisplayValue = treasure.GET_COUNT().ToString(),
+            ////d.珍宝
+            //else if (gameInventory.InventoryCategory == nameof(Treasure))
+            //{
+            //    var pListTreasures = pGameSettings.TREASURES;
+            //    if (pListTreasures.Valid())
+            //    {
+            //        foreach (var treasure in pListTreasures)
+            //        {
+            //            var uid = treasure.UID.ToString()!;
+            //            if (uid == gameInventory.InventoryObject)
+            //            {
+            //                return new GameInventoryInfoDTO()
+            //                {
+            //                    ObjectId = uid,
+            //                    DisplayValue = treasure.GET_COUNT().ToString(),
 
-                            };
-                        }
+            //                };
+            //            }
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
 
             //e.唱片
             else if (gameInventory.InventoryCategory == nameof(Vinyl))
@@ -1967,34 +1995,34 @@ namespace Maple.Bloomtown
                 }
             }
 
-            //d.珍宝
-            else if (gameInventory.InventoryCategory == nameof(Treasure))
-            {
-                var pListTreasures = pGameSettings.TREASURES;
-                if (pListTreasures.Valid())
-                {
-                    foreach (var treasure in pListTreasures)
-                    {
-                        var uid = treasure.UID.ToString()!;
-                        if (uid == gameInventory.InventoryObject)
-                        {
-                            treasure.SET_COUNT(CONST_ITEM_ZERO);
-                            if (count > 0)
-                            {
-                                treasure.ADD(count);
-                            }
-                            return new GameInventoryInfoDTO()
-                            {
-                                ObjectId = uid,
+            ////d.珍宝
+            //else if (gameInventory.InventoryCategory == nameof(Treasure))
+            //{
+            //    var pListTreasures = pGameSettings.TREASURES;
+            //    if (pListTreasures.Valid())
+            //    {
+            //        foreach (var treasure in pListTreasures)
+            //        {
+            //            var uid = treasure.UID.ToString()!;
+            //            if (uid == gameInventory.InventoryObject)
+            //            {
+            //                treasure.SET_COUNT(CONST_ITEM_ZERO);
+            //                if (count > 0)
+            //                {
+            //                    treasure.ADD(count);
+            //                }
+            //                return new GameInventoryInfoDTO()
+            //                {
+            //                    ObjectId = uid,
 
-                                DisplayValue = treasure.GET_COUNT().ToString(),
+            //                    DisplayValue = treasure.GET_COUNT().ToString(),
 
-                            };
-                        }
+            //                };
+            //            }
 
-                    }
-                }
-            }
+            //        }
+            //    }
+            //}
 
             //e.唱片
             else if (gameInventory.InventoryCategory == nameof(Vinyl))
@@ -2150,8 +2178,8 @@ namespace Maple.Bloomtown
                     break;
                 }
                 cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
-                cacheSkillInfo.DisplayName = skillInfo.ITEM_NAME.GET_VALUE().ToString();
-                cacheSkillInfo.DisplayDesc = skillInfo.DESCRIPTION.GET_VALUE().ToString();
+                cacheSkillInfo.DisplayName = BloomtownGameEnvironment.L(skillInfo.NAME_UID);  
+                cacheSkillInfo.DisplayDesc = BloomtownGameEnvironment.L(skillInfo.DESCRIPTION_UID);
             }
             return skillInfoDTOs;
         }
@@ -2192,7 +2220,7 @@ namespace Maple.Bloomtown
                     yield return new GameCharacterDisplayDTO()
                     {
                         ObjectId = uid,
-                        DisplayName = playerModel.UNIT_NAME.GET_VALUE().ToString(),
+                        DisplayName = playerModel.GET_NAME_00().ToString(),
                         DisplayCategory = nameof(Character),
                     };
 
@@ -2281,8 +2309,8 @@ namespace Maple.Bloomtown
             if (pMeleeWeapon.Valid())
             {
                 defMeleeWeapon.ObjectId = pMeleeWeapon.UID.ToString()!;
-                defMeleeWeapon.DisplayName = pMeleeWeapon.ITEM_NAME.GET_VALUE().ToString();
-                defMeleeWeapon.DisplayDesc = pMeleeWeapon.DESCRIPTION.GET_VALUE().ToString();
+                defMeleeWeapon.DisplayName = BloomtownGameEnvironment.L(pMeleeWeapon.NAME_UID);
+                defMeleeWeapon.DisplayDesc = BloomtownGameEnvironment.L(pMeleeWeapon.DESCRIPTION_UID);
             }
             yield return defMeleeWeapon;
 
@@ -2300,8 +2328,8 @@ namespace Maple.Bloomtown
             if (pRangedWeapon.Valid())
             {
                 defRangedWeapon.ObjectId = pRangedWeapon.UID.ToString()!;
-                defRangedWeapon.DisplayName = pRangedWeapon.ITEM_NAME.GET_VALUE().ToString();
-                defRangedWeapon.DisplayDesc = pRangedWeapon.DESCRIPTION.GET_VALUE().ToString();
+                defRangedWeapon.DisplayName = BloomtownGameEnvironment.L(pRangedWeapon.NAME_UID);
+                defRangedWeapon.DisplayDesc = BloomtownGameEnvironment.L(pRangedWeapon.DESCRIPTION_UID);
 
             }
             yield return defRangedWeapon;
@@ -2321,8 +2349,8 @@ namespace Maple.Bloomtown
             if (pArmor.Valid())
             {
                 defArmor.ObjectId = pArmor.UID.ToString()!;
-                defArmor.DisplayName = pArmor.ITEM_NAME.GET_VALUE().ToString();
-                defArmor.DisplayDesc = pArmor.DESCRIPTION.GET_VALUE().ToString();
+                defArmor.DisplayName = BloomtownGameEnvironment.L(pArmor.NAME_UID);
+                defArmor.DisplayDesc = BloomtownGameEnvironment.L(pArmor.DESCRIPTION_UID);
             }
             yield return defArmor;
 
@@ -2336,9 +2364,9 @@ namespace Maple.Bloomtown
             var pAccessory = pPlayerModel.ACCESSORY;
             if (pAccessory.Valid())
             {
-                defAccessory.ObjectId = pArmor.UID.ToString()!;
-                defAccessory.DisplayName = pAccessory.ITEM_NAME.GET_VALUE().ToString();
-                defAccessory.DisplayDesc = pAccessory.DESCRIPTION.GET_VALUE().ToString();
+                defAccessory.ObjectId = pAccessory.UID.ToString()!;
+                defAccessory.DisplayName = BloomtownGameEnvironment.L(pAccessory.NAME_UID);
+                defAccessory.DisplayDesc = BloomtownGameEnvironment.L(pAccessory.DESCRIPTION_UID);
             }
             yield return defAccessory;
 
@@ -2352,7 +2380,7 @@ namespace Maple.Bloomtown
             if (defaultPersona.Valid())
             {
                 defDefaultPersona.ObjectId = defaultPersona.UID.ToString()!;
-                defDefaultPersona.DisplayName = defaultPersona.UNIT_NAME.GET_VALUE().ToString();
+                defDefaultPersona.DisplayName = BloomtownGameEnvironment.L(defaultPersona.UNIT_NAME_UID);
             }
             yield return defDefaultPersona;
 
@@ -2363,10 +2391,15 @@ namespace Maple.Bloomtown
                 CanWrite = true
             };
             var pPersonaProgress = pPlayerModel.PERSONA_PROGRESS;
-            if (pPersonaProgress.Valid() && (nint)pPersonaProgress.MONSTER_MODEL != defaultPersona)
+            if (pPersonaProgress.Valid())
             {
-                defPersonaProgress.ObjectId = pPersonaProgress.MONSTER_MODEL.UID.ToString()!;
-                defPersonaProgress.DisplayName = pPersonaProgress.MONSTER_MODEL.UNIT_NAME.GET_VALUE().ToString();
+                var monsterModel = pPersonaProgress.MONSTER_MODEL;
+                if (monsterModel != (nint)defaultPersona)
+                {
+                    defPersonaProgress.ObjectId = monsterModel.UID.ToString()!;
+                    defPersonaProgress.DisplayName = BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID);
+
+                }
             }
             yield return defPersonaProgress;
 
@@ -2429,7 +2462,7 @@ namespace Maple.Bloomtown
                 pCharacter.SET_ACTIVE_PERSONA(persona);
             }
 
-            
+
 
             return new GameCharacterEquipmentDTO()
             {
@@ -2628,7 +2661,7 @@ namespace Maple.Bloomtown
                 return new GameMonsterDisplayDTO()
                 {
                     ObjectId = uid,
-                    DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                    DisplayName = BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID),
                     DisplayCategory = nameof(BattleMonsterModel),
                     MonsterAttributes = atts,
                     SkillInfos = skills,
@@ -2659,7 +2692,7 @@ namespace Maple.Bloomtown
                 return new GameMonsterDisplayDTO()
                 {
                     ObjectId = uid,
-                    DisplayName = monsterModel.UNIT_NAME.GET_VALUE().ToString(),
+                    DisplayName =  BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID),
                     DisplayCategory = nameof(PersonaProgress),
                     MonsterAttributes = atts,
                     SkillInfos = skills,
@@ -2681,8 +2714,8 @@ namespace Maple.Bloomtown
                             {
                                 ObjectId = pSkillInfo.UID.ToString()!,
                                 DisplayCategory = nameof(SkillInfo),
-                                DisplayName = pSkillInfo.ITEM_NAME.GET_VALUE().ToString(),
-                                DisplayDesc = pSkillInfo.DESCRIPTION.GET_VALUE().ToString(),
+                                DisplayName = BloomtownGameEnvironment.L(pSkillInfo.NAME_UID),
+                                DisplayDesc = BloomtownGameEnvironment.L(pSkillInfo.DESCRIPTION_UID),
                             };
                         }
                     }
@@ -2740,8 +2773,8 @@ namespace Maple.Bloomtown
             {
                 ObjectId = uid,
                 DisplayCategory = displayCategory,
-                DisplayName = pSkillInfo.ITEM_NAME.GET_VALUE().ToString(),
-                DisplayDesc = pSkillInfo.DESCRIPTION.GET_VALUE().ToString(),
+                DisplayName = BloomtownGameEnvironment.L(pSkillInfo.NAME_UID),
+                DisplayDesc = BloomtownGameEnvironment.L(pSkillInfo.DESCRIPTION_UID),
                 SkillAttributes = atts,
                 CanUse = pSkillInfo.EFFECT_HOLDER.Valid(),
 
