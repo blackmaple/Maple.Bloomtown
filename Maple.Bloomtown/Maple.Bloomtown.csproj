@@ -15,7 +15,7 @@
 		<AssemblyName>Maple</AssemblyName>
 
 		<!--https://learn.microsoft.com/zh-cn/dotnet/core/deploying/trimming/trimming-options?pivots=dotnet-8-0-->
-		
+
 		<DebuggerSupport>false</DebuggerSupport>
 		<EnableUnsafeBinaryFormatterSerialization>false</EnableUnsafeBinaryFormatterSerialization>
 		<EnableUnsafeUTF7Encoding>false</EnableUnsafeUTF7Encoding>
@@ -29,7 +29,7 @@
 		<UseSystemResourceKeys>true</UseSystemResourceKeys>
 		<TrimmerRemoveSymbols>true</TrimmerRemoveSymbols>
 		<!--<XmlResolverIsNetworkingEnabledByDefault>false</XmlResolverIsNetworkingEnabledByDefault>-->
-		
+
 		<BuiltInComInteropSupport>false</BuiltInComInteropSupport>
 		<CustomResourceTypesSupport>false</CustomResourceTypesSupport>
 		<EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization>false</EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization>
@@ -42,9 +42,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Compile Remove="GameModel\Demo\**" />
-	  <EmbeddedResource Remove="GameModel\Demo\**" />
-	  <None Remove="GameModel\Demo\**" />
+		<LinkerArg Include="/MAP" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Remove="GameModel\Demo\**" />
+		<EmbeddedResource Remove="GameModel\Demo\**" />
+		<None Remove="GameModel\Demo\**" />
 	</ItemGroup>
 
 
@@ -58,12 +62,12 @@
 	</ItemGroup>
 
 
- 
-	 
 
- 
-	
-	
+
+
+
+
+
 	<Target Name="PostPublishActions" AfterTargets="Publish">
 		<PropertyGroup>
 			<Time>$([System.DateTime]::Now.ToString("yyyyMMddHHmmss"))</Time>
