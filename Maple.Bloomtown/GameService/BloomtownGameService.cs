@@ -7,6 +7,8 @@ using Maple.MonoGameAssistant.MonoCollectorDataV2;
 using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 
 
 namespace Maple.Bloomtown
@@ -33,13 +35,42 @@ namespace Maple.Bloomtown
 
 
         #region  WebApi
+        bool TryGetGameResource(string category, string fileName, [MaybeNullWhen(false)] out string url)
+        {
+            Unsafe.SkipInit<string>(out url);
+            var webRootPath = this.GameSettings.WebRootPath;
+            if (string.IsNullOrEmpty(webRootPath))
+            {
+                return false;
+            }
 
+            string text = Path.Combine(webRootPath, "GameResource");
+            if (!Directory.Exists(text))
+            {
+                return false;
+            }
+
+            string text2 = Path.Combine(text, category);
+            if (!Directory.Exists(text2))
+            {
+                return false;
+            }
+
+            string text3 = Path.Combine(text2, fileName);
+            if (!File.Exists(text3))
+            {
+                return false;
+            }
+
+            url = text3.Replace(webRootPath, string.Empty).Replace("\\", "/");
+            return true;
+        }
         void FillGameResourceUrlImp<T>(Func<T, string>? getName, params ReadOnlySpan<T> displayDTOs)
             where T : GameObjectDisplayDTO
         {
             foreach (var data in displayDTOs)
             {
-                if (this.GameSettings.TryGetGameResourceUrl(data.DisplayCategory!, getName is not null ? getName(data) : $"{data.ObjectId}.png", out var url))
+                if (TryGetGameResource(data.DisplayCategory!, getName is not null ? getName(data) : $"{data.ObjectId}.png", out var url))
                 {
                     data.DisplayImage = url;
                 }
