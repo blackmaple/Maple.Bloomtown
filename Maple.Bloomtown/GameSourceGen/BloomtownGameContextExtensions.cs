@@ -398,7 +398,20 @@ namespace Maple.Bloomtown
                 }
             }
 
-
+            //h.扳手
+            var pLockpick = pGameSettings.LOCKPICK;
+            if (pLockpick.Valid())
+            {
+                var pIcon = pLockpick.GET_ICON_00();
+                if (pIcon.Valid())
+                {
+                    var pIconPng = unityEngine.ReadSprite2Png2(pIcon);
+                    if (pIconPng.Valid())
+                    {
+                        yield return new UnitySpriteImageData() { Category = nameof(Fish), Name = pLockpick.UID.ToString(), ImageData = pIconPng };
+                    }
+                }
+            }
         }
         public static IEnumerable<UnitySpriteImageData> GetListCharacterIcon(this BloomtownGameEnvironment @this, UnityEngineContext unityEngine)
         {
@@ -1188,6 +1201,23 @@ namespace Maple.Bloomtown
                 }
             }
 
+
+
+            //h.扳手
+            var pLockpick = pGameSettings.LOCKPICK;
+            if (pLockpick.Valid())
+            {
+                var uid = pLockpick.UID.ToString()!;
+                yield return new GameInventoryDisplayDTO()
+                {
+                    ObjectId = uid,
+                    DisplayName = BloomtownGameEnvironment.L(pLockpick.NAME_UID),
+                    DisplayDesc = BloomtownGameEnvironment.L(pLockpick.DESCRIPTION_UID),
+                    DisplayCategory = nameof(Lockpick),
+                };
+
+            }
+
         }
         public static GameInventoryInfoDTO GetInventoryInfo(this BloomtownGameEnvironment @this, GameInventoryObjectDTO gameInventory)
         {
@@ -1575,6 +1605,26 @@ namespace Maple.Bloomtown
                     }
                 }
             }
+
+            //h.扳手
+            else if (gameInventory.InventoryCategory == nameof(Lockpick))
+            {
+                var pLockpick = pGameSettings.LOCKPICK;
+                if (pLockpick.Valid())
+                {
+                    var uid = pLockpick.UID.ToString()!;
+                    if (uid == gameInventory.InventoryObject)
+                    {
+                        return new GameInventoryInfoDTO()
+                        {
+                            ObjectId = uid,
+                            DisplayValue = pLockpick.GET_COUNT().ToString(),
+                        };
+                    }
+                }
+            }
+
+
 
             return GameException.Throw<GameInventoryInfoDTO>($"Not Found:{gameInventory.InventoryObject}");
         }
@@ -2110,6 +2160,29 @@ namespace Maple.Bloomtown
             }
 
 
+            //h.扳手
+            var pLockpick = pGameSettings.LOCKPICK;
+            if (pLockpick.Valid())
+            {
+                var uid = pLockpick.UID.ToString()!;
+                if (uid == gameInventory.InventoryObject)
+                {
+                    pLockpick.SET_COUNT(CONST_ITEM_ZERO);
+                    if (count > 0)
+                    {
+                        pLockpick.ADD(count);
+                    }
+                    return new GameInventoryInfoDTO()
+                    {
+                        ObjectId = uid,
+                        DisplayValue = pLockpick.GET_COUNT().ToString(),
+                    };
+
+                }
+
+            }
+
+
             return GameException.Throw<GameInventoryInfoDTO>($"Not Found:{gameInventory.InventoryObject}");
         }
         #endregion
@@ -2178,7 +2251,7 @@ namespace Maple.Bloomtown
                     break;
                 }
                 cacheSkillInfo.ObjectId = skillInfo.UID.ToString()!;
-                cacheSkillInfo.DisplayName = BloomtownGameEnvironment.L(skillInfo.NAME_UID);  
+                cacheSkillInfo.DisplayName = BloomtownGameEnvironment.L(skillInfo.NAME_UID);
                 cacheSkillInfo.DisplayDesc = BloomtownGameEnvironment.L(skillInfo.DESCRIPTION_UID);
             }
             return skillInfoDTOs;
@@ -2692,7 +2765,7 @@ namespace Maple.Bloomtown
                 return new GameMonsterDisplayDTO()
                 {
                     ObjectId = uid,
-                    DisplayName =  BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID),
+                    DisplayName = BloomtownGameEnvironment.L(monsterModel.UNIT_NAME_UID),
                     DisplayCategory = nameof(PersonaProgress),
                     MonsterAttributes = atts,
                     SkillInfos = skills,
