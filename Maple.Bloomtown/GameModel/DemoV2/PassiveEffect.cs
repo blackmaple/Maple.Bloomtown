@@ -47,7 +47,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(PassiveEffect.Effect),"effect", "EFFECT")]
 
     // struct 0x44 System.Int32 arg
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"arg", "ARG")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "arg", "ARG")]
 
     // enum 0x48 StatusEffect.Type statusType
     // [MonoCollectorSearchFieldAttribute(typeof(StatusEffect.Type),"statusType", "STATUS_TYPE")]

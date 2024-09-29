@@ -1144,7 +1144,7 @@ namespace Maple.Bloomtown
         /// </summary>
         /// <returns>class System.String</returns>
         [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getStat3Name")]
-        extern nint GET_GET_STAT3_NAME_00();
+        extern PMonoString GET_GET_STAT3_NAME_00();
 
 
         /// <summary>
@@ -1176,7 +1176,7 @@ namespace Maple.Bloomtown
         /// </summary>
         /// <returns>class System.String</returns>
         [Maple.MonoGameAssistant.MonoCollectorDataV2.MonoCollectorMethodAttribute("get_getStat4Name")]
-        extern nint GET_GET_STAT4_NAME_00();
+        extern PMonoString GET_GET_STAT4_NAME_00();
 
 
         /// <summary>

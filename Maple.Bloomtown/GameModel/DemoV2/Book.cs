@@ -54,7 +54,7 @@ namespace Maple.Bloomtown.GameModel.Demo
     // [MonoCollectorSearchFieldAttribute(typeof(nint),"rewardStr", "REWARD_STR")]
 
     // struct 0x60 System.Int32 readingTimeMinutes
-    // [MonoCollectorSearchFieldAttribute(typeof(System.Int32),"readingTimeMinutes", "READING_TIME_MINUTES")]
+    [MonoCollectorSearchFieldAttribute(typeof(System.Int32), "readingTimeMinutes", "READING_TIME_MINUTES")]
     public partial class Book
     {
         //public const string Const_ImageName = "Assembly-CSharp";

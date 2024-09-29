@@ -78,10 +78,10 @@ namespace Maple.Bloomtown.GameModel.Demo
       [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite),"monsterPreview", "MONSTER_PREVIEW")]
             
     // class 0x88 UnityEngine.Sprite monsterPreviewMini
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"monsterPreviewMini", "MONSTER_PREVIEW_MINI")]
+     [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite),"monsterPreviewMini", "MONSTER_PREVIEW_MINI")]
             
     // class 0x90 UnityEngine.Sprite monsterPreviewMicro
-    // [MonoCollectorSearchFieldAttribute(typeof(nint),"monsterPreviewMicro", "MONSTER_PREVIEW_MICRO")]
+     [MonoCollectorSearchFieldAttribute(typeof(Sprite.Ptr_Sprite),"monsterPreviewMicro", "MONSTER_PREVIEW_MICRO")]
             
     // struct 0x98 UnityEngine.Vector2 spawnAnimationOffset
     // [MonoCollectorSearchFieldAttribute(typeof(UnityEngine.Vector2),"spawnAnimationOffset", "SPAWN_ANIMATION_OFFSET")]

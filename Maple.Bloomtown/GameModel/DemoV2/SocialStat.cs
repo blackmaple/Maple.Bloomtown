@@ -50,7 +50,7 @@ namespace Maple.Bloomtown.GameModel.Demo
         /// <summary>
         /// struct System.Int32 MaxRang "0"
         /// </summary>
-        /// public const System.Int32 MAX_RANG=>"0";
+        public const System.Int32 MAX_RANG = 10;
 
 
 

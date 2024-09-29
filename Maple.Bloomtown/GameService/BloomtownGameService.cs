@@ -259,7 +259,6 @@ namespace Maple.Bloomtown
         }
         #endregion
 
-
         #region Skill
 
         public sealed override async ValueTask<GameSkillDisplayDTO[]> GetListSkillDisplayAsync()
@@ -271,17 +270,17 @@ namespace Maple.Bloomtown
 
         }
 
-        public sealed override async ValueTask<GameSkillDisplayDTO> AddSkillDisplayAsync(GameSkillObjectDTO gameSkillObject)
-        {
-            var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
-            if (gameEnvironment.InFight())
-            {
-                return GameException.Throw<GameSkillDisplayDTO>("Error:In Fight");
-            }
-            var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.AddSkillDisplay(args.gameSkillObject), (gameEnvironment, gameSkillObject)).ConfigureAwait(false);
-            FillGameResourceUrl(default, datas);
-            return datas;
-        }
+        //public sealed override async ValueTask<GameSkillDisplayDTO> AddSkillDisplayAsync(GameSkillObjectDTO gameSkillObject)
+        //{
+        //    var gameEnvironment = await this.GetGameEnvironmentThrowIfNotInGameAsync().ConfigureAwait(false);
+        //    if (gameEnvironment.InFight())
+        //    {
+        //        return GameException.Throw<GameSkillDisplayDTO>("Error:In Fight");
+        //    }
+        //    var datas = await this.MonoTaskAsync(static (_, args) => args.gameEnvironment.AddSkillDisplay(args.gameSkillObject), (gameEnvironment, gameSkillObject)).ConfigureAwait(false);
+        //    FillGameResourceUrl(default, datas);
+        //    return datas;
+        //}
         #endregion
 
         #endregion

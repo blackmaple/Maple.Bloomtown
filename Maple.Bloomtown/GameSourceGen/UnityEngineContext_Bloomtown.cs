@@ -25,5 +25,46 @@ namespace Maple.Bloomtown
                 Func_GET_TEXTURE_RECT_INJECTED = 0x118F40
             });
         }
+
+
+
+        private void CopyToTexture2D3(Texture2D.Ptr_Texture2D pSrc, Texture2D.Ptr_Texture2D pDest, in Rect.Ref_Rect ref_Rect)
+        {
+            int wIDTH = pSrc.GET_WIDTH();
+            int hEIGHT = pSrc.GET_HEIGHT();
+            RenderTexture.Ptr_RenderTexture ptr_RenderTexture = Maple.MonoGameAssistant.UnityCore.UnityEngine.RenderTexture.Ptr_RenderTexture.GET_TEMPORARY_0A(wIDTH, hEIGHT, 0, RenderTextureFormat.Default, RenderTextureReadWrite.Linear);
+            NativeMethodSetting.BLIT2((nint)pSrc, (nint)ptr_RenderTexture);
+            nint aCTIVE = Maple.MonoGameAssistant.UnityCore.UnityEngine.RenderTexture.Ptr_RenderTexture.GET_ACTIVE();
+            Maple.MonoGameAssistant.UnityCore.UnityEngine.RenderTexture.Ptr_RenderTexture.SET_ACTIVE((nint)ptr_RenderTexture);
+            int width = (int)ref_Rect.m_Width;
+            int height = (int)ref_Rect.m_Height;
+            pDest.CTOR_08(width, height);
+            pDest.READ_PIXELS_01(ref_Rect, 0, 0);
+            pDest.APPLY_02();
+            Maple.MonoGameAssistant.UnityCore.UnityEngine.RenderTexture.Ptr_RenderTexture.SET_ACTIVE(aCTIVE);
+            Maple.MonoGameAssistant.UnityCore.UnityEngine.RenderTexture.Ptr_RenderTexture.RELEASE_TEMPORARY((nint)ptr_RenderTexture);
+        }
+
+
+        public PMonoArray<byte> ReadSprite2Png3(Sprite.Ptr_Sprite pSprite)
+        {
+            if (!pSprite.Valid())
+            {
+                return default;
+            }
+
+            Texture2D.Ptr_Texture2D tEXTURE = pSprite.GET_TEXTURE();
+            if (!tEXTURE.Valid())
+            {
+                return default;
+            }
+
+            UnityPlayerNativeMethodSetting.GET_TEXTURE_RECT_INJECTED(pSprite, out var ret);
+            Texture2D.Ptr_Texture2D pDest = Texture2D.New<Texture2D.Ptr_Texture2D>(execDefCtor: false);
+            CopyToTexture2D3(tEXTURE, pDest, in ret);
+            return NativeMethodSetting.EncodeToPng(pDest);
+        }
+
+
     }
 }
