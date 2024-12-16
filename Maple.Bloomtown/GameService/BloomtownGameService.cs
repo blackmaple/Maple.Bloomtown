@@ -1,15 +1,15 @@
 ﻿using Maple.MonoGameAssistant.Core;
-using Maple.MonoGameAssistant.GameContext;
 using Maple.MonoGameAssistant.GameDTO;
-using Maple.MonoGameAssistant.HotKey;
 using Maple.MonoGameAssistant.Model;
 using Maple.MonoGameAssistant.MonoCollectorDataV2;
-using Maple.MonoGameAssistant.UITask;
 using Maple.MonoGameAssistant.UnityCore.UnityEngine;
+using Maple.MonoGameAssistant.Windows.HotKey.HookWindowMessage;
+using Maple.MonoGameAssistant.Windows.Service;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-
+using Maple.Bloomtown.Metadata.Environment;
+using Maple.MonoGameAssistant.Windows.UITask;
 
 namespace Maple.Bloomtown
 {
@@ -24,7 +24,7 @@ namespace Maple.Bloomtown
         protected sealed override BloomtownGameContext LoadGameContext()
             => BloomtownGameContext.LoadGameContext(this.RuntimeContext, EnumMonoCollectorTypeVersion.APP, this.Logger);
         protected sealed override UnityEngineContext LoadUnityEngineContext()
-            => new UnityEngineContext_Bloomtown(this.RuntimeContext, this.Logger);
+            => UnityEngineContext_Bloomtown.Create(this.RuntimeContext, this.Logger);
 
         protected sealed override GameSwitchDisplayDTO[] InitListGameSwitch()
         {

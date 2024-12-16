@@ -4,8 +4,8 @@
     <BuildType Name="Local" />
     <BuildType Name="Release" />
   </Configurations>
-  <Properties Name="Visual Studio">
-    <Property Name="OpenWith" Value="Visual Studio Version 17" />
-  </Properties>
+  <Project Path="Maple.Bloomtown.Metadata/Maple.Bloomtown.Metadata.csproj" Id="3e238875-afd7-484e-ab60-3f1735e1c3ec">
+    <BuildType Solution="Local|*" Project="Debug" />
+  </Project>
   <Project Path="Maple.Bloomtown\Maple.Bloomtown.csproj" />
 </Solution>

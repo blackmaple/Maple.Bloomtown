@@ -1,5 +1,5 @@
-﻿using Maple.MonoGameAssistant.GameContext;
-using Maple.MonoGameAssistant.WebApi;
+﻿using Maple.MonoGameAssistant.WebApi;
+using Maple.MonoGameAssistant.Windows.Service;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
@@ -37,7 +37,7 @@ namespace Maple.Bloomtown
 
         }
 
-        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall),typeof(CallConvSuppressGCTransition)], EntryPoint = nameof(DllMain))]
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall), typeof(CallConvSuppressGCTransition)], EntryPoint = nameof(DllMain))]
         [return: MarshalAs(UnmanagedType.Bool)]
         public static bool DllMain(nint hModule, uint ul_reason_for_call, nint lpReserved)
         {
