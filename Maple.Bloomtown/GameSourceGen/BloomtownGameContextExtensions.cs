@@ -6,6 +6,7 @@ using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using static Maple.Bloomtown.GameModel.Demo.BattleMonsterModel;
 
 namespace Maple.Bloomtown
 {
@@ -590,6 +591,13 @@ namespace Maple.Bloomtown
             var pListPersonaModels = pGameSettings.PERSONA_MODELS;
             if (pListPersonaModels.Valid())
             {
+                foreach (var monsterModel in pListPersonaModels.AsReadOnlySpan().GetListGameInventoryDisplay(
+                    nameof(PersonaProgress),
+                    p => BloomtownGameEnvironment.L(p.UNIT_NAME_UID),
+                    _ => default))
+                {
+                    
+                }
                 foreach (var monsterModel in pListPersonaModels)
                 {
                     var uid = monsterModel.UID.ToString()!;

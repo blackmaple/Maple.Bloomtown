@@ -1,4 +1,6 @@
 ﻿using Maple.Bloomtown.GameModel.Demo;
+using Maple.MonoGameAssistant.GameDTO;
+using static Maple.Bloomtown.GameDisplayExtensions;
 
 namespace Maple.Bloomtown
 {
@@ -85,4 +87,128 @@ namespace Maple.Bloomtown
             return LocalizationManager.Ptr_LocalizationManager.L(uid).ToString();
         }
     }
+
+
+
+
+
+
+    public static class GameDisplayExtensions
+    {
+        public interface IGameDisplay
+        {
+            public string GetObjectId();
+            public string? GetDisplayName();
+            public string? GetDisplayDesc();
+
+        }
+
+
+        public static T_OBJ ConvertGameDisplay<T_PTR, T_OBJ>(
+           this T_PTR @this, string category,
+            Func<T_PTR, string?>? displayName,
+            Func<T_PTR, string?>? displayDesc)
+            where T_PTR : unmanaged, IGameDisplay
+            where T_OBJ : GameObjectDisplayDTO, new()
+        {
+            return new T_OBJ()
+            {
+                ObjectId = @this.GetObjectId(),
+                DisplayCategory = category,
+                DisplayName = displayName is null ? @this.GetDisplayName() : displayName(@this),
+                DisplayDesc = displayDesc is null ? @this.GetDisplayDesc() : displayDesc(@this)
+            };
+        }
+
+        public static T_OBJ ConvertGameDisplay<T_PTR, T_OBJ>(
+           this T_PTR @this, string category)
+            where T_PTR : unmanaged, IGameDisplay
+            where T_OBJ : GameObjectDisplayDTO, new()
+        {
+            return new T_OBJ()
+            {
+                ObjectId = @this.GetObjectId(),
+                DisplayCategory = category,
+                DisplayName = @this.GetDisplayName(),
+                DisplayDesc = @this.GetDisplayDesc(),
+            };
+        }
+
+        public static T_OBJ[] GetListGameDisplay<T_PTR, T_OBJ>(
+            this ReadOnlySpan<T_PTR> @this,
+            string category,
+            Func<T_PTR, string?>? displayName,
+            Func<T_PTR, string?>? displayDesc)
+            where T_PTR : unmanaged, IGameDisplay
+            where T_OBJ : GameObjectDisplayDTO, new()
+        {
+            var size = @this.Length;
+            var objs = new T_OBJ[size];
+            for (int i = 0; i < size; i++)
+            {
+                objs[i] = ConvertGameDisplay<T_PTR, T_OBJ>(@this[i], category, displayName, displayDesc);
+            }
+            return objs;
+        }
+
+        public static T_OBJ[] GetListGameDisplay<T_PTR, T_OBJ>(
+            this ReadOnlySpan<T_PTR> @this,
+            string category)
+            where T_PTR : unmanaged, IGameDisplay
+            where T_OBJ : GameObjectDisplayDTO, new()
+
+        {
+            var size = @this.Length;
+            var objs = new T_OBJ[size];
+            for (int i = 0; i < size; i++)
+            {
+                objs[i] = ConvertGameDisplay<T_PTR, T_OBJ>(@this[i], category);
+            }
+            return objs;
+        }
+
+        #region GameInventoryDisplayDTO
+        public static GameInventoryDisplayDTO ConvertGameInventoryDisplay<T_PTR>(
+            this T_PTR @this, string category,
+            Func<T_PTR, string?>? displayName,
+            Func<T_PTR, string?>? displayDesc)
+            where T_PTR : unmanaged, IGameDisplay
+
+        {
+            return new GameInventoryDisplayDTO()
+            {
+                ObjectId = @this.GetObjectId(),
+                DisplayCategory = category,
+                DisplayName = displayName is null ? @this.GetDisplayName() : displayName(@this),
+                DisplayDesc = displayDesc is null ? @this.GetDisplayDesc() : displayDesc(@this)
+            };
+        }
+
+        public static GameInventoryDisplayDTO[] GetListGameInventoryDisplay<T_PTR>(
+            this scoped ReadOnlySpan<T_PTR> @this,
+            string category,
+            Func<T_PTR, string?>? displayName,
+            Func<T_PTR, string?>? displayDesc)
+            where T_PTR : unmanaged, IGameDisplay
+        {
+
+            var size = @this.Length;
+            var objs = new GameInventoryDisplayDTO[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                objs[i] = ConvertGameInventoryDisplay(@this[i], category, displayName, displayDesc);
+            }
+            return objs;
+        }
+
+        #endregion
+
+    }
+
+
+
+
+
+
 }

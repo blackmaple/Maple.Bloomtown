@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Maple.Bloomtown.GameDisplayExtensions;
 
 namespace Maple.Bloomtown.GameModel.Demo
 {
@@ -1644,5 +1645,25 @@ namespace Maple.Bloomtown.GameModel.Demo
 
     }
 
+    partial class BattleMonsterModel
+    {
+        partial struct Ptr_BattleMonsterModel : IGameDisplay
+        {
+            public string? GetDisplayDesc()
+            {
+                throw new NotImplementedException();
+            }
 
+            public string? GetDisplayName()
+            {
+                throw new NotImplementedException();
+            }
+
+            public string GetObjectId()
+            {
+                return this.UID.ToString()!;
+            }
+        }
+
+    }
 }
