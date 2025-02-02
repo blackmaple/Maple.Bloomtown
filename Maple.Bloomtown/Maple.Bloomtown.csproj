@@ -6,7 +6,6 @@
 		<Nullable>enable</Nullable>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
 		<InvariantGlobalization>true</InvariantGlobalization>
-		<LangVersion>latest</LangVersion>
 
 		<PublishAot>true</PublishAot>
 		<IsAotCompatible>true</IsAotCompatible>
@@ -42,26 +41,21 @@
 		<InterceptorsPreviewNamespaces>$(InterceptorsPreviewNamespaces);Microsoft.AspNetCore.Http.Generated</InterceptorsPreviewNamespaces>
 	</PropertyGroup>
 
+
+
+
+
 	<ItemGroup>
-		<NativeLibrary Include="Lib\Maple.MonoGameAssistant.DllProxyStaticLib.lib" />
-		<LinkerArg Include="/LTCG" />
-		<LinkerArg Include="/MAP" />
+		<PackageReference Include="Maple.MonoGameAssistant.DllProxyStaticLib" Version="1.0.3-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.WebApi" Version="1.0.90-rc" />
+		<PackageReference Include="Maple.MonoGameAssistant.Windows" Version="1.0.90-rc" />
+
 	</ItemGroup>
 
-	<ItemGroup>
-		<Compile Remove="GameModel\Demo\**" />
-		<EmbeddedResource Remove="GameModel\Demo\**" />
-		<None Remove="GameModel\Demo\**" />
-	</ItemGroup>
-
 
 
 	<ItemGroup>
-		<PackageReference Include="Maple.MonoGameAssistant.GameDTO" Version="1.1.0-rc" />
-		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorDataV2" Version="1.1.0-rc" />
-		<PackageReference Include="Maple.MonoGameAssistant.MonoCollectorGeneratorV2" Version="1.1.0-rc" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
-		<PackageReference Include="Maple.MonoGameAssistant.WebApi" Version="1.1.1-rc" />
-
+		<ProjectReference Include="..\Maple.Bloomtown.Metadata\Maple.Bloomtown.Metadata.csproj" />
 	</ItemGroup>
 
 
@@ -86,7 +80,7 @@
 		<Message Text="自动部署功能已经启动 $(PublishDir)" Importance="high" />
 
 		<Exec Command="if exist &quot;$(TargetDir)$(TargetFileName)&quot; move &quot;$(TargetDir)$(TargetFileName)&quot; &quot;$(TargetDir)$(BackupFileName)&quot;" />
-		<Exec Command="copy &quot;$(PublishDllPath)&quot; &quot;$(TargetDir)$(TargetFileName)&quot;" />
+		<Exec Command="if exist &quot;$(TargetDir)&quot; copy &quot;$(PublishDllPath)&quot; &quot;$(TargetDir)$(TargetFileName)&quot;" />
 	</Target>
 
 
