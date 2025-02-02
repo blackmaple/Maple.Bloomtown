@@ -592,13 +592,7 @@ namespace Maple.Bloomtown.Metadata.Environment
             var pListPersonaModels = pGameSettings.PERSONA_MODELS;
             if (pListPersonaModels.Valid())
             {
-                foreach (var monsterModel in pListPersonaModels.AsReadOnlySpan().GetListGameInventoryDisplay(
-                    nameof(PersonaProgress),
-                    p => BloomtownGameEnvironment.L(p.UNIT_NAME_UID),
-                    _ => default))
-                {
-                    
-                }
+ 
                 foreach (var monsterModel in pListPersonaModels)
                 {
                     var uid = monsterModel.UID.ToString()!;
