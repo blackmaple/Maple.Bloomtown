@@ -1,4 +1,4 @@
-﻿using Maple.MonoGameAssistant.WebApi;
+﻿using Maple.MonoGameAssistant.WebApiLauncher;
 using Maple.MonoGameAssistant.Windows.Service;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -18,7 +18,7 @@ namespace Maple.Bloomtown
             static async Task RunWebApiServiceAsync(int millisecondsDelay = 18 * 1000)
             {
 
-                var webapp = WebApiServiceExtensions.AsRunWebApiService(p =>
+                var webapp = LauncherServiceExtensions.AsRunWebApiService(p =>
                 {
                     p.GameName = "Bloomtown A Different Story";
                     p.QQ = "0";

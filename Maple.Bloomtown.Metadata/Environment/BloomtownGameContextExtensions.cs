@@ -7,6 +7,7 @@ using Maple.MonoGameAssistant.UnityCore.UnityEngine;
 using System.Diagnostics.CodeAnalysis;
 using System.Numerics;
 using System.Runtime.CompilerServices;
+using Maple.MonoGameAssistant.MonoCollector;
 using static Maple.Bloomtown.GameModel.Demo.BattleMonsterModel;
 
 namespace Maple.Bloomtown.Metadata.Environment
@@ -53,6 +54,7 @@ namespace Maple.Bloomtown.Metadata.Environment
             var fieldInfo = @this.PlayerData.ClassInfo.FieldInfos.Find(p => MemoryExtensions.SequenceEqual(p.Name.AsSpan(), "personasCaught"));
             if (fieldInfo is not null)
             {
+              
                 var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(fieldInfo.FieldType.Pointer);
                 return new ListGeneric(@this, classInfo);
             }
