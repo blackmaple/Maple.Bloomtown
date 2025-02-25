@@ -53,7 +53,7 @@ namespace Maple.Bloomtown.Metadata.Environment
             var fieldInfo = @this.PlayerData.ClassInfo.FieldInfos.Find(p => MemoryExtensions.SequenceEqual(p.Name.AsSpan(), "personasCaught"));
             if (fieldInfo is not null)
             {
-                var classInfo = @this.RuntimeContext.GetMonoCollectorClassInfo(fieldInfo.FieldType.Pointer);
+                var classInfo = Maple.MonoGameAssistant.MonoCollector.MonoCollectorExtensions.GetMonoCollectorClassInfo(@this.RuntimeContext, fieldInfo.FieldType.Pointer);
                 return new ListGeneric(@this, classInfo);
             }
             return default;
@@ -592,7 +592,7 @@ namespace Maple.Bloomtown.Metadata.Environment
             var pListPersonaModels = pGameSettings.PERSONA_MODELS;
             if (pListPersonaModels.Valid())
             {
- 
+
                 foreach (var monsterModel in pListPersonaModels)
                 {
                     var uid = monsterModel.UID.ToString()!;

@@ -9,13 +9,14 @@ namespace Maple.Bloomtown
     {
 
 
-        [ModuleInitializer]
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2255:不应在库中使用 “ModuleInitializer” 属性", Justification = "<挂起>")]
-        public static void Initializer()
+        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall)/*, typeof(CallConvSuppressGCTransition)*/], EntryPoint = nameof(Maple))]
+        [return: MarshalAs(UnmanagedType.I4)]
+        public static int Maple()
         {
-            _ = RunWebApiServiceAsync();
+            RunWebApiService();
+            return 1;
 
-            static async Task RunWebApiServiceAsync(int millisecondsDelay = 18 * 1000)
+            static void RunWebApiService(int millisecondsDelay = 18 * 1000)
             {
 
                 var webapp = WebApiServiceExtensions.AsRunWebApiService(p =>
@@ -30,25 +31,13 @@ namespace Maple.Bloomtown
                     services.UseGameContextService<BloomtownGameService>();
                 });
                 //延迟启动
-                await Task.Delay(millisecondsDelay).ConfigureAwait(false);
-                await webapp.RunAsync().ConfigureAwait(false);
+                Thread.Sleep(millisecondsDelay);
+                webapp.Run();
+
 
             }
-
         }
 
-        [UnmanagedCallersOnly(CallConvs = [typeof(CallConvStdcall), typeof(CallConvSuppressGCTransition)], EntryPoint = nameof(DllMain))]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static bool DllMain(nint hModule, uint ul_reason_for_call, nint lpReserved)
-        {
-            return InitDllMain(hModule, ul_reason_for_call, lpReserved);
-        }
-
-
-        [UnmanagedCallConv(CallConvs = [typeof(CallConvStdcall), typeof(CallConvSuppressGCTransition)])]
-        [LibraryImport("*")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool InitDllMain(nint hModule, uint ul_reason_for_call, nint lpReserved);
 
 
     }
